@@ -173,7 +173,7 @@
                 <p>Next Gen &copy; {{ date('Y') }}.</p>
                 <p>Created by <a href="https://www.facebook.com/nestor.nam.jay" rel="nofollow">Nam Le</a>. Contact him
                     at <a href="mailto:me@namle.info">jay@next-gen.vn</a> or visit project's repository at <a
-                            href="https://github.com/lntn/next-gen">GitHub</a></p>
+                            href="https://github.com/lntn/esport-website">GitHub</a></p>
                 <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a> and <a href=""
                                                                                                   rel="nofollow">Laravel
                         5</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font
