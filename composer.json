@@ -15,7 +15,10 @@
     ],
     "support": {
         "email": "me@namle.info",
-        "issues": "https://github.com/lntn/next-gen/issues"
+        "issues": "https://github.com/lntn/esport-website/issues",
+        "wiki": "https://github.com/lntn/esport-website/wiki",
+        "source": "https://github.com/lntn/esport-website",
+        "docs": "https://github.com/lntn/esport-website/wiki"
     },
     "require": {
         "php": ">=5.6.4",

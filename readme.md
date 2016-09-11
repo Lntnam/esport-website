@@ -1,8 +1,8 @@
 # Next Gen Esports Website
 
-[![Build Status](https://travis-ci.org/lntn/next-gen.svg)](https://travis-ci.org/lntn/next-gen)
+[![Build Status](https://travis-ci.org/lntn/esport-website.svg?branch=master)](https://travis-ci.org/lntn/esport-website)
 
-Built on Laravel 5.3
+Built on Laravel 5.3 and Bootstrap 3
 
 Maybe suitable for other Esports organization as well (especially DOTA 2)
 
