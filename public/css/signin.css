@@ -1,0 +1,32 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-login {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-login .form-login-heading {
+  margin-bottom: 10px;
+}
+
+.facebook{
+  background-color: #4863ae;
+  border-color: #4863ae;
+}
+.facebook:hover{
+  background-color: #2871aa;
+  border-color: #2871aa;
+}
+
+.google{
+  background-color: #2196F3;
+  border-color: #2196F3;
+}
+.google:hover{
+  background-color: #42A5F5;
+  border-color:#42A5F5;
+}
