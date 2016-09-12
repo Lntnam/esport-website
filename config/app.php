@@ -183,6 +183,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\CountryListServiceProvider::class,
         App\Providers\SettingServiceProvider::class,
+        App\Providers\MailChimpServiceProvider::class
     ],
 
     /*
@@ -238,7 +239,8 @@ return [
         'GeoIP' => Torann\GeoIP\GeoIPFacade::class,
 
         'CountryList' => \App\Facades\CountryList::class,
-        'Setting' => \App\Facades\Setting::class
+        'Setting' => \App\Facades\Setting::class,
+        'MC' => \App\Facades\MailChimp::class
     ],
 
 ];

@@ -45,9 +45,50 @@ return [
     ],
 
     /*
+     * Email campaigns
+     */
+    'mc_campaigns' => [
+        'fixtures' => [
+            'enabled' => true,
+            'campaign_id' => '21263', // saved campaign to replicate
+            'template_id' => '8279', // saved template to generate HTML content
+            'blocks' => [ // defined in the template in *|mc:edit="key"|* format
+                'preview' => 'fixtures.preview',
+                'content' => 'fixtures.content',
+                'change' => 'general.change_preferences',
+            ],
+            'by' => [
+                'unit' => 'day',
+                'every' => 3,
+                'on' => null, // week: N | month: j | year: jn
+            ],
+            'time'       => '23:00', // H:i
+        ],
+        'results' => [
+            'enabled' => false,
+            'campaign_id' => '', // saved campaign to replicate
+            'template_id' => '', // saved template to generate HTML content
+            'blocks' => [ // defined in the template in *|mc:edit="key"|* format
+                'preview' => 'results.preview',
+                'content' => 'results.content',
+                'change' => 'general.change_preferences',
+            ],
+            'segment_id' => '', // saved segment to receive emails
+            'by' => [
+                'unit' => 'day',
+                'every' => 3,
+                'on' => null, // week: N | month: j | year: jn
+            ],
+            'time'       => '', // H:i
+        ],
+    ],
+
+    /*
      * Third party packages
      */
 
-    'mailchimp-api-key'     => 'eb11873cc5d478f8501ea6152b549e79-us14',
-    'mailchimp-list-id'     => 'f848ac684f',
+    'mailchimp' => [
+        'api_key'               => env('MAILCHIMP_KEY'),
+        'list-id'               => env('MAILCHIPM_LIST_ID'),
+    ],
 ];
