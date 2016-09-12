@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller as BaseController;
 use App\Repositories\MatchRepository;
-use Illuminate\Http\Request;
 
 class FixtureController extends BaseController
 {
@@ -13,7 +12,8 @@ class FixtureController extends BaseController
         return view('front.fixtures');
     }
 
-    public function data($kind) {
+    public function data($kind)
+    {
         $matches = [];
         switch ($kind) {
             case 'live':

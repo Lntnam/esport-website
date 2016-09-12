@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -36,25 +36,41 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = [
-        'deleted_at'
+        'deleted_at',
     ];
 
     /* determine if this is a root admin */
-    public function getRootAttribute() {
+    public function getRootAttribute()
+    {
         $admins = preg_split('/[\s*,\s*]*,+[\s*,\s*]*/', trim(\Config::get('settings.root_admin')));
+
         return in_array($this->getAttribute('email'), $admins);
     }
 
-    public function getCreatedAtAttribute($value) {
-        if (empty($value)) return null;
+    public function getCreatedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return;
+        }
+
         return \Timezone::convertFromUTC($value, \Config::get('settings.default_timezone'));
     }
-    public function getUpdatedAtAttribute($value) {
-        if (empty($value)) return null;
+
+    public function getUpdatedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return;
+        }
+
         return \Timezone::convertFromUTC($value, \Config::get('settings.default_timezone'));
     }
-    public function getDeletedAtAttribute($value) {
-        if (empty($value)) return null;
+
+    public function getDeletedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return;
+        }
+
         return \Timezone::convertFromUTC($value, \Config::get('settings.default_timezone'));
     }
 }

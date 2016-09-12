@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 08/09/2016
- * Time: 23:24
+ * Time: 23:24.
  */
 namespace App\Providers;
 
@@ -32,7 +32,7 @@ class MailChimpServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('mailchimp', function() {
+        $this->app->singleton('mailchimp', function () {
             return new MailChimp(Config::get('settings.mailchimp-api-key'));
         });
     }

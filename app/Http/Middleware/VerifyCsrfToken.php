@@ -14,6 +14,6 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         '/back/logout',
         '/back/staffs_grid_data',
-        '/back/staff_update'
+        '/back/staff_update',
     ];
 }

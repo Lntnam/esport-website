@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
@@ -14,9 +14,9 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        User::create(array(
+        User::create([
             'name'          => 'Super Boss',
             'email'         => 'j251282@gmail.com',
-        ));
+        ]);
     }
 }

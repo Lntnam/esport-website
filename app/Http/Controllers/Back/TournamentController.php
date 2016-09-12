@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 03/09/2016
- * Time: 00:12
+ * Time: 00:12.
  */
 namespace App\Http\Controllers\Back;
 
@@ -16,16 +16,20 @@ use Illuminate\Support\Facades\Validator;
 
 class TournamentController extends BaseController
 {
-    public function ajaxCreate(Request $request) {
+    public function ajaxCreate(Request $request)
+    {
         if (!empty($request->all())) {
             $attributes = $request->all();
-            if (empty($attributes['prize'])) $attributes['prize'] = 0;
+            if (empty($attributes['prize'])) {
+                $attributes['prize'] = 0;
+            }
 
             $validator = Validator::make($attributes, TournamentRepository::getCreateValidationRules());
             if ($validator->fails()) {
                 $errors = $validator->errors();
             } else {
                 $tour = TournamentRepository::create($attributes);
+
                 return response()->json(new AjaxResponse(true, $tour));
             }
 
@@ -35,6 +39,7 @@ class TournamentController extends BaseController
                 ->with('errors', $errors)
             ));
         }
+
         return view('back.create_tour_modal')->with('input', $request->all());
     }
 
@@ -62,6 +67,7 @@ class TournamentController extends BaseController
                 $errors = $validator->errors();
             } else {
                 $match = MatchRepository::create($request->all());
+
                 return redirect()->route('back.match.index')
                     ->with('status', 'success')
                     ->with('message', trans('success.created', ['model' => 'match', 'label' => $match->opponent->name]));
@@ -84,6 +90,7 @@ class TournamentController extends BaseController
         if (!$user || $user->getAttribute('root')) {
             abort(404);
         }
+
         return view('back.delete_staff')->with('model', $user->getAttributes());
     }
 
@@ -91,8 +98,9 @@ class TournamentController extends BaseController
     {
         $user = UserRepository::restoreDeleted($id);
         if (!$user) {
-            return response()->json(new AjaxResponse(false, trans('validation.not-found', ['model'=>'staff'])));
+            return response()->json(new AjaxResponse(false, trans('validation.not-found', ['model' => 'staff'])));
         }
+
         return response()->json(new AjaxResponse(true, '', $user));
     }
 
@@ -110,16 +118,16 @@ class TournamentController extends BaseController
             ->with('message', trans('success.deleted', ['model' => 'staff']));
     }
 
-    public function update(Request $request, $id=null)
+    public function update(Request $request, $id = null)
     {
         if (empty($request->all())) {
             $user = UserRepository::read($id);
             if (!$user) {
                 abort(404);
             }
+
             return view('back.update_staff')->with('model', $user->getAttributes());
-        }
-        else {
+        } else {
             $user = UserRepository::read($request->input('id'));
             if (!$user) {
                 abort(404);
@@ -130,8 +138,7 @@ class TournamentController extends BaseController
                 return view('back.update_staff')
                     ->with('model', $request->all())
                     ->with('errors', $validator->errors());
-            }
-            else {
+            } else {
                 $repo = new UserRepository($user);
                 $repo->update($request->all());
 

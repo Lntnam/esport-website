@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\SiteSetting;
+use Illuminate\Database\Seeder;
 
 class SiteSettingSeeder extends Seeder
 {
@@ -14,42 +14,42 @@ class SiteSettingSeeder extends Seeder
     {
         DB::table('site_settings')->delete();
 
-        SiteSetting::create(array(
+        SiteSetting::create([
             'key'           => 'title',
             'title'         => trans('contents.site-title'),
             'value'         => 'Next Gen Esports',
             'lines'         => 1,
             'order'         => 0,
-        ));
+        ]);
 
-        SiteSetting::create(array(
+        SiteSetting::create([
             'key'           => 'brand-name',
             'title'         => trans('contents.brand-name'),
             'value'         => 'Next-Gen',
             'lines'         => 1,
             'order'         => 0,
-        ));
+        ]);
 
-        SiteSetting::create(array(
+        SiteSetting::create([
             'key'           => 'meta-keywords',
             'title'         => trans('contents.meta-keywords'),
             'value'         => 'dota 2, esport, gaming, dota',
             'order'         => 1,
-        ));
+        ]);
 
-        SiteSetting::create(array(
+        SiteSetting::create([
             'key'           => 'meta-description',
             'title'         => trans('contents.meta-description'),
             'value'         => 'The number one DOTA 2 in Vietnam',
             'order'         => 2,
-        ));
+        ]);
 
-        SiteSetting::create(array(
+        SiteSetting::create([
             'key'           => 'google-analytics',
             'title'         => trans('contents.google-analytics'),
-            'value'         => "UA-46526094-5",
+            'value'         => 'UA-46526094-5',
             'lines'         => 1,
             'order'         => 4,
-        ));
+        ]);
     }
 }

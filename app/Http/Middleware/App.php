@@ -10,11 +10,12 @@ class App
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
      *
      * @throws AuthorizationException
+     *
+     * @return mixed
      */
     public function handle($request, Closure $next)
     {
@@ -28,8 +29,11 @@ class App
             if (empty($location)) {
                 $ip = null;
 
-                if (!empty($request->header('HTTP_CF-Connecting-IP'))) $ip = $request->header('HTTP_CF-Connecting-IP');
-                elseif (isset($_SERVER['REMOTE_ADDR'])) $ip = $_SERVER['REMOTE_ADDR'];
+                if (!empty($request->header('HTTP_CF-Connecting-IP'))) {
+                    $ip = $request->header('HTTP_CF-Connecting-IP');
+                } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                }
 
                 $location = GeoIPFacade::getLocation($ip);
             }

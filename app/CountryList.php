@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 07/09/2016
- * Time: 18:54
+ * Time: 18:54.
  */
-
 namespace App;
-
 
 class CountryList
 {
@@ -24,27 +22,25 @@ class CountryList
         $this->location = realpath($dir);
     }
 
-    public function getOne($countryCode, $locale='en')
+    public function getOne($countryCode, $locale = 'en')
     {
         $countryCode = mb_strtoupper($countryCode);
         $allCodes = $this->loadData($locale);
-        if (!isset($allCodes[$countryCode]))
-        {
+        if (!isset($allCodes[$countryCode])) {
             throw new \RuntimeException(sprintf('Unable to locate the country code of "%s"', $countryCode));
         }
+
         return $allCodes[$countryCode];
     }
 
-    public function getList($locale='en')
+    public function getList($locale = 'en')
     {
-
         return $this->loadData($locale);
     }
 
     protected function loadData($locale)
     {
         if (!isset($this->cache[$locale])) {
-
             $file = sprintf('%s/%s/country.php', $this->location, $locale);
             if (!is_file($file)) {
                 throw new \RuntimeException(sprintf('Unable to load the country data file "%s"', $file));
@@ -52,23 +48,21 @@ class CountryList
             $data = require $file;
             $this->cache[$locale] = $this->sortData($locale, $data);
         }
+
         return $this->cache[$locale];
     }
 
     protected function sortData($locale, $data)
     {
-        if (is_array($data))
-        {
-            if (class_exists('Collator'))
-            {
+        if (is_array($data)) {
+            if (class_exists('Collator')) {
                 $collator = new \Collator($locale);
                 $collator->asort($data);
-            }
-            else
-            {
+            } else {
                 asort($data);
             }
         }
+
         return $data;
     }
 }

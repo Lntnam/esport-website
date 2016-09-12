@@ -14,14 +14,16 @@ class SubscriberSeeder extends Seeder
     {
         // Pull subscribers from Mailchimp account
         $mailchimp = new \DrewM\MailChimp\MailChimp(Config::get('settings.mailchimp-api-key'));
-        $uri = sprintf("lists/%s/members", Config::get('settings.mailchimp-list-id'));
+        $uri = sprintf('lists/%s/members', Config::get('settings.mailchimp-list-id'));
         $result = $mailchimp->get($uri);
-        if (empty($result) || empty($result['members'])) return;
+        if (empty($result) || empty($result['members'])) {
+            return;
+        }
 
         DB::table('subscribers')->delete();
 
         foreach ($result['members'] as $member) {
-            \App\Models\Subscriber::create(array(
+            \App\Models\Subscriber::create([
                 'name'          => $member['merge_fields']['FNAME'],
                 'email'         => $member['email_address'],
                 'interests'     => json_encode($member['interests']),
@@ -30,7 +32,7 @@ class SubscriberSeeder extends Seeder
                 'created_at'    => (new \Carbon\Carbon($member['timestamp_opt']))->toDateTimeString(),
                 'updated_at'    => (new \Carbon\Carbon($member['timestamp_opt']))->toDateTimeString(),
                 'deleted_at'    => $member['status'] == 'subscribed' ? null : (new \Carbon\Carbon())->toDateTimeString(),
-            ));
+            ]);
         }
     }
 }

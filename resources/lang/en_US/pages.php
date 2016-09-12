@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 02/09/2016
- * Time: 01:12
+ * Time: 01:12.
  */
 
 return [
@@ -14,8 +14,8 @@ return [
    |--------------------------------------------------------------------------
    */
 
-    'login' => 'Login',
-    'logout' => 'Log Out',
+    'login'           => 'Login',
+    'logout'          => 'Log Out',
     'back_toggle_nav' => 'Toggle Navigation',
     'back_restricted' => 'Restricted Area',
 

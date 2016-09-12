@@ -3,15 +3,13 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 02/09/2016
- * Time: 03:30
+ * Time: 03:30.
  */
-
 namespace App\Http\Controllers\Back;
 
+use App\Http\Controllers\Controller as BaseController;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller as BaseController;
-
 use Socialite;
 
 class AuthController extends BaseController
@@ -25,32 +23,31 @@ class AuthController extends BaseController
         return redirect()->route('back.login')
             ->with('status', 'success')
             ->with('message', trans('auth.logged_out'));
-
     }
 
-    public function getSocialRedirect( $provider ) {
-        $providerKey = \Config::get('services.' . $provider);
-        if(empty($providerKey))
+    public function getSocialRedirect($provider)
+    {
+        $providerKey = \Config::get('services.'.$provider);
+        if (empty($providerKey)) {
             return view('auth.login');
+        }
 
-        return Socialite::driver( $provider )->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
-    public function getSocialHandle( $provider ) {
-        $socialUser = Socialite::driver( $provider )->user();
+    public function getSocialHandle($provider)
+    {
+        $socialUser = Socialite::driver($provider)->user();
 
         $userCheck = UserRepository::matchWithSocial($socialUser, $provider);
 
-        if(!empty($userCheck))
-        {
+        if (!empty($userCheck)) {
             //Check if we can match an existing staff with social user
             $this->user = new UserRepository($userCheck);
 
             // update latest information from social network
             $this->user->updateFromSocial($socialUser, $provider);
-        }
-        else
-        {
+        } else {
             // this social user is not authorized
             return redirect()->route('back.login')
                 ->with('status', 'error')

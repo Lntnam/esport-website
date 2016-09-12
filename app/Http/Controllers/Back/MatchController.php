@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 03/09/2016
- * Time: 00:12
+ * Time: 00:12.
  */
 namespace App\Http\Controllers\Back;
 
@@ -43,6 +43,7 @@ class MatchController extends BaseController
                 $errors = $validator->errors();
             } else {
                 $match = MatchRepository::create($attributes);
+
                 return redirect()->route('back.match.index')
                     ->with('status', 'success')
                     ->with('message', trans('success.created', ['model' => 'match', 'label' => $match->getAttribute('formatted_schedule')]));
@@ -61,7 +62,7 @@ class MatchController extends BaseController
             ->with('opponents', $opponents);
     }
 
-    public function delete(Request $request, $id=null)
+    public function delete(Request $request, $id = null)
     {
         if (empty($request->all())) {
             $match = MatchRepository::read($id);
@@ -69,9 +70,9 @@ class MatchController extends BaseController
             if (!$match) {
                 abort(404);
             }
-            return view('back.delete_match')->with('model', array_merge($match->getAttributes(), ['formatted_schedule'=>$match->getAttribute('formatted_schedule')]));
-        }
-        else {
+
+            return view('back.delete_match')->with('model', array_merge($match->getAttributes(), ['formatted_schedule' => $match->getAttribute('formatted_schedule')]));
+        } else {
             $match = MatchRepository::read($request->input('id'));
             if (!$match) {
                 abort(404);
@@ -85,7 +86,7 @@ class MatchController extends BaseController
         }
     }
 
-    public function update(Request $request, $id=null)
+    public function update(Request $request, $id = null)
     {
         $opponents = OpponentRepository::getList();
 
@@ -94,11 +95,11 @@ class MatchController extends BaseController
             if (!$match) {
                 abort(404);
             }
+
             return view('back.update_match')
-                ->with('model', array_merge($match->getAttributes(), ['formatted_schedule'=>$match->getAttribute('formatted_schedule')]))
+                ->with('model', array_merge($match->getAttributes(), ['formatted_schedule' => $match->getAttribute('formatted_schedule')]))
                 ->with('opponents', $opponents);
-        }
-        else {
+        } else {
             $attributes = $request->all();
             $match = MatchRepository::read($attributes['id']);
             if (!$match) {
@@ -108,11 +109,10 @@ class MatchController extends BaseController
             $validator = Validator::make($attributes, MatchRepository::getUpdateValidationRules($match));
             if ($validator->fails()) {
                 return view('back.update_match')
-                    ->with('model', array_merge($attributes, ['formatted_schedule'=>$match->getAttribute('formatted_schedule')]))
+                    ->with('model', array_merge($attributes, ['formatted_schedule' => $match->getAttribute('formatted_schedule')]))
                     ->with('errors', $validator->errors())
                     ->with('opponents', $opponents);
-            }
-            else {
+            } else {
                 $repo = new MatchRepository($match);
                 $repo->update($attributes);
 

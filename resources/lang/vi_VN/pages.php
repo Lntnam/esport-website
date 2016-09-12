@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 02/09/2016
- * Time: 01:12
+ * Time: 01:12.
  */
 
 return [
@@ -14,8 +14,8 @@ return [
    |--------------------------------------------------------------------------
    */
 
-    'login' => 'Đăng nhập',
-    'logout' => 'Thoát ra',
+    'login'           => 'Đăng nhập',
+    'logout'          => 'Thoát ra',
     'back_toggle_nav' => 'Hiện menu',
     'back_restricted' => 'Khu vực cấm',
 
