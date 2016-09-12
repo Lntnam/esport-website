@@ -3,32 +3,32 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 02/09/2016
- * Time: 23:20
+ * Time: 23:20.
  */
 namespace App\Repositories;
 
 use App\Models\SiteSetting;
 use Illuminate\Database\Eloquent\Model;
 
-class SiteSettingRepository extends BaseRepository {
+class SiteSettingRepository extends BaseRepository
+{
+    public static $modelClassName = SiteSetting::class;
 
-    static $modelClassName = SiteSetting::class;
-
-    static function getCreateValidationRules()
+    public static function getCreateValidationRules()
     {
         return [];
     }
 
-    static function getUpdateValidationRules(Model $model)
+    public static function getUpdateValidationRules(Model $model)
     {
-         return [];
+        return [];
     }
 
-    static function create(array $attributes)
+    public static function create(array $attributes)
     {
     }
 
-    static function all($columns = ['*'])
+    public static function all($columns = ['*'])
     {
         return SiteSetting::orderBy('order')
             ->get();
@@ -36,7 +36,7 @@ class SiteSettingRepository extends BaseRepository {
 
     public static function save(array $settings)
     {
-        $data = array();
+        $data = [];
         foreach ($settings as $key => $value) {
             $setting = SiteSetting::find($key);
             if ($setting && $setting->getAttribute('visible')) {
@@ -45,14 +45,15 @@ class SiteSettingRepository extends BaseRepository {
                 $data[] = $setting;
             }
         }
+
         return $data;
     }
 
-    static function read($key)
+    public static function read($key)
     {
         $setting = SiteSetting::withoutGlobalScope('visibility')->find($key);
-        if (!empty($setting)) return $setting->getAttribute('value');
-
-        return null;
+        if (!empty($setting)) {
+            return $setting->getAttribute('value');
+        }
     }
 }

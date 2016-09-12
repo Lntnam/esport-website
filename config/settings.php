@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 01/09/2016
- * Time: 20:34
+ * Time: 20:34.
  */
 return [
     'root_admin'            => 'j251282@gmail.com',
@@ -26,11 +26,11 @@ return [
      * For date and time display
      */
 
-    'default_timezone'      => 'Asia/Bangkok',
-    'default_timezone_value'=> 'GMT +7',
-    'match-localized'       => '%a, %e/%m/%Y %H:%M',
-    'match-date-localized'  => '%a, %e/%m/%Y',
-    'match-time-localized'  => '%H:%M',
+    'default_timezone'       => 'Asia/Bangkok',
+    'default_timezone_value' => 'GMT +7',
+    'match-localized'        => '%a, %e/%m/%Y %H:%M',
+    'match-date-localized'   => '%a, %e/%m/%Y',
+    'match-time-localized'   => '%H:%M',
 
     'match-date-format'     => 'D, j/m/Y',
     'match-time-format'     => 'H:i',
@@ -40,8 +40,8 @@ return [
      * Localization
      */
     'locales'     => [
-        'vi_VN' => ['title'=>'Vie', 'geo'=>'VN', 'icon'=>'vn'],
-        'en_US' => ['title'=>'Eng', 'geo'=>'US', 'icon'=>'gb'],
+        'vi_VN' => ['title' => 'Vie', 'geo' => 'VN', 'icon' => 'vn'],
+        'en_US' => ['title' => 'Eng', 'geo' => 'US', 'icon' => 'gb'],
     ],
 
     /*

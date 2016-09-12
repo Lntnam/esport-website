@@ -26,7 +26,7 @@ class CountryListServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('countrylist', function() {
+        $this->app->singleton('countrylist', function () {
             return new CountryList();
         });
     }

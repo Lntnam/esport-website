@@ -8,10 +8,10 @@ use Sofa\Eloquence\Eloquence;
 class Tournament extends Model
 {
     use Eloquence;
-    protected $searchableColumns = ['name'=>10, 'short'=>5];
+    protected $searchableColumns = ['name' => 10, 'short' => 5];
 
     protected $casts = [
-        'prize'
+        'prize',
     ];
 
     protected $hidden = [
@@ -25,24 +25,35 @@ class Tournament extends Model
     protected $fillable = [
     ];
 
-    public function matches() {
+    public function matches()
+    {
         return $this->hasMany(Match::class);
     }
 
-    public function getLogoAttribute($value) {
+    public function getLogoAttribute($value)
+    {
         if (substr($value, 0, 7) == 'http://' || substr($value, 0, 8) == 'https://') {
             return $value;
         }
-        return \URL::asset(\Config::get('settings.image-tournaments') . $value);
+
+        return \URL::asset(\Config::get('settings.image-tournaments').$value);
     }
 
-    public function getCreatedAtAttribute($value) {
-        if (empty($value)) return null;
-        return \Timezone::convertFromUTC($value, \Config::get('settings.default_timezone'));
-    }
-    public function getUpdatedAtAttribute($value) {
-        if (empty($value)) return null;
+    public function getCreatedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return;
+        }
+
         return \Timezone::convertFromUTC($value, \Config::get('settings.default_timezone'));
     }
 
+    public function getUpdatedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return;
+        }
+
+        return \Timezone::convertFromUTC($value, \Config::get('settings.default_timezone'));
+    }
 }

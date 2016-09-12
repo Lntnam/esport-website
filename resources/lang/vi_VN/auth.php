@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'failed' => 'Thông tin đăng nhập không đúng.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed'       => 'Thông tin đăng nhập không đúng.',
+    'throttle'     => 'Too many login attempts. Please try again in :seconds seconds.',
     'please_login' => 'Xin đăng nhập.',
-    'logged_out' => 'Bạn đã thoát ra thành công.',
+    'logged_out'   => 'Bạn đã thoát ra thành công.',
     'unauthorized' => 'Tài khoản của bạn không được phép sử dụng.',
 ];

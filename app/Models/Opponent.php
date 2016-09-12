@@ -8,7 +8,7 @@ use Sofa\Eloquence\Eloquence;
 class Opponent extends Model
 {
     use Eloquence;
-    protected $searchableColumns = ['name'=>10, 'short'=>5];
+    protected $searchableColumns = ['name' => 10, 'short' => 5];
 
     protected $casts = [
     ];
@@ -30,27 +30,38 @@ class Opponent extends Model
      * @var array
      */
     protected $dates = [
-        'schedule'
+        'schedule',
     ];
 
-    public function matches() {
+    public function matches()
+    {
         return $this->hasMany(Match::class);
     }
 
-    public function getFlagAttribute($value) {
+    public function getFlagAttribute($value)
+    {
         if (substr($value, 0, 7) == 'http://' || substr($value, 0, 8) == 'https://') {
             return $value;
         }
-        return \URL::asset(\Config::get('settings.image-opponents') . $value);
+
+        return \URL::asset(\Config::get('settings.image-opponents').$value);
     }
 
-    public function getCreatedAtAttribute($value) {
-        if (empty($value)) return null;
-        return \Timezone::convertFromUTC($value, \Config::get('settings.default_timezone'));
-    }
-    public function getUpdatedAtAttribute($value) {
-        if (empty($value)) return null;
+    public function getCreatedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return;
+        }
+
         return \Timezone::convertFromUTC($value, \Config::get('settings.default_timezone'));
     }
 
+    public function getUpdatedAtAttribute($value)
+    {
+        if (empty($value)) {
+            return;
+        }
+
+        return \Timezone::convertFromUTC($value, \Config::get('settings.default_timezone'));
+    }
 }

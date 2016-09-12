@@ -3,15 +3,16 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 07/09/2016
- * Time: 22:04
+ * Time: 22:04.
  */
-
 namespace App\Facades;
-
 
 use Illuminate\Support\Facades\Facade;
 
 class CountryList extends Facade
 {
-    protected static function getFacadeAccessor() { return 'countrylist'; }
+    protected static function getFacadeAccessor()
+    {
+        return 'countrylist';
+    }
 }

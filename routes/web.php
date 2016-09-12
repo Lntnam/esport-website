@@ -28,16 +28,16 @@ Route::get('/back/login', function () {
 Route::group(['middleware' => 'back', 'prefix' => 'back', 'namespace' => 'Back'], function () {
     $module = 'back.';
 
-    Route::get('', 'DashboardController@getDashboard')->name($module . 'home');
+    Route::get('', 'DashboardController@getDashboard')->name($module.'home');
 
     Route::get('profile', function () {
-    })->name($module . 'profile');
+    })->name($module.'profile');
     Route::get('user_settings', function () {
-    })->name($module . 'user_settings');
-    Route::get('logout', 'AuthController@getLogout')->name($module . 'logout');
+    })->name($module.'user_settings');
+    Route::get('logout', 'AuthController@getLogout')->name($module.'logout');
 
     Route::get('fixture/index', function () {
-    })->name($module . 'fixture.index');
+    })->name($module.'fixture.index');
 
     /*
      * Manage fixtures
@@ -47,17 +47,17 @@ Route::group(['middleware' => 'back', 'prefix' => 'back', 'namespace' => 'Back']
         $module = 'back.match.';
 
         Route::get('', 'MatchController@index');
-        Route::get('index', 'MatchController@index')->name($module . 'index');
-        Route::get('grid_data', "MatchController@data")->name($module . 'gridData');
+        Route::get('index', 'MatchController@index')->name($module.'index');
+        Route::get('grid_data', 'MatchController@data')->name($module.'gridData');
 
-        Route::get('create', 'MatchController@create')->name($module . 'create');
+        Route::get('create', 'MatchController@create')->name($module.'create');
         Route::post('create', 'MatchController@create');
 
-        Route::get('delete/{id}', 'MatchController@delete')->name($module . 'delete');
-        Route::post('delete', 'MatchController@delete')->name($module . 'doDelete');
+        Route::get('delete/{id}', 'MatchController@delete')->name($module.'delete');
+        Route::post('delete', 'MatchController@delete')->name($module.'doDelete');
 
-        Route::get('update/{id}', 'MatchController@update')->name($module . 'update');
-        Route::post('update', 'MatchController@update')->name($module . 'doUpdate');
+        Route::get('update/{id}', 'MatchController@update')->name($module.'update');
+        Route::post('update', 'MatchController@update')->name($module.'doUpdate');
     });
 
     /*
@@ -67,7 +67,7 @@ Route::group(['middleware' => 'back', 'prefix' => 'back', 'namespace' => 'Back']
     Route::group(['prefix' => 'tournament'], function () {
         $module = 'back.tournament.';
 
-        Route::get('ajaxCreate', 'TournamentController@ajaxCreate')->name($module . 'ajaxCreate');
+        Route::get('ajaxCreate', 'TournamentController@ajaxCreate')->name($module.'ajaxCreate');
         Route::post('ajaxCreate', 'TournamentController@ajaxCreate');
     });
 
@@ -78,7 +78,7 @@ Route::group(['middleware' => 'back', 'prefix' => 'back', 'namespace' => 'Back']
     Route::group(['prefix' => 'opponent'], function () {
         $module = 'back.opponent.';
 
-        Route::get('ajaxCreate', 'OpponentController@ajaxCreate')->name($module . 'ajaxCreate');
+        Route::get('ajaxCreate', 'OpponentController@ajaxCreate')->name($module.'ajaxCreate');
         Route::post('ajaxCreate', 'OpponentController@ajaxCreate');
     });
 
@@ -96,18 +96,18 @@ Route::group(['middleware' => 'back', 'prefix' => 'back', 'namespace' => 'Back']
             $module = 'back.staff.';
 
             Route::get('', 'StaffController@index');
-            Route::get('index', 'StaffController@index')->name($module . 'index');
-            Route::get('grid_data', "StaffController@data")->name($module . 'gridData');
+            Route::get('index', 'StaffController@index')->name($module.'index');
+            Route::get('grid_data', 'StaffController@data')->name($module.'gridData');
 
-            Route::get('create', 'StaffController@create')->name($module . 'create');
+            Route::get('create', 'StaffController@create')->name($module.'create');
             Route::post('create', 'StaffController@create');
 
-            Route::get('delete/{id}', 'StaffController@delete')->name($module . 'delete');
-            Route::post('delete', 'StaffController@delete')->name($module . 'doDelete');
-            Route::get('restore/{id}', 'StaffController@restore')->name($module . 'restore');
+            Route::get('delete/{id}', 'StaffController@delete')->name($module.'delete');
+            Route::post('delete', 'StaffController@delete')->name($module.'doDelete');
+            Route::get('restore/{id}', 'StaffController@restore')->name($module.'restore');
 
-            Route::get('update/{id}', 'StaffController@update')->name($module . 'update');
-            Route::post('update', 'StaffController@update')->name($module . 'doUpdate');
+            Route::get('update/{id}', 'StaffController@update')->name($module.'update');
+            Route::post('update', 'StaffController@update')->name($module.'doUpdate');
         });
 
         Route::get('site_settings', 'SettingController@getSiteSettings')->name('back.siteSettings');
@@ -121,14 +121,14 @@ Route::group(['middleware' => 'back', 'prefix' => 'back', 'namespace' => 'Back']
  * Name: front.
  */
 
-Route::group(['middleware' => 'front', 'namespace' => 'Front'], function() {
+Route::group(['middleware' => 'front', 'namespace' => 'Front'], function () {
     $module = 'front.';
 
-    Route::get('', 'SiteController@index')->name($module . 'home');
-    Route::get('lang/{locale}', 'SiteController@lang')->name($module . 'lang');
+    Route::get('', 'SiteController@index')->name($module.'home');
+    Route::get('lang/{locale}', 'SiteController@lang')->name($module.'lang');
 
-    Route::get('fixtures', 'FixtureController@index')->name($module . 'fixture.index');
-    Route::get('fixtures/data/{kind}', 'FixtureController@data')->name($module . 'fixture.data');
+    Route::get('fixtures', 'FixtureController@index')->name($module.'fixture.index');
+    Route::get('fixtures/data/{kind}', 'FixtureController@data')->name($module.'fixture.data');
 });
 
 /*
@@ -136,5 +136,5 @@ Route::group(['middleware' => 'front', 'namespace' => 'Front'], function() {
  */
 
 $module = 'social.';
-Route::get('/social/redirect/{provider}', 'Back\AuthController@getSocialRedirect')->name($module . 'redirect');
-Route::get('/social/handle/{provider}', 'Back\AuthController@getSocialHandle')->name($module . 'handle');
+Route::get('/social/redirect/{provider}', 'Back\AuthController@getSocialRedirect')->name($module.'redirect');
+Route::get('/social/handle/{provider}', 'Back\AuthController@getSocialHandle')->name($module.'handle');

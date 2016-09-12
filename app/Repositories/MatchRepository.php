@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 02/09/2016
- * Time: 22:29
+ * Time: 22:29.
  */
 namespace App\Repositories;
 
@@ -11,22 +11,22 @@ use App\Models\Match;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class MatchRepository extends BaseRepository  {
+class MatchRepository extends BaseRepository
+{
+    public static $modelClassName = Match::class;
 
-    static $modelClassName = Match::class;
+    public static $allowedForCreate = ['tournament_id', 'opponent_id', 'for', 'against', 'games', 'over'];
 
-    static $allowedForCreate = ['tournament_id', 'opponent_id', 'for', 'against', 'games', 'over'];
+    public static $allowedForUpdate = ['opponent_id', 'for', 'against', 'games', 'over'];
 
-    static $allowedForUpdate = ['opponent_id', 'for', 'against', 'games', 'over'];
-
-    static $numberFields = ['for','against','games','opponent_id','over'];
+    public static $numberFields = ['for', 'against', 'games', 'opponent_id', 'over'];
 
     public function __construct(Match $model)
     {
         $this->model = $model;
     }
 
-    static function getCreateValidationRules()
+    public static function getCreateValidationRules()
     {
         return [
             'schedule'          => 'required',
@@ -34,13 +34,13 @@ class MatchRepository extends BaseRepository  {
         ];
     }
 
-    static function getUpdateValidationRules(Model $model)
+    public static function getUpdateValidationRules(Model $model)
     {
         return [
         ];
     }
 
-    static function create(array $attributes)
+    public static function create(array $attributes)
     {
         $attributes = static::emptyStringToNull($attributes);
 
@@ -52,10 +52,11 @@ class MatchRepository extends BaseRepository  {
         }
         $match->setAttribute('schedule', \Timezone::convertToUTC($attributes['schedule'], $attributes['timezone']));
         $match->save();
+
         return $match;
     }
 
-    public static function query($keyword, $sort='schedule', $order='desc')
+    public static function query($keyword, $sort = 'schedule', $order = 'desc')
     {
         return Match::search($keyword)
             ->with('tournament')
@@ -77,23 +78,26 @@ class MatchRepository extends BaseRepository  {
         $this->model->save();
     }
 
-    public static function getLiveMatches() {
-        return Match::where([['over', false], ['schedule','<=',Carbon::now()->toDateTimeString()]])
+    public static function getLiveMatches()
+    {
+        return Match::where([['over', false], ['schedule', '<=', Carbon::now()->toDateTimeString()]])
             ->with('tournament')
             ->with('opponent')
             ->orderBy('schedule', 'desc')
             ->get();
     }
 
-    public static function getUpcomingMatches() {
-        return Match::where([['over', false], ['schedule','>',Carbon::now()->toDateTimeString()]])
+    public static function getUpcomingMatches()
+    {
+        return Match::where([['over', false], ['schedule', '>', Carbon::now()->toDateTimeString()]])
             ->with('tournament')
             ->with('opponent')
             ->orderBy('schedule', 'asc')
             ->get();
     }
 
-    public static function getRecentMatches() {
+    public static function getRecentMatches()
+    {
         return Match::where('over', true)
             ->with('tournament')
             ->with('opponent')

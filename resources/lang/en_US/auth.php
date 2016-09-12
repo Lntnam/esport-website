@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed'       => 'These credentials do not match our records.',
+    'throttle'     => 'Too many login attempts. Please try again in :seconds seconds.',
     'please_login' => 'Please Login.',
-    'logged_out' => 'You have successfully logged out.',
+    'logged_out'   => 'You have successfully logged out.',
     'unauthorized' => 'You are not authorized to use this portal.',
 ];

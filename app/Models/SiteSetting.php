@@ -11,11 +11,11 @@ class SiteSetting extends Model
     public $incrementing = false;
 
     protected $casts = [
-        'lines', 'visible', 'order'
+        'lines', 'visible', 'order',
     ];
 
     protected $hidden = [
-        'visible', 'order'
+        'visible', 'order',
     ];
 
     /**
@@ -31,7 +31,7 @@ class SiteSetting extends Model
     {
         parent::boot();
 
-        static::addGlobalScope('visibility', function(Builder $builder) {
+        static::addGlobalScope('visibility', function (Builder $builder) {
             $builder->where('visible', '=', 1);
         });
     }

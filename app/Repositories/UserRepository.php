@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 02/09/2016
- * Time: 22:29
+ * Time: 22:29.
  */
 namespace App\Repositories;
 
@@ -11,38 +11,38 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Socialite\AbstractUser;
 
-class UserRepository extends BaseRepository  {
+class UserRepository extends BaseRepository
+{
+    public static $modelClassName = User::class;
 
-    static $modelClassName = User::class;
+    public static $allowedForCreate = ['name', 'email'];
 
-    static $allowedForCreate = ['name', 'email'];
-
-    static $allowedForUpdate = ['name', 'email'];
+    public static $allowedForUpdate = ['name', 'email'];
 
     public function __construct(User $model)
     {
         $this->model = $model;
     }
 
-    static function getCreateValidationRules()
+    public static function getCreateValidationRules()
     {
         return [
-            'name'=>'required',
-            'email'=>'required|email|unique:users',
+            'name'  => 'required',
+            'email' => 'required|email|unique:users',
         ];
     }
 
-    static function getUpdateValidationRules(Model $model)
+    public static function getUpdateValidationRules(Model $model)
     {
         return [
-            'name'=>'required',
-            'email'=>'required|email|unique:users,email,'.$model->getAttribute('id'),
+            'name'  => 'required',
+            'email' => 'required|email|unique:users,email,'.$model->getAttribute('id'),
         ];
     }
 
-    static function create(array $attributes)
+    public static function create(array $attributes)
     {
-        $model = new User;
+        $model = new User();
         foreach ($attributes as $field => $value) {
             if (in_array($field, static::$allowedForCreate)) {
                 $model->setAttribute($field, $value);
@@ -50,6 +50,7 @@ class UserRepository extends BaseRepository  {
         }
 
         $model->save();
+
         return $model;
     }
 
@@ -60,12 +61,16 @@ class UserRepository extends BaseRepository  {
             ->get();
     }
 
-    public static function restoreDeleted($id) {
+    public static function restoreDeleted($id)
+    {
         $deleted = User::withTrashed()
             ->where('id', $id);
-        if (!$deleted) return false;
+        if (!$deleted) {
+            return false;
+        }
 
         $deleted->restore();
+
         return $deleted->first();
     }
 
@@ -76,7 +81,7 @@ class UserRepository extends BaseRepository  {
 
         if (empty($model)) {
             $model = User::where('social_id', '=', $socialUser->id)
-                ->where('provider', '=', $provider )
+                ->where('provider', '=', $provider)
                 ->first();
         }
 

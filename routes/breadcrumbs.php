@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 02/09/2016
- * Time: 15:38
+ * Time: 15:38.
  */
 
 // Home / Dashboard
@@ -38,12 +38,12 @@
 // Home > Manage Staffs > Update
     Breadcrumbs::register('update_staff', function ($breadcrumbs, $staff) {
         $breadcrumbs->parent('manage_staffs');
-        $breadcrumbs->push(trans('pages.update', ['model' => 'staff']) . ' ' . $staff['name'], route('back.staff.update', $staff['id']));
+        $breadcrumbs->push(trans('pages.update', ['model' => 'staff']).' '.$staff['name'], route('back.staff.update', $staff['id']));
     });
 // Home > Manage Staffs > Delete
     Breadcrumbs::register('delete_staff', function ($breadcrumbs, $staff) {
         $breadcrumbs->parent('manage_staffs');
-        $breadcrumbs->push(trans('pages.delete', ['model' => 'staff']) . ' ' . $staff['name'], route('back.staff.delete', $staff['id']));
+        $breadcrumbs->push(trans('pages.delete', ['model' => 'staff']).' '.$staff['name'], route('back.staff.delete', $staff['id']));
     });
 
     /*
@@ -63,12 +63,12 @@
 // Home > Manage Staffs > Update
     Breadcrumbs::register('update_match', function ($breadcrumbs, $match) {
         $breadcrumbs->parent('manage_matches');
-        $breadcrumbs->push(trans('pages.update', ['model' => 'match']) . ' ' . $match['formatted_schedule'], route('back.match.update', $match['id']));
+        $breadcrumbs->push(trans('pages.update', ['model' => 'match']).' '.$match['formatted_schedule'], route('back.match.update', $match['id']));
     });
 // Home > Manage Staffs > Delete
     Breadcrumbs::register('delete_match', function ($breadcrumbs, $match) {
         $breadcrumbs->parent('manage_matches');
-        $breadcrumbs->push(trans('pages.delete', ['model' => 'match']) . ' ' . $match['formatted_schedule'], route('back.match.delete', $match['id']));
+        $breadcrumbs->push(trans('pages.delete', ['model' => 'match']).' '.$match['formatted_schedule'], route('back.match.delete', $match['id']));
     });
 
     /*

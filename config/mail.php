@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => 'no-reply@next-gen.vn',
-        'name' => 'Next Gen Esports',
+        'name'    => 'Next Gen Esports',
     ],
 
     /*

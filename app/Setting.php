@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Nam
  * Date: 08/09/2016
- * Time: 15:20
+ * Time: 15:20.
  */
 namespace App;
 
@@ -28,7 +28,10 @@ class Setting
 
     public function get($key)
     {
-        if (!isset($this->cache[$key])) return null;
+        if (!isset($this->cache[$key])) {
+            return;
+        }
+
         return $this->cache[$key];
     }
 }

@@ -22,46 +22,51 @@
 //    ];
 //});
 
-$factory->define(App\Models\Opponent::class, function(Faker\Generator $faker) {
-    $name = $faker->unique()->company . ' ' . $faker->companySuffix;
+$factory->define(App\Models\Opponent::class, function (Faker\Generator $faker) {
+    $name = $faker->unique()->company.' '.$faker->companySuffix;
+
     return [
-        'name'  => $name,
-        'short' => getFirstLetters($name),
+        'name'    => $name,
+        'short'   => getFirstLetters($name),
         'country' => $faker->country,
-        'flag' => $faker->imageUrl($width = 64, $height = 64, 'sports')
+        'flag'    => $faker->imageUrl($width = 64, $height = 64, 'sports'),
     ];
 });
 
-$factory->define(App\Models\Tournament::class, function(Faker\Generator $faker) {
+$factory->define(App\Models\Tournament::class, function (Faker\Generator $faker) {
     $name = $faker->unique()->sentence(5);
+
     return [
-        'name'  => $name,
-        'short' => getFirstLetters($name),
-        'type' => $faker->randomElements(['online', 'onlan', 'other'], $count = 1)[0],
-        'logo' => $faker->imageUrl($width = 130, $height = 40, 'sports'),
+        'name'     => $name,
+        'short'    => getFirstLetters($name),
+        'type'     => $faker->randomElements(['online', 'onlan', 'other'], $count = 1)[0],
+        'logo'     => $faker->imageUrl($width = 130, $height = 40, 'sports'),
         'homepage' => $faker->url(),
-        'bracket' => $faker->url(),
-        'prize' => $faker->numberBetween(1000, $max = 200000)
+        'bracket'  => $faker->url(),
+        'prize'    => $faker->numberBetween(1000, $max = 200000),
     ];
 });
 
-$factory->define(App\Models\Match::class, function(Faker\Generator $faker) {
+$factory->define(App\Models\Match::class, function (Faker\Generator $faker) {
     $for = $faker->numberBetween(0, 3);
+
     return [
-        'schedule' => $faker->dateTimeBetween('-10 months', \Carbon\Carbon::now()->addDay(30)),
+        'schedule'      => $faker->dateTimeBetween('-10 months', \Carbon\Carbon::now()->addDay(30)),
         'tournament_id' => $faker->numberBetween(1, $max = 10),
-        'opponent_id' => $faker->numberBetween(1, $max = 30),
-        'for' => $for,
-        'against' => $faker->numberBetween(0, 5 - $for)
+        'opponent_id'   => $faker->numberBetween(1, $max = 30),
+        'for'           => $for,
+        'against'       => $faker->numberBetween(0, 5 - $for),
     ];
 });
 
-function getFirstLetters($text) {
-    $words = explode(" ", $text);
-    $acronym = "";
+function getFirstLetters($text)
+{
+    $words = explode(' ', $text);
+    $acronym = '';
 
     foreach ($words as $w) {
         $acronym .= $w[0];
     }
+
     return strtoupper($acronym);
 }
