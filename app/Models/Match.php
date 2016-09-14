@@ -42,6 +42,7 @@ class Match extends Model
     public function getIsPastAttribute()
     {
         $schedule = new Carbon($this->getAttribute('schedule'), config('settings.default_timezone'));
+
         return $schedule->lt(Carbon::now());
     }
 

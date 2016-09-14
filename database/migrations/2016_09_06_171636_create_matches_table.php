@@ -17,11 +17,16 @@ class CreateMatchesTable extends Migration
             $table->increments('id');
             $table->dateTime('schedule');
             $table->integer('tournament_id');
-            $table->integer('opponent_id')->nullable();
-            $table->smallInteger('for')->default(0);
-            $table->smallInteger('against')->default(0);
-            $table->smallInteger('games')->default(1);
-            $table->tinyInteger('over')->default(0);
+            $table->integer('opponent_id')
+                  ->nullable();
+            $table->smallInteger('for')
+                  ->default(0);
+            $table->smallInteger('against')
+                  ->default(0);
+            $table->smallInteger('games')
+                  ->default(1);
+            $table->tinyInteger('over')
+                  ->default(0);
             $table->timestamps();
         });
     }

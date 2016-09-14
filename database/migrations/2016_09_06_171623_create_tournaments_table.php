@@ -18,8 +18,10 @@ class CreateTournamentsTable extends Migration
             $table->string('name', 50);
             $table->string('short', 10);
             $table->enum('type', ['online', 'onlan', 'other'])->nullable;
-            $table->string('homepage')->nullable();
-            $table->string('bracket')->nullable();
+            $table->string('homepage')
+                  ->nullable();
+            $table->string('bracket')
+                  ->nullable();
             $table->timestamps();
         });
     }

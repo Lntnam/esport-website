@@ -14,15 +14,22 @@ class CreateSiteSettingsTable extends Migration
     public function up()
     {
         Schema::create('site_settings', function (Blueprint $table) {
-            $table->string('key')->unique();
+            $table->string('key')
+                  ->unique();
             $table->primary('key');
             $table->string('title');
-            $table->integer('lines')->default(3);
-            $table->text('options')->nullable();
-            $table->text('value')->nullable();
-            $table->string('hint', 200)->nullable();
-            $table->tinyInteger('visible')->default(1);
-            $table->integer('order')->defeault(0);
+            $table->integer('lines')
+                  ->default(3);
+            $table->text('options')
+                  ->nullable();
+            $table->text('value')
+                  ->nullable();
+            $table->string('hint', 200)
+                  ->nullable();
+            $table->tinyInteger('visible')
+                  ->default(1);
+            $table->integer('order')
+                  ->defeault(0);
             $table->timestamps();
         });
     }

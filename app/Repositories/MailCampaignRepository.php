@@ -36,7 +36,7 @@ class MailCampaignRepository extends BaseRepository
      * @param $message
      * @return void
      */
-    static function writeSimpleLog($message)
+    public static function writeSimpleLog($message)
     {
         static::create(['type' => 'log', 'title' => $message]);
     }

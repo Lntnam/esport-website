@@ -13,8 +13,9 @@ class AddStreamMatches extends Migration
      */
     public function up()
     {
-        Schema::table('matches', function(Blueprint $table) {
-            $table->string('stream')->nullable();
+        Schema::table('matches', function (Blueprint $table) {
+            $table->string('stream')
+                  ->nullable();
         });
     }
 

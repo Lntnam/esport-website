@@ -13,8 +13,9 @@ class AddRoundMatches extends Migration
      */
     public function up()
     {
-        Schema::table('matches', function(Blueprint $table) {
-            $table->string('round')->nullable();
+        Schema::table('matches', function (Blueprint $table) {
+            $table->string('round')
+                  ->nullable();
         });
     }
 

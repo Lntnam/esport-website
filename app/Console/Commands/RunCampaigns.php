@@ -81,6 +81,7 @@ class RunCampaigns extends Command
         $data = $this->validateFixtureCampaignData();
         if (empty($data)) {
             Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] No matches to send. Skipping.');
+
             return;
         }
 
@@ -95,18 +96,20 @@ class RunCampaigns extends Command
             $campaign = MailChimp::post(sprintf('campaigns/%s/actions/replicate', $id));
             if (!empty($campaign) && empty($campaign['id'])) {
                 Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error replicating campaign: ' . $campaign['title']);
+
                 return;
             }
 
             // Change campaign title
             $title = $campaign['settings']['title'];
-            $title = substr($title, 0, strlen($title) - 10) .
-                ' #' . Carbon::today(config('settings.default_timezone'))->format('Ymj');
+            $title = substr($title, 0, strlen($title) - 10) . ' #' . Carbon::today(config('settings.default_timezone'))
+                                                                           ->format('Ymj');
 
             $campaign['settings']['title'] = $title;
             $campaign = MailChimp::patch(sprintf('campaigns/%s', $campaign['id']), $campaign);
             if (!empty($campaign) && empty($campaign['id'])) {
                 Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error changing campaign title: ' . $campaign['title']);
+
                 return;
             }
 
@@ -114,14 +117,12 @@ class RunCampaigns extends Command
             $response = MailChimp::put(sprintf('campaigns/%s/content', $campaign['id']), ['html' => $html]);
             if (!empty($response) && !empty($response['type'])) {
                 Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error setting campaign content: ' . $response['title']);
+
                 return;
             }
 
             // Store to campaign log
-            $log = Repositories\MailCampaignRepository::create([
-                'type' => 'fixtures',
-                'title' => $title
-            ]);
+            $log = Repositories\MailCampaignRepository::create(['type' => 'fixtures', 'title' => $title]);
 
             // Send & update campaign log
             $response = MailChimp::post(sprintf('campaigns/%s/actions/send', $campaign['id']));
@@ -148,36 +149,34 @@ class RunCampaigns extends Command
         $send_today = Setting::get('fixtures_send_today');
         if ($send_today == 1) {
             Setting::set('fixtures_send_today', 0);
+
             return true;
         }
 
         $latest = Repositories\MailCampaignRepository::getLatestByType($type);
-        if (!empty($latest))
-            $last_run = $latest->getAttribute('created_at');
-        else
+        if (!empty($latest)) $last_run = $latest->getAttribute('created_at'); else
             $last_run = Carbon::minValue();
 
         $every = $settings['by']['every'];
         $on = $settings['by']['on'];
-        $today = Carbon::tomorrow(config('app.timezone'))->subSecond(1); // at 23:59:59 because Carbon diff functions do round down
+        $today = Carbon::tomorrow(config('app.timezone'))
+                       ->subSecond(1); // at 23:59:59 because Carbon diff functions do round down
 
         switch ($settings['by']['unit']) {
             case 'day':
                 return $last_run->diffInDays($today) >= $every;
                 break;
             case 'week':
-                return $last_run->diffInWeeks($today) >= $every
-                && $today->format('N') == $on;
+                return $last_run->diffInWeeks($today) >= $every && $today->format('N') == $on;
                 break;
             case 'month':
-                $last_run->diffInMonths($today) >= $every
-                && $today->format('j') == $on;
+                $last_run->diffInMonths($today) >= $every && $today->format('j') == $on;
                 break;
             case 'year':
-                $last_run->diffInYears($today) >= $every
-                && $today->format('j n') == $on;
+                $last_run->diffInYears($today) >= $every && $today->format('j n') == $on;
                 break;
         }
+
         return false;
     }
 
@@ -187,7 +186,8 @@ class RunCampaigns extends Command
     private function validateFixtureCampaignData()
     {
         // Only send fixtures update if there's any match for the next 3 days
-        $today = Carbon::tomorrow(config('app.timezone'))->subSecond(1); // at 23:59:59 because Carbon diff functions do round down
+        $today = Carbon::tomorrow(config('app.timezone'))
+                       ->subSecond(1); // at 23:59:59 because Carbon diff functions do round down
         return Repositories\MatchRepository::getUpcomingMatchesInRange($today->addDays(3));
     }
 }

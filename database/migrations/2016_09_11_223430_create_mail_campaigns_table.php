@@ -17,9 +17,12 @@ class CreateMailCampaignsTable extends Migration
             $table->increments('id');
             $table->string('type');
             $table->string('title');
-            $table->tinyInteger('success')->nullable();
-            $table->string('problem')->nullable();
-            $table->string('message')->nullable();
+            $table->tinyInteger('success')
+                  ->nullable();
+            $table->string('problem')
+                  ->nullable();
+            $table->string('message')
+                  ->nullable();
             $table->timestamps();
         });
     }

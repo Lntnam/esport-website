@@ -17,7 +17,8 @@ class CreateOpponentsTable extends Migration
             $table->increments('id');
             $table->string('name', 50);
             $table->string('short', 10);
-            $table->string('country', 3)->nullable();
+            $table->string('country', 3)
+                  ->nullable();
             $table->timestamps();
         });
     }

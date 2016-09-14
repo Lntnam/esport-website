@@ -22,35 +22,24 @@
 //    ];
 //});
 
-$factory->define(App\Models\Opponent::class, function(Faker\Generator $faker) {
+$factory->define(App\Models\Opponent::class, function (Faker\Generator $faker) {
     $name = $faker->unique()->company . ' ' . $faker->companySuffix;
-    return [
-        'name'  => $name,
-        'short' => ModelFactoryHelper::getFirstLetters($name),
-        'country' => $faker->country
-    ];
+
+    return ['name' => $name, 'short' => ModelFactoryHelper::getFirstLetters($name), 'country' => $faker->country];
 });
 
-$factory->define(App\Models\Tournament::class, function(Faker\Generator $faker) {
-    $name = $faker->unique()->sentence(5);
-    return [
-        'name'  => $name,
-        'short' => ModelFactoryHelper::getFirstLetters($name),
-        'type' => $faker->randomElements(['online', 'onlan', 'other'], 1)[0],
-        'homepage' => $faker->url(),
-        'bracket' => $faker->url(),
-    ];
+$factory->define(App\Models\Tournament::class, function (Faker\Generator $faker) {
+    $name = $faker->unique()
+                  ->sentence(5);
+
+    return ['name' => $name, 'short' => ModelFactoryHelper::getFirstLetters($name), 'type' => $faker->randomElements(['online', 'onlan', 'other'], 1)[0], 'homepage' => $faker->url(), 'bracket' => $faker->url(),];
 });
 
-$factory->define(App\Models\Match::class, function(Faker\Generator $faker) {
+$factory->define(App\Models\Match::class, function (Faker\Generator $faker) {
     $for = $faker->numberBetween(0, 3);
-    return [
-        'schedule' => $faker->dateTimeBetween('-10 months', \Carbon\Carbon::now()->addDay(30)),
-        'tournament_id' => $faker->numberBetween(1, 10),
-        'opponent_id' => $faker->numberBetween(1, 30),
-        'for' => $for,
-        'against' => $faker->numberBetween(0, 5 - $for)
-    ];
+
+    return ['schedule' => $faker->dateTimeBetween('-10 months', \Carbon\Carbon::now()
+                                                                              ->addDay(30)), 'tournament_id' => $faker->numberBetween(1, 10), 'opponent_id' => $faker->numberBetween(1, 30), 'for' => $for, 'against' => $faker->numberBetween(0, 5 - $for)];
 });
 
 class ModelFactoryHelper

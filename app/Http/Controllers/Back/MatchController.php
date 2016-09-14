@@ -43,6 +43,9 @@ class MatchController extends BaseController
             } else {
                 $match = MatchRepository::create($attributes);
 
+                // Set flag to send fixture today
+                Setting::set('fixtures_send_today', 1);
+
                 return redirect()
                     ->route('back.match.index')
                     ->with('status', 'success')
