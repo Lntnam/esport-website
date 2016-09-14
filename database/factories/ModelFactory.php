@@ -26,7 +26,7 @@ $factory->define(App\Models\Opponent::class, function(Faker\Generator $faker) {
     $name = $faker->unique()->company . ' ' . $faker->companySuffix;
     return [
         'name'  => $name,
-        'short' => getFirstLetters($name),
+        'short' => ModelFactoryHelper::getFirstLetters($name),
         'country' => $faker->country
     ];
 });
@@ -35,7 +35,7 @@ $factory->define(App\Models\Tournament::class, function(Faker\Generator $faker) 
     $name = $faker->unique()->sentence(5);
     return [
         'name'  => $name,
-        'short' => getFirstLetters($name),
+        'short' => ModelFactoryHelper::getFirstLetters($name),
         'type' => $faker->randomElements(['online', 'onlan', 'other'], $count = 1)[0],
         'homepage' => $faker->url(),
         'bracket' => $faker->url(),
@@ -53,12 +53,17 @@ $factory->define(App\Models\Match::class, function(Faker\Generator $faker) {
     ];
 });
 
-function getFirstLetters($text) {
-    $words = explode(" ", $text);
-    $acronym = "";
+class ModelFactoryHelper
+{
+    static function getFirstLetters($text)
+    {
+        $words = explode(" ", $text);
+        $acronym = "";
 
-    foreach ($words as $w) {
-        $acronym .= $w[0];
+        foreach ($words as $w) {
+            $acronym .= $w[0];
+        }
+
+        return strtoupper($acronym);
     }
-    return strtoupper($acronym);
 }
