@@ -32,4 +32,11 @@ class Setting
 
         return $this->cache[$key];
     }
+
+    public function server($key) {
+        if (isset($_SERVER[$key]))
+            return $_SERVER[$key];
+
+        return null;
+    }
 }

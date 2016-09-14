@@ -19,8 +19,8 @@ class MatchController extends BaseController
 {
     public function data(Request $request)
     {
-        $sort = !empty($request->input('sort')) ? $request->input('sort') : 'schedule';
-        $order = !empty($request->input('order')) ? $request->input('order') : 'desc';
+        $sort = !empty($request->input('sort')) && is_string($request->input('sort')) ? $request->input('sort') : 'schedule';
+        $order = !empty($request->input('order')) && is_string($request->input('order')) ? $request->input('order') : 'desc';
 
         return response()->json(MatchRepository::query($request->input('search'), $sort, $order));
     }
@@ -39,9 +39,7 @@ class MatchController extends BaseController
         if (!empty($request->all())) {
             $attributes = $request->all();
             $validator = Validator::make($attributes, MatchRepository::getCreateValidationRules());
-            if ($validator->fails()) {
-                $errors = $validator->errors();
-            } else {
+            if (!$validator->fails()) {
                 $match = MatchRepository::create($attributes);
 
                 // Set flag to send fixture today
@@ -55,7 +53,7 @@ class MatchController extends BaseController
 
             return view('back.create_match')
                 ->with('model', $attributes)
-                ->with('errors', $errors)
+                ->with('errors', $validator->errors())
                 ->with('tournaments', $tournaments)
                 ->with('opponents', $opponents);
         }
@@ -120,15 +118,15 @@ class MatchController extends BaseController
                     ->with('errors', $validator->errors())
                     ->with('tournaments', $tournaments)
                     ->with('opponents', $opponents);
-            } else {
-                $repo = new MatchRepository($match);
-                $repo->update($attributes);
-
-                return redirect()
-                    ->route('back.match.index')
-                    ->with('status', 'success')
-                    ->with('message', trans('success.updated', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
             }
+
+            $repo = new MatchRepository($match);
+            $repo->update($attributes);
+
+            return redirect()
+                ->route('back.match.index')
+                ->with('status', 'success')
+                ->with('message', trans('success.updated', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
         }
     }
 }

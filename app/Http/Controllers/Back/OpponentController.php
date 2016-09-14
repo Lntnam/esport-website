@@ -11,8 +11,8 @@ class OpponentController extends BaseController
 {
     public function data(Request $request)
     {
-        $sort = !empty($request->input('sort')) ? $request->input('sort') : 'name';
-        $order = !empty($request->input('order')) ? $request->input('order') : 'asc';
+        $sort = !empty($request->input('sort')) && is_string($request->input('sort')) ? $request->input('sort') : 'name';
+        $order = !empty($request->input('order')) && is_string($request->input('order')) ? $request->input('order') : 'asc';
 
         return response()->json(OpponentRepository::search($request->input('search'), $sort, $order));
     }
@@ -26,9 +26,7 @@ class OpponentController extends BaseController
     {
         if (!empty($request->all())) {
             $validator = Validator::make($request->all(), OpponentRepository::getCreateValidationRules());
-            if ($validator->fails()) {
-                $errors = $validator->errors();
-            } else {
+            if (!$validator->fails()) {
                 $team = OpponentRepository::create($request->all());
 
                 return response()->json(new AjaxResponse(true, $team));
@@ -36,7 +34,7 @@ class OpponentController extends BaseController
 
             return response()->json(new AjaxResponse(false, (string)view('back.create_opponent_modal')
                 ->with('input', $request->all())
-                ->with('errors', $errors)));
+                ->with('errors', $validator->errors())));
         }
 
         return view('back.create_opponent_modal')->with('input', $request->all());
@@ -100,15 +98,15 @@ class OpponentController extends BaseController
                 return view('back.update_opponent')
                     ->with('model', $attributes)
                     ->with('errors', $validator->errors());
-            } else {
-                $repo = new OpponentRepository($model);
-                $repo->update($attributes);
-
-                return redirect()
-                    ->route('back.opponent.index')
-                    ->with('status', 'success')
-                    ->with('message', trans('success.updated', ['model' => trans('contents.opponent'), 'label' => $model->getAttribute('name')]));
             }
+
+            $repo = new OpponentRepository($model);
+            $repo->update($attributes);
+
+            return redirect()
+                ->route('back.opponent.index')
+                ->with('status', 'success')
+                ->with('message', trans('success.updated', ['model' => trans('contents.opponent'), 'label' => $model->getAttribute('name')]));
         }
     }
 }

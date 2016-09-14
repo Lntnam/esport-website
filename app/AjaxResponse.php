@@ -23,6 +23,6 @@ class AjaxResponse
         $this->success = $success;
         $this->content = $content;
         $this->model = $model;
-        $this->time = Carbon::now();
+        $this->time = Carbon::now()->toDateTimeString();
     }
 }
