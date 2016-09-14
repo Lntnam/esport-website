@@ -12,6 +12,7 @@ use App\Repositories\MatchRepository;
 use App\Repositories\OpponentRepository;
 use App\Repositories\TournamentRepository;
 use Illuminate\Http\Request;
+use Setting;
 use Validator;
 
 class MatchController extends BaseController
