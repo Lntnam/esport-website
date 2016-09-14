@@ -15,7 +15,7 @@
     <div class="clearfix">
         <p class="pull-right">
             <button id="btnCreate" type="button" class="btn btn-primary">
-                @lang('contents.btn-create-model', ['model'=>trans('contents.match')])</button>
+                @lang('contents.btn_create_model', ['model'=>trans('contents.match')])</button>
         </p>
     </div>
 
@@ -145,7 +145,7 @@
 
                         '<a class="btn-sm" href="' +
                         '{!! route('back.match.delete', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
-                        '" title="@lang('contents.btn-delete')">' +
+                        '" title="@lang('contents.btn_delete')">' +
                         '<i class="glyphicon glyphicon-remove"></i></a>'
                     ].join('');
                 }

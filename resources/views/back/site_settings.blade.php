@@ -32,8 +32,8 @@
                     </div>
                 @endforeach
 
-                <button type="submit" class="btn btn-primary">@lang('contents.btn-submit')</button>
-                <button type="reset" class="btn btn-default">@lang('contents.btn-reset')</button>
+                <button type="submit" class="btn btn-primary">@lang('contents.btn_submit')</button>
+                <button type="reset" class="btn btn-default">@lang('contents.btn_reset')</button>
             </form>
         </div>
     </div>

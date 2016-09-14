@@ -47,7 +47,7 @@ class MatchRepository extends BaseRepository
                 $match->setAttribute($field, $value);
             }
         }
-        $match->setAttribute('schedule', Carbon::createFromFormat(config('settings.match-format'), $attributes['schedule'], $attributes['timezone'])
+        $match->setAttribute('schedule', Carbon::createFromFormat(config('settings.match_format'), $attributes['schedule'], $attributes['timezone'])
                                                ->tz(config('app.timezone')));
         $match->save();
 
@@ -73,7 +73,7 @@ class MatchRepository extends BaseRepository
                 $this->model->setAttribute($field, $value);
             }
         }
-        $this->model->setAttribute('schedule', Carbon::createFromFormat(config('settings.match-format'), $attributes['schedule'], $attributes['timezone'])
+        $this->model->setAttribute('schedule', Carbon::createFromFormat(config('settings.match_format'), $attributes['schedule'], $attributes['timezone'])
                                                      ->tz(config('app.timezone')));
         $this->model->save();
     }

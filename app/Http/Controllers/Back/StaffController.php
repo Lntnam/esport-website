@@ -17,10 +17,9 @@ class StaffController extends BaseController
 {
     public function data(Request $request)
     {
-        $sort = !empty($request->input('sort')) && is_string($request->input('sort')) ? $request->input('sort') : 'name';
-        $order = !empty($request->input('order')) && is_string($request->input('order')) ? $request->input('order') : 'asc';
+        $params = $this->retrieveSortParams($request);
 
-        return response()->json(UserRepository::query($sort, $order));
+        return response()->json(UserRepository::query($params['sort'], $params['order']));
     }
 
     public function index()
@@ -59,19 +58,19 @@ class StaffController extends BaseController
             }
 
             return view('back.delete_staff')->with('model', $user->getAttributes());
-        } else {
-            $user = UserRepository::read($request->input('id'));
-            if (!$user || $user->getAttribute('root')) {
-                abort(404);
-            }
-
-            UserRepository::destroy($user->id);
-
-            return redirect()
-                ->route('back.staff.index')
-                ->with('status', 'success')
-                ->with('message', trans('success.deleted', ['model' => trans('contents.staff')]));
         }
+
+        $user = UserRepository::read($request->input('id'));
+        if (!$user || $user->getAttribute('root')) {
+            abort(404);
+        }
+
+        UserRepository::destroy($user->id);
+
+        return redirect()
+            ->route('back.staff.index')
+            ->with('status', 'success')
+            ->with('message', trans('success.deleted', ['model' => trans('contents.staff')]));
     }
 
     public function restore($id)

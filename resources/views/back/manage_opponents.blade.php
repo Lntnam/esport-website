@@ -118,7 +118,7 @@
 
                         '<a class="btn-sm" href="' +
                         '{!! route('back.opponent.delete', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
-                        '" title="@lang('contents.btn-delete')">' +
+                        '" title="@lang('contents.btn_delete')">' +
                         '<i class="glyphicon glyphicon-remove"></i></a>'
                     ].join('');
                 }

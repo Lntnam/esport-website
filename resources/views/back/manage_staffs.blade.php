@@ -15,7 +15,7 @@
 
     <p class="pull-right">
         <button id="btnCreate" type="button" class="btn btn-primary">
-            @lang('contents.btn-create-model', ['model'=>trans('contents.staff')])</button>
+            @lang('contents.btn_create_model', ['model'=>trans('contents.staff')])</button>
     </p>
 
     <table id="grid"></table>
@@ -123,7 +123,7 @@
                     var buttons = [];
                     if (row.deleted_at != null && row.deleted_at != '') {
                         buttons.push('<a class="btn-sm" href="javascript:void(0)" onclick="restoreClick(' + row.id +
-                                ')" title="@lang('contents.btn-restore')">' +
+                                ')" title="@lang('contents.btn_restore')">' +
                                 '<i class="glyphicon glyphicon-refresh"></i></a>');
                     }
                     else {
@@ -135,7 +135,7 @@
                         if (!row.root) {
                             buttons.push('<a class="btn-sm" href="' +
                                     '{!! route('back.staff.delete', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
-                                    '" title="@lang('contents.btn-delete')">' +
+                                    '" title="@lang('contents.btn_delete')">' +
                                     '<i class="glyphicon glyphicon-remove"></i></a>');
                         }
                     }

@@ -163,7 +163,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <ul class="list-unstyled">
-                    <li class="pull-right"><a href="#top">@lang('contents.btn-back-to-top')</a></li>
+                    <li class="pull-right"><a href="#top">@lang('contents.btn_back_to_top')</a></li>
                     <li><a href="#">Terms of use</a></li>
                     <li><a href="#">Privacy</a></li>
                     <li><a href="#">Contact</a></li>

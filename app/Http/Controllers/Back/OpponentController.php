@@ -11,10 +11,9 @@ class OpponentController extends BaseController
 {
     public function data(Request $request)
     {
-        $sort = !empty($request->input('sort')) && is_string($request->input('sort')) ? $request->input('sort') : 'name';
-        $order = !empty($request->input('order')) && is_string($request->input('order')) ? $request->input('order') : 'asc';
+        $params = $this->retrieveSortParams($request);
 
-        return response()->json(OpponentRepository::search($request->input('search'), $sort, $order));
+        return response()->json(OpponentRepository::search($request->input('search'), $params['sort'], $params['order']));
     }
 
     public function index()
@@ -54,27 +53,27 @@ class OpponentController extends BaseController
             return view('back.delete_opponent')
                 ->with('model', $model)
                 ->with('deletable', $deletable);
-        } else {
-            $model = OpponentRepository::readWithCount($request->input('id'));
-            if (!$model) {
-                abort(404);
-            }
-
-            $deletable = $model->matches_count == 0;
-
-            if (!$deletable) {
-                return view('back.delete_opponent')
-                    ->with('model', $model)
-                    ->with('deletable', $deletable);
-            }
-
-            $model->delete();
-
-            return redirect()
-                ->route('back.opponent.index')
-                ->with('status', 'success')
-                ->with('message', trans('success.updated', ['model' => trans('contents.opponent'), 'label' => $model->getAttribute('name')]));
         }
+
+        $model = OpponentRepository::readWithCount($request->input('id'));
+        if (!$model) {
+            abort(404);
+        }
+
+        $deletable = $model->matches_count == 0;
+
+        if (!$deletable) {
+            return view('back.delete_opponent')
+                ->with('model', $model)
+                ->with('deletable', $deletable);
+        }
+
+        $model->delete();
+
+        return redirect()
+            ->route('back.opponent.index')
+            ->with('status', 'success')
+            ->with('message', trans('success.updated', ['model' => trans('contents.opponent'), 'label' => $model->getAttribute('name')]));
     }
 
     public function update(Request $request, $id = null)

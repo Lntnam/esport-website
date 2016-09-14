@@ -27,7 +27,7 @@
     <meta name="msapplication-TileImage" content="{{ URL::asset('favicons/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
 
-    <title>{{config('app.back-name')}} - @yield('title')</title>
+    <title>{{config('app.back_name')}} - @yield('title')</title>
 
     <!-- Bootstrap core CSS / paper theme-->
     <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">

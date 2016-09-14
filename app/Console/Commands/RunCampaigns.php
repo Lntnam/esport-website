@@ -160,35 +160,32 @@ class RunCampaigns extends Command
     {
         // Check override setting
         $send_today = Setting::get('fixtures_send_today');
-        if ($send_today == 1) {
-            Setting::set('fixtures_send_today', 0);
+        if (!$send_today) {
+            $last_run = Carbon::minValue();
+            $latest = Repositories\MailCampaignRepository::getLatestByType($type);
+            if (!empty($latest)) {
+                $last_run = $latest->getAttribute('created_at');
+            }
 
-            return true;
+            $every = $settings['by']['every'];
+            $check = $settings['by']['check'];
+            $today = Carbon::tomorrow(config('app.timezone'))
+                           ->subSecond(1); // at 23:59:59 because Carbon diff functions do round down
+
+            switch ($settings['by']['unit']) {
+                case 'day':
+                    return $last_run->diffInDays($today) >= $every;
+                case 'week':
+                    return $last_run->diffInWeeks($today) >= $every && $today->format('N') == $check;
+                case 'month':
+                    return $last_run->diffInMonths($today) >= $every && $today->format('j') == $check;
+                case 'year':
+                    return $last_run->diffInYears($today) >= $every && $today->format('j n') == $check;
+            }
         }
+        Setting::set('fixtures_send_today', 0);
 
-        $last_run = Carbon::minValue();
-        $latest = Repositories\MailCampaignRepository::getLatestByType($type);
-        if (!empty($latest)) {
-            $last_run = $latest->getAttribute('created_at');
-        }
-
-        $every = $settings['by']['every'];
-        $check = $settings['by']['check'];
-        $today = Carbon::tomorrow(config('app.timezone'))
-                       ->subSecond(1); // at 23:59:59 because Carbon diff functions do round down
-
-        switch ($settings['by']['unit']) {
-            case 'day':
-                return $last_run->diffInDays($today) >= $every;
-            case 'week':
-                return $last_run->diffInWeeks($today) >= $every && $today->format('N') == $check;
-            case 'month':
-                return $last_run->diffInMonths($today) >= $every && $today->format('j') == $check;
-            case 'year':
-                return $last_run->diffInYears($today) >= $every && $today->format('j n') == $check;
-        }
-
-        return false;
+        return true;
     }
 
     /**

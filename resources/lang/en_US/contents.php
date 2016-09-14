@@ -20,21 +20,21 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'btn-back-to-top'               => 'Back to top',
+    'btn_back_to_top'               => 'Back to top',
 
-    'btn-submit'                    => 'Submit',
-    'btn-reset'                     => 'Reset',
-    'btn-delete'                    => 'Delete',
-    'btn-back'                      => '&laquo; Go back',
-    'btn-close'                     => 'Close',
-    'btn-restore'                   => 'Restore',
+    'btn_submit'                    => 'Submit',
+    'btn_reset'                     => 'Reset',
+    'btn_delete'                    => 'Delete',
+    'btn_back'                      => '&laquo; Go back',
+    'btn_close'                     => 'Close',
+    'btn_restore'                   => 'Restore',
 
-    'btn-create-model'              => 'Create :model',
-    'modal-add-title'               => 'Add new :Model',
+    'btn_create_model'              => 'Create :model',
+    'modal_add_title'               => 'Add new :Model',
 
-    'btn-combo-show-all'            => 'Show all items',
+    'btn_combo_show_all'            => 'Show all items',
 
-    'btn-subscribe'                 => 'Subscribe',
+    'btn_subscribe'                 => 'Subscribe',
 
     'btn-call-fixtures'             => 'Check Fixtures & Results',
     'btn-call-stream'               => 'Watch live stream',

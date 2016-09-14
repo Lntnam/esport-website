@@ -26,17 +26,17 @@ class Match extends Model
 
     public function getDateAttribute()
     {
-        return (new Carbon($this->getAttribute('schedule')))->formatLocalized(config('settings.match-date-localized'));
+        return (new Carbon($this->getAttribute('schedule')))->formatLocalized(config('settings.match_date_localized'));
     }
 
     public function getTimeAttribute()
     {
-        return (new Carbon($this->getAttribute('schedule')))->formatLocalized(config('settings.match-time-localized'));
+        return (new Carbon($this->getAttribute('schedule')))->formatLocalized(config('settings.match_time_localized'));
     }
 
     public function getFormattedScheduleAttribute()
     {
-        return (new Carbon($this->getAttribute('schedule')))->formatLocalized(config('settings.match-localized'));
+        return (new Carbon($this->getAttribute('schedule')))->formatLocalized(config('settings.match_localized'));
     }
 
     public function getIsPastAttribute()

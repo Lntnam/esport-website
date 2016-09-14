@@ -28,7 +28,7 @@ class FixtureController extends BaseController
                 $matches = MatchRepository::getUpcomingMatches();
                 break;
             case 'recent':
-                $matches = MatchRepository::getRecentMatches(config('settings.past-matches-count'));
+                $matches = MatchRepository::getRecentMatches(config('settings.past_matches_count'));
                 break;
         }
 

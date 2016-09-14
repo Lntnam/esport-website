@@ -27,7 +27,7 @@
     <meta name="msapplication-TileImage" content="{{ URL::asset('favicons/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
 
-    <title>{{ config('settings.back-name') }} - @yield('title')</title>
+    <title>{{ config('settings.back_name') }} - @yield('title')</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -70,8 +70,8 @@
             </button>
             <img class="img-rounded logo" src="{{ URL::asset('images/next-gen.png') }}" alt="logo"/>
             <a href="{!! route('back.home') !!}" class="navbar-brand logo-text"
-               title="{!! config('settings.back-name') !!}">
-                {!! config('settings.back-name') !!}</a>
+               title="{!! config('settings.back_name') !!}">
+                {!! config('settings.back_name') !!}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">

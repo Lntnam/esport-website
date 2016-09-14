@@ -30,9 +30,9 @@
                            name="email" value="{{ $model['email'] }}">
                 </div>
 
-                <button type="submit" class="btn btn-primary">@lang('contents.btn-submit')</button>
-                <button type="reset" class="btn btn-default">@lang('contents.btn-reset')</button>
-                <button type="button" class="btn btn-link" >@lang('contents.btn-back')</button>
+                <button type="submit" class="btn btn-primary">@lang('contents.btn_submit')</button>
+                <button type="reset" class="btn btn-default">@lang('contents.btn_reset')</button>
+                <button type="button" class="btn btn-link" >@lang('contents.btn_back')</button>
             </form>
         </div>
     </div>

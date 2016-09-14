@@ -19,10 +19,9 @@ class MatchController extends BaseController
 {
     public function data(Request $request)
     {
-        $sort = !empty($request->input('sort')) && is_string($request->input('sort')) ? $request->input('sort') : 'schedule';
-        $order = !empty($request->input('order')) && is_string($request->input('order')) ? $request->input('order') : 'desc';
+        $params = $this->retrieveSortParams($request, ['sort'=>'schedule', 'order'=>'desc']);
 
-        return response()->json(MatchRepository::query($request->input('search'), $sort, $order));
+        return response()->json(MatchRepository::query($request->input('search'), $params['sort'], $params['order']));
     }
 
     public function index()
@@ -74,19 +73,19 @@ class MatchController extends BaseController
             }
 
             return view('back.delete_match')->with('model', array_merge($match->getAttributes(), ['formatted_schedule' => $match->getAttribute('formatted_schedule')]));
-        } else {
-            $match = MatchRepository::read($request->input('id'));
-            if (!$match) {
-                abort(404);
-            }
-
-            $match->delete();
-
-            return redirect()
-                ->route('back.match.index')
-                ->with('status', 'success')
-                ->with('message', trans('success.updated', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
         }
+
+        $match = MatchRepository::read($request->input('id'));
+        if (!$match) {
+            abort(404);
+        }
+
+        $match->delete();
+
+        return redirect()
+            ->route('back.match.index')
+            ->with('status', 'success')
+            ->with('message', trans('success.updated', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
     }
 
     public function update(Request $request, $id = null)

@@ -20,21 +20,21 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'btn-back-to-top'               => 'Lên đầu trang',
+    'btn_back_to_top'               => 'Lên đầu trang',
 
-    'btn-submit'                    => 'Submit',
-    'btn-reset'                     => 'Làm lại',
-    'btn-delete'                    => 'Xóa',
-    'btn-back'                      => '&laquo; Trở về',
-    'btn-close'                     => 'Đóng',
-    'btn-restore'                   => 'Phục hồi',
+    'btn_submit'                    => 'Submit',
+    'btn_reset'                     => 'Làm lại',
+    'btn_delete'                    => 'Xóa',
+    'btn_back'                      => '&laquo; Trở về',
+    'btn_close'                     => 'Đóng',
+    'btn_restore'                   => 'Phục hồi',
 
-    'btn-create-model'              => 'Tạo :model',
-    'modal-add-title'               => 'Tạo :Model',
+    'btn_create_model'              => 'Tạo :model',
+    'modal_add_title'               => 'Tạo :Model',
 
-    'btn-combo-show-all'            => 'Hiện toàn bộ',
+    'btn_combo_show_all'            => 'Hiện toàn bộ',
 
-    'btn-subscribe'                 => 'Đăng ký',
+    'btn_subscribe'                 => 'Đăng ký',
 
     'btn-call-fixtures'             => 'Xem lịch đấu & kết quả',
     'btn-call-stream'               => 'Xem stream',

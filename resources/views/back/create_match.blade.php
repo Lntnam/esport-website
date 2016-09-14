@@ -20,7 +20,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"
-                        id="myModalLabel">@lang('contents.modal-add-title', ['model'=>'tournament'])</h4>
+                        id="myModalLabel">@lang('contents.modal_add_title', ['model'=>'tournament'])</h4>
                 </div>
                 <div class="modal-body">
                 </div>
@@ -40,7 +40,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"
-                        id="myModalLabel">@lang('contents.modal-add-title', ['model'=>'opponent'])</h4>
+                        id="myModalLabel">@lang('contents.modal_add_title', ['model'=>'opponent'])</h4>
                 </div>
                 <div class="modal-body">
                 </div>
@@ -61,7 +61,7 @@
                     <div class="input-group date" id="schedulepicker">
                         <input type="text" class="form-control" name="schedule"
                                placeholder="{{ \Carbon\Carbon::now(config('settings.default_timezone'))
-                               ->format(config('settings.match-format')) }}"
+                               ->format(config('settings.match_format')) }}"
                                value="{{ !empty($model) ? $model['formatted_schedule'] : '' }}"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -147,9 +147,9 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">@lang('contents.btn-submit')</button>
-                    <button type="reset" class="btn btn-default">@lang('contents.btn-reset')</button>
-                    <button type="button" class="btn btn-link">@lang('contents.btn-back')</button>
+                    <button type="submit" class="btn btn-primary">@lang('contents.btn_submit')</button>
+                    <button type="reset" class="btn btn-default">@lang('contents.btn_reset')</button>
+                    <button type="button" class="btn btn-link">@lang('contents.btn_back')</button>
                 </div>
             </form>
         </div>
@@ -166,7 +166,7 @@
             window.location.href = '{{ route('back.match.index') }}'
         });
         $('#schedulepicker').datetimepicker({
-            format: '{{ config('settings.match-picker-format') }}',
+            format: '{{ config('settings.match_picker_format') }}',
             stepping: 5,
             // minDate: moment().startOf('day'),
             collapse: false,
@@ -177,7 +177,7 @@
         var tournament = $('#tournament');
 
         tournament.combobox({
-            showAllItems: '@lang('contents.btn-combo-show-all')',
+            showAllItems: '@lang('contents.btn_combo_show_all')',
             didNotMatch: "@lang('messages.combo-did-not-match')",
             ifInvalid: function (value) {
                 modal.find('.btn-primary').hide();
@@ -235,7 +235,7 @@
         var opponent = $('#opponent');
 
         opponent.combobox({
-            showAllItems: '@lang('contents.btn-combo-show-all')',
+            showAllItems: '@lang('contents.btn_combo_show_all')',
             didNotMatch: "@lang('messages.combo-did-not-match')",
             ifInvalid: function (value) {
                 modal.find('.btn-primary').hide();

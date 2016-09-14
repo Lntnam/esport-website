@@ -24,8 +24,8 @@
                     <p>Is about to be deleted.</p>
                     <p>This action is irreversible! Are you sure to continue?</p>
                     <p>
-                        <button type="submit" class="btn btn-danger">@lang('contents.btn-delete')</button>
-                        <button type="button" class="btn btn-link">@lang('contents.btn-back')</button>
+                        <button type="submit" class="btn btn-danger">@lang('contents.btn_delete')</button>
+                        <button type="button" class="btn btn-link">@lang('contents.btn_back')</button>
                     </p>
                 </div>
             </form>

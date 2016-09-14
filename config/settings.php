@@ -7,12 +7,12 @@
  */
 return [
     'root_admin'            => 'j251282@gmail.com',
-    'back-name'             => 'NG Staff Portal',
+    'back_name'             => 'NG Staff Portal',
 
     /*
      * Front-end view options
      */
-    'past-matches-count'    => 20,
+    'past_matches_count'    => 20,
 
     /*
      * Back-end view options
@@ -24,8 +24,6 @@ return [
      * Path settings
      */
 
-    'image-opponent'        => 'storage/opponents/',
-    'image-tournament'      => 'storage/tournaments/',
     'vendor_dir'            => 'vendor',
 
     /*
@@ -36,12 +34,12 @@ return [
     'default_timezone_value'=> 'GMT +7',
 
     /** For using with Carbon -> localization */
-    'match-localized'       => '%a, %d/%m/%Y %H:%M',
-    'match-date-localized'  => '%a, %d/%m/%Y',
-    'match-time-localized'  => '%H:%M',
+    'match_localized'       => '%a, %d/%m/%Y %H:%M',
+    'match_date_localized'  => '%a, %d/%m/%Y',
+    'match_time_localized'  => '%H:%M',
 
-    'match-format'          => 'Y-m-d H:i', // for binding data to datepicker
-    'match-picker-format'   => 'YYYY-MM-DD HH:mm', // for moment.js
+    'match_format'          => 'Y-m-d H:i', // for binding data to datepicker
+    'match_picker_format'   => 'YYYY-MM-DD HH:mm', // for moment.js
 
     /*
      * Localization
