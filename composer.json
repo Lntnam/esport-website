@@ -28,7 +28,7 @@
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "sofa/eloquence": "~5.3",
         "camroncade/timezone": "0.1",
-        "umpirsky/country-list": "dev-master",
+        "umpirsky/country-list": "2.0.2",
         "drewm/mailchimp-api": "^2.2",
         "torann/geoip": "^0.2.2",
         "paragonie/random_compat": "2.0.2",

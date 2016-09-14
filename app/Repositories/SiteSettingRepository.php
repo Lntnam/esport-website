@@ -10,33 +10,34 @@ namespace App\Repositories;
 use App\Models\SiteSetting;
 use Illuminate\Database\Eloquent\Model;
 
-class SiteSettingRepository extends BaseRepository {
+class SiteSettingRepository extends BaseRepository
+{
 
-    static $modelClassName = SiteSetting::class;
+    protected static $modelClassName = SiteSetting::class;
 
-    static function getCreateValidationRules()
+    public static function getCreateValidationRules()
     {
         return [];
     }
 
-    static function getUpdateValidationRules(Model $model)
+    public static function getUpdateValidationRules(Model $model)
     {
-         return [];
+        return [];
     }
 
-    static function create(array $attributes)
+    public static function create(array $attributes)
     {
     }
 
-    static function all($columns = ['*'])
+    public static function all($columns = ['*'])
     {
         return SiteSetting::orderBy('order')
-            ->get();
+                          ->get();
     }
 
     public static function save(array $settings)
     {
-        $data = array();
+        $data = [];
         foreach ($settings as $key => $value) {
             $setting = SiteSetting::find($key);
             if ($setting && $setting->getAttribute('visible')) {
@@ -45,12 +46,14 @@ class SiteSettingRepository extends BaseRepository {
                 $data[] = $setting;
             }
         }
+
         return $data;
     }
 
-    static function read($key)
+    public static function read($key)
     {
-        $setting = SiteSetting::withoutGlobalScope('visibility')->find($key);
+        $setting = SiteSetting::withoutGlobalScope('visibility')
+                              ->find($key);
         if (!empty($setting)) return $setting->getAttribute('value');
 
         return null;

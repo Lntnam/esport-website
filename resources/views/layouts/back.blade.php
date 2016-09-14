@@ -231,6 +231,15 @@
 
     </div>
     <!-- /#page-wrapper -->
+
+    <div class="clearfix"></div>
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Version {{ config('app.version') }}</p>
+            </div>
+        </div>
+    </footer>
 </div>
 <!-- /#wrapper -->
 

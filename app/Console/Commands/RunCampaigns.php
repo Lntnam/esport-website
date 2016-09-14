@@ -81,19 +81,24 @@ class RunCampaigns extends Command
         $every = $settings['by']['every'];
         $on = $settings['by']['on'];
         $last_run = $latest->getAttribute('created_at');
-        $today = Carbon::tomorrow('UTC')->subSecond(1); // at 23:59:59
+        $today = Carbon::tomorrow('UTC')
+                       ->subSecond(1); // at 23:59:59
 
         switch ($settings['by']['unit']) {
             case 'day':
                 return $last_run->diffInDays($today) >= $every;
                 break;
             case 'week':
+                return $last_run->diffInWeeks($today) >= $every && $on == $today->format('N');
                 break;
             case 'month':
+                return $last_run->diffInMonths($today) >= $every && $on == $today->format('j');
                 break;
             case 'year':
+                return $last_run->diffInYears($today) >= $every && $on == $today->format('j n');
                 break;
         }
+
         return true;
     }
 }

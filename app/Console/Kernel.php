@@ -16,9 +16,7 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        Commands\RunCampaigns::class,
-    ];
+    protected $commands = [Commands\RunCampaigns::class,];
 
     /**
      * Define the application's command schedule.
@@ -36,8 +34,8 @@ class Kernel extends ConsoleKernel
             if ($settings['enabled'] !== true) continue;
 
             $schedule->command('campaigns:run ' . $name)
-                ->dailyAt($settings['time'])
-                ->timezone(config('settings.default_timezone'));
+                     ->dailyAt($settings['time'])
+                     ->timezone(config('settings.default_timezone'));
         }
     }
 

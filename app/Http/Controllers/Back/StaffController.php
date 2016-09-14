@@ -36,17 +36,22 @@ class StaffController extends BaseController
                 $errors = $validator->errors();
             } else {
                 UserRepository::create(['name' => $request->input('name'), 'email' => $request->input('email')]);
-                return redirect()->route('back.staff.index')->with('status', 'success')
+
+                return redirect()
+                    ->route('back.staff.index')
+                    ->with('status', 'success')
                     ->with('message', trans('success.created', ['model' => trans('contents.staff'), 'label' => $request->input('name')]));
             }
 
-            return view('back.create_staff')->with('input', $request->all())->with('errors', $errors);
+            return view('back.create_staff')
+                ->with('input', $request->all())
+                ->with('errors', $errors);
         }
 
         return view('back.create_staff')->with('input', $request->all());
     }
 
-    public function delete(Request $request, $id=null)
+    public function delete(Request $request, $id = null)
     {
         if (empty($request->all())) {
             $user = UserRepository::read($id);
@@ -54,9 +59,9 @@ class StaffController extends BaseController
             if (!$user || $user->getAttribute('root')) {
                 abort(404);
             }
+
             return view('back.delete_staff')->with('model', $user->getAttributes());
-        }
-        else {
+        } else {
             $user = UserRepository::read($request->input('id'));
             if (!$user || $user->getAttribute('root')) {
                 abort(404);
@@ -64,7 +69,8 @@ class StaffController extends BaseController
 
             UserRepository::destroy($user->id);
 
-            return redirect()->route('back.staff.index')
+            return redirect()
+                ->route('back.staff.index')
                 ->with('status', 'success')
                 ->with('message', trans('success.deleted', ['model' => trans('contents.staff')]));
         }
@@ -74,21 +80,22 @@ class StaffController extends BaseController
     {
         $user = UserRepository::restoreDeleted($id);
         if (!$user) {
-            return response()->json(new AjaxResponse(false, trans('validation.not-found', ['model'=>'staff'])));
+            return response()->json(new AjaxResponse(false, trans('validation.not-found', ['model' => 'staff'])));
         }
+
         return response()->json(new AjaxResponse(true, '', $user));
     }
 
-    public function update(Request $request, $id=null)
+    public function update(Request $request, $id = null)
     {
         if (empty($request->all())) {
             $user = UserRepository::read($id);
             if (!$user) {
                 abort(404);
             }
+
             return view('back.update_staff')->with('model', $user->getAttributes());
-        }
-        else {
+        } else {
             $user = UserRepository::read($request->input('id'));
             if (!$user) {
                 abort(404);
@@ -99,12 +106,12 @@ class StaffController extends BaseController
                 return view('back.update_staff')
                     ->with('model', $request->all())
                     ->with('errors', $validator->errors());
-            }
-            else {
+            } else {
                 $repo = new UserRepository($user);
                 $repo->update($request->all());
 
-                return redirect()->route('back.staff.index')
+                return redirect()
+                    ->route('back.staff.index')
                     ->with('status', 'success')
                     ->with('message', trans('success.updated', ['model' => trans('contents.staff'), 'label' => $user->name]));
             }

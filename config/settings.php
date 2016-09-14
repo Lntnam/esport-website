@@ -67,7 +67,7 @@ return [
             'by' => [
                 'unit' => 'day',
                 'every' => 3,
-                'on' => null, // week: N | month: j | year: jn
+                'on' => null, // week: N | month: j | year: j n
             ],
             'time'       => '23:00', // H:i
         ],
@@ -84,7 +84,7 @@ return [
             'by' => [
                 'unit' => 'day',
                 'every' => 3,
-                'on' => null, // week: N | month: j | year: jn
+                'on' => null, // week: N | month: j | year: j n
             ],
             'time'       => '', // H:i
         ],

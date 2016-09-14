@@ -14,30 +14,30 @@ use Illuminate\Database\Eloquent\Model;
 class MatchRepository extends BaseRepository
 {
 
-    static $modelClassName = Match::class;
+    protected static $modelClassName = Match::class;
 
-    static $allowedForCreate = ['tournament_id', 'opponent_id', 'for', 'against', 'games', 'over', 'stream', 'round'];
+    protected static $allowedForCreate = ['tournament_id', 'opponent_id', 'for', 'against', 'games', 'over', 'stream', 'round'];
 
-    static $allowedForUpdate = ['tournament_id', 'opponent_id', 'for', 'against', 'games', 'over', 'stream', 'round'];
+    protected static $allowedForUpdate = ['tournament_id', 'opponent_id', 'for', 'against', 'games', 'over', 'stream', 'round'];
 
-    static $numberFields = ['for', 'against', 'games', 'opponent_id', 'over'];
+    protected static $numberFields = ['for', 'against', 'games', 'opponent_id', 'over'];
 
     public function __construct(Match $model)
     {
         $this->model = $model;
     }
 
-    static function getCreateValidationRules()
+    public static function getCreateValidationRules()
     {
         return ['schedule' => 'required', 'tournament_id' => 'required|integer|exists:tournaments,id', 'stream' => 'url'];
     }
 
-    static function getUpdateValidationRules(Model $model)
+    public static function getUpdateValidationRules(Model $model)
     {
         return ['schedule' => 'required', 'tournament_id' => 'required|integer|exists:tournaments,id', 'stream' => 'url'];
     }
 
-    static function create(array $attributes)
+    public static function create(array $attributes)
     {
         $attributes = static::emptyStringToNull($attributes);
 

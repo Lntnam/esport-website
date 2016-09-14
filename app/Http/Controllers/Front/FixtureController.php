@@ -38,6 +38,7 @@ class FixtureController extends BaseController
     public function results()
     {
         $matches = MatchRepository::getRecentMatches();
+
         return view('front.fixture_results')->with('matches', $matches);
     }
 

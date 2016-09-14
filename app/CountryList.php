@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use RuntimeException;
+
 class CountryList
 {
     private $cache = [];

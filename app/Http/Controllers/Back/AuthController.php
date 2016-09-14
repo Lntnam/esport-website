@@ -22,37 +22,39 @@ class AuthController extends BaseController
     {
         Auth::logout();
 
-        return redirect()->route('back.login')
+        return redirect()
+            ->route('back.login')
             ->with('status', 'success')
             ->with('message', trans('auth.logged_out'));
 
     }
 
-    public function getSocialRedirect( $provider ) {
+    public function getSocialRedirect($provider)
+    {
         $providerKey = config('services.' . $provider);
-        if(empty($providerKey))
-            return view('auth.login');
+        if (empty($providerKey)) return view('auth.login');
 
-        return Socialite::driver( $provider )->redirect();
+        return Socialite::driver($provider)
+                        ->redirect();
     }
 
-    public function getSocialHandle( $provider ) {
-        $socialUser = Socialite::driver( $provider )->user();
+    public function getSocialHandle($provider)
+    {
+        $socialUser = Socialite::driver($provider)
+                               ->user();
 
         $userCheck = UserRepository::matchWithSocial($socialUser, $provider);
 
-        if(!empty($userCheck))
-        {
+        if (!empty($userCheck)) {
             //Check if we can match an existing staff with social user
             $this->user = new UserRepository($userCheck);
 
             // update latest information from social network
             $this->user->updateFromSocial($socialUser, $provider);
-        }
-        else
-        {
+        } else {
             // this social user is not authorized
-            return redirect()->route('back.login')
+            return redirect()
+                ->route('back.login')
                 ->with('status', 'error')
                 ->with('message', trans('auth.unauthorized'));
         }

@@ -19,19 +19,16 @@ class FixtureMailer
             // Load settings
             $config = config('settings.mc_campaigns');
 
-            if (!isset($config['fixtures']))
-                throw new \Exception("Campaign [fixtures] not found in config\\settings.php");
+            if (!isset($config['fixtures'])) throw new \Exception("Campaign [fixtures] not found in config\\settings.php");
             $this->settings = $config['fixtures'];
-        }
-        else {
+        } else {
             $this->settings = $setting;
         }
     }
 
     public function run()
     {
-        if (!$this->_mc_data_constrain())
-            return;
+        if (!$this->_mc_data_constrain()) return;
     }
 
     /**

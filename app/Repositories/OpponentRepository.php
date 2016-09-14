@@ -7,28 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 class OpponentRepository extends BaseRepository
 {
 
-    static $modelClassName = Opponent::class;
+    protected static $modelClassName = Opponent::class;
 
-    static $allowedForCreate = ['name', 'short', 'country', 'flag'];
+    protected static $allowedForCreate = ['name', 'short', 'country', 'flag'];
 
-    static $allowedForUpdate = ['name', 'short', 'country', 'flag'];
+    protected static $allowedForUpdate = ['name', 'short', 'country', 'flag'];
 
     public function __construct(Opponent $model)
     {
         $this->model = $model;
     }
 
-    static function getCreateValidationRules()
+    public static function getCreateValidationRules()
     {
         return ['name' => 'required', 'short' => 'required',];
     }
 
-    static function getUpdateValidationRules(Model $model)
+    public static function getUpdateValidationRules(Model $model)
     {
         return ['name' => 'required', 'short' => 'required',];
     }
 
-    static function create(array $attributes)
+    public static function create(array $attributes)
     {
         $opp = new Opponent();
         foreach ($attributes as $field => $value) {

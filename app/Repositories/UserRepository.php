@@ -11,36 +11,31 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Socialite\AbstractUser;
 
-class UserRepository extends BaseRepository  {
+class UserRepository extends BaseRepository
+{
 
-    static $modelClassName = User::class;
+    protected static $modelClassName = User::class;
 
-    static $allowedForCreate = ['name', 'email'];
+    protected static $allowedForCreate = ['name', 'email'];
 
-    static $allowedForUpdate = ['name', 'email'];
+    protected static $allowedForUpdate = ['name', 'email'];
 
     public function __construct(User $model)
     {
         $this->model = $model;
     }
 
-    static function getCreateValidationRules()
+    public static function getCreateValidationRules()
     {
-        return [
-            'name'=>'required',
-            'email'=>'required|email|unique:users',
-        ];
+        return ['name' => 'required', 'email' => 'required|email|unique:users',];
     }
 
-    static function getUpdateValidationRules(Model $model)
+    public static function getUpdateValidationRules(Model $model)
     {
-        return [
-            'name'=>'required',
-            'email'=>'required|email|unique:users,email,'.$model->getAttribute('id'),
-        ];
+        return ['name' => 'required', 'email' => 'required|email|unique:users,email,' . $model->getAttribute('id'),];
     }
 
-    static function create(array $attributes)
+    public static function create(array $attributes)
     {
         $model = new User;
         foreach ($attributes as $field => $value) {
@@ -50,34 +45,37 @@ class UserRepository extends BaseRepository  {
         }
 
         $model->save();
+
         return $model;
     }
 
     public static function query($sort, $order)
     {
         return User::withTrashed()
-            ->orderBy($sort, $order)
-            ->get();
+                   ->orderBy($sort, $order)
+                   ->get();
     }
 
-    public static function restoreDeleted($id) {
+    public static function restoreDeleted($id)
+    {
         $deleted = User::withTrashed()
-            ->where('id', $id);
+                       ->where('id', $id);
         if (!$deleted) return false;
 
         $deleted->restore();
+
         return $deleted->first();
     }
 
     public static function matchWithSocial(AbstractUser $socialUser, $provider)
     {
         $model = User::where('email', '=', $socialUser->getEmail())
-            ->first();
+                     ->first();
 
         if (empty($model)) {
             $model = User::where('social_id', '=', $socialUser->id)
-                ->where('provider', '=', $provider )
-                ->first();
+                         ->where('provider', '=', $provider)
+                         ->first();
         }
 
         return $model;

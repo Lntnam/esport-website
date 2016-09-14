@@ -16,13 +16,14 @@ class SettingController extends BaseController
     public function getSiteSettings()
     {
         $settings = SiteSettingRepository::all();
+
         return view('back.site_settings')->with('settings', $settings);
     }
 
     public function postSiteSettings(Request $request)
     {
         $inputs = $request->all();
-        $settings = array();
+        $settings = [];
         foreach ($inputs as $name => $value) {
             if (substr($name, 0, 8) == 'setting-') {
                 $name = substr($name, 8);
@@ -32,8 +33,11 @@ class SettingController extends BaseController
 
         $settings = SiteSettingRepository::save($settings);
 
-        $request->session()->flash('status', 'success');
-        $request->session()->flash('message', trans('success.site_setting_updated'));
+        $request->session()
+                ->flash('status', 'success');
+        $request->session()
+                ->flash('message', trans('success.site_setting_updated'));
+
         return view('back.site_settings')->with('settings', $settings);
     }
 }

@@ -19,39 +19,20 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $middleware = [
-        Http\Middleware\CheckForMaintenanceMode::class,
-    ];
+    protected $middleware = [Http\Middleware\CheckForMaintenanceMode::class,];
 
     /**
      * The application's route middleware groups.
      *
      * @var array
      */
-    protected $middlewareGroups = [
-        'web' => [
-            Middleware\EncryptCookies::class,
-            Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            Session\Middleware\StartSession::class,
-            View\Middleware\ShareErrorsFromSession::class,
-            Middleware\VerifyCsrfToken::class,
-            Routing\Middleware\SubstituteBindings::class,
-        ],
+    protected $middlewareGroups = ['web' => [Middleware\EncryptCookies::class, Cookie\Middleware\AddQueuedCookiesToResponse::class, Session\Middleware\StartSession::class, View\Middleware\ShareErrorsFromSession::class, Middleware\VerifyCsrfToken::class, Routing\Middleware\SubstituteBindings::class,],
 
-        'back' => [
-            Middleware\App::class,
-            'auth:web',
-        ],
+                                   'back' => [Middleware\App::class, 'auth:web',],
 
-        'front' => [
-            Middleware\App::class,
-        ],
+                                   'front' => [Middleware\App::class,],
 
-        'api' => [
-            'throttle:60,1',
-            'bindings',
-        ],
-    ];
+                                   'api' => ['throttle:60,1', 'bindings',],];
 
     /**
      * The application's route middleware.
@@ -60,13 +41,5 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $routeMiddleware = [
-        'auth' => Auth\Middleware\Authenticate::class,
-        'auth.basic' => Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => Routing\Middleware\SubstituteBindings::class,
-        'can' => Auth\Middleware\Authorize::class,
-        'guest' => Middleware\RedirectIfAuthenticated::class,
-        'throttle' => Routing\Middleware\ThrottleRequests::class,
-        'root' => Middleware\RootOnlyAccess::class,
-    ];
+    protected $routeMiddleware = ['auth' => Auth\Middleware\Authenticate::class, 'auth.basic' => Auth\Middleware\AuthenticateWithBasicAuth::class, 'bindings' => Routing\Middleware\SubstituteBindings::class, 'can' => Auth\Middleware\Authorize::class, 'guest' => Middleware\RedirectIfAuthenticated::class, 'throttle' => Routing\Middleware\ThrottleRequests::class, 'root' => Middleware\RootOnlyAccess::class,];
 }

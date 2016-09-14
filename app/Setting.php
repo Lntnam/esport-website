@@ -29,6 +29,7 @@ class Setting
     public function get($key)
     {
         if (!isset($this->cache[$key])) return null;
+
         return $this->cache[$key];
     }
 }

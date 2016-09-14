@@ -13,22 +13,22 @@ use App\Models\MailCampaign;
 
 class MailCampaignRepository extends BaseRepository
 {
-    static $modelClassName = MailCampaign::class;
+    protected static $modelClassName = MailCampaign::class;
 
     public function __construct(MailCampaign $model)
     {
         $this->model = $model;
     }
 
-    static function create(array $attributes)
+    public static function create(array $attributes)
     {
         return MailCampaign::create($attributes);
     }
 
-    static function getLatestByType($type)
+    public static function getLatestByType($type)
     {
         return MailCampaign::where('type', $type)
-            ->orderBy('created_at', 'desc')
-            ->first();
+                           ->orderBy('created_at', 'desc')
+                           ->first();
     }
 }

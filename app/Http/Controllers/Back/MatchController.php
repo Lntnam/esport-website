@@ -7,7 +7,6 @@
  */
 namespace App\Http\Controllers\Back;
 
-use Carbon\Carbon;
 use App\Http\Controllers\Controller as BaseController;
 use App\Repositories\MatchRepository;
 use App\Repositories\OpponentRepository;
@@ -43,7 +42,9 @@ class MatchController extends BaseController
                 $errors = $validator->errors();
             } else {
                 $match = MatchRepository::create($attributes);
-                return redirect()->route('back.match.index')
+
+                return redirect()
+                    ->route('back.match.index')
                     ->with('status', 'success')
                     ->with('message', trans('success.created', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
             }

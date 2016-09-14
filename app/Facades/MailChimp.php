@@ -13,5 +13,8 @@ use Illuminate\Support\Facades\Facade;
 
 class MailChimp extends Facade
 {
-    protected static function getFacadeAccessor() { return 'DrewM\MailChimp\MailChimp'; }
+    protected static function getFacadeAccessor()
+    {
+        return 'DrewM\MailChimp\MailChimp';
+    }
 }

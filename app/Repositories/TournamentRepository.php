@@ -7,28 +7,28 @@ use Illuminate\Database\Eloquent\Model;
 class TournamentRepository extends BaseRepository
 {
 
-    static $modelClassName = Tournament::class;
+    protected static $modelClassName = Tournament::class;
 
-    static $allowedForCreate = ['name', 'short', 'type', 'homepage', 'bracket'];
+    protected static $allowedForCreate = ['name', 'short', 'type', 'homepage', 'bracket'];
 
-    static $allowedForUpdate = ['name', 'short', 'type', 'homepage', 'bracket'];
+    protected static $allowedForUpdate = ['name', 'short', 'type', 'homepage', 'bracket'];
 
     public function __construct(Tournament $model)
     {
         $this->model = $model;
     }
 
-    static function getCreateValidationRules()
+    public static function getCreateValidationRules()
     {
         return ['name' => 'required', 'short' => 'required', 'type' => 'required|in:online,onlan,other', 'homepage' => 'url', 'bracket' => 'url'];
     }
 
-    static function getUpdateValidationRules(Model $model)
+    public static function getUpdateValidationRules(Model $model)
     {
         return ['name' => 'required', 'short' => 'required', 'type' => 'required|in:online,onlan,other', 'homepage' => 'url', 'bracket' => 'url'];
     }
 
-    static function create(array $attributes)
+    public static function create(array $attributes)
     {
         $tour = new Tournament();
         foreach ($attributes as $field => $value) {
