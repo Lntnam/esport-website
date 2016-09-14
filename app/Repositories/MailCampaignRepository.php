@@ -31,4 +31,13 @@ class MailCampaignRepository extends BaseRepository
                            ->orderBy('created_at', 'desc')
                            ->first();
     }
+
+    /**
+     * @param $message
+     * @return void
+     */
+    static function writeSimpleLog($message)
+    {
+        static::create(['type' => 'log', 'title' => $message]);
+    }
 }

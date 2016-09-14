@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddRoundMatches extends Migration
@@ -12,7 +13,7 @@ class AddRoundMatches extends Migration
      */
     public function up()
     {
-        Schema::table('matches', function($table) {
+        Schema::table('matches', function(Blueprint $table) {
             $table->string('round')->nullable();
         });
     }
@@ -24,7 +25,7 @@ class AddRoundMatches extends Migration
      */
     public function down()
     {
-        Schema::table('matches', function ($table) {
+        Schema::table('matches', function (Blueprint $table) {
             $table->dropColumn('round');
         });
     }

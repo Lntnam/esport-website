@@ -57,36 +57,29 @@ return [
     'mc_campaigns' => [
         'fixtures' => [
             'enabled' => true,
-            'campaign_id' => '21263', // saved campaign to replicate
-            'template_id' => '8279', // saved template to generate HTML content
-            'blocks' => [ // defined in the template in *|mc:edit="key"|* format
-                'preview' => 'fixtures.preview',
-                'content' => 'fixtures.content',
-                'change' => 'general.change_preferences',
-            ],
+            'campaign_id' => [
+                'en_US' => '1ce3d317ef',
+                'vi_VN' => '6cfc74b5d6',
+            ], // saved campaigns to replicate
             'by' => [
                 'unit' => 'day',
                 'every' => 3,
                 'on' => null, // week: N | month: j | year: j n
             ],
-            'time'       => '23:00', // H:i
+            'time' => '23:00', // H:i, default timezone
         ],
         'results' => [
             'enabled' => false,
-            'campaign_id' => '', // saved campaign to replicate
-            'template_id' => '', // saved template to generate HTML content
-            'blocks' => [ // defined in the template in *|mc:edit="key"|* format
-                'preview' => 'results.preview',
-                'content' => 'results.content',
-                'change' => 'general.change_preferences',
-            ],
-            'segment_id' => '', // saved segment to receive emails
+            'campaign_id' => [
+                'en_US' => '',
+                'vi_VN' => '',
+            ], // saved campaigns to replicate
             'by' => [
-                'unit' => 'day',
-                'every' => 3,
-                'on' => null, // week: N | month: j | year: j n
+                'unit' => 'week',
+                'every' => 1,
+                'on' => 1, // week: N | month: j | year: j n
             ],
-            'time'       => '', // H:i
+            'time' => '08:00', // H:i, default timezone
         ],
     ],
 

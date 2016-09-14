@@ -110,4 +110,14 @@ class MatchRepository extends BaseRepository
 
         return $builder->get();
     }
+
+    public static function getUpcomingMatchesInRange(Carbon $endDate)
+    {
+        return Match::where([['over', false], ['schedule', '>', Carbon::now(config('app.timezone'))
+                                                                      ->toDateTimeString()], ['schedule', '<=', $endDate->toDateTimeString()]])
+                    ->with('tournament')
+                    ->with('opponent')
+                    ->orderBy('schedule', 'asc')
+                    ->get();
+    }
 }

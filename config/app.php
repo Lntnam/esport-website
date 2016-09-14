@@ -242,7 +242,7 @@ return [
 
         'CountryList' => \App\Facades\CountryList::class,
         'Setting' => \App\Facades\Setting::class,
-        'MC' => \App\Facades\MailChimp::class
+        'MailChimp' => \App\Facades\MailChimp::class
     ],
 
 ];
