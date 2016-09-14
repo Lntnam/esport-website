@@ -57,17 +57,21 @@ class RunCampaigns extends Command
         $config = config('settings.mc_campaigns');
         $type = $this->argument('type');
 
-        if (isset($config[$type])) {
-            $settings = $config[$type];
-            if ($this->validateCampaignSchedule($type, $settings)) {
-                switch ($type) {
-                    case 'fixtures':
-                        $this->runFixtures($settings);
-                        break;
-                }
-            } else {
-                Repositories\MailCampaignRepository::writeSimpleLog(sprintf('[%s] Schedule constraint not met. Skipping.', $type));
+        if (!isset($config[$type])) {
+            Repositories\MailCampaignRepository::writeSimpleLog(sprintf('[%s] Schedule constraint not met. Skipping.', $type));
+
+            return;
+        }
+
+        $settings = $config[$type];
+        if ($this->validateCampaignSchedule($type, $settings)) {
+            switch ($type) {
+                case 'fixtures':
+                    $this->runFixtures($settings);
+                    break;
             }
+
+            return;
         }
     }
 
@@ -88,53 +92,59 @@ class RunCampaigns extends Command
         foreach ($settings['campaign_id'] as $locale => $id) {
             /** @var $locale string */
             /** @var $id string */
-            $html = view(sprintf('campaigns.%s.fixtures', $locale))
-                ->with('matches', $data)
-                ->render();
 
-            // Replicate campaign
-            $campaign = MailChimp::post(sprintf('campaigns/%s/actions/replicate', $id));
-            if (!empty($campaign) && empty($campaign['id'])) {
-                Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error replicating campaign: ' . $campaign['title']);
-
-                return;
-            }
-
-            // Change campaign title
-            $title = $campaign['settings']['title'];
-            $title = substr($title, 0, strlen($title) - 10) . ' #' . Carbon::today(config('settings.default_timezone'))
-                                                                           ->format('Ymj');
-
-            $campaign['settings']['title'] = $title;
-            $campaign = MailChimp::patch(sprintf('campaigns/%s', $campaign['id']), $campaign);
-            if (!empty($campaign) && empty($campaign['id'])) {
-                Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error changing campaign title: ' . $campaign['title']);
-
-                return;
-            }
-
-            // Set content
-            $response = MailChimp::put(sprintf('campaigns/%s/content', $campaign['id']), ['html' => $html]);
-            if (!empty($response) && !empty($response['type'])) {
-                Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error setting campaign content: ' . $response['title']);
-
-                return;
-            }
-
-            // Store to campaign log
-            $log = Repositories\MailCampaignRepository::create(['type' => 'fixtures', 'title' => $title]);
-
-            // Send & update campaign log
-            $response = MailChimp::post(sprintf('campaigns/%s/actions/send', $campaign['id']));
-            if (!empty($response) && !empty($response['type'])) { // ERROR!
-                $log->setAttribute('success', false);
-                $log->setAttribute('problem', $response['title']);
-                $log->setAttribute('message', $response['detail']);
-            } else {
-                $log->setAttribute('success', true);
-            }
-            $log->save();
+            $this->sendFixtureByLocale($locale, $id, $data);
         }
+    }
+
+    protected function sendFixtureByLocale($locale, $id, $data)
+    {
+        $html = view(sprintf('campaigns.%s.fixtures', $locale))
+            ->with('matches', $data)
+            ->render();
+
+        // Replicate campaign
+        $campaign = MailChimp::post(sprintf('campaigns/%s/actions/replicate', $id));
+        if (!empty($campaign) && empty($campaign['id'])) {
+            Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error replicating campaign: ' . $campaign['title']);
+
+            return;
+        }
+
+        // Change campaign title
+        $title = $campaign['settings']['title'];
+        $title = substr($title, 0, strlen($title) - 10) . ' #' . Carbon::today(config('settings.default_timezone'))
+                                                                       ->format('Ymj');
+
+        $campaign['settings']['title'] = $title;
+        $campaign = MailChimp::patch(sprintf('campaigns/%s', $campaign['id']), $campaign);
+        if (!empty($campaign) && empty($campaign['id'])) {
+            Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error changing campaign title: ' . $campaign['title']);
+
+            return;
+        }
+
+        // Set content
+        $response = MailChimp::put(sprintf('campaigns/%s/content', $campaign['id']), ['html' => $html]);
+        if (!empty($response) && !empty($response['type'])) {
+            Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error setting campaign content: ' . $response['title']);
+
+            return;
+        }
+
+        // Store to campaign log
+        $log = Repositories\MailCampaignRepository::create(['type' => 'fixtures', 'title' => $title]);
+
+        // Send & update campaign log
+        $response = MailChimp::post(sprintf('campaigns/%s/actions/send', $campaign['id']));
+        if (!empty($response) && !empty($response['type'])) { // ERROR!
+            $log->setAttribute('success', false);
+            $log->setAttribute('problem', $response['title']);
+            $log->setAttribute('message', $response['detail']);
+        } else {
+            $log->setAttribute('success', true);
+        }
+        $log->save();
     }
 
     /**
@@ -158,7 +168,7 @@ class RunCampaigns extends Command
             $last_run = Carbon::minValue();
 
         $every = $settings['by']['every'];
-        $on = $settings['by']['on'];
+        $check = $settings['by']['check'];
         $today = Carbon::tomorrow(config('app.timezone'))
                        ->subSecond(1); // at 23:59:59 because Carbon diff functions do round down
 
@@ -167,13 +177,13 @@ class RunCampaigns extends Command
                 return $last_run->diffInDays($today) >= $every;
                 break;
             case 'week':
-                return $last_run->diffInWeeks($today) >= $every && $today->format('N') == $on;
+                return $last_run->diffInWeeks($today) >= $every && $today->format('N') == $check;
                 break;
             case 'month':
-                $last_run->diffInMonths($today) >= $every && $today->format('j') == $on;
+                $last_run->diffInMonths($today) >= $every && $today->format('j') == $check;
                 break;
             case 'year':
-                $last_run->diffInYears($today) >= $every && $today->format('j n') == $on;
+                $last_run->diffInYears($today) >= $every && $today->format('j n') == $check;
                 break;
         }
 

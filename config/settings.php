@@ -64,7 +64,7 @@ return [
             'by' => [
                 'unit' => 'day',
                 'every' => 3,
-                'on' => null, // week: N | month: j | year: j n
+                'check' => null, // week: N | month: j | year: j n
             ],
             'time' => '23:00', // H:i, default timezone
         ],
@@ -77,7 +77,7 @@ return [
             'by' => [
                 'unit' => 'week',
                 'every' => 1,
-                'on' => 1, // week: N | month: j | year: j n
+                'check' => 1, // week: N | month: j | year: j n
             ],
             'time' => '08:00', // H:i, default timezone
         ],
