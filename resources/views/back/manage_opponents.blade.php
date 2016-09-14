@@ -1,23 +1,17 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.manage_matches'))
+@section('title', trans('pages.manage_opponents'))
 
 @section('head')
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-table.min.css') }}"/>
+    <link rel="stylesheet" href="{{ URL::asset('css/flag-icon.min.css') }}"/>
 @stop
 
-@section('page-heading', trans('pages.manage_matches'))
+@section('page-heading', trans('pages.manage_opponents'))
 
-@section('breadcrumbs', Breadcrumbs::render('manage_matches'))
+@section('breadcrumbs', Breadcrumbs::render('manage_opponents'))
 
 @section('content')
-
-    <div class="clearfix">
-        <p class="pull-right">
-            <button id="btnCreate" type="button" class="btn btn-primary">
-                @lang('contents.btn-create-model', ['model'=>trans('contents.match')])</button>
-        </p>
-    </div>
 
     <table id="grid"></table>
 
@@ -62,14 +56,6 @@
             // Style //
             classes: 'table table-no-bordered table-hover',
             striped: true,
-            rowStyle: function (row) {
-                if (row.over) {
-                    if (row.for > row.against) return {classes: 'success'};
-                    else if (row.for == row.against) return {classes: 'warning'};
-                    else return {classes: 'danger'};
-                }
-                else return {classes: 'info'};
-            },
 
             // Display //
             search: true,
@@ -87,9 +73,9 @@
             // Data Settings //
             idField: 'id',
             uniqueId: 'id',
-            sortName: 'schedule',
-            sortOrder: 'desc',
-            url: '{{ route('back.match.gridData') }}',
+            sortName: 'name',
+            sortOrder: 'asc',
+            url: '{{ route('back.opponent.gridData') }}',
             escape: true,
 
             // Column Definitions //
@@ -100,38 +86,25 @@
                     return index + 1;
                 }
             }, {
-                field: 'date',
+                field: 'name',
+                width: 400,
+                title: '@lang('contents.team-name')'
+            }, {
+                field: 'short',
+                width: 300,
+                title: '@lang('contents.team-short')'
+            }, {
+                field: 'country_name',
+                width: 300,
+                title: '@lang('contents.team-country')',
+                formatter: function (value, row) {
+                    return '<span class="flag-icon flag-icon-'+row.country.toLowerCase()+'"></span> '+value;
+                }
+            }, {
+                field: 'matches_count',
                 width: 150,
                 align: 'center',
-                title: '@lang('contents.match-date')'
-            }, {
-                field: 'time',
-                width: 80,
-                align: 'center',
-                title: '@lang('contents.match-time')'
-            }, {
-                field: 'tournament.name',
-                width: 400,
-                title: '@lang('contents.match-tour')',
-                formatter: function(value, row) {
-                    return value + (row.round != null && row.round != '' ? ' - '+row.round : '')
-                }
-            }, {
-                field: 'opponent.name',
-                width: 400,
-                title: '@lang('contents.match-opponent')'
-            }, {
-                width: 100,
-                title: '@lang('contents.match-best-of')',
-                align: 'center',
-                field: 'games'
-            }, {
-                width: 100,
-                title: '@lang('contents.match-result')',
-                align: 'center',
-                formatter: function (value, row) {
-                    return row.for + ' - ' + row.against;
-                }
+                title: '@lang('contents.team_matches_count')'
             }, {
                 title: '@lang('table.col-command')',
                 width: 100,
@@ -139,22 +112,17 @@
                 formatter: function (value, row) {
                     return [
                         '<a class="btn-sm" href="' +
-                        '{!! route('back.match.update', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
+                        '{!! route('back.opponent.update', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
                         '" title="@lang('contents.btn-update')">' +
                         '<i class="glyphicon glyphicon-edit"></i></a>',
 
                         '<a class="btn-sm" href="' +
-                        '{!! route('back.match.delete', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
+                        '{!! route('back.opponent.delete', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
                         '" title="@lang('contents.btn-delete')">' +
                         '<i class="glyphicon glyphicon-remove"></i></a>'
                     ].join('');
                 }
             }]
-        });
-    </script>
-    <script type="text/javascript">
-        $('#btnCreate').click(function () {
-            window.location.href = '{!! route('back.match.create') !!}'
         });
     </script>
 @stop

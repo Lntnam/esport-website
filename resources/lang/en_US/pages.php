@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nam
- * Date: 02/09/2016
- * Time: 01:12
- */
-
 return [
 
     /*
@@ -14,29 +7,28 @@ return [
    |--------------------------------------------------------------------------
    */
 
-    'login' => 'Login',
+    'login' => 'Log In',
     'logout' => 'Log Out',
     'back_toggle_nav' => 'Toggle Navigation',
-    'back_restricted' => 'Restricted Area',
+
+    'profile'                           => 'Profile',
+    'settings'                          => 'Settings',
 
     /*
     |--------------------------------------------------------------------------
     | Layout Texts for Back End
     |--------------------------------------------------------------------------
     */
+    'back_home'                         => 'Home',
+    'back_dashboard'                    => 'Dashboard',
 
-    // User menu
-    'profile'                           => 'Profile',
-    'settings'                          => 'Settings',
+    'back_restricted'                   => 'Restricted Area',
 
-    // Main backend items
-    'home'                              => 'Home',
-    'dashboard'                         => 'Dashboard',
-
+    'back_fixtures'                     => 'Fixtures',
     'manage_matches'                    => 'Manage Matches',
-
+    'manage_tournaments'                => 'Manage Tournaments',
+    'manage_opponents'                  => 'Manage Opponents',
     'manage_staffs'                     => 'Manage Staffs',
-
     'site_settings'                     => 'Site Settings',
 
     // Action pages
@@ -50,13 +42,14 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'we-need-support'                   => 'We need your support',
-    'join-supporter-club'               => 'Join our supporter club',
+    'we_need_support'                   => 'We need your support',
+    'join_supporter_club'               => 'Join our supporter club',
     'buy-badge'                         => 'Buy badge',
     'follow-us'                         => 'Follow us',
     'spread-the-words'                  => 'Spread the words',
 
     'fixtures'                          => 'Fixtures & Results',
+    'results'                           => 'All Results',
     'youtube-channel'                   => 'Stream',
     'team-roster'                       => 'Team',
     'sponsor'                           => 'Sponsor',

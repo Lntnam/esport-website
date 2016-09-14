@@ -15,6 +15,12 @@ return [
     'past-matches-count'    => 20,
 
     /*
+     * Back-end view options
+     */
+    'table_page_size'       => 15,
+    'table_page_list'       => '[15,30,45,60,100]',
+
+    /*
      * Path settings
      */
 
@@ -28,13 +34,14 @@ return [
 
     'default_timezone'      => 'Asia/Bangkok',
     'default_timezone_value'=> 'GMT +7',
-    'match-localized'       => '%a, %e/%m/%Y %H:%M',
-    'match-date-localized'  => '%a, %e/%m/%Y',
+
+    /** For using with Carbon -> localization */
+    'match-localized'       => '%a, %d/%m/%Y %H:%M',
+    'match-date-localized'  => '%a, %d/%m/%Y',
     'match-time-localized'  => '%H:%M',
 
-    'match-date-format'     => 'D, j/m/Y',
-    'match-time-format'     => 'H:i',
-    'match-picker-format'   => 'ddd, D MMM YYYY H:mm',
+    'match-format'          => 'Y-m-d H:i', // for binding data to datepicker
+    'match-picker-format'   => 'YYYY-MM-DD HH:mm', // for moment.js
 
     /*
      * Localization

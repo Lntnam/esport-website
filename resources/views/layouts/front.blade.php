@@ -52,7 +52,7 @@
     <![endif]-->
 
     <!-- SweetAlert -->
-    <link href="{{ URL::asset('css/sweetalert.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('css/sweetalert.css') }}" rel="stylesheet"/>
     <script src="{{ URL::asset('js/sweetalert.min.js') }}"></script>
 
     @yield('head')
@@ -92,10 +92,10 @@
             {{--<ul class="nav navbar-nav navbar-left">--}}
             {{--<li class="dropdown">--}}
             {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">--}}
-            {{--<i class="fa fa-heart fa-fw" aria-hidden="true"></i> @lang('pages.we-need-support')--}}
+            {{--<i class="fa fa-heart fa-fw" aria-hidden="true"></i> @lang('pages.we_need_support')--}}
             {{--<span class="caret"></span></a>--}}
             {{--<ul class="dropdown-menu" aria-labelledby="themes">--}}
-            {{--<li><a href="#">@lang('pages.join-supporter-club')</a></li>--}}
+            {{--<li><a href="#">@lang('pages.join_supporter_club')</a></li>--}}
             {{--<li><a href="#">@lang('pages.sponsor')</a></li>--}}
             {{--<li class="divider"></li>--}}
             {{--<li><a href="#">@lang('pages.buy-badge')</a></li>--}}
@@ -158,6 +158,7 @@
 
     @yield('content')
 
+    <div class="clearfix"></div>
     <footer>
         <div class="row">
             <div class="col-lg-12">
@@ -181,7 +182,6 @@
 
             </div>
         </div>
-
     </footer>
 </div> <!-- / container -->
 

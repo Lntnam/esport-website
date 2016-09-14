@@ -14,35 +14,34 @@ return [
    |--------------------------------------------------------------------------
    */
 
-    'login' => 'Đăng nhập',
-    'logout' => 'Thoát ra',
-    'back_toggle_nav' => 'Hiện menu',
-    'back_restricted' => 'Khu vực cấm',
+    'login' => 'Đăng Nhập',
+    'logout' => 'Đăng Xuất',
+    'back_toggle_nav' => 'Toggle Navigation',
+
+    'profile'                           => 'Hồ Sơ',
+    'settings'                          => 'Thiết Lập',
 
     /*
     |--------------------------------------------------------------------------
     | Layout Texts for Back End
     |--------------------------------------------------------------------------
     */
+    'back_home'                         => 'Home',
+    'back_dashboard'                    => 'Dashboard',
 
-    // User menu
-    'profile'                           => 'Hồ sơ',
-    'settings'                          => 'Thiết lập',
+    'back_restricted'                   => 'Restricted Area',
 
-    // Main backend items
-    'home'                              => 'Home',
-    'dashboard'                         => 'Dashboard',
-
-    'manage_matches'                    => 'Manage Matches',
-
-    'manage_staffs'                     => 'Manage Staffs',
-
+    'back_fixtures'                     => 'Lịch Đấu',
+    'manage_matches'                    => 'Quản Lý Trận Đấu',
+    'manage_tournaments'                => 'Quản Lý Giải Đấu',
+    'manage_opponents'                  => 'Quản Lý Đối Thủ',
+    'manage_staffs'                     => 'Quản Lý Nhân Viên',
     'site_settings'                     => 'Site Settings',
 
     // Action pages
-    'delete'                            => 'Deleting :Model',
-    'create'                            => 'Creating :Model',
-    'update'                            => 'Updating :Model',
+    'delete'                            => 'Đang Xóa :Model',
+    'create'                            => 'Đang Tạo :Model',
+    'update'                            => 'Đang Cập Nhật :Model',
 
     /*
     |--------------------------------------------------------------------------
@@ -50,13 +49,14 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'we-need-support'                   => 'Hãy ủng hộ team',
-    'join-supporter-club'               => 'Tham gia CLB ủng hộ',
+    'we_need_support'                   => 'Hãy ủng hộ team',
+    'join_supporter_club'               => 'Tham gia CLB ủng hộ',
     'buy-badge'                         => 'Mua hàng lưu niệm',
     'follow-us'                         => 'Theo chân chúng tôi',
     'spread-the-words'                  => 'Chia sẻ thông tin',
 
     'fixtures'                          => 'Lịch đấu & kết quả',
+    'results'                           => 'Tất cả kết quả',
     'youtube-channel'                   => 'Stream',
     'team-roster'                       => 'Team',
     'sponsor'                           => 'Tài trợ',

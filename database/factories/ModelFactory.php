@@ -27,8 +27,7 @@ $factory->define(App\Models\Opponent::class, function(Faker\Generator $faker) {
     return [
         'name'  => $name,
         'short' => getFirstLetters($name),
-        'country' => $faker->country,
-        'flag' => $faker->imageUrl($width = 64, $height = 64, 'sports')
+        'country' => $faker->country
     ];
 });
 
@@ -38,10 +37,8 @@ $factory->define(App\Models\Tournament::class, function(Faker\Generator $faker) 
         'name'  => $name,
         'short' => getFirstLetters($name),
         'type' => $faker->randomElements(['online', 'onlan', 'other'], $count = 1)[0],
-        'logo' => $faker->imageUrl($width = 130, $height = 40, 'sports'),
         'homepage' => $faker->url(),
         'bracket' => $faker->url(),
-        'prize' => $faker->numberBetween(1000, $max = 200000)
     ];
 });
 

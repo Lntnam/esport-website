@@ -2,15 +2,14 @@
 
 @section('title', trans('pages.create', ['model'=>'match']))
 
+@section('head')
+    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-datetimepicker.min.css') }}"/>
+    <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.min.css') }}"/>
+@stop
+
 @section('page-heading', trans('pages.create', ['model'=>'match']))
 
 @section('breadcrumbs', Breadcrumbs::render('create_match'))
-
-@section('head')
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/css/bootstrap-datetimepicker.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css"/>
-@stop
 
 @section('content')
     <!-- Add tournament modal -->
@@ -62,8 +61,8 @@
                     <div class="input-group date" id="schedulepicker">
                         <input type="text" class="form-control" name="schedule"
                                placeholder="{{ \Carbon\Carbon::now(config('settings.default_timezone'))
-                               ->format(config('settings.match-date-format') . ' ' . config('settings.match-time-format')) }}"
-                               value="{{ !empty($model) ? $model['schedule'] : '' }}"/>
+                               ->format(config('settings.match-format')) }}"
+                               value="{{ !empty($model) ? $model['formatted_schedule'] : '' }}"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -73,7 +72,7 @@
                 <div class="form-group">
                     <label for="timezone">@lang('contents.timezone')</label>
                     {!! Timezone::selectForm(
-                        !empty($model) ? $model['timezone'] : config('settings.default_timezone'),
+                        !empty($model['timezone']) ? $model['timezone'] : config('settings.default_timezone'),
                         null,
                         ['class'=>'form-control', 'name'=>'timezone']
                         )
@@ -85,7 +84,7 @@
                     <div class="input-group" id="groupTournament">
                         {!! Form::select('tournament_id',
                             $tournaments,
-                            !empty($model) ? $model['tournament_id'] : null,
+                            !empty($model['tournament_id']) ? $model['tournament_id'] : null,
                             ['placeholder'=>trans('contents.match-tour-default'), 'id'=>'tournament'])
                         !!}
                     </div>
@@ -105,6 +104,19 @@
                 <div class="form-group">
                     <label for="games">@lang('contents.match-best-of')</label>
                     {!! Form::select('games', [1=>1, 2=>2, 3=>3, 5=>5, 7=>7], !empty($model) ? $model['games'] : 1, ['class'=>'form-control']) !!}
+                </div>
+
+                <div class="form-group">
+                    <label for="stream">@lang('contents.match_stream')</label>
+                    <input id="stream" type="url" class="form-control" name="stream"
+                           value="{{ !empty($model) ? $model['stream'] : '' }}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="round">@lang('contents.match_round')</label>
+                    <input id="round" type="text" class="form-control" name="round"
+                           placeholder="Qualifier / Play-off / Main event"
+                           value="{{ !empty($model) ? $model['round'] : '' }}"/>
                 </div>
 
                 <div class="form-group">
@@ -128,6 +140,7 @@
 
                 <div class="checkbox">
                     <label>
+                        <input type="hidden" name="over" value="0">
                         <input type="checkbox" name="over"
                                value="1" {{ !empty($model) ? ($model['over'] ? 'checked="checked"' : '' ) : '' }}>
                         @lang('contents.match-over')</label>
@@ -165,7 +178,7 @@
 
         tournament.combobox({
             showAllItems: '@lang('contents.btn-combo-show-all')',
-            didNotMatch: "@lang('contents.combo-did-not-match')",
+            didNotMatch: "@lang('messages.combo-did-not-match')",
             ifInvalid: function (value) {
                 modal.find('.btn-primary').hide();
                 modal.modal();
@@ -223,7 +236,7 @@
 
         opponent.combobox({
             showAllItems: '@lang('contents.btn-combo-show-all')',
-            didNotMatch: "@lang('contents.combo-did-not-match')",
+            didNotMatch: "@lang('messages.combo-did-not-match')",
             ifInvalid: function (value) {
                 modal.find('.btn-primary').hide();
                 modal.modal();

@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
         ],
 
         'back' => [
+            Middleware\App::class,
             'auth:web',
         ],
 

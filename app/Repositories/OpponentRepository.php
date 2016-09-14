@@ -1,16 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nam
- * Date: 02/09/2016
- * Time: 22:29
- */
 namespace App\Repositories;
 
 use App\Models\Opponent;
 use Illuminate\Database\Eloquent\Model;
 
-class OpponentRepository extends BaseRepository  {
+class OpponentRepository extends BaseRepository
+{
 
     static $modelClassName = Opponent::class;
 
@@ -25,20 +20,12 @@ class OpponentRepository extends BaseRepository  {
 
     static function getCreateValidationRules()
     {
-        return [
-            'name'=>'required',
-            'short'=>'required',
-            'flag'=>'url',
-        ];
+        return ['name' => 'required', 'short' => 'required',];
     }
 
     static function getUpdateValidationRules(Model $model)
     {
-        return [
-            'name'=>'required',
-            'short'=>'required',
-            'flag'=>'url',
-        ];
+        return ['name' => 'required', 'short' => 'required',];
     }
 
     static function create(array $attributes)
@@ -50,30 +37,41 @@ class OpponentRepository extends BaseRepository  {
             }
         }
         $opp->save();
+
         return $opp;
     }
 
-    public static function query($sort='name', $order='asc')
+    public static function query($sort = 'name', $order = 'asc')
     {
         return Opponent::orderBy($sort, $order)
-            ->get();
+                       ->get();
     }
 
-    public static function search($keyword, $sort='name', $order='asc')
+    public static function search($keyword, $sort = 'name', $order = 'asc')
     {
         return Opponent::search($keyword)
-            ->orderBy($sort, $order)
-            ->get();
+                       ->withCount('matches')
+                       ->orderBy($sort, $order)
+                       ->get();
     }
 
-    public static function getList() {
+    public static function readWithCount($id)
+    {
+        return Opponent::withCount('matches')
+                       ->where('id', $id)
+                       ->first();
+    }
+
+    public static function getList()
+    {
         $opps = Opponent::select('id', 'name')
-            ->orderBy('name', 'asc')
-            ->get();
+                        ->orderBy('name', 'asc')
+                        ->get();
         $array = [];
         foreach ($opps as $t) {
             $array[$t->id] = $t->name;
         }
+
         return $array;
     }
 

@@ -38,12 +38,6 @@
                         ['class'=>'form-control'])
                     !!}
                 </div>
-
-                <div class="form-group">
-                    <label for="flag">@lang('contents.team-flag')</label>
-                    <input id="flag" type="url" class="form-control" name="flag"
-                           value="{{ !empty($input) ? $input['flag'] : '' }}"/>
-                </div>
             </form>
         </div>
     </div>

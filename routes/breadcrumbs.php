@@ -1,7 +1,7 @@
 <?php
 // Home / Dashboard
     Breadcrumbs::register('home', function ($breadcrumbs) {
-        $breadcrumbs->push(trans('pages.home'), route('back.home'));
+        $breadcrumbs->push(trans('pages.back_home'), route('back.home'));
     });
 
 // Home > Authenticated User Profile
@@ -15,54 +15,69 @@
         $breadcrumbs->push(trans('pages.settings'), route('back.user_settingss'));
     });
 
-    /*
-     * Staff
-     */
-// Home > Manage Staffs
+/** Staffs */
     Breadcrumbs::register('manage_staffs', function ($breadcrumbs) {
         $breadcrumbs->parent('home');
         $breadcrumbs->push(trans('pages.manage_staffs'), route('back.staff.index'));
     });
-// Home > Manage Staffs > Create
     Breadcrumbs::register('create_staff', function ($breadcrumbs) {
         $breadcrumbs->parent('manage_staffs');
         $breadcrumbs->push(trans('pages.create', ['model' => 'Staff']), route('back.staff.create'));
     });
-// Home > Manage Staffs > Update
     Breadcrumbs::register('update_staff', function ($breadcrumbs, $staff) {
         $breadcrumbs->parent('manage_staffs');
         $breadcrumbs->push(trans('pages.update', ['model' => 'staff']) . ' ' . $staff['name'], route('back.staff.update', $staff['id']));
     });
-// Home > Manage Staffs > Delete
     Breadcrumbs::register('delete_staff', function ($breadcrumbs, $staff) {
         $breadcrumbs->parent('manage_staffs');
         $breadcrumbs->push(trans('pages.delete', ['model' => 'staff']) . ' ' . $staff['name'], route('back.staff.delete', $staff['id']));
     });
 
-    /*
-     * Fixtures
-     */
-
-// Home > Manage Matches
+/** Matches */
     Breadcrumbs::register('manage_matches', function ($breadcrumbs) {
         $breadcrumbs->parent('home');
         $breadcrumbs->push(trans('pages.manage_matches'), route('back.match.index'));
     });
-// Home > Manage Staffs > Create
     Breadcrumbs::register('create_match', function ($breadcrumbs) {
         $breadcrumbs->parent('manage_matches');
         $breadcrumbs->push(trans('pages.create', ['model' => 'match']), route('back.match.create'));
     });
-// Home > Manage Staffs > Update
     Breadcrumbs::register('update_match', function ($breadcrumbs, $match) {
         $breadcrumbs->parent('manage_matches');
         $breadcrumbs->push(trans('pages.update', ['model' => 'match']) . ' ' . $match['formatted_schedule'], route('back.match.update', $match['id']));
     });
-// Home > Manage Staffs > Delete
     Breadcrumbs::register('delete_match', function ($breadcrumbs, $match) {
         $breadcrumbs->parent('manage_matches');
         $breadcrumbs->push(trans('pages.delete', ['model' => 'match']) . ' ' . $match['formatted_schedule'], route('back.match.delete', $match['id']));
     });
+
+/** Tournaments */
+Breadcrumbs::register('manage_tournaments', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('pages.manage_tournaments'), route('back.tournament.index'));
+});
+Breadcrumbs::register('update_tournament', function ($breadcrumbs, $model) {
+    $breadcrumbs->parent('manage_tournaments');
+    $breadcrumbs->push(trans('pages.update', ['model' => 'tournament']) . ' ' . $model['name'], route('back.tournament.update', $model['id']));
+});
+Breadcrumbs::register('delete_tournament', function ($breadcrumbs, $model) {
+    $breadcrumbs->parent('manage_tournaments');
+    $breadcrumbs->push(trans('pages.delete', ['model' => 'tournament']) . ' ' . $model['name'], route('back.tournament.delete', $model['id']));
+});
+
+/** Opponents */
+Breadcrumbs::register('manage_opponents', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('pages.manage_opponents'), route('back.opponent.index'));
+});
+Breadcrumbs::register('update_opponent', function ($breadcrumbs, $model) {
+    $breadcrumbs->parent('manage_opponents');
+    $breadcrumbs->push(trans('pages.update', ['model' => 'opponent']) . ' ' . $model['name'], route('back.opponent.update', $model['id']));
+});
+Breadcrumbs::register('delete_opponent', function ($breadcrumbs, $model) {
+    $breadcrumbs->parent('manage_opponents');
+    $breadcrumbs->push(trans('pages.delete', ['model' => 'opponent']) . ' ' . $model['name'], route('back.opponent.delete', $model['id']));
+});
 
     /*
      * Others

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Carbon\Carbon;
@@ -14,13 +13,6 @@ class Match extends Model
     protected $searchableColumns = ['tournament.name' => 20, 'tournament.short' => 5, 'opponent.name' => 25, 'opponent.short' => 10,];
 
     protected $appends = ['date', 'time', 'is_past', 'formatted_schedule', 'diff'];
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [];
 
     public function opponent()
     {
@@ -49,7 +41,8 @@ class Match extends Model
 
     public function getIsPastAttribute()
     {
-        return (new Carbon($this->getAttribute('schedule')))->lt(Carbon::now());
+        $schedule = new Carbon($this->getAttribute('schedule'), config('settings.default_timezone'));
+        return $schedule->lt(Carbon::now());
     }
 
     public function getDiffAttribute()

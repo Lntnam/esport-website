@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App;
+use CountryList;
 use Illuminate\Database\Eloquent\Model;
 use Sofa\Eloquence\Eloquence;
 use URL;
@@ -13,36 +15,11 @@ class Opponent extends Model
 
     protected $searchableColumns = ['name' => 10, 'short' => 5];
 
-    protected $casts = [];
-
-    protected $hidden = [];
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [];
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['schedule'];
+    protected $appends = ['country_name'];
 
     public function matches()
     {
         return $this->hasMany(Match::class);
-    }
-
-    public function getFlagAttribute($value)
-    {
-        if (substr($value, 0, 7) == 'http://' || substr($value, 0, 8) == 'https://') {
-            return $value;
-        }
-
-        return URL::asset(config('settings.image-opponents') . $value);
     }
 
     public function getCreatedAtAttribute($value)
@@ -55,4 +32,8 @@ class Opponent extends Model
         return $this->convertToUserTimezone($value);
     }
 
+    public function getCountryNameAttribute()
+    {
+        return CountryList::getOne($this->country, App::getLocale());
+    }
 }

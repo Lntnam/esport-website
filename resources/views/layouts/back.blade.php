@@ -143,11 +143,26 @@
                  -->
                 <li>
                     <a href="{!! route('back.home') !!}"><i
-                                class="fa fa-fw fa-dashboard"></i> @lang('pages.dashboard')</a>
+                                class="fa fa-fw fa-dashboard"></i> @lang('pages.back_dashboard')</a>
                 </li>
                 <li>
-                    <a href="{!! route('back.match.index') !!}"><i
-                                class="fa fa-fw fa-table"></i> @lang('pages.manage_matches')</a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#fixtures">
+                        <i class="fa fa-fw fa-wrench"></i> @lang('pages.back_fixtures')
+                        <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="fixtures" class="collapse">
+                        <li>
+                            <a href="{!! route('back.match.index') !!}"><i
+                                        class="fa fa-fw fa-table"></i> @lang('pages.manage_matches')</a>
+                        </li>
+                        <li>
+                            <a href="{!! route('back.tournament.index') !!}"><i
+                                        class="fa fa-fw fa-table"></i> @lang('pages.manage_tournaments')</a>
+                        </li>
+                        <li>
+                            <a href="{!! route('back.opponent.index') !!}"><i
+                                        class="fa fa-fw fa-table"></i> @lang('pages.manage_opponents')</a>
+                        </li>
+                    </ul>
                 </li>
                 @if (session('root'))
                     <li>

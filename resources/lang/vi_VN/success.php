@@ -8,8 +8,8 @@
 return [
 
     'site_setting_updated'      => 'Site Settings have been saved successfully.',
-    'deleted'                   => 'The :model has been deleted.',
-    'created'                   => 'The :model [:label] has been created.',
-    'restored'                  => 'The :model has been restored.',
-    'updated'                   => 'The :model [:label] has been updated.',
+    'deleted'                   => ':Model đã bị xóa thành công.',
+    'created'                   => ':Model [:label] đã được tạo.',
+    'restored'                  => ':Model đã được hồi phục.',
+    'updated'                   => ':Model [:label] đã được thay đổi.',
 ];

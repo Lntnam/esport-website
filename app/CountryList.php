@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nam
- * Date: 07/09/2016
- * Time: 18:54
- */
-
 namespace App;
-
 
 class CountryList
 {
@@ -19,7 +11,7 @@ class CountryList
     {
         $dir = base_path(config('settings.vendor_dir').'/umpirsky/country-list/data');
         if (!is_dir($dir)) {
-            throw new \RuntimeException(sprintf('Unable to locate the country data directory at "%s"', $dir));
+            throw new RuntimeException(sprintf('Unable to locate the country data directory at "%s"', $dir));
         }
         $this->location = realpath($dir);
     }
@@ -30,7 +22,7 @@ class CountryList
         $allCodes = $this->loadData($locale);
         if (!isset($allCodes[$countryCode]))
         {
-            throw new \RuntimeException(sprintf('Unable to locate the country code of "%s"', $countryCode));
+            throw new RuntimeException(sprintf('Unable to locate the country code of "%s"', $countryCode));
         }
         return $allCodes[$countryCode];
     }
@@ -47,7 +39,7 @@ class CountryList
 
             $file = sprintf('%s/%s/country.php', $this->location, $locale);
             if (!is_file($file)) {
-                throw new \RuntimeException(sprintf('Unable to load the country data file "%s"', $file));
+                throw new RuntimeException(sprintf('Unable to load the country data file "%s"', $file));
             }
             $data = require $file;
             $this->cache[$locale] = $this->sortData($locale, $data);

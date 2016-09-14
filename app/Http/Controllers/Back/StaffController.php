@@ -37,7 +37,7 @@ class StaffController extends BaseController
             } else {
                 UserRepository::create(['name' => $request->input('name'), 'email' => $request->input('email')]);
                 return redirect()->route('back.staff.index')->with('status', 'success')
-                    ->with('message', trans('success.created', ['model' => 'staff', 'label' => $request->input('name')]));
+                    ->with('message', trans('success.created', ['model' => trans('contents.staff'), 'label' => $request->input('name')]));
             }
 
             return view('back.create_staff')->with('input', $request->all())->with('errors', $errors);
@@ -66,7 +66,7 @@ class StaffController extends BaseController
 
             return redirect()->route('back.staff.index')
                 ->with('status', 'success')
-                ->with('message', trans('success.deleted', ['model' => 'staff']));
+                ->with('message', trans('success.deleted', ['model' => trans('contents.staff')]));
         }
     }
 
@@ -106,7 +106,7 @@ class StaffController extends BaseController
 
                 return redirect()->route('back.staff.index')
                     ->with('status', 'success')
-                    ->with('message', trans('success.updated', ['model' => 'staff', 'label' => $user->name]));
+                    ->with('message', trans('success.updated', ['model' => trans('contents.staff'), 'label' => $user->name]));
             }
         }
     }

@@ -9,8 +9,10 @@ return [
     /*
      * Models
      */
-    'staff'                         => 'Nhân Viên',
-    'match'                         => 'Trận Đấu',
+    'staff'                         => 'nhân niên',
+    'match'                         => 'trận đấu',
+    'tournament'                    => 'giải đấu',
+    'opponent'                      => 'đối thủ',
 
     /*
     |--------------------------------------------------------------------------
@@ -31,22 +33,25 @@ return [
     'modal-add-title'               => 'Tạo :Model',
 
     'btn-combo-show-all'            => 'Hiện toàn bộ',
-    'combo-did-not-match'           => "'%1' không tìm thấy",
 
     'btn-subscribe'                 => 'Đăng ký',
 
     'btn-call-fixtures'             => 'Xem lịch đấu & kết quả',
     'btn-call-stream'               => 'Xem stream',
 
+    'btn_all_results'               => 'Xem tất cả kết quả',
+    'btn_back_to_fixtures'          => 'Quay lại xem lịch đấu',
+
     /*
     |--------------------------------------------------------------------------
-    | Brief messages
+    | RSS
     |--------------------------------------------------------------------------
     */
 
-    'no-matches-found'              => 'Không tìm thấy.',
-    'at'                            => 'lúc', // at what time
-    'timezone-statement'            => 'Ngày giờ được hiển thị theo :value',
+    'channel_title'                 => 'Next Gen Fixtures',
+    'channel_description'           => 'Next Gen Vietnam fixture updates',
+    'live_now'                      => 'Live now',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -75,15 +80,13 @@ return [
     'team-name'                     => 'Tên',
     'team-short'                    => 'Tên ngắn gọn',
     'team-country'                  => 'Quốc gia',
-    'team-flag'                     => 'Link cờ',
+    'team_matches_count'            => 'Số trận',
 
     'tour-name'                     => 'Tên giải',
     'tour-short'                    => 'Tên ngắn gọn',
     'tour-type'                     => 'Loại',
-    'tour-logo'                     => 'Link logo',
     'tour-homepage'                 => 'Link homepage',
     'tour-bracket'                  => 'Link bracket',
-    'tour-prize'                    => 'Tổng giải thưởng',
 
     'match-schedule'                => 'Ngày giờ',
     'match-date'                    => 'Ngày',
@@ -97,6 +100,8 @@ return [
     'match-against-holder'          => 'Theirs',
     'match-best-of'                 => 'Best Of',
     'match-over'                    => 'Trận này đã kết thúc',
+    'match_stream'                  => 'Kênh stream / Replay',
+    'match_round'                   => 'Vòng',
 
     'your-email'                    => 'Địa chỉ email của bạn',
 ];

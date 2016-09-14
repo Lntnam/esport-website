@@ -9,6 +9,6 @@ trait AppModel
     {
         if (empty($value)) return null;
 
-        return (string) new Carbon($value, config('settings.default_timezone'));
+        return (string)(new Carbon($value, config('app.timezone')))->tz(config('settings.default_timezone'));
     }
 }

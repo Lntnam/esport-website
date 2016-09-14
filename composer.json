@@ -31,7 +31,8 @@
         "umpirsky/country-list": "dev-master",
         "drewm/mailchimp-api": "^2.2",
         "torann/geoip": "^0.2.2",
-        "paragonie/random_compat": "1.4"
+        "paragonie/random_compat": "2.0.2",
+        "suin/php-rss-writer": "^1.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

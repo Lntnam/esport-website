@@ -7,7 +7,10 @@
 
 @section('content')
     <div class="col-lg-12">
-        <p class="text-info">@lang('contents.timezone-statement', ['value'=>config('settings.default_timezone_value')])</p>
+        <p class="text-info pull-left">@lang('messages.timezone-statement', ['value'=>config('settings.default_timezone_value')])</p>
+        <p class="pull-right">
+            <a href="{!! URL::route('front.fixture.rss', ['locale'=>\App::getLocale()]) !!}" title="RSS" target="_blank"><span class="fa fa-rss-square fa-2x"></span></a></p>
+        <div class="clearfix"></div>
         <div class="row">
             <h2 id="live">@lang('pages.live')</h2>
             <table id="live-table" class="table table-striped table-hover">
@@ -19,6 +22,7 @@
                     <th width="300px">@lang('contents.match-opponent')</th>
                     <th width="80px" style="text-align: center;">@lang('contents.match-best-of')</th>
                     <th width="100px" style="text-align: center;">@lang('contents.match-result')</th>
+                    <th width="30px" style="text-align: center;"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,6 +40,7 @@
                     <th width="300px">@lang('contents.match-opponent')</th>
                     <th width="80px" style="text-align: center;">@lang('contents.match-best-of')</th>
                     <th width="100px" style="text-align: center;">@lang('contents.match-result')</th>
+                    <th width="30px" style="text-align: center;"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,11 +58,13 @@
                     <th width="300px">@lang('contents.match-opponent')</th>
                     <th width="80px" style="text-align: center;">@lang('contents.match-best-of')</th>
                     <th width="100px" style="text-align: center;">@lang('contents.match-result')</th>
+                    <th width="30px" style="text-align: center;"></th>
                 </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
+            <p class="pull-right"><a class="btn btn-default btn-sm" href="{{ URL::route('front.fixture.results') }}"><span class="fa fa-link"></span> @lang('contents.btn_all_results')</a></p>
         </div>
         <div class="row">
             <h2 id="subscribe">@lang('pages.subscribe')</h2>

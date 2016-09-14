@@ -32,13 +32,7 @@
 
                 <div class="form-group">
                     <label for="type">@lang('contents.tour-type')</label>
-                    {!! Form::select('type', ['onlan'=>'On LAN', 'online'=>'Online', 'other'=>'Other'], !empty($input) ? $input['type'] : null, ['class'=>'form-control']) !!}
-                </div>
-
-                <div class="form-group">
-                    <label for="logo">@lang('contents.tour-logo')</label>
-                    <input id="logo" type="url" class="form-control" name="logo"
-                           value="{{ !empty($input) ? $input['logo'] : '' }}"/>
+                    {!! Form::select('type', ['onlan'=>'ONLAN', 'online'=>'ONLINE', 'other'=>'Other'], !empty($input) ? $input['type'] : null, ['class'=>'form-control']) !!}
                 </div>
 
                 <div class="form-group">

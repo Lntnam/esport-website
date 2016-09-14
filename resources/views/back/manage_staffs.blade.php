@@ -152,7 +152,7 @@
             $.ajax('{!! route('back.staff.restore', ['id'=>'_id_']) !!}'.replace('_id_', id), {
                 success: function (data) {
                     swal({
-                        title: data.success ? '@lang('success.restored', ['model'=>'staff'])' : data.msg,
+                        title: data.success ? '@lang('success.restored', ['model'=>trans('contents.staff')])' : data.msg,
                         type: data.success ? 'success' : 'error'
                     });
                     if (data.success) {

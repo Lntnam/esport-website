@@ -9,8 +9,10 @@ return [
     /*
      * Models
      */
-    'staff'                         => 'Staff',
-    'match'                         => 'Match',
+    'staff'                         => 'staff',
+    'match'                         => 'match',
+    'tournament'                    => 'tournament',
+    'opponent'                      => 'opponent',
 
     /*
     |--------------------------------------------------------------------------
@@ -31,22 +33,24 @@ return [
     'modal-add-title'               => 'Add new :Model',
 
     'btn-combo-show-all'            => 'Show all items',
-    'combo-did-not-match'           => "'%1' didn't match any item",
 
     'btn-subscribe'                 => 'Subscribe',
 
     'btn-call-fixtures'             => 'Check Fixtures & Results',
     'btn-call-stream'               => 'Watch live stream',
 
+    'btn_all_results'               => 'View all past results',
+    'btn_back_to_fixtures'          => 'Return to fixtures',
+
     /*
     |--------------------------------------------------------------------------
-    | Brief messages
+    | RSS
     |--------------------------------------------------------------------------
     */
 
-    'no-matches-found'              => 'No matches found.',
-    'at'                            => 'at', // at what time
-    'timezone-statement'            => 'Date & time are being displayed in :value',
+    'channel_title'                 => 'Next Gen Fixtures',
+    'channel_description'           => 'Next Gen Vietnam fixture updates',
+    'live_now'                      => 'Live now',
 
     /*
     |--------------------------------------------------------------------------
@@ -75,15 +79,13 @@ return [
     'team-name'                     => 'Name',
     'team-short'                    => 'Short Name',
     'team-country'                  => 'Country',
-    'team-flag'                     => 'Flag',
+    'team_matches_count'            => 'Matches',
 
     'tour-name'                     => 'Tournament Name',
     'tour-short'                    => 'Short Name',
     'tour-type'                     => 'Type',
-    'tour-logo'                     => 'Logo',
     'tour-homepage'                 => 'Homepage URL',
     'tour-bracket'                  => 'Bracket URL',
-    'tour-prize'                    => 'Total Prize Pool',
 
     'match-schedule'                => 'Date and Time',
     'match-date'                    => 'Match Date',
@@ -97,6 +99,8 @@ return [
     'match-against-holder'          => 'Theirs',
     'match-best-of'                 => 'Best Of',
     'match-over'                    => 'This match is ended',
+    'match_stream'                  => 'Streaming channel / Replay',
+    'match_round'                   => 'Round',
 
     'your-email'                    => 'Your email address',
 ];
