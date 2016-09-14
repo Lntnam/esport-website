@@ -61,10 +61,9 @@ abstract class BaseRepository
     {
         foreach ($attributes as $k => $v) {
             if (empty($v)) {
+                $attributes[$k] = null;
                 if (!empty(static::$numberFields) && in_array($k, static::$numberFields)) {
                     $attributes[$k] = 0;
-                } else {
-                    $attributes[$k] = null;
                 }
             }
         }

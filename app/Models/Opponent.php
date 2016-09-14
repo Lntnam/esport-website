@@ -34,6 +34,6 @@ class Opponent extends Model
 
     public function getCountryNameAttribute()
     {
-        return CountryList::getOne($this->country, App::getLocale());
+        return CountryList::getOne($this->getAttribute('country'), App::getLocale());
     }
 }

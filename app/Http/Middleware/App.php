@@ -6,6 +6,7 @@ use App as Application;
 use Closure;
 use GeoIP;
 use Illuminate\Http\Request;
+use Setting;
 
 class App
 {
@@ -27,9 +28,11 @@ class App
             // check from CloudFlare first
             $location = $request->header('HTTP_CF_IPCOUNTRY');
             if (empty($location)) {
-                $ip = null;
+                $ip = Setting::server('REMOTE_ADDR');
 
-                if (!empty($request->header('HTTP_CF-Connecting-IP'))) $ip = $request->header('HTTP_CF-Connecting-IP'); elseif (isset($_SERVER['REMOTE_ADDR'])) $ip = $_SERVER['REMOTE_ADDR'];
+                if (!empty($request->header('HTTP_CF-Connecting-IP'))) {
+                    $ip = $request->header('HTTP_CF-Connecting-IP');
+                }
 
                 $location = GeoIP::getLocation($ip);
             }

@@ -11,8 +11,8 @@ class TournamentController extends BaseController
 {
     public function data(Request $request)
     {
-        $sort = !empty($request->input('sort')) ? $request->input('sort') : 'name';
-        $order = !empty($request->input('order')) ? $request->input('order') : 'asc';
+        $sort = !empty($request->input('sort')) && is_string($request->input('sort')) ? $request->input('sort') : 'name';
+        $order = !empty($request->input('order')) && is_string($request->input('order')) ? $request->input('order') : 'asc';
 
         return response()->json(TournamentRepository::search($request->input('search'), $sort, $order));
     }
@@ -29,9 +29,7 @@ class TournamentController extends BaseController
             if (empty($attributes['prize'])) $attributes['prize'] = 0;
 
             $validator = Validator::make($attributes, TournamentRepository::getCreateValidationRules());
-            if ($validator->fails()) {
-                $errors = $validator->errors();
-            } else {
+            if (!$validator->fails()) {
                 $tour = TournamentRepository::create($attributes);
 
                 return response()->json(new AjaxResponse(true, $tour));
@@ -39,7 +37,7 @@ class TournamentController extends BaseController
 
             return response()->json(new AjaxResponse(false, (string)view('back.create_tour_modal')
                 ->with('input', $attributes)
-                ->with('errors', $errors)));
+                ->with('errors', $validator->errors())));
         }
 
         return view('back.create_tour_modal')->with('input', $request->all());
@@ -103,15 +101,15 @@ class TournamentController extends BaseController
                 return view('back.update_tournament')
                     ->with('model', $attributes)
                     ->with('errors', $validator->errors());
-            } else {
-                $repo = new TournamentRepository($model);
-                $repo->update($attributes);
-
-                return redirect()
-                    ->route('back.tournament.index')
-                    ->with('status', 'success')
-                    ->with('message', trans('success.updated', ['model' => trans('contents.tournament'), 'label' => $model->getAttribute('name')]));
             }
+
+            $repo = new TournamentRepository($model);
+            $repo->update($attributes);
+
+            return redirect()
+                ->route('back.tournament.index')
+                ->with('status', 'success')
+                ->with('message', trans('success.updated', ['model' => trans('contents.tournament'), 'label' => $model->getAttribute('name')]));
         }
     }
 }

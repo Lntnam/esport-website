@@ -45,19 +45,18 @@ class AuthController extends BaseController
 
         $userCheck = UserRepository::matchWithSocial($socialUser, $provider);
 
-        if (!empty($userCheck)) {
-            //Check if we can match an existing staff with social user
-            $this->user = new UserRepository($userCheck);
-
-            // update latest information from social network
-            $this->user->updateFromSocial($socialUser, $provider);
-        } else {
+        if (empty($userCheck)) {
             // this social user is not authorized
             return redirect()
                 ->route('back.login')
                 ->with('status', 'error')
                 ->with('message', trans('auth.unauthorized'));
         }
+        //Check if we can match an existing staff with social user
+        $this->user = new UserRepository($userCheck);
+
+        // update latest information from social network
+        $this->user->updateFromSocial($socialUser, $provider);
 
         Auth::login($userCheck, false);
 

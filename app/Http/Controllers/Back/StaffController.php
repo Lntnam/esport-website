@@ -17,8 +17,8 @@ class StaffController extends BaseController
 {
     public function data(Request $request)
     {
-        $sort = !empty($request->input('sort')) ? $request->input('sort') : 'name';
-        $order = !empty($request->input('order')) ? $request->input('order') : 'asc';
+        $sort = !empty($request->input('sort')) && is_string($request->input('sort')) ? $request->input('sort') : 'name';
+        $order = !empty($request->input('order')) && is_string($request->input('order')) ? $request->input('order') : 'asc';
 
         return response()->json(UserRepository::query($sort, $order));
     }
@@ -32,9 +32,7 @@ class StaffController extends BaseController
     {
         if (!empty($request->all())) {
             $validator = Validator::make($request->all(), UserRepository::getCreateValidationRules());
-            if ($validator->fails()) {
-                $errors = $validator->errors();
-            } else {
+            if (!$validator->fails()) {
                 UserRepository::create(['name' => $request->input('name'), 'email' => $request->input('email')]);
 
                 return redirect()
@@ -45,7 +43,7 @@ class StaffController extends BaseController
 
             return view('back.create_staff')
                 ->with('input', $request->all())
-                ->with('errors', $errors);
+                ->with('errors', $validator->errors());
         }
 
         return view('back.create_staff')->with('input', $request->all());
@@ -106,15 +104,15 @@ class StaffController extends BaseController
                 return view('back.update_staff')
                     ->with('model', $request->all())
                     ->with('errors', $validator->errors());
-            } else {
-                $repo = new UserRepository($user);
-                $repo->update($request->all());
-
-                return redirect()
-                    ->route('back.staff.index')
-                    ->with('status', 'success')
-                    ->with('message', trans('success.updated', ['model' => trans('contents.staff'), 'label' => $user->name]));
             }
+
+            $repo = new UserRepository($user);
+            $repo->update($request->all());
+
+            return redirect()
+                ->route('back.staff.index')
+                ->with('status', 'success')
+                ->with('message', trans('success.updated', ['model' => trans('contents.staff'), 'label' => $user->name]));
         }
     }
 }

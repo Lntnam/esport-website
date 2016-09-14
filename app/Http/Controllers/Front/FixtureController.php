@@ -60,11 +60,11 @@ class FixtureController extends BaseController
         foreach ($matches as $match) {
             $item = new RSSWriter\Item();
 
-            $item->title((empty($match->opponent) ? 'TBD' : $match->opponent->short) . ', ' . $match->tournament->short)
-                 ->description((empty($match->opponent) ? 'TBD' : ($match->opponent->name . ' (' . CountryList::getOne($match->opponent->country, $locale) . ') ')) . ', ' . $match->tournament->name . ', ' . trans('contents.live_now'))
+            $item->title($this->getRssTitle($match, 'live'))
+                 ->description($this->getRssDescription($match, $locale, 'live'))
                  ->pubDate(strtotime($match->updated_at))
                  ->category(trans('pages.live'))
-                 ->url(!empty($match->stream) ? $match->stream : URL::route('front.fixture.index') . '#' . $match->id)
+                 ->url($this->getRssUrl($match))
                  ->appendTo($channel);
 
             $last_updated = max($last_updated, strtotime($match->updated_at));
@@ -74,25 +74,11 @@ class FixtureController extends BaseController
         foreach ($matches as $match) {
             $item = new RSSWriter\Item();
 
-            $item->title((empty($match->opponent) ? 'TBD' : $match->opponent->short) . ', ' . $match->tournament->short . ', ' . $match->formatted_schedule)
-                 ->description((empty($match->opponent) ? 'TBD' : ($match->opponent->name . ' (' . CountryList::getOne($match->opponent->country, $locale) . ') ')) . ', ' . $match->tournament->name . ', ' . $match->formatted_schedule)
+            $item->title($this->getRssTitle($match, 'upcoming'))
+                 ->description($this->getRssDescription($match, $locale, 'upcoming'))
                  ->pubDate(strtotime($match->updated_at))
                  ->category(trans('pages.upcoming'))
-                 ->url(!empty($match->stream) ? $match->stream : URL::route('front.fixture.index') . '#' . $match->id)
-                 ->appendTo($channel);
-
-            $last_updated = max($last_updated, strtotime($match->updated_at));
-        }
-
-        $matches = MatchRepository::getRecentMatches();
-        foreach ($matches as $match) {
-            $item = new RSSWriter\Item();
-
-            $item->title((empty($match->opponent) ? 'TBD' : $match->opponent->short) . ', ' . $match->tournament->short . ', ' . $match->for . ' - ' . $match->against)
-                 ->description((empty($match->opponent) ? '?' : ($match->opponent->name . ' (' . CountryList::getOne($match->opponent->country, $locale) . ') ')) . ', ' . $match->tournament->name . ', ' . $match->date . ', ' . $match->for . ' - ' . $match->against)
-                 ->pubDate(strtotime($match->updated_at))
-                 ->category(trans('pages.recent'))
-                 ->url(!empty($match->stream) ? $match->stream : URL::route('front.fixture.index') . '#' . $match->id)
+                 ->url($this->getRssUrl($match))
                  ->appendTo($channel);
 
             $last_updated = max($last_updated, strtotime($match->updated_at));
@@ -103,5 +89,33 @@ class FixtureController extends BaseController
                 ->appendTo($feed);
 
         return $feed->render();
+    }
+
+    private function getRssTitle($match, $type)
+    {
+        $title = (empty($match->opponent) ? 'TBD' : $match->opponent->short) . ', ' . $match->tournament->short;
+        if ($type == 'upcoming') {
+            $title .= ', ' . $match->formatted_schedule;
+        }
+
+        return $title;
+    }
+
+    private function getRssDescription($match, $locale, $type)
+    {
+        $desc = (empty($match->opponent) ? 'TBD' : ($match->opponent->name . ' (' . CountryList::getOne($match->opponent->country, $locale) . ') ')) . ', ' . $match->tournament->name;
+        if ($type == 'live') {
+            $desc .= ', ' . trans('contents.live_now');
+        }
+        elseif ($type == 'upcoming') {
+            $desc .= ', ' . $match->formatted_schedule;
+        }
+
+        return $desc;
+    }
+
+    private function getRssUrl($match)
+    {
+        return !empty($match->stream) ? $match->stream : URL::route('front.fixture.index') . '#' . $match->id;
     }
 }
