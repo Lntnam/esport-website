@@ -10,7 +10,6 @@ namespace App\Http\Controllers\Back;
 use App\AjaxResponse;
 use App\Http\Controllers\Controller as BaseController;
 use App\Repositories\UserRepository;
-use App\TableUpdateResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

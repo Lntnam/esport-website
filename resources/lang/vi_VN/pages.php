@@ -50,8 +50,6 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'home'                              => 'Trang Chủ',
-
     'we-need-support'                   => 'Hãy ủng hộ team',
     'join-supporter-club'               => 'Tham gia CLB ủng hộ',
     'buy-badge'                         => 'Mua hàng lưu niệm',

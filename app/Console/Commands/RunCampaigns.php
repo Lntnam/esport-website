@@ -53,20 +53,19 @@ class RunCampaigns extends Command
     public function handle()
     {
         // get settings
-        $config = \Config::get('settings.mc_campaigns');
+        $config = config('settings.mc_campaigns');
         $type = $this->argument('type');
 
-        if (!isset($config[$type]))
-            return;
-        $settings = $config[$type];
-        if (!$this->_mc_schedule_constrain($type, $settings))
-            return;
-
-        switch ($type) {
-            case 'fixtures':
-                $mailer = new FixtureMailer($settings);
-                $mailer->run();
-                break;
+        if (isset($config[$type])) {
+            $settings = $config[$type];
+            if ($this->validateCampaignSchedule($type, $settings)) {
+                switch ($type) {
+                    case 'fixtures':
+                        $mailer = new FixtureMailer($settings);
+                        $mailer->run();
+                        break;
+                }
+            }
         }
     }
 
@@ -76,7 +75,7 @@ class RunCampaigns extends Command
      *
      * @return boolean
      */
-    private function _mc_schedule_constrain($type, $settings)
+    private function validateCampaignSchedule($type, $settings)
     {
         $latest = MailCampaignRepository::getLatestByType($type);
         $every = $settings['by']['every'];

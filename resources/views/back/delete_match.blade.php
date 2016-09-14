@@ -20,7 +20,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="id" value="{{ $model['id'] }}">
                 <div class="jumbotron">
-                    <h3>on <strong>{{ \Timezone::convertFromUTC($model['schedule'], \Config::get('settings.default_timezone')) }}</strong></h3>
+                    <h3>on <strong>{{ \Timezone::convertFromUTC($model['schedule'], config('settings.default_timezone')) }}</strong></h3>
                     <p>Is about to be deleted.</p>
                     <p>This action is irreversible! Are you sure to continue?</p>
                     <p>

@@ -17,7 +17,7 @@ class CountryList
 
     public function __construct()
     {
-        $dir = base_path(\Config::get('settings.vendor_dir').'/umpirsky/country-list/data');
+        $dir = base_path(config('settings.vendor_dir').'/umpirsky/country-list/data');
         if (!is_dir($dir)) {
             throw new \RuntimeException(sprintf('Unable to locate the country data directory at "%s"', $dir));
         }

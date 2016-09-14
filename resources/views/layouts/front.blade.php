@@ -31,13 +31,12 @@
     <title>{{ Setting::get('title') }} - @yield('title')</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css"
-          rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('css/bootstrap.flatly.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/bootstrap-select.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/flag-icon.min.css') }}" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('css/font-awesome.min.css') }}" rel="stylesheet">
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
@@ -48,13 +47,13 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="{{ URL::asset('js/html5shiv.min.js') }}"></script>
+    <script src="{{ URL::asset('js/respond.min.js') }}"></script>
     <![endif]-->
 
     <!-- SweetAlert -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link href="{{ URL::asset('css/sweetalert.css') }}" rel="stylesheet" />
+    <script src="{{ URL::asset('js/sweetalert.min.js') }}"></script>
 
     @yield('head')
     <link href="{{ URL::asset('css/front/custom.css') }}" rel="stylesheet">
@@ -126,7 +125,7 @@
                         <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i></a></li>
                 <li>
                     <select class="selectpicker" data-width="fit">
-                        @foreach (\Config::get('settings.locales') as $locale=>$details)
+                        @foreach (config('settings.locales') as $locale=>$details)
                             <option data-content='<span class="flag-icon flag-icon-{{ $details['icon'] }}"></span> {{ $details['title'] }}'
                                     value="{{ $locale }}"></option>
                         @endforeach
@@ -187,21 +186,22 @@
 </div> <!-- / container -->
 
 <!-- Bootstrap core JavaScript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('js/jquery-3.1.0.min.js') }}"></script>
+<script src="{{ URL::asset('js/bootstrap-select.min.js') }}"></script>
+<script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+<script src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
 
 @yield('foot')
 <script type="text/javascript">
     $(function () {
-        $('.selectpicker').selectpicker({});
-        $('.selectpicker').on('change', function () {
-            window.location.href = '{{ URL::route('front.lang', ['locale'=>':locale:']) }}'.replace(':locale:', $('.selectpicker').val());
+        var picker = $('.selectpicker');
+        picker.selectpicker({});
+        picker.on('change', function () {
+            window.location.href = '{{ URL::route('front.lang', ['locale'=>':locale:']) }}'.replace(':locale:', picker.val());
         });
 
-        $('.selectpicker').selectpicker('val', '{{ App()->getLocale() }}');
+        picker.selectpicker('val', '{{ App::getLocale() }}');
     });
 </script>
 </body>

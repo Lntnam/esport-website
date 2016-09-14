@@ -23,8 +23,7 @@
 @stop
 
 @section('foot')
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/bootstrap-table.min.js') }}"></script>
     <script type="text/javascript">
         $('#grid').bootstrapTable({
             // Localization //
@@ -69,7 +68,6 @@
                 else if (row.deleted_at != null) {
                     return {classes: 'warning'};
                 }
-                ;
                 return {};
             },
 
@@ -121,7 +119,7 @@
                 title: '@lang('table.col-command')',
                 width: 100,
                 align: 'center',
-                formatter: function (value, row, index) {
+                formatter: function (value, row) {
                     var buttons = [];
                     if (row.deleted_at != null && row.deleted_at != '') {
                         buttons.push('<a class="btn-sm" href="javascript:void(0)" onclick="restoreClick(' + row.id +
@@ -167,7 +165,7 @@
                         text: errorThrown,
                         type: data.success ? 'success' : 'error'
                     });
-                },
+                }
             });
         }
     </script>

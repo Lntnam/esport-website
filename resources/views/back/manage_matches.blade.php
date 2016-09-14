@@ -25,8 +25,7 @@
 @stop
 
 @section('foot')
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/bootstrap-table.min.js') }}"></script>
     <script type="text/javascript">
         $('#grid').bootstrapTable({
             // Localization //

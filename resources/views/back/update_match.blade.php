@@ -95,63 +95,65 @@
 @stop
 
 @section('foot')
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{!! URL::asset('js/combobox.js') !!}"></script>
 
     <script type="text/javascript">
         $('.btn-link').click(function() {window.location.href = '{{ route('back.match.index') }}'});
 
-        $('#opponent').combobox({
+        var opponent = $('#opponent');
+        var modal = $('#modalOpponent');
+        
+        opponent.combobox({
             showAllItems: '@lang('contents.btn-combo-show-all')',
             didNotMatch: "@lang('contents.combo-did-not-match')",
             ifInvalid: function (value) {
-                $('#modalOpponent').find('.btn-primary').hide();
-                $('#modalOpponent').modal();
-                $('#modalOpponent').on('hide.bs.modal', function () {
+                modal.find('.btn-primary').hide();
+                modal.modal();
+                modal.on('hide.bs.modal', function () {
                     // clear selection if form close without adding any new item
-                    if ($('#opponent').val() === null || $('#opponent').val() === '') {
+                    if (opponent.val() === null || opponent.val() === '') {
                         $('#groupOpponent > input').val('');
                     }
                 });
 
-                $('#modalOpponent').find('.modal-body').load('{!! URL::route('back.opponent.ajaxCreate') !!}', function () {
+                modal.find('.modal-body').load('{!! URL::route('back.opponent.ajaxCreate') !!}', function () {
                     // Set default name
-                    $('#modalOpponent').find('#nameInput').val(value);
+                    modal.find('#nameInput').val(value);
 
                     // Assign submit event
-                    $('#modalOpponent').find('.btn-primary').off('click');
-                    $('#modalOpponent').find('.btn-primary').on('click', function (e) {
+                    modal.find('.btn-primary').off('click');
+                    modal.find('.btn-primary').on('click', function () {
                         $.post('{!! URL::route('back.opponent.ajaxCreate') !!}', // URL
-                                $('#modalOpponent').find('.modal-body').find('form').serialize() // data
+                                modal.find('.modal-body').find('form').serialize() // data
                         ).done(function (data) { // complete handler
                             if (data.success) {
                                 // Add new item to list & select it too
-                                $('#opponent').prepend($('<option>', {
+                                opponent.prepend($('<option>', {
                                     value: data.content.id,
                                     text: data.content.name,
                                     selected: true
                                 }));
 
-                                $('#modalOpponent').modal('hide');
+                                modal.modal('hide');
                             }
                             else {
-                                $('#modalOpponent').find('.modal-body').html(data.content);
+                                modal.find('.modal-body').html(data.content);
                             }
                         })
                         ;
                     });
 
                     // Bind enter key
-                    $('#modalOpponent').find('.modal-body').find('form').off('keypress');
-                    $('#modalOpponent').find('.modal-body').find('form').keypress(function (e) {
+                    modal.find('.modal-body').find('form').off('keypress');
+                    modal.find('.modal-body').find('form').keypress(function (e) {
                         if (e.which == 13) {
-                            $('#modalOpponent').find('.btn-primary').click();
+                            modal.find('.btn-primary').click();
                         }
                     });
 
                     // Show button after the form is fully loaded
-                    $('#modalOpponent').find('.btn-primary').show();
+                    modal.find('.btn-primary').show();
                 });
                 return true;
             }

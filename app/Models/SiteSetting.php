@@ -10,13 +10,9 @@ class SiteSetting extends Model
     protected $primaryKey = 'key';
     public $incrementing = false;
 
-    protected $casts = [
-        'lines', 'visible', 'order'
-    ];
+    protected $casts = ['lines', 'visible', 'order'];
 
-    protected $hidden = [
-        'visible', 'order'
-    ];
+    protected $hidden = ['visible', 'order'];
 
     /**
      * The attributes that are mass assignable.
@@ -31,7 +27,7 @@ class SiteSetting extends Model
     {
         parent::boot();
 
-        static::addGlobalScope('visibility', function(Builder $builder) {
+        static::addGlobalScope('visibility', function (Builder $builder) {
             $builder->where('visible', '=', 1);
         });
     }

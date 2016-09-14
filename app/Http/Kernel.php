@@ -2,6 +2,12 @@
 
 namespace App\Http;
 
+use Illuminate\Auth;
+use Illuminate\Foundation\Http;
+use Illuminate\Cookie;
+use Illuminate\Routing;
+use Illuminate\Session;
+use Illuminate\View;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -14,7 +20,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        Http\Middleware\CheckForMaintenanceMode::class,
     ];
 
     /**
@@ -24,12 +30,12 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            Middleware\EncryptCookies::class,
+            Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            Session\Middleware\StartSession::class,
+            View\Middleware\ShareErrorsFromSession::class,
+            Middleware\VerifyCsrfToken::class,
+            Routing\Middleware\SubstituteBindings::class,
         ],
 
         'back' => [
@@ -37,7 +43,7 @@ class Kernel extends HttpKernel
         ],
 
         'front' => [
-            \App\Http\Middleware\App::class,
+            Middleware\App::class,
         ],
 
         'api' => [
@@ -54,12 +60,12 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'root' => \App\Http\Middleware\RootOnlyAccess::class,
+        'auth' => Auth\Middleware\Authenticate::class,
+        'auth.basic' => Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings' => Routing\Middleware\SubstituteBindings::class,
+        'can' => Auth\Middleware\Authorize::class,
+        'guest' => Middleware\RedirectIfAuthenticated::class,
+        'throttle' => Routing\Middleware\ThrottleRequests::class,
+        'root' => Middleware\RootOnlyAccess::class,
     ];
 }

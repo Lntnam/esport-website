@@ -27,23 +27,23 @@
     <meta name="msapplication-TileImage" content="{{ URL::asset('favicons/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
 
-    <title>{{Config::get('app.back-name')}} - @yield('title')</title>
+    <title>{{config('app.back-name')}} - @yield('title')</title>
 
     <!-- Bootstrap core CSS / paper theme-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="{{ URL::asset('css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="{{ URL::asset('js/html5shiv.min.js') }}"></script>
+    <script src="{{ URL::asset('js/respond.min.js') }}"></script>
     <![endif]-->
 
     <!-- SweetAlert -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link href="{{ URL::asset('css/sweetalert.css') }}" rel="stylesheet" />
+    <script src="{{ URL::asset('js/sweetalert.min.js') }}"></script>
 
     @yield('head')
 </head>
@@ -57,10 +57,10 @@
 </div> <!-- /container -->
 
 <!-- Bootstrap core JavaScript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{{ URL::asset('js/jquery-3.1.0.min.js') }}"></script>
+<script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+<script src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
 
 </body>
 </html>

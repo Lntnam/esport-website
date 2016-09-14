@@ -8,9 +8,9 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Repositories\UserRepository;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use App\Http\Controllers\Controller as BaseController;
+use App\Repositories\UserRepository;
 
 use Socialite;
 
@@ -29,7 +29,7 @@ class AuthController extends BaseController
     }
 
     public function getSocialRedirect( $provider ) {
-        $providerKey = \Config::get('services.' . $provider);
+        $providerKey = config('services.' . $provider);
         if(empty($providerKey))
             return view('auth.login');
 
@@ -60,7 +60,7 @@ class AuthController extends BaseController
         Auth::login($userCheck, false);
 
         // Flag root admin
-        $admins = preg_split('/[\s*,\s*]*,+[\s*,\s*]*/', trim(\Config::get('settings.root_admin')));
+        $admins = preg_split('/[\s*,\s*]*,+[\s*,\s*]*/', trim(config('settings.root_admin')));
         session(['root' => in_array($userCheck->getAttribute('email'), $admins)]);
 
         return redirect()->intended(route('back.home'));

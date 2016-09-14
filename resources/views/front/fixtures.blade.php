@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="col-lg-12">
-        <p class="text-info">@lang('contents.timezone-statement', ['value'=>\Config::get('settings.default_timezone_value')])</p>
+        <p class="text-info">@lang('contents.timezone-statement', ['value'=>config('settings.default_timezone_value')])</p>
         <div class="row">
             <h2 id="live">@lang('pages.live')</h2>
             <table id="live-table" class="table table-striped table-hover">

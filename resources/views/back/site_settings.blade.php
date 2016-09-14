@@ -17,16 +17,16 @@
                         <label for="setting-{{ $setting->key }}">{{ $setting->title }}</label>
                         @if (!empty($setting->options))
                             {{ $options = json_decode($setting->options) }}
-                            <select class="form-control" name="setting-{{ $setting->key }}">
+                            <select id="setting-{{ $setting->key }}" class="form-control" name="setting-{{ $setting->key }}">
                                 @foreach ($options as $val => $text)
                                     <option value="{{ $val }}" {{ $val == $setting->value ? '"selected"' : '' }}>{{ $text }}</option>
                                 @endforeach
                             </select>
                         @elseif ($setting->lines == 1)
-                            <input type="text" class="form-control" placeholder="{{ $setting->hint }}"
+                            <input id="setting-{{ $setting->key }}" type="text" class="form-control" placeholder="{{ $setting->hint }}"
                                    name="setting-{{ $setting->key }}" value="{{ $setting->value }}">
                         @else
-                            <textarea class="form-control" rows="{{ $setting->lines }}"
+                            <textarea id="setting-{{ $setting->key }}" class="form-control" rows="{{ $setting->lines }}"
                                       name="setting-{{ $setting->key }}">{{ $setting->value }}</textarea>
                         @endif
                     </div>

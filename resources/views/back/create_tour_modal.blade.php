@@ -19,14 +19,14 @@
             <form role="form" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">@lang('contents.tour-name')</label>
+                    <label for="nameInput">@lang('contents.tour-name')</label>
                     <input id="nameInput" type="text" class="form-control" name="name"
                            value="{{ !empty($input) ? $input['name'] : '' }}"/>
                 </div>
 
                 <div class="form-group">
                     <label for="short">@lang('contents.tour-short')</label>
-                    <input type="text" class="form-control" name="short"
+                    <input id="short" type="text" class="form-control" name="short"
                            value="{{ !empty($input) ? $input['short'] : '' }}"/>
                 </div>
 
@@ -37,19 +37,19 @@
 
                 <div class="form-group">
                     <label for="logo">@lang('contents.tour-logo')</label>
-                    <input type="url" class="form-control" name="logo"
+                    <input id="logo" type="url" class="form-control" name="logo"
                            value="{{ !empty($input) ? $input['logo'] : '' }}"/>
                 </div>
 
                 <div class="form-group">
                     <label for="homepage">@lang('contents.tour-homepage')</label>
-                    <input type="url" class="form-control" name="homepage"
+                    <input id="homepage" type="url" class="form-control" name="homepage"
                            value="{{ !empty($input) ? $input['homepage'] : '' }}"/>
                 </div>
 
                 <div class="form-group">
                     <label for="bracket">@lang('contents.tour-bracket')</label>
-                    <input type="url" class="form-control" name="bracket"
+                    <input id="bracket" type="url" class="form-control" name="bracket"
                            value="{{ !empty($input) ? $input['bracket'] : '' }}"/>
                 </div>
             </form>

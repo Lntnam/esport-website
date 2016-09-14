@@ -2,8 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App as Application;
 use Closure;
-use Torann\GeoIP\GeoIPFacade;
+use GeoIP;
 
 class App
 {
@@ -31,7 +32,7 @@ class App
                 if (!empty($request->header('HTTP_CF-Connecting-IP'))) $ip = $request->header('HTTP_CF-Connecting-IP');
                 elseif (isset($_SERVER['REMOTE_ADDR'])) $ip = $_SERVER['REMOTE_ADDR'];
 
-                $location = GeoIPFacade::getLocation($ip);
+                $location = GeoIP::getLocation($ip);
             }
 
             // also add timezone if hasn't
@@ -39,7 +40,7 @@ class App
 //                $timezone = $location['timezone'];
 //                $request->session()->put('timezone', $timezone);
 //            }
-            foreach (\Config::get('settings.locales') as $l => $d) {
+            foreach (config('settings.locales') as $l => $d) {
                 if ($d['geo'] == $location['isoCode']) {
                     $locale = $l;
                     break;
@@ -48,7 +49,7 @@ class App
         }
 
         if (!empty($locale)) {
-            \App::setLocale($locale);
+            Application::setLocale($locale);
             setlocale(LC_TIME, $locale);
         }
 

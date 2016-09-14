@@ -17,7 +17,7 @@ class FixtureMailer
     {
         if (empty($setting)) {
             // Load settings
-            $config = \Config::get('settings.mc_campaigns');
+            $config = config('settings.mc_campaigns');
 
             if (!isset($config['fixtures']))
                 throw new \Exception("Campaign [fixtures] not found in config\\settings.php");

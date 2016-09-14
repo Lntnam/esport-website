@@ -19,14 +19,14 @@
             <form role="form" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">@lang('contents.team-name')</label>
+                    <label for="nameInput">@lang('contents.team-name')</label>
                     <input id="nameInput" type="text" class="form-control" name="name"
                            value="{{ !empty($input) ? $input['name'] : '' }}"/>
                 </div>
 
                 <div class="form-group">
                     <label for="short">@lang('contents.team-short')</label>
-                    <input type="text" class="form-control" name="short"
+                    <input id="short" type="text" class="form-control" name="short"
                            value="{{ !empty($input) ? $input['short'] : '' }}"/>
                 </div>
 
@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <label for="flag">@lang('contents.team-flag')</label>
-                    <input type="url" class="form-control" name="flag"
+                    <input id="flag" type="url" class="form-control" name="flag"
                            value="{{ !empty($input) ? $input['flag'] : '' }}"/>
                 </div>
             </form>

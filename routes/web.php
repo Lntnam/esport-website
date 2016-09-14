@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/back/login', function () {
     return view('auth.login');
 })->name('back.login');

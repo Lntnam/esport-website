@@ -61,8 +61,8 @@
                     <label for="schedule">@lang('contents.match-schedule')</label>
                     <div class="input-group date" id="schedulepicker">
                         <input type="text" class="form-control" name="schedule"
-                               placeholder="{{ \Carbon\Carbon::now(Config::get('settings.default_timezone'))
-                               ->format(Config::get('settings.match-date-format') . ' ' . Config::get('settings.match-time-format')) }}"
+                               placeholder="{{ \Carbon\Carbon::now(config('settings.default_timezone'))
+                               ->format(config('settings.match-date-format') . ' ' . config('settings.match-time-format')) }}"
                                value="{{ !empty($model) ? $model['schedule'] : '' }}"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -73,7 +73,7 @@
                 <div class="form-group">
                     <label for="timezone">@lang('contents.timezone')</label>
                     {!! Timezone::selectForm(
-                        !empty($model) ? $model['timezone'] : \Config::get('settings.default_timezone'),
+                        !empty($model) ? $model['timezone'] : config('settings.default_timezone'),
                         null,
                         ['class'=>'form-control', 'name'=>'timezone']
                         )
@@ -128,7 +128,8 @@
 
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="over" value="1" {{ !empty($model) ? ($model['over'] ? 'checked="checked"' : '' ) : '' }}>
+                        <input type="checkbox" name="over"
+                               value="1" {{ !empty($model) ? ($model['over'] ? 'checked="checked"' : '' ) : '' }}>
                         @lang('contents.match-over')</label>
                 </div>
 
@@ -143,131 +144,133 @@
 @stop
 
 @section('foot')
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/moment-with-locales.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{!! URL::asset('js/combobox.js') !!}"></script>
     <script type="text/javascript">
         $('.btn-link').click(function () {
             window.location.href = '{{ route('back.match.index') }}'
         });
         $('#schedulepicker').datetimepicker({
-            format: '{{ Config::get('settings.match-picker-format') }}',
+            format: '{{ config('settings.match-picker-format') }}',
             stepping: 5,
             // minDate: moment().startOf('day'),
             collapse: false,
             sideBySide: true,
             showTodayButton: true
         });
+        var modal = $('#modalTournament');
+        var tournament = $('#tournament');
 
-        $('#tournament').combobox({
+        tournament.combobox({
             showAllItems: '@lang('contents.btn-combo-show-all')',
             didNotMatch: "@lang('contents.combo-did-not-match')",
             ifInvalid: function (value) {
-                $('#modalTournament').find('.btn-primary').hide();
-                $('#modalTournament').modal();
-                $('#modalTournament').on('hide.bs.modal', function () {
+                modal.find('.btn-primary').hide();
+                modal.modal();
+                modal.on('hide.bs.modal', function () {
                     // clear selection if form close without adding any new item
-                    if ($('#tournament').val() === null || $('#tournament').val() === '') {
+                    if (tournament.val() === null || tournament.val() === '') {
                         $('#groupTournament > input').val('');
                     }
                 });
 
-                $('#modalTournament').find('.modal-body').load('{!! URL::route('back.tournament.ajaxCreate') !!}', function () {
+                modal.find('.modal-body').load('{!! URL::route('back.tournament.ajaxCreate') !!}', function () {
                     // Set default name
-                    $('#modalTournament').find('#nameInput').val(value);
+                    modal.find('#nameInput').val(value);
 
                     // Assign submit event
-                    $('#modalTournament').find('.btn-primary').off('click');
-                    $('#modalTournament').find('.btn-primary').on('click', function (e) {
+                    modal.find('.btn-primary').off('click');
+                    modal.find('.btn-primary').on('click', function () {
                         $.post('{!! URL::route('back.tournament.ajaxCreate') !!}', // URL
-                                $('#modalTournament').find('.modal-body').find('form').serialize() // data
+                                modal.find('.modal-body').find('form').serialize() // data
                         ).done(function (data) { // complete handler
                             if (data.success) {
                                 // Add new item to list & select it too
-                                $('#tournament').prepend($('<option>', {
+                                tournament.prepend($('<option>', {
                                     value: data.content.id,
                                     text: data.content.name,
                                     selected: true
                                 }));
 
-                                $('#modalTournament').modal('hide');
+                                modal.modal('hide');
                             }
                             else {
-                                $('#modalTournament').find('.modal-body').html(data.content);
+                                modal.find('.modal-body').html(data.content);
                             }
                         })
                         ;
                     });
 
                     // Bind enter key
-                    $('#modalOpponent').find('.modal-body').find('form').off('keypress');
-                    $('#modalTournament').find('.modal-body').find('form').keypress(function (e) {
+                    modal.find('.modal-body').find('form').off('keypress');
+                    modal.find('.modal-body').find('form').keypress(function (e) {
                         if (e.which == 13) {
-                            $('#modalTournament').find('.btn-primary').click();
+                            modal.find('.btn-primary').click();
                         }
                     });
 
                     // Show button after the form is fully loaded
-                    $('#modalTournament').find('.btn-primary').show();
+                    modal.find('.btn-primary').show();
                 });
                 return true;
             }
         });
 
-        $('#opponent').combobox({
+        modal = $('#modalOpponent');
+        var opponent = $('#opponent');
+
+        opponent.combobox({
             showAllItems: '@lang('contents.btn-combo-show-all')',
             didNotMatch: "@lang('contents.combo-did-not-match')",
             ifInvalid: function (value) {
-                $('#modalOpponent').find('.btn-primary').hide();
-                $('#modalOpponent').modal();
-                $('#modalOpponent').on('hide.bs.modal', function () {
+                modal.find('.btn-primary').hide();
+                modal.modal();
+                modal.on('hide.bs.modal', function () {
                     // clear selection if form close without adding any new item
-                    if ($('#opponent').val() === null || $('#opponent').val() === '') {
+                    if (opponent.val() === null || opponent.val() === '') {
                         $('#groupOpponent > input').val('');
                     }
                 });
 
-                $('#modalOpponent').find('.modal-body').load('{!! URL::route('back.opponent.ajaxCreate') !!}', function () {
+                modal.find('.modal-body').load('{!! URL::route('back.opponent.ajaxCreate') !!}', function () {
                     // Set default name
-                    $('#modalOpponent').find('#nameInput').val(value);
+                    modal.find('#nameInput').val(value);
 
                     // Assign submit event
-                    $('#modalOpponent').find('.btn-primary').off('click');
-                    $('#modalOpponent').find('.btn-primary').on('click', function (e) {
+                    modal.find('.btn-primary').off('click');
+                    modal.find('.btn-primary').on('click', function () {
                         $.post('{!! URL::route('back.opponent.ajaxCreate') !!}', // URL
-                                $('#modalOpponent').find('.modal-body').find('form').serialize() // data
+                                modal.find('.modal-body').find('form').serialize() // data
                         ).done(function (data) { // complete handler
                             if (data.success) {
                                 // Add new item to list & select it too
-                                $('#opponent').prepend($('<option>', {
+                                opponent.prepend($('<option>', {
                                     value: data.content.id,
                                     text: data.content.name,
                                     selected: true
                                 }));
 
-                                $('#modalOpponent').modal('hide');
+                                modal.modal('hide');
                             }
                             else {
-                                $('#modalOpponent').find('.modal-body').html(data.content);
+                                modal.find('.modal-body').html(data.content);
                             }
                         })
                         ;
                     });
 
                     // Bind enter key
-                    $('#modalOpponent').find('.modal-body').find('form').off('keypress');
-                    $('#modalOpponent').find('.modal-body').find('form').keypress(function (e) {
+                    modal.find('.modal-body').find('form').off('keypress');
+                    modal.find('.modal-body').find('form').keypress(function (e) {
                         if (e.which == 13) {
-                            $('#modalOpponent').find('.btn-primary').click();
+                            modal.find('.btn-primary').click();
                         }
                     });
 
                     // Show button after the form is fully loaded
-                    $('#modalOpponent').find('.btn-primary').show();
+                    modal.find('.btn-primary').show();
                 });
                 return true;
             }

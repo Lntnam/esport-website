@@ -50,8 +50,6 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'home'                              => 'Homepage',
-
     'we-need-support'                   => 'We need your support',
     'join-supporter-club'               => 'Join our supporter club',
     'buy-badge'                         => 'Buy badge',

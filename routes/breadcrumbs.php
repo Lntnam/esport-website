@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nam
- * Date: 02/09/2016
- * Time: 15:38
- */
-
 // Home / Dashboard
     Breadcrumbs::register('home', function ($breadcrumbs) {
         $breadcrumbs->push(trans('pages.home'), route('back.home'));

@@ -50,7 +50,7 @@ class MatchRepository extends BaseRepository  {
                 $match->setAttribute($field, $value);
             }
         }
-        $match->setAttribute('schedule', \Timezone::convertToUTC($attributes['schedule'], $attributes['timezone']));
+        $match->setAttribute('schedule', (new Carbon($attributes['schedule'], $attributes['timezone']))->tz(config('app.timezone')));
         $match->save();
         return $match;
     }
@@ -98,7 +98,7 @@ class MatchRepository extends BaseRepository  {
             ->with('tournament')
             ->with('opponent')
             ->orderBy('schedule', 'desc')
-            ->limit(\Config::get('settings.past-matches-count'))
+            ->limit(config('settings.past-matches-count'))
             ->get();
     }
 }

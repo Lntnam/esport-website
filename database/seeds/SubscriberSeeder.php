@@ -13,8 +13,8 @@ class SubscriberSeeder extends Seeder
     public function run()
     {
         // Pull subscribers from Mailchimp account
-        $mailchimp = new \DrewM\MailChimp\MailChimp(Config::get('settings.mailchimp-api-key'));
-        $uri = sprintf("lists/%s/members", Config::get('settings.mailchimp-list-id'));
+        $mailchimp = new \DrewM\MailChimp\MailChimp(config('settings.mailchimp-api-key'));
+        $uri = sprintf("lists/%s/members", config('settings.mailchimp-list-id'));
         $result = $mailchimp->get($uri);
         if (empty($result) || empty($result['members'])) return;
 

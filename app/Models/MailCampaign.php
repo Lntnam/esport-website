@@ -11,7 +11,5 @@ class MailCampaign extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'type', 'title', 'template_id', 'segment_id', 'success', 'problem', 'message'
-    ];
+    protected $fillable = ['type', 'title', 'template_id', 'segment_id', 'success', 'problem', 'message'];
 }
