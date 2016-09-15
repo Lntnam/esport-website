@@ -26,7 +26,7 @@ class MatchController extends BaseController
 
     public function index()
     {
-        return view('back.manage_matches');
+        return view('match.manage_matches');
     }
 
     public function create(Request $request)
@@ -50,14 +50,14 @@ class MatchController extends BaseController
                     ->with('message', trans('success.created', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
             }
 
-            return view('back.create_match')
+            return view('match.create_match')
                 ->with('model', $attributes)
                 ->with('errors', $validator->errors())
                 ->with('tournaments', $tournaments)
                 ->with('opponents', $opponents);
         }
 
-        return view('back.create_match')
+        return view('match.create_match')
             ->with('model', $request->all())
             ->with('tournaments', $tournaments)
             ->with('opponents', $opponents);
@@ -72,7 +72,7 @@ class MatchController extends BaseController
                 abort(404);
             }
 
-            return view('back.delete_match')->with('model', array_merge($match->getAttributes(), ['formatted_schedule' => $match->getAttribute('formatted_schedule')]));
+            return view('match.delete_match')->with('model', array_merge($match->getAttributes(), ['formatted_schedule' => $match->getAttribute('formatted_schedule')]));
         }
 
         $match = MatchRepository::read($request->input('id'));
@@ -99,7 +99,7 @@ class MatchController extends BaseController
                 abort(404);
             }
 
-            return view('back.update_match')
+            return view('match.update_match')
                 ->with('model', $match)
                 ->with('tournaments', $tournaments)
                 ->with('opponents', $opponents);
@@ -112,7 +112,7 @@ class MatchController extends BaseController
 
             $validator = Validator::make($attributes, MatchRepository::getUpdateValidationRules($match));
             if ($validator->fails()) {
-                return view('back.update_match')
+                return view('match.update_match')
                     ->with('model', $attributes)
                     ->with('errors', $validator->errors())
                     ->with('tournaments', $tournaments)

@@ -14,7 +14,7 @@ class FixtureController extends BaseController
 {
     public function index()
     {
-        return view('front.fixtures');
+        return view('match.fixtures');
     }
 
     public function data($kind)
@@ -32,14 +32,14 @@ class FixtureController extends BaseController
                 break;
         }
 
-        return view('front/_fixtures')->with('matches', $matches);
+        return view('match/_fixtures')->with('matches', $matches);
     }
 
     public function results()
     {
         $matches = MatchRepository::getRecentMatches();
 
-        return view('front.fixture_results')->with('matches', $matches);
+        return view('match.fixture_results')->with('matches', $matches);
     }
 
     public function rss($locale)

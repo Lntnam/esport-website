@@ -68,27 +68,7 @@
         </div>
         <div class="row">
             <h2 id="subscribe">@lang('pages.subscribe')</h2>
-            <!-- Begin MailChimp Signup Form -->
-            <div class="col-lg-6">
-                <form action="//next-gen.us14.list-manage.com/subscribe/post?u=59a9a5aee257480d4f3cbe81e&amp;id=f848ac684f"
-                      method="post" target="_blank" novalidate>
-                    <input type="hidden" name="group[443][1]" value="1">
-                    <div class="form-group">
-                        <label for="mce-EMAIL">@lang('contents.your-email')</label>
-                        <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    </div>
-                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                        <input type="text" name="b_59a9a5aee257480d4f3cbe81e_f848ac684f" tabindex="-1" value="">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">@lang('contents.btn_subscribe')</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!--End mc_embed_signup-->
-
+            @include('subscription._form', ['interest' => 'd796835b62'])
     </div>
 @stop
 
