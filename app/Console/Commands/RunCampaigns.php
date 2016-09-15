@@ -16,11 +16,6 @@ use Setting;
 class RunCampaigns extends Command
 {
     /**
-     * @var MailChimp
-     */
-    protected $mc;
-
-    /**
      * The name and signature of the console command.
      *
      * @var string
@@ -33,18 +28,6 @@ class RunCampaigns extends Command
      * @var string
      */
     protected $description = 'Check and run MailChimp campaigns';
-
-    /**
-     * Create a new command instance.
-     *
-     * @param MailChimp $mc
-     */
-    public function __construct(MailChimp $mc)
-    {
-        $this->mc = $mc;
-
-        parent::__construct();
-    }
 
     /**
      * Execute the console command.
@@ -132,7 +115,7 @@ class RunCampaigns extends Command
 
             return;
         }
-
+dump($content_result);
         // Store to campaign log
         $log = Repositories\MailCampaignRepository::create(['type' => 'fixtures', 'title' => $title]);
 
