@@ -37,7 +37,7 @@
             <td align="center">
                 @if ($match->over) {{-- Recent --}}
                 @if (!empty($match->stream))
-                    {{ $streams = explode(';',$match->stream) }}
+                    <?php $streams = explode(';', $match->stream) ?>
                     @if (count($streams) == 1)
                         <a href="{{ $match->stream }}" target="_blank">
                             <span class="fa fa-play-circle fa-lg"></span>
@@ -47,10 +47,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="fa fa-play-circle fa-lg"></span>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width: 0;">
                                 @foreach ($streams as $stream)
-                                <li>
-                                    <a href="{{ $stream }}" target="_blank"> <span class="fa fa-play-circle">Game {{$loop+1}}</span></a>
+                                <li class="pull-right">
+                                    <a href="{{ $stream }}" target="_blank">Game {{$loop->index+1}} <span class="fa fa-play-circle"></span></a>
                                 </li>
                                 @endforeach
                             </ul>
