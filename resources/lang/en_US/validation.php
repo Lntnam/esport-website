@@ -118,4 +118,5 @@ return [
     'error'                 => 'Oops! something went wrong.',
     'updating-not-allowed'  => 'Updating of [:attribute] is not allowed.',
     'not-found'             => 'The :model cannot be found.',
+    'interests'             => 'You must choose at least one item to get update.',
 ];

@@ -118,4 +118,5 @@ return [
     'error'                 => 'Oops! đã có lỗi xảy ra.',
     'updating-not-allowed'  => 'Không được phép cập nhật [:attribute].',
     'not-found'             => 'Không tìm thấy :model.',
+    'interests'             => 'Bạn phải chọn ít nhất một nội dung để nhận tin.',
 ];

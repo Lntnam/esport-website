@@ -63,11 +63,9 @@ return [
     'meta-description'              => 'Meta Description',
     'meta-robots'                   => 'Meta Robots',
     'google-analytics'              => 'Google Analytics Script',
-    'site-title'                    => 'Site Title',
+    'title'                         => 'Site Title',
     'brand-name'                    => 'Site Brand Name',
-    'default-timezone'              => 'Default Timezone',
-    'languages'                     => 'Available Languages',
-    'default-locale'                => 'Default Locale',
+    'physical_address'              => 'Physical Address',
 
     'created_at'                    => 'Được tạo vào',
     'updated_at'                    => 'Chỉnh sửa vào',
@@ -103,5 +101,6 @@ return [
     'match_stream'                  => 'Kênh stream / Replay',
     'match_round'                   => 'Vòng',
 
-    'your-email'                    => 'Địa chỉ email của bạn',
+    'your_email'                    => 'Địa chỉ email của bạn',
+    'your_name'                     => 'Tên của bạn',
 ];

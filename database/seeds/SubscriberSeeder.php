@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Subscriber;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Config;
+use App\Facades\MailChimp;
 
 class SubscriberSeeder extends Seeder
 {
@@ -12,24 +14,29 @@ class SubscriberSeeder extends Seeder
      */
     public function run()
     {
-        // Pull subscribers from Mailchimp account
-        $mailchimp = new \DrewM\MailChimp\MailChimp(config('settings.mailchimp-api-key'));
-        $uri = sprintf("lists/%s/members", config('settings.mailchimp-list-id'));
-        $result = $mailchimp->get($uri);
-        if (empty($result) || empty($result['members'])) return;
+        // Pull subscribers from MailChimp account
+        $members = MailChimp::getMembers();
+        if ($members === false) {
+            \Log::error('Unable to get members list: ' . MailChimp::getError()['detail']);
+            return;
+        }
 
         DB::table('subscribers')->delete();
 
-        foreach ($result['members'] as $member) {
-            \App\Models\Subscriber::create(array(
+        $languages = array_merge(config('services.mailchimp')['language_mapping'], [null => config('app.locale'), '' => config('app.locale')]);
+
+        foreach ($members as $member) {
+            Subscriber::create(array(
+                'mail_chimp_id' => $member['id'],
                 'name'          => $member['merge_fields']['FNAME'],
                 'email'         => $member['email_address'],
+                'status'        => $member['status'],
+                'language'      => $languages[$member['language']],
                 'interests'     => json_encode($member['interests']),
-                'mailchimp_id'  => $member['id'],
-                'ip'            => $member['ip_opt'],
-                'created_at'    => (new \Carbon\Carbon($member['timestamp_opt']))->toDateTimeString(),
-                'updated_at'    => (new \Carbon\Carbon($member['timestamp_opt']))->toDateTimeString(),
-                'deleted_at'    => $member['status'] == 'subscribed' ? null : (new \Carbon\Carbon())->toDateTimeString(),
+                'ip_signup'     => $member['ip_signup'],
+                'ip_opt'        => $member['ip_opt'],
+                'created_at'    => (new Carbon($member['timestamp_opt'] ?: $member['timestamp_signup']))->toDateTimeString(),
+                'updated_at'    => (new Carbon($member['last_changed'] ?: $member['timestamp_signup']))->toDateTimeString(),
             ));
         }
     }

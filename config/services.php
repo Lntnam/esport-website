@@ -39,5 +39,11 @@ return [
         'client_id'     => env('GOOGLE_ID'),
         'client_secret' => env('GOOGLE_SECRET'),
         'redirect'      => env('GOOGLE_REDIRECT')
-    ]
+    ],
+
+    'mailchimp' => [
+        'api_key'               => env('MAILCHIMP_KEY'),
+        'list_id'               => env('MAILCHIPM_LIST_ID'),
+        'language_mapping'      => ['vi' => 'vi_VN', 'en' => 'en_US', 'vi_VN' => 'vi', 'en_US' => 'en'],
+    ],
 ];

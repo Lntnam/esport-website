@@ -51,5 +51,14 @@ class SiteSettingSeeder extends Seeder
             'lines'         => 1,
             'order'         => 4,
         ));
+
+        SiteSetting::create(array(
+            'key'           => 'physical-address',
+            'title'         => trans('contents.physical_address'),
+            'hint'          => 'for emails',
+            'value'         => '',
+            'lines'         => 1,
+            'order'         => 5,
+        ));
     }
 }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "76f4ae5b480525e74b3cfde31044af7d",
-    "content-hash": "5c509b6625cc43f21beac2a782658e83",
+    "hash": "53c7df8fea339708b6c0d3dc3b397f25",
+    "content-hash": "ebb12207f7aa300c2ee1a4f4bde8ce5f",
     "packages": [
         {
             "name": "camroncade/timezone",

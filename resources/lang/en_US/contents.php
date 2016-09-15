@@ -62,11 +62,9 @@ return [
     'meta-description'              => 'Meta Description',
     'meta-robots'                   => 'Meta Robots',
     'google-analytics'              => 'Google Analytics Script',
-    'site-title'                    => 'Site Title',
+    'title'                         => 'Site Title',
     'brand-name'                    => 'Site Brand Name',
-    'default-timezone'              => 'Default Timezone',
-    'languages'                     => 'Available Languages',
-    'default-locale'                => 'Default Locale',
+    'physical_address'              => 'Physical Address',
 
     'created_at'                    => 'Created At',
     'updated_at'                    => 'Updated At',
@@ -102,5 +100,6 @@ return [
     'match_stream'                  => 'Streaming channel / Replay',
     'match_round'                   => 'Round',
 
-    'your-email'                    => 'Your email address',
+    'your_email'                    => 'Your email address',
+    'your_name'                     => 'Your name',
 ];

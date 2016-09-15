@@ -23,13 +23,11 @@ return [
     /*
      * Path settings
      */
-
     'vendor_dir'            => 'vendor',
 
     /*
      * For date and time display
      */
-
     'default_timezone'      => 'Asia/Bangkok',
     'default_timezone_value'=> 'GMT +7',
 
@@ -64,29 +62,7 @@ return [
                 'every' => 3,
                 'check' => null, // week: N | month: j | year: j n
             ],
-            'time' => '23:00', // H:i, default timezone
+            'time' => '07:00', // H:i, default timezone
         ],
-        'results' => [
-            'enabled' => false,
-            'campaign_id' => [
-                'en_US' => '',
-                'vi_VN' => '',
-            ], // saved campaigns to replicate
-            'by' => [
-                'unit' => 'week',
-                'every' => 1,
-                'check' => 1, // week: N | month: j | year: j n
-            ],
-            'time' => '08:00', // H:i, default timezone
-        ],
-    ],
-
-    /*
-     * Third party packages
-     */
-
-    'mailchimp' => [
-        'api_key'               => env('MAILCHIMP_KEY'),
-        'list-id'               => env('MAILCHIPM_LIST_ID'),
     ],
 ];
