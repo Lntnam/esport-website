@@ -109,18 +109,18 @@ class RunCampaigns extends Command
             ->with('matches', $data)
             ->render();
 
-        $content_result = MailChimp::put(sprintf('campaigns/%s/content', $edit_result['id']), ['html' => $html]);
+        $content_result = MailChimp::put(sprintf('campaigns/%s/content', $replicate_result['id']), ['html' => $html]);
         if (!empty($content_result) && !empty($content_result['type'])) {
             Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error setting campaign content: ' . $content_result['title']);
 
             return;
         }
-dump($content_result);
+
         // Store to campaign log
         $log = Repositories\MailCampaignRepository::create(['type' => 'fixtures', 'title' => $title]);
 
         // Send & update campaign log
-        $send_result = MailChimp::post(sprintf('campaigns/%s/actions/send', $content_result['id']));
+        $send_result = MailChimp::post(sprintf('campaigns/%s/actions/send', $replicate_result['id']));
         if (!empty($send_result) && !empty($send_result['type'])) { // ERROR!
             $log->setAttribute('success', false);
             $log->setAttribute('problem', $send_result['title']);
