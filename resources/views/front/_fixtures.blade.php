@@ -37,9 +37,25 @@
             <td align="center">
                 @if ($match->over) {{-- Recent --}}
                 @if (!empty($match->stream))
-                    <a href="{{ $match->stream }}" target="_blank">
-                        <span class="fa fa-play fa-lg"></span>
-                    </a>
+                    {{ $streams = explode(';',$match->stream) }}
+                    @if (count($streams) == 1)
+                        <a href="{{ $match->stream }}" target="_blank">
+                            <span class="fa fa-play-circle fa-lg"></span>
+                        </a>
+                    @else
+                        <div class="dropdown" >
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="fa fa-play-circle fa-lg"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach ($streams as $stream)
+                                <li>
+                                    <a href="{{ $stream }}" target="_blank"> <span class="fa fa-play-circle">Game {{$loop+1}}</span></a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 @endif
                 @else {{-- Live & upcoming --}}
                 @if (!empty($match->stream))
