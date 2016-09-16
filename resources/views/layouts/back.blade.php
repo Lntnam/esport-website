@@ -69,7 +69,7 @@
                 <span class="icon-bar">dummy 1</span>
             </button>
             <img class="img-rounded logo" src="{{ URL::asset('images/next-gen.png') }}" alt="logo"/>
-            <a href="{!! route('back.home') !!}" class="navbar-brand logo-text"
+            <a href="{!! route('back.dashboard') !!}" class="navbar-brand logo-text"
                title="{!! config('settings.back_name') !!}">
                 {!! config('settings.back_name') !!}</a>
         </div>
@@ -142,7 +142,7 @@
                 fa-file
                  -->
                 <li>
-                    <a href="{!! route('back.home') !!}"><i
+                    <a href="{!! route('back.dashboard') !!}"><i
                                 class="fa fa-fw fa-dashboard"></i> @lang('pages.back_dashboard')</a>
                 </li>
                 <li>

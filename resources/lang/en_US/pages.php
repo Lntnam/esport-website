@@ -19,8 +19,7 @@ return [
     | Layout Texts for Back End
     |--------------------------------------------------------------------------
     */
-    'back_home'                         => 'Home',
-    'back_dashboard'                    => 'Dashboard',
+    'back_dashboard'                    => 'Staff Dashboard',
 
     'back_restricted'                   => 'Restricted Area',
 
@@ -41,6 +40,8 @@ return [
     | Layout Texts for Front End
     |--------------------------------------------------------------------------
     */
+
+    'home'                              => 'Homepage',
 
     'we_need_support'                   => 'We need your support',
     'join_supporter_club'               => 'Join our supporter club',
