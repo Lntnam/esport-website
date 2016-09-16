@@ -110,6 +110,7 @@ class SubscriptionController extends BaseController
         }
 
         \Log::info('MailChimp webhook triggered. Type missing.');
+        dump($request->all());
     }
 
     private function _processHookUnsubscribe($data)
