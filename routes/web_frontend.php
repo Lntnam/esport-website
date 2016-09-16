@@ -32,7 +32,7 @@ Route::group(['middleware' => 'front', 'namespace' => 'Front'], function () {
      */
     $module = 'front.subscription.';
 
-    Route::post('subscribe', 'SubscriptionController@create')
+    Route::any('subscribe', 'SubscriptionController@create')
          ->name($module . 'create');
     Route::get('subscription/confirmation', function () {
         return view('subscription.confirmation');

@@ -17,64 +17,69 @@ class SubscriptionController extends BaseController
 {
     public function create(Request $request)
     {
-        /* verify if human */
-        if (!empty($request->input('b_59a9a5aee257480d4f3cbe81e_f848ac684f'))) {
-            abort(403);
-        }
-
+        $attributes = $request->all();
         $interests = InterestRepository::getList();
 
-        /* validation */
-        $attributes = $request->input();
+        if (!empty($attributes)) {
+            /* verify if human */
+            if (!empty($request->input('b_59a9a5aee257480d4f3cbe81e_f848ac684f'))) {
+                abort(403);
+            }
 
-        if (!is_array($attributes['interests'])) {
-            $attributes['interests'] = [$attributes['interest'] => true];
-        }
+            /* validation */
 
-        foreach ($attributes['interests'] as $key => $value) {
-            $attributes['interests'][$key] = ($value == '1' || $value == true);
-        }
+            if (!is_array($attributes['interests'])) {
+                $attributes['interests'] = [$attributes['interest'] => true];
+            }
 
-        /* bind interest list */
-        $list = array_fill_keys(array_keys($interests), false);
-        $list = array_replace($list, $attributes['interests']);
-        $attributes['interests'] = $list;
+            foreach ($attributes['interests'] as $key => $value) {
+                $attributes['interests'][$key] = ($value == '1' || $value == true);
+            }
 
-        $validator = Validator::make($attributes, SubscriberRepository::getCreateValidationRules());
-        if (!$validator->fails()) {
-            /* create subscriber locally */
-            $model = SubscriberRepository::create($attributes);
+            /* bind interest list */
+            $list = array_fill_keys(array_keys($interests), false);
+            $list = array_replace($list, $attributes['interests']);
+            $attributes['interests'] = $list;
 
-            /* send to mailchimp */
-            $member = MailChimp::createMember($model->getAttributes());
-            if ($member !== false) {
-                /* update subscriber locally */
-                $repo = new SubscriberRepository($model);
-                $repo->updateMailChimpId($member['unique_email_id']);
+            $validator = Validator::make($attributes, SubscriberRepository::getCreateValidationRules());
+            if (!$validator->fails()) {
+                /* create subscriber locally */
+                $model = SubscriberRepository::create($attributes);
 
-                /* send confirmation email */
-                try {
-                    Mail::to($model->getAttribute('email'))
-                        ->send(new SubscriptionConfirmation());
-                } catch (RequestException $e) {
-                    \Log::error('Unable to send email: ' . $e->getMessage());
+                /* send to mailchimp */
+                $member = MailChimp::createMember($model->getAttributes());
+                if ($member !== false) {
+                    /* update subscriber locally */
+                    $repo = new SubscriberRepository($model);
+                    $repo->updateMailChimpId($member['unique_email_id']);
+
+                    /* send confirmation email */
+                    try {
+                        Mail::to($model->getAttribute('email'))
+                            ->send(new SubscriptionConfirmation());
+                    } catch (RequestException $e) {
+                        \Log::error('Unable to send email: ' . $e->getMessage());
+                    }
+
+                    return redirect()
+                        ->route('front.subscription.confirmation')
+                        ->with('success', true);
                 }
+
+                \Log::error('Unable to send member to MailChimp: ' . MailChimp::getError()['detail']);
 
                 return redirect()
                     ->route('front.subscription.confirmation')
-                    ->with('success', true);
+                    ->with('success', false);
             }
-
-            \Log::error('Unable to send member to MailChimp: ' . MailChimp::getError()['detail']);
-
-            return redirect()
-                ->route('front.subscription.confirmation')
-                ->with('success', false);
+            return view('subscription.subscribe')
+                ->with('model', $attributes)
+                ->with('errors', $validator->errors())
+                ->with('interests', $interests);
         }
 
         return view('subscription.subscribe')
             ->with('model', $attributes)
-            ->with('errors', $validator->errors())
             ->with('interests', $interests);
     }
 

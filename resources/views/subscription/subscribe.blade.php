@@ -43,8 +43,8 @@
                     <div class="checkbox">
                         <label>
                             <input type="hidden" name="interests[{{ $interest }}]" value="0" >
-                            <input type="checkbox" data-toggle="toggle" name="interests[{{ $interest }}]" value="1" {!! $model['interests'][$interest] ? 'checked' : '' !!}>
-                            {{ $label }}
+                            <input type="checkbox" data-toggle="toggle" name="interests[{{ $interest }}]" value="1" {!! isset($model['interests']) && $model['interests'][$interest] ? 'checked' : '' !!}>
+                            @lang('contents.interest_' . $interest)
                         </label>
                     </div>
                     @endforeach
