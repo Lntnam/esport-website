@@ -32,4 +32,6 @@ return ['home-welcome' => 'Chào mừng đến với Next Gen&reg;!',
                                                 <br />và đồng thời cũng là đội mạnh nhất Việt Nam hiện tại.',
         'subscription_confirmation_goodbye' => 'Xin cảm ơn và chúc bạn may mắn.',
         'subscription_error'                => 'Có lỗi đã xảy ra và bạn chưa đăng ký nhận email thành công.',
+        'unsubscribe_success'               => 'Bạn đã hủy nhận email thành công với Next Gen Việt Nam.',
+        'unsubscribe_failure'               => 'Có lỗi đã xảy ra và bạn chưa hủy đăng ký nhận email thành công.',
 ];

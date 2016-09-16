@@ -12,7 +12,7 @@ class SubscriberRepository extends BaseRepository
 
     protected static $allowedForCreate = ['name', 'email'];
 
-    protected static $allowedForUpdate = ['name', 'email', 'language', 'interests', 'ip_signup', 'opt_in_code', 'ip_opt', 'mail_chimp_id', 'status'];
+    protected static $allowedForUpdate = ['name', 'email', 'language', 'interests', 'ip_signup', 'opt_in_code', 'ip_opt', 'mail_chimp_id', 'status',];
 
     public function __construct(Subscriber $model)
     {
@@ -31,7 +31,12 @@ class SubscriberRepository extends BaseRepository
 
     public static function create(array $attributes)
     {
-        $model = new Subscriber();
+        /* check if email exists */
+        $model = Subscriber::where('email', $attributes['email'])->first();
+        if (!$model) {
+            $model = new Subscriber();
+        }
+
         foreach ($attributes as $field => $value) {
             if (in_array($field, static::$allowedForCreate)) {
                 $model->setAttribute($field, $value);
@@ -51,23 +56,38 @@ class SubscriberRepository extends BaseRepository
         return $model;
     }
 
+    public static function unsubscribe($mailChimpId)
+    {
+        $model = Subscriber::where('mail_chimp_id', $mailChimpId)
+                           ->first();
+        if ($model) {
+            $model->setAttribute('status', 'unsubscribed');
+            $model->save();
+
+            return $model;
+        }
+
+        return false;
+    }
+
     public function updateMailChimpId($mailChimpId)
     {
         $this->model->setAttribute('mail_chimp_id', $mailChimpId);
         $this->model->save();
     }
 
-    public static function updateFromMailChimp($mailChimpId, $attributes)
+    public static function unsubscribeFromMailChimp($email)
     {
-        $model = Subscriber::where('mail_chimp_id', $mailChimpId)->first();
+        $model = Subscriber::where('email', $email)
+                           ->first();
         if (!empty($model)) {
-            $model->setAttributes($attributes);
+            $model->setAttribute('status', 'unsubscribed');
             $model->save();
 
             return $model;
         }
 
-        return null;
+        return false;
     }
 
     public function updateInterests($interests)

@@ -14,9 +14,9 @@ return [
    |--------------------------------------------------------------------------
    */
 
-    'login' => 'Đăng Nhập',
-    'logout' => 'Đăng Xuất',
-    'back_toggle_nav' => 'Toggle Navigation',
+    'login'                             => 'Đăng Nhập',
+    'logout'                            => 'Đăng Xuất',
+    'back_toggle_nav'                   => 'Toggle Navigation',
 
     'profile'                           => 'Hồ Sơ',
     'settings'                          => 'Thiết Lập',
@@ -61,6 +61,10 @@ return [
     'team-roster'                       => 'Team',
     'sponsor'                           => 'Tài trợ',
     'get-in-touch'                      => 'Liên hệ',
+
+    'unsubscribe'                       => 'Hủy nhận email',
+    'subscribe'                         => 'Đăng ký nhận email',
+
 
     /*
      * Sub headings

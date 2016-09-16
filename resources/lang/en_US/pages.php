@@ -7,9 +7,9 @@ return [
    |--------------------------------------------------------------------------
    */
 
-    'login' => 'Log In',
-    'logout' => 'Log Out',
-    'back_toggle_nav' => 'Toggle Navigation',
+    'login'                             => 'Log In',
+    'logout'                            => 'Log Out',
+    'back_toggle_nav'                   => 'Toggle Navigation',
 
     'profile'                           => 'Profile',
     'settings'                          => 'Settings',
@@ -54,6 +54,9 @@ return [
     'team-roster'                       => 'Team',
     'sponsor'                           => 'Sponsor',
     'get-in-touch'                      => 'Get in Touch',
+
+    'unsubscribe'                       => 'Unsubscribe',
+    'subscribe'                         => 'Subscribe',
 
     /*
      * Sub headings

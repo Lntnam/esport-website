@@ -26,8 +26,7 @@ class SubscriptionConfirmation extends BaseMailer
     {
         /** unsubscription key is the mail chimp id */
 
-        $mail = $this->view('emails.subscription_confirmation')
-             ->text('email_plains.subscription_confirmation');
+        $mail = $this->view('emails.subscription_confirmation');
 
         return $this->buildDefault($mail);
     }

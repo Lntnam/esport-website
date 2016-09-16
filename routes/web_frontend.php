@@ -40,4 +40,9 @@ Route::group(['middleware' => 'front', 'namespace' => 'Front'], function () {
          ->name($module . 'confirmation');
     Route::get('unsubscribe/{key}', 'SubscriptionController@unsubscribe')
          ->name($module . 'unsubscribe');
+
+    /**
+     * Webhooks
+     */
+    Route::post('wh/mc', 'SubscriptionController@webHook');
 });

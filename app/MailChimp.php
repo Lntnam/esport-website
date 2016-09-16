@@ -47,6 +47,7 @@ class MailChimp
             }
             $this->error = $result;
         }
+
         return false;
     }
 
@@ -70,6 +71,22 @@ class MailChimp
             }
             $this->error = $result;
         }
+
+        return false;
+    }
+
+    public function unsubscribeMember($attributes)
+    {
+        $subscriber_hash = $this->mc->subscriberHash($attributes['email']);
+        $uri = sprintf("lists/%s/members/%s", $this->settings['list_id'], $subscriber_hash);
+        $result = $this->mc->patch($uri, ['status' => 'unsubscribed']);
+        if (!empty($result)) {
+            if (isset($result['id'])) {
+                return $result;
+            }
+            $this->error = $result;
+        }
+
         return false;
     }
 
@@ -77,22 +94,22 @@ class MailChimp
      * Basic function wrappers
      */
 
-    public function get($method, $args = array(), $timeout = 10)
+    public function get($method, $args = [], $timeout = 10)
     {
         return $this->mc->get($method, $args, $timeout);
     }
 
-    public function post($method, $args = array(), $timeout = 10)
+    public function post($method, $args = [], $timeout = 10)
     {
         return $this->mc->post($method, $args, $timeout);
     }
 
-    public function patch($method, $args= array(), $timeout = 10)
+    public function patch($method, $args = [], $timeout = 10)
     {
         return $this->mc->patch($method, $args, $timeout);
     }
 
-    public function put($method, $args= array(), $timeout = 10)
+    public function put($method, $args = [], $timeout = 10)
     {
         return $this->mc->put($method, $args, $timeout);
     }
