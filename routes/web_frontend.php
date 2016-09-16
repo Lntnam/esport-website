@@ -45,4 +45,5 @@ Route::group(['middleware' => 'front', 'namespace' => 'Front'], function () {
      * Webhooks
      */
     Route::post('wh/mc', 'SubscriptionController@webHook');
+    Route::get('wh/mc', 'SubscriptionController@webHook');
 });
