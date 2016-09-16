@@ -228,7 +228,7 @@
 
 
                                                             <img align="center" alt=""
-                                                                 src="https://gallery.mailchimp.com/59a9a5aee257480d4f3cbe81e/images/bb2720fc-03fd-4929-ba2c-69c7f9e7ede9.jpg"
+                                                                 src="{{ $message->embed(resource_path('assets/images/logo.png')) }}"
                                                                  width="251"
                                                                  style="border:0; height:auto; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; vertical-align:bottom; display:inline; max-width:251px; padding-bottom:0"
                                                                  class="mcnImage" height="auto" valign="bottom">
