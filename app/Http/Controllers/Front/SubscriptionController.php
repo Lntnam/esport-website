@@ -98,17 +98,23 @@ class SubscriptionController extends BaseController
     public function webHook(Request $request)
     {
         if (!empty($request->input('type'))) {
+            \Log::info('MailChimp webhook triggered. Type ['.$request->input('type').']');
             $data = $request->input('data');
             switch ($request->input('type')) {
                 case 'unsubscribe':
                     $this->_processHookUnsubscribe($data);
-                    break;
+                    return;
+                default:
+                    return;
             }
         }
+
+        \Log::info('MailChimp webhook triggered. Type missing.');
     }
 
     private function _processHookUnsubscribe($data)
     {
+        \Log::info('MailChimp unsubscribe triggered. Email ['.$data['email'].']');
         SubscriberRepository::unsubscribeFromMailChimp($data['email']);
     }
 }
