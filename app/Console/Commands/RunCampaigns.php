@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Repositories;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Log;
 use MailChimp;
 use Setting;
 
@@ -42,7 +43,8 @@ class RunCampaigns extends Command
         if (is_array($type)) $type = implode(',', $type);
 
         if (!isset($config[$type])) {
-            Repositories\MailCampaignRepository::writeSimpleLog(sprintf('[%s] Schedule constraint not met. Skipping.', $type));
+            Log::warning(sprintf('MailChimp Campaign - [%s] type not found. Quitting.', $type));
+            echo sprintf("\033[31m [%s] type not found. Skipping.\033[0m\n", $type);
 
             return;
         }
@@ -52,11 +54,11 @@ class RunCampaigns extends Command
             switch ($type) {
                 case 'fixtures':
                     $this->runFixtures($settings);
-                    break;
+                    return;
             }
-
-            return;
         }
+        Log::info(sprintf('MailChimp Campaign - [%s] Schedule constraint not met. Skipping.', $type));
+        echo sprintf("\033[30m [%s] Schedule constraint not met. Skipping.\033[0m\n", $type);
     }
 
     /**
@@ -67,22 +69,21 @@ class RunCampaigns extends Command
     protected function runFixtures($settings)
     {
         $data = $this->validateFixtureCampaignData();
-        if (empty($data)) {
-            Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] No matches to send. Skipping.');
+        if (!empty($data)) {
+            foreach ($settings['campaign_id'] as $locale => $id) {
+                $this->sendFixtureByLocale($locale, $id, $data);
+            }
 
             return;
         }
-
-        foreach ($settings['campaign_id'] as $locale => $id) {
-            /** @var $locale string */
-            /** @var $id string */
-
-            $this->sendFixtureByLocale($locale, $id, $data);
-        }
+        Log::info(sprintf('MailChimp Campaign - [fixtures] No matches to send. Skipping.'));
+        echo sprintf("\033[30m [fixtures] No matches to send. Skipping.\033[0m\n");
     }
 
     protected function sendFixtureByLocale($locale, $id, $data)
     {
+        Log::info(sprintf('MailChimp Campaign - [fixtures] Attempting to send in [%s] campaign [%s].', $locale, $id));
+        echo sprintf("\033[30m [fixtures] [fixtures] Attempting to send in [%s] campaign [%s].\033[0m\n", $locale, $id);
         // Replicate campaign
         $replicate_result = MailChimp::post(sprintf('campaigns/%s/actions/replicate', $id));
         if (!empty($replicate_result) && empty($replicate_result['id'])) {
@@ -111,7 +112,8 @@ class RunCampaigns extends Command
 
         $content_result = MailChimp::put(sprintf('campaigns/%s/content', $replicate_result['id']), ['html' => $html]);
         if (!empty($content_result) && !empty($content_result['type'])) {
-            Repositories\MailCampaignRepository::writeSimpleLog('[fixtures] Error setting campaign content: ' . $content_result['title']);
+            Log::error(sprintf('MailChimp Campaign - [fixtures] Error setting campaign content: %s', $content_result['detail']));
+            echo sprintf("\033[31m [fixtures] Error setting campaign content: %s\033[0m\n", $content_result['detail']);
 
             return;
         }
@@ -126,7 +128,8 @@ class RunCampaigns extends Command
             $log->setAttribute('problem', $send_result['title']);
             $log->setAttribute('message', $send_result['detail']);
 
-            return;
+            Log::error(sprintf('MailChimp Campaign - [fixtures] Error sending campaign: %s', $send_result['detail']));
+            echo sprintf("\033[31m [%s] [fixtures] Error sending campaign: %s\033[0m\n", $send_result['detail']);
         } else {
             $log->setAttribute('success', true);
         }
