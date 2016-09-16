@@ -16,7 +16,10 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [Commands\RunCampaigns::class,];
+    protected $commands = [
+        Commands\RunCampaigns::class,
+        Commands\TestMailer::class,
+    ];
 
     /**
      * Define the application's command schedule.
