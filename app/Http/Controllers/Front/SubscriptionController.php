@@ -50,12 +50,12 @@ class SubscriptionController extends BaseController
             if ($member !== false) {
                 /* update subscriber locally */
                 $repo = new SubscriberRepository($model);
-                $repo->updateMailChimpId($member['id']);
+                $repo->updateMailChimpId($member['unique_email_id']);
 
                 /* send confirmation email */
                 try {
                     Mail::to($model->getAttribute('email'))
-                        ->send(new SubscriptionConfirmation($member['id']));
+                        ->send(new SubscriptionConfirmation());
                 } catch (RequestException $e) {
                     \Log::error('Unable to send email: ' . $e->getMessage());
                 }
@@ -78,37 +78,4 @@ class SubscriptionController extends BaseController
             ->with('interests', $interests);
     }
 
-    public function unsubscribe($key)
-    {
-        $subscriber = SubscriberRepository::unsubscribe($key);
-        if ($subscriber) {
-            /* send to MailChimp */
-            $result = MailChimp::unsubscribeMember($subscriber->getAttributes());
-
-            if ($result) {
-                return view('subscription.unsubscribe')
-                    ->with('success', true);
-            }
-        }
-
-        return view('subscription.unsubscribe')
-            ->with('success', false);
-    }
-
-    public function webHook(Request $request)
-    {
-        if (!empty($request->input('type'))) {
-            $data = $request->input('data');
-            switch ($request->input('type')) {
-                case 'unsubscribe':
-                    $this->_processHookUnsubscribe($data);
-                    break;
-            }
-        }
-    }
-
-    private function _processHookUnsubscribe($data)
-    {
-        SubscriberRepository::unsubscribeFromMailChimp($data['email']);
-    }
 }

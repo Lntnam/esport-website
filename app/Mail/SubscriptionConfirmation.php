@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
+use URL;
 
 class SubscriptionConfirmation extends BaseMailer
 {
@@ -12,9 +13,12 @@ class SubscriptionConfirmation extends BaseMailer
     /**
      * Create a new message instance.
      */
-    public function __construct($mailChimpId)
+    public function __construct()
     {
-        $this->unsubscriptionKey = $mailChimpId;
+        $this->actionUrl = URL::route('front.fixture.index');
+        $this->actionText = trans('contents.btn-call-fixtures');
+
+        parent::__construct();
     }
 
     /**
@@ -24,10 +28,9 @@ class SubscriptionConfirmation extends BaseMailer
      */
     public function build()
     {
-        /** unsubscription key is the mail chimp id */
+        $this->subject(trans('texts.subscription_confirmation_subject'))
+            ->view('emails.subscription_confirmation');
 
-        $mail = $this->view('emails.subscription_confirmation');
-
-        return $this->buildDefault($mail);
+        return parent::build();
     }
 }

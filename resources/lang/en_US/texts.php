@@ -26,11 +26,9 @@ return ['home-welcome' => 'Welcome to Next Gen&reg;!',
          */
 
         'email_greeting'                    => 'Hi there,',
-        'subscription_confirmation_preview' => 'You have successfully subscribed at Next Gen Vietnam.',
+        'subscription_confirmation_subject' => 'Next Gen DOTA 2 email subscription',
         'subscription_confirmation_content' => 'You have subscribed to receive updates from team Next Gen DOTA 2.',
         'subscription_confirmation_footer'  => 'Next Gen is a private-funded Dota 2 professional team in Vietnam, <br />and is also the strongest.',
         'subscription_confirmation_goodbye' => 'Best regards and best luck.',
         'subscription_error'                => 'We are sorry there was an error, and you did not subscribe successfully.',
-        'unsubscribe_success'               => 'You have successfully unsubscribed at Next Gen Vietnam.',
-        'unsubscribe_failure'               => 'We are sorry there was an error, and you did not unsubscribe successfully.',
 ];

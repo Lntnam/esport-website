@@ -90,6 +90,20 @@ class SubscriberRepository extends BaseRepository
         return false;
     }
 
+    public static function resubscribeFromMailChimp($email)
+    {
+        $model = Subscriber::where('email', $email)
+                           ->first();
+        if (!empty($model)) {
+            $model->setAttribute('status', 'unsubscribed');
+            $model->save();
+
+            return $model;
+        }
+
+        return false;
+    }
+
     public function updateInterests($interests)
     {
         $this->model->setAttribute('interests', json_encode($interests));

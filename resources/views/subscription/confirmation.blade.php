@@ -7,7 +7,7 @@
 @section('content')
     @if (Session::get('success'))
         <p>@lang('texts.email_greeting')</p>
-        <p>@lang('texts.subscription_confirmation_preview')</p>
+        <p>@lang('texts.subscription_confirmation_content')</p>
         <p></p>
         <p>@lang('texts.subscription_confirmation_goodbye')</p>
     @else

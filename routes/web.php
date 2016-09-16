@@ -10,6 +10,13 @@
 |
 */
 
+/**
+ * Webhooks
+ */
+Route::post('hook/mailchimp', function() {
+    return App\WebHook::receiveMailChimp();
+});
+
 /*
  * Backend Group
  * Prefix: /back/

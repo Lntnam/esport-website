@@ -8,21 +8,25 @@ use URL;
 
 class BaseMailer extends Mailable
 {
-    protected $unsubscriptionKey = '';
-
     protected $actionUrl = '';
 
     protected $actionText = '';
 
-    public function build()
+    public function __construct()
     {
-
+        $this->_constructTest();
     }
 
-    public function buildDefault(Mailable $mail)
+    public function build()
     {
-        return $mail->with(['hasAction'      => !empty($this->actionUrl),
-                            'unsubscribeUrl' => URL::route('front.subscription.unsubscribe', ['key' => $this->unsubscriptionKey]),
+        return $this->with(['hasAction'  => !empty($this->actionUrl),
+                            'actionUrl'  => $this->actionUrl,
+                            'actionText' => $this->actionText,
                            ]);
+    }
+
+    protected function _constructTest()
+    {
+
     }
 }

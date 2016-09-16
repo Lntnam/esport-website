@@ -27,7 +27,7 @@ class SubscriberSeeder extends Seeder
 
         foreach ($members as $member) {
             Subscriber::create(array(
-                'mail_chimp_id' => $member['id'],
+                'mail_chimp_id' => $member['unique_email_id'],
                 'name'          => $member['merge_fields']['FNAME'],
                 'email'         => $member['email_address'],
                 'status'        => $member['status'],

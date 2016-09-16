@@ -51,6 +51,50 @@ class MailChimp
         return false;
     }
 
+    public function getSingleMember($email)
+    {
+        $subscriber_hash = $this->mc->subscriberHash($email);
+        $uri = sprintf("lists/%s/members/%s", $this->settings['list_id'], $subscriber_hash);
+        $result = $this->get($uri);
+        if (!empty($result)) {
+            if (isset($result['id'])) {
+                return $result;
+            }
+            $this->error = $result;
+        }
+
+        return false;
+    }
+
+    public function getInterests()
+    {
+        /* Get all interest categories first */
+        $uri = sprintf("lists/%s/interest-categories", $this->settings['list_id']);
+        $result = $this->get($uri);
+        if (!empty($result)) {
+            if (isset($result['categories'])) {
+                $categories = $result['categories'];
+                $interests = [];
+
+                foreach ($categories as $category) {
+                    $uri = sprintf("lists/%s/interest-categories/%s/interests", $this->settings['list_id'], $category['id']);
+                    $result = $this->get($uri);
+                    if (!empty($result)) {
+                        if (isset($result['interests'])) {
+                            $interests = array_merge($interests, $result['interests']);
+                        }
+                    }
+                }
+                return $interests;
+            }
+            else {
+                $this->error = $result;
+            }
+        }
+
+        return false;
+    }
+
     public function createMember($attributes)
     {
         $uri = sprintf("lists/%s/members", $this->settings['list_id']);

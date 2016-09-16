@@ -26,12 +26,10 @@ return ['home-welcome' => 'Chào mừng đến với Next Gen&reg;!',
          */
 
         'email_greeting'                    => 'Chào bạn,',
-        'subscription_confirmation_preview' => 'Bạn đã đăng ký nhận email thành công với Next Gen Việt Nam.',
+        'subscription_confirmation_subject' => 'Đăng ký nhận email từ Next Gen DOTA 2',
         'subscription_confirmation_content' => 'Bạn đã đăng ký nhận email cập nhật của đội Next Gen DOTA 2 Việt Nam.',
         'subscription_confirmation_footer'  => 'Next Gen là một đội tuyển DOTA 2 chuyên nghiệp, độc lập, và tự chủ tài chính ở Việt Nam, 
                                                 <br />và đồng thời cũng là đội mạnh nhất Việt Nam hiện tại.',
         'subscription_confirmation_goodbye' => 'Xin cảm ơn và chúc bạn may mắn.',
         'subscription_error'                => 'Có lỗi đã xảy ra và bạn chưa đăng ký nhận email thành công.',
-        'unsubscribe_success'               => 'Bạn đã hủy nhận email thành công với Next Gen Việt Nam.',
-        'unsubscribe_failure'               => 'Có lỗi đã xảy ra và bạn chưa hủy đăng ký nhận email thành công.',
 ];
