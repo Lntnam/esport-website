@@ -14,7 +14,7 @@ Route::group(['middleware' => 'back', 'prefix' => 'back', 'namespace' => 'Back']
     $module = 'back.';
 
     Route::get('', 'DashboardController@getDashboard')
-         ->name($module . 'home');
+         ->name($module . 'dashboard');
 
     Route::get('profile', function () {
     })

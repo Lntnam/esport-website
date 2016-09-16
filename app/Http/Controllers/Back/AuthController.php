@@ -64,6 +64,6 @@ class AuthController extends BaseController
         $admins = preg_split('/[\s*,\s*]*,+[\s*,\s*]*/', trim(config('settings.root_admin')));
         session(['root' => in_array($userCheck->getAttribute('email'), $admins)]);
 
-        return redirect()->intended(route('back.home'));
+        return redirect()->intended(route('back.dashboard'));
     }
 }

@@ -3,7 +3,7 @@ use DaveJamesMiller\Breadcrumbs\Generator;
 
 // Home / Dashboard
     Breadcrumbs::register('home', function (Generator $breadcrumbs) {
-        $breadcrumbs->push(trans('pages.back_home'), route('back.home'));
+        $breadcrumbs->push(trans('pages.back_dashboard'), route('back.dashboard'));
     });
 
 // Home > Authenticated User Profile

@@ -26,8 +26,7 @@ return [
     | Layout Texts for Back End
     |--------------------------------------------------------------------------
     */
-    'back_home'                         => 'Home',
-    'back_dashboard'                    => 'Dashboard',
+    'back_dashboard'                    => 'Staff Dashboard',
 
     'back_restricted'                   => 'Restricted Area',
 
@@ -48,6 +47,8 @@ return [
     | Layout Texts for Front End
     |--------------------------------------------------------------------------
     */
+
+    'home'                              => 'Trang chủ',
 
     'we_need_support'                   => 'Hãy ủng hộ team',
     'join_supporter_club'               => 'Tham gia CLB ủng hộ',
