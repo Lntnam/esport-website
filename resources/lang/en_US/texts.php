@@ -5,7 +5,7 @@
  * Date: 10/09/2016
  * Time: 22:02
  */
-return ['home-welcome' => 'Welcome to Next Gen&reg;!',
+return ['home-welcome' => 'Welcome to Next Gen<sup>&reg;</sup>!',
 
         'home-intro' => "We are a private-funded Dota 2 professional team in Vietnam.<br /><br />
                                     Despite the lack of sponsorship support, team Next Gen is now considered as the strongest DOTA 2 team in our country,
@@ -17,7 +17,7 @@ return ['home-welcome' => 'Welcome to Next Gen&reg;!',
         'home-contact' => "For further investor relation enquiries, contact us at <strong>+84 888 225122</strong> or send us a message
                                     on our <a href=\"https://www.facebook.com/NextGenDota2/\" target=\"_blank\">Facebook fan page</a>.",
 
-        'home-for-fan' => 'If you are a fan of DOTA 2 or of Next Gen&reg;, do stick along with your dream.',
+        'home-for-fan' => 'If you are a fan of DOTA 2 or of Next Gen<sup>&reg;</sup>, do stick along with your dream.',
 
         'website-under-construction' => 'Website is still under developer, this is like version 1.0 / 1000. You may come back at another time for more information.',
 

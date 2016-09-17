@@ -5,7 +5,7 @@
  * Date: 10/09/2016
  * Time: 22:02
  */
-return ['home-welcome' => 'Chào mừng đến với Next Gen&reg;!',
+return ['home-welcome' => 'Chào mừng đến với Next Gen<sup>&reg;</sup>!',
 
         'home-intro' => "Chúng tôi là một đội tuyển DOTA 2 chuyên nghiệp, độc lập, và tự chủ tài chính ở Việt Nam.<br /><br />
                                     Mặc dù đang thiếu thốn về mặt tài trợ, đội Next Gen hiện nay đang được xem như là đội DOTA 2 mạnh nhất ở Việt Nam,
@@ -17,7 +17,7 @@ return ['home-welcome' => 'Chào mừng đến với Next Gen&reg;!',
         'home-contact' => "Để biết thêm thông tin về việc đầu tư hoặc tài trợ, liên hệ số +84 888 225122 hoặc gởi tin nhắn đến 
                                     <a href=\"https://www.facebook.com/NextGenDota2/\" target=\"_blank\">trang Facebook</a> của chúng tôi.",
 
-        'home-for-fan' => 'Nếu bạn là một fan hâm mộ của DOTA 2 hoặc của Next Gen&reg;, hãy sống cùng với giấc mơ của chúng tôi.',
+        'home-for-fan' => 'Nếu bạn là một fan hâm mộ của DOTA 2 hoặc của Next Gen<sup>&reg;</sup>, hãy sống cùng với giấc mơ của chúng tôi.',
 
         'website-under-construction' => 'Website vẫn đang được xây dựng, đây chỉ là version 1.0 / 1000. Bạn hãy quay lại dịp khác để có nhiều thông tin hơn.',
 

@@ -39,7 +39,7 @@
     <link href="{{ URL::asset('css/font-awesome.min.css') }}" rel="stylesheet">
 
     <!-- Google font -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arimo|Open+Sans:300,400,600&subset=vietnamese" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="{{ URL::asset('css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
@@ -81,7 +81,7 @@
         <div class="navbar-header">
             <a href="{!! \URL::route('front.home') !!}" class="navbar-brand">
                 <img src="{!! URL::asset('images/logo-small.png') !!}" alt="" class="logo-small">
-                <span>{{ \Setting::get('brand-name') }}</span></a>
+                <span>{!! \Setting::get('brand-name')!!}</span></a>
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -89,36 +89,36 @@
             </button>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
-            {{--<ul class="nav navbar-nav navbar-left">--}}
-            {{--<li class="dropdown">--}}
-            {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">--}}
-            {{--<i class="fa fa-heart fa-fw" aria-hidden="true"></i> @lang('pages.we_need_support')--}}
-            {{--<span class="caret"></span></a>--}}
-            {{--<ul class="dropdown-menu" aria-labelledby="themes">--}}
-            {{--<li><a href="#">@lang('pages.join_supporter_club')</a></li>--}}
-            {{--<li><a href="#">@lang('pages.sponsor')</a></li>--}}
-            {{--<li class="divider"></li>--}}
-            {{--<li><a href="#">@lang('pages.buy-badge')</a></li>--}}
-            {{--<li><a href="#">@lang('pages.follow-us')</a></li>--}}
-            {{--<li><a href="#">@lang('pages.spread-the-words')</a></li>--}}
-            {{--</ul>--}}
-            {{--</li>--}}
-            {{--</ul>--}}
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-left">
                 <li>
                     <a href="{!! \URL::route('front.fixture.index') !!}">
                         <i class="fa fa-calendar fa-fw" aria-hidden="true"></i> @lang('pages.fixtures')</a>
                 </li>
+                <li>
+                    <a href="https://gaming.youtube.com/c/NextGenDOTA2VN" target="_blank">
+                        <i class="fa fa-youtube-play fa-fw" aria-hidden="true"></i> @lang('pages.youtube-channel')</a>
+                </li>
+                {{--<li class="dropdown">--}}
+                    {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">--}}
+                        {{--<i class="fa fa-heart fa-fw" aria-hidden="true"></i> @lang('pages.we_need_support')--}}
+                        {{--<span class="caret"></span></a>--}}
+                    {{--<ul class="dropdown-menu" aria-labelledby="themes">--}}
+                        {{--<li><a href="#">@lang('pages.join_supporter_club')</a></li>--}}
+                        {{--<li><a href="#">@lang('pages.sponsor')</a></li>--}}
+                        {{--<li class="divider"></li>--}}
+                        {{--<li><a href="#">@lang('pages.buy-badge')</a></li>--}}
+                        {{--<li><a href="#">@lang('pages.follow-us')</a></li>--}}
+                        {{--<li><a href="#">@lang('pages.spread-the-words')</a></li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
                 {{--<li>--}}
                 {{--<a href="#">--}}
                 {{--<i class="fa fa-users fa-fw" aria-hidden="true"></i> @lang('pages.team-roster')</a>--}}
                 {{--</li>--}}
                 {{--<li><a href="#" target="_blank">--}}
                 {{--<i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i> @lang('pages.get-in-touch')</a></li>--}}
-                <li>
-                    <a href="https://gaming.youtube.com/c/NextGenDOTA2VN" target="_blank">
-                        <i class="fa fa-youtube-play fa-fw" aria-hidden="true"></i> @lang('pages.youtube-channel')</a>
-                </li>
                 {{--<li><a href="https://gaming.youtube.com/c/NextGenDOTA2VN/" target="_blank">--}}
                 {{--<i class="fa fa-youtube fa-lg" aria-hidden="true"></i> @lang('pages.youtube-channel')</a></li>--}}
                 <li><a href="https://www.facebook.com/NextGenDota2/" target="_blank">
