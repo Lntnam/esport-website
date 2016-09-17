@@ -9,7 +9,8 @@
     <div class="col-lg-12">
         <p class="text-info pull-left">@lang('messages.timezone-statement', ['value'=>config('settings.default_timezone_value')])</p>
         <p class="pull-right">
-            <a href="{!! URL::route('front.fixture.rss', ['locale'=>\App::getLocale()]) !!}" title="RSS" target="_blank"><span class="fa fa-rss-square fa-2x"></span></a></p>
+            <a href="{!! URL::route('front.fixture.rss', ['locale'=>\App::getLocale()]) !!}" title="RSS"
+               target="_blank"><span class="fa fa-rss-square fa-2x"></span></a></p>
         <div class="clearfix"></div>
         <div class="row">
             <h2 id="live">@lang('pages.live')</h2>
@@ -26,6 +27,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                <i id="live-loading" class="fa fa-circle-o-notch fa-spin" style="font-size:20px"></i>
                 </tbody>
             </table>
         </div>
@@ -44,6 +46,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                <i id="upcoming-loading" class="fa fa-circle-o-notch fa-spin" style="font-size:20px"></i>
                 </tbody>
             </table>
         </div>
@@ -62,33 +65,38 @@
                 </tr>
                 </thead>
                 <tbody>
+                <i id="recent-loading" class="fa fa-circle-o-notch fa-spin" style="font-size:20px"></i>
                 </tbody>
             </table>
-            <p class="pull-right"><a class="btn btn-default btn-sm" href="{{ URL::route('front.fixture.results') }}"><span class="fa fa-link"></span> @lang('contents.btn_all_results')</a></p>
+            <p class="pull-right"><a class="btn btn-default btn-sm"
+                                     href="{{ URL::route('front.fixture.results') }}"><span
+                            class="fa fa-link"></span> @lang('contents.btn_all_results')</a></p>
         </div>
         <div class="row">
             <h2 id="subscribe">@lang('pages.subscribe')</h2>
             @include('subscription._form', ['interest' => 'd796835b62'])
-    </div>
-@stop
+        </div>
+        @stop
 
-@section('foot')
-    <script type="text/javascript">
-        function load(kind) {
-            $('#' + kind + '-table > tbody').load('{!! URL::route('front.fixture.data', ['kind'=>':kind:']) !!}'.replace(':kind:', kind));
-        }
-        $('document').ready(function () {
-            load('live');
-            load('upcoming');
-            load('recent');
-            startCounter();
-        });
+        @section('foot')
+            <script type="text/javascript">
+                function load(kind) {
+                    $('#' + kind + '-table > tbody').load('{!! URL::route('front.fixture.data', ['kind'=>':kind:']) !!}'.replace(':kind:', kind));
+                }
+                $('document').ready(function () {
+                    load('live');
+                    $('#live-loading').hide();
+                    load('upcoming');
+                    $('#upcoming-loading').hide();
+                    load('recent');
+                    $('#recent-loading').hide();
+                    startCounter();
+                });
 
-        function startCounter() {
-            setTimeout(startCounter, 10000);
-            load('live');
-            load('upcoming');
-            load('recent');
-        }
-    </script>
+                function startCounter() {
+                    setTimeout(startCounter, 10000);
+                    load('upcoming');
+                    load('recent');
+                }
+            </script>
 @stop
