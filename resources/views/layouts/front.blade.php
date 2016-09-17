@@ -39,7 +39,7 @@
     <link href="{{ URL::asset('css/font-awesome.min.css') }}" rel="stylesheet">
 
     <!-- Google font -->
-    <link href="https://fonts.googleapis.com/css?family=Arimo|Open+Sans:300,400,600&subset=vietnamese" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:300,400,500&subset=vietnamese" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="{{ URL::asset('css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
