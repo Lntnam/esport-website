@@ -27,7 +27,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <i id="live-loading" class="fa fa-circle-o-notch fa-spin" style="font-size:20px"></i>
+                <tr>
+                    <td colspan="7"><i id="live-loading" class="fa fa-circle-o-notch fa-spin"
+                                       style="font-size:20px"></i></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -46,7 +49,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <i id="upcoming-loading" class="fa fa-circle-o-notch fa-spin" style="font-size:20px"></i>
+                <tr>
+                    <td colspan="7"><i id="upcoming-loading" class="fa fa-circle-o-notch fa-spin"
+                                       style="font-size:20px"></i></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -65,7 +71,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <i id="recent-loading" class="fa fa-circle-o-notch fa-spin" style="font-size:20px"></i>
+                <tr>
+                    <td colspan="7"><i id="recent-loading" class="fa fa-circle-o-notch fa-spin"
+                                       style="font-size:20px"></i></td>
+                </tr>
                 </tbody>
             </table>
             <p class="pull-right"><a class="btn btn-default btn-sm"
@@ -76,41 +85,42 @@
             <h2 id="subscribe">@lang('pages.subscribe')</h2>
             @include('subscription._form', ['interest' => 'd796835b62'])
         </div>
-        @stop
+    </div>
+@stop
 
-        @section('foot')
-            <script type="text/javascript">
-               $('document').ready(function () {
-                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'live']) !!}', function(data) {
-                        $('#live-loading').hide();
-                        $('#live-table > tbody').html(data);
-                    });
-                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'upcoming']) !!}', function(data) {
-                        $('#upcoming-loading').hide();
-                        $('#upcoming-table > tbody').html(data);
-                    });
-                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'recent']) !!}', function(data) {
-                        $('#recent-loading').hide();
-                        $('#recent-table > tbody').html(data);
-                    });
+@section('foot')
+    <script type="text/javascript">
+        $('document').ready(function () {
+            $.get('{!! URL::route('front.fixture.data', ['kind'=>'live']) !!}', function (data) {
+                $('#live-loading').hide();
+                $('#live-table > tbody').html(data);
+            });
+            $.get('{!! URL::route('front.fixture.data', ['kind'=>'upcoming']) !!}', function (data) {
+                $('#upcoming-loading').hide();
+                $('#upcoming-table > tbody').html(data);
+            });
+            $.get('{!! URL::route('front.fixture.data', ['kind'=>'recent']) !!}', function (data) {
+                $('#recent-loading').hide();
+                $('#recent-table > tbody').html(data);
+            });
 
-                    startCounter();
-                });
+            startCounter();
+        });
 
-                function startCounter() {
-                    setTimeout(startCounter, 10000);
-                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'live']) !!}', function(data) {
-                        $('#live-loading').hide();
-                        $('#live-table > tbody').html(data);
-                    });
-                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'upcoming']) !!}', function(data) {
-                        $('#upcoming-loading').hide();
-                        $('#upcoming-table > tbody').html(data);
-                    });
-                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'recent']) !!}', function(data) {
-                        $('#recent-loading').hide();
-                        $('#recent-table > tbody').html(data);
-                    });
-                }
-            </script>
+        function startCounter() {
+            setTimeout(startCounter, 10000);
+            $.get('{!! URL::route('front.fixture.data', ['kind'=>'live']) !!}', function (data) {
+                $('#live-loading').hide();
+                $('#live-table > tbody').html(data);
+            });
+            $.get('{!! URL::route('front.fixture.data', ['kind'=>'upcoming']) !!}', function (data) {
+                $('#upcoming-loading').hide();
+                $('#upcoming-table > tbody').html(data);
+            });
+            $.get('{!! URL::route('front.fixture.data', ['kind'=>'recent']) !!}', function (data) {
+                $('#recent-loading').hide();
+                $('#recent-table > tbody').html(data);
+            });
+        }
+    </script>
 @stop
