@@ -38,9 +38,10 @@ return [
     'site_settings'                     => 'Site Settings',
 
     // Action pages
-    'delete'                            => 'Đang Xóa :Model',
-    'create'                            => 'Đang Tạo :Model',
-    'update'                            => 'Đang Cập Nhật :Model',
+    'manage'                            => 'Quản lý :Model',
+    'delete'                            => 'Đang xóa :Model',
+    'create'                            => 'Đang tạo :Model',
+    'update'                            => 'Đang sửa :Model',
 
     /*
     |--------------------------------------------------------------------------

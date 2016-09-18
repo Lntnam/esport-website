@@ -174,6 +174,9 @@
                                 <a href="{!! route('back.staff.index') !!}">@lang('pages.manage_staffs')</a>
                             </li>
                             <li>
+                                <a href="{!! route('back.content_block.index') !!}">@lang('pages.manage', ['model' => trans('contents.content_block')])</a>
+                            </li>
+                            <li>
                                 <a href="{!! route('back.siteSettings') !!}">@lang('pages.site_settings')</a>
                             </li>
                         </ul>
@@ -234,10 +237,8 @@
 
     <div class="clearfix"></div>
     <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <p>Version {{ config('app.version') }}</p>
-            </div>
+        <div class="col-lg-12">
+            <p>Version {{ config('app.version') }}</p>
         </div>
     </footer>
 </div>

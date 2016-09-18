@@ -149,6 +149,38 @@ Route::group(['middleware' => 'back', 'prefix' => 'back', 'namespace' => 'Back']
                  ->name($module . 'doUpdate');
         });
 
+        /*
+         * Manage content blocks
+         */
+
+        Route::group(['prefix' => 'content_block'], function () {
+            $module = 'back.content_block.';
+
+            Route::get('', 'ContentBlockController@index');
+            Route::get('index', 'ContentBlockController@index')
+                 ->name($module . 'index');
+            Route::get('grid_data', "ContentBlockController@data")
+                 ->name($module . 'gridData');
+
+            Route::get('create', 'ContentBlockController@create')
+                 ->name($module . 'create');
+            Route::post('create', 'ContentBlockController@create');
+
+            Route::get('delete/{id}', 'ContentBlockController@delete')
+                 ->name($module . 'delete');
+            Route::post('delete', 'ContentBlockController@delete')
+                 ->name($module . 'doDelete');
+
+            Route::get('update/{id}', 'ContentBlockController@update')
+                 ->name($module . 'update');
+            Route::post('update', 'ContentBlockController@update')
+                 ->name($module . 'doUpdate');
+        });
+
+        /*
+         * Others
+         */
+
         Route::get('site_settings', 'SettingController@getSiteSettings')
              ->name('back.siteSettings');
         Route::post('site_settings', 'SettingController@postSiteSettings');

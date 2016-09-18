@@ -13,6 +13,7 @@ return [
     'match'      => 'match',
     'tournament' => 'tournament',
     'opponent'   => 'opponent',
+    'content_block' => 'content block',
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | RSS
+    | MailChimp Interest Group
     |--------------------------------------------------------------------------
     */
 
@@ -111,4 +112,8 @@ return [
 
     'your_email' => 'Your email address',
     'your_name'  => 'Your name',
+
+    'content_block_key'         => 'Key',
+    'content_block_type'        => 'Type',
+    'content_block_description' => 'Description',
 ];

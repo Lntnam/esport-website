@@ -13,6 +13,7 @@ return [
     'match'      => 'trận đấu',
     'tournament' => 'giải đấu',
     'opponent'   => 'đối thủ',
+    'content_block' => 'content block',
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | RSS
+    | MailChimp Interest Group
     |--------------------------------------------------------------------------
     */
 
@@ -111,4 +112,8 @@ return [
 
     'your_email' => 'Địa chỉ email của bạn',
     'your_name'  => 'Tên của bạn',
+
+    'content_block_key'         => 'Từ Khóa',
+    'content_block_type'        => 'Loại',
+    'content_block_description' => 'Ghi Chú',
 ];
