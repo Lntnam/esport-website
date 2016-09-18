@@ -80,23 +80,37 @@
 
         @section('foot')
             <script type="text/javascript">
-                function load(kind) {
-                    $('#' + kind + '-table > tbody').load('{!! URL::route('front.fixture.data', ['kind'=>':kind:']) !!}'.replace(':kind:', kind));
-                }
-                $('document').ready(function () {
-                    load('live');
-                    $('#live-loading').hide();
-                    load('upcoming');
-                    $('#upcoming-loading').hide();
-                    load('recent');
-                    $('#recent-loading').hide();
+               $('document').ready(function () {
+                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'live']) !!}', function(data) {
+                        $('#live-loading').hide();
+                        $('#live-table > tbody').html(data);
+                    });
+                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'upcoming']) !!}', function(data) {
+                        $('#upcoming-loading').hide();
+                        $('#upcoming-table > tbody').html(data);
+                    });
+                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'recent']) !!}', function(data) {
+                        $('#recent-loading').hide();
+                        $('#recent-table > tbody').html(data);
+                    });
+
                     startCounter();
                 });
 
                 function startCounter() {
                     setTimeout(startCounter, 10000);
-                    load('upcoming');
-                    load('recent');
+                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'live']) !!}', function(data) {
+                        $('#live-loading').hide();
+                        $('#live-table > tbody').html(data);
+                    });
+                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'upcoming']) !!}', function(data) {
+                        $('#upcoming-loading').hide();
+                        $('#upcoming-table > tbody').html(data);
+                    });
+                    $.get('{!! URL::route('front.fixture.data', ['kind'=>'recent']) !!}', function(data) {
+                        $('#recent-loading').hide();
+                        $('#recent-table > tbody').html(data);
+                    });
                 }
             </script>
 @stop
