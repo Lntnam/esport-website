@@ -125,7 +125,7 @@ class MatchController extends BaseController
             return redirect()
                 ->route('back.match.index')
                 ->with('status', 'success')
-                ->with('message', trans('success.updated', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
+                ->with('message', trans('success.delete', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
         }
     }
 }

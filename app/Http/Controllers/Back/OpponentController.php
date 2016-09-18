@@ -73,7 +73,7 @@ class OpponentController extends BaseController
         return redirect()
             ->route('back.opponent.index')
             ->with('status', 'success')
-            ->with('message', trans('success.updated', ['model' => trans('contents.opponent'), 'label' => $model->getAttribute('name')]));
+            ->with('message', trans('success.delete', ['model' => trans('contents.opponent'), 'label' => $model->getAttribute('name')]));
     }
 
     public function update(Request $request, $id = null)

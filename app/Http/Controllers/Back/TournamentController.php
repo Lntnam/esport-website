@@ -108,7 +108,7 @@ class TournamentController extends BaseController
             return redirect()
                 ->route('back.tournament.index')
                 ->with('status', 'success')
-                ->with('message', trans('success.updated', ['model' => trans('contents.tournament'), 'label' => $model->getAttribute('name')]));
+                ->with('message', trans('success.delete', ['model' => trans('contents.tournament'), 'label' => $model->getAttribute('name')]));
         }
     }
 }
