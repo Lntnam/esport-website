@@ -43,22 +43,26 @@ return [
     */
 
     'home'                              => 'Homepage',
+    'about_us'                          => 'About Us',
+    'dota2'                             => 'DotA 2',
+    'league_of_legends'                 => 'League of Legends',
 
-    'we_need_support'                   => 'We need your support',
-    'join_supporter_club'               => 'Join our supporter club',
-    'buy-badge'                         => 'Buy badge',
-    'follow-us'                         => 'Follow us',
-    'spread-the-words'                  => 'Spread the words',
+    'dota2_fanpage'                     => 'DotA 2 Fan Page',
+    'league_fanpage'                    => 'League Fan Page',
+    'support_us'                        => 'Support Us',
 
     'fixtures'                          => 'Fixtures & Results',
     'results'                           => 'All Results',
-    'youtube-channel'                   => 'Stream',
-    'team-roster'                       => 'Team',
-    'sponsor'                           => 'Sponsor',
-    'get-in-touch'                      => 'Get in Touch',
+    'streaming'                         => 'Live Stream',
+    'the_management'                    => 'The Management',
+    'our_missions'                      => 'Our Missions',
 
     'unsubscribe'                       => 'Unsubscribe',
     'subscribe'                         => 'Subscribe',
+
+    'terms_of_use'                      => 'Terms of use',
+    'privacy_policy'                    => 'Privacy Policy',
+    'for_sponsors'                      => 'For Sponsors & Advertisers',
 
     /*
      * Sub headings
@@ -74,5 +78,4 @@ return [
     'upcoming'                          => 'Upcoming',
     'recent'                            => 'Recent',
     'subscribe'                         => 'Receive fixture update via email',
-    'google-calendar'                   => 'On Google Calendar',
 ];

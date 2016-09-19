@@ -50,23 +50,26 @@ return [
     */
 
     'home'                              => 'Trang chủ',
+    'about_us'                          => 'Về Chúng Tôi',
+    'dota2'                             => 'DotA 2',
+    'league_of_legends'                 => 'Liên Minh',
 
-    'we_need_support'                   => 'Hãy ủng hộ team',
-    'join_supporter_club'               => 'Tham gia CLB ủng hộ',
-    'buy-badge'                         => 'Mua hàng lưu niệm',
-    'follow-us'                         => 'Theo chân chúng tôi',
-    'spread-the-words'                  => 'Chia sẻ thông tin',
+    'dota2_fanpage'                     => 'DotA 2 Fan Page',
+    'league_fanpage'                    => 'LMHT Fan Page',
+    'support_us'                        => 'Hỗ Trợ Team',
 
-    'fixtures'                          => 'Lịch đấu & kết quả',
-    'results'                           => 'Tất cả kết quả',
-    'youtube-channel'                   => 'Stream',
-    'team-roster'                       => 'Team',
-    'sponsor'                           => 'Tài trợ',
-    'get-in-touch'                      => 'Liên hệ',
+    'fixtures'                          => 'Lịch Đấu & Kết Quả',
+    'results'                           => 'Tất Cả Kết Quả',
+    'streaming'                         => 'Live Stream',
+    'the_management'                    => 'Ban Điều Hành',
+    'our_missions'                      => 'Nhiệm Vụ',
 
     'unsubscribe'                       => 'Hủy nhận email',
     'subscribe'                         => 'Đăng ký nhận email',
 
+    'terms_of_use'                      => 'Điều khoản sử dụng',
+    'privacy_policy'                           => 'Điều khoản về quyền riêng tư',
+    'for_sponsors'                       => 'Cho nhà tài trợ & quảng cáo',
 
     /*
      * Sub headings
@@ -82,5 +85,4 @@ return [
     'upcoming'                          => 'Sắp tới',
     'recent'                            => 'Đã qua',
     'subscribe'                         => 'Nhận lịch đấu qua email',
-    'google-calendar'                   => 'Nhận lịch đấu qua Google calendar',
 ];

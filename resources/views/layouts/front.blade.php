@@ -79,25 +79,29 @@
 <!-- Navigation -->
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a href="{!! \URL::route('front.home') !!}" class="navbar-brand">
-                <img src="{!! URL::asset('images/logo-small.png') !!}" alt="" class="logo-small">
-                <span>{!! \Setting::get('brand-name')!!}</span></a>
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <a href="{!! \URL::route('front.home') !!}" class="navbar-brand">
+                <span>{!! \Setting::get('brand-name')!!}</span></a>
         </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="#">
-                        <i class="fa fa-user-secret fa-fw" aria-hidden="true"></i> About Us</a>
+                        <img src="{!! URL::asset('images/nextgen.png') !!}"
+                             style="height: 20px; vertical-align: middle"><span> @lang('pages.about_us')</span></a>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
                         <img src="{!! URL::asset('images/Dota2.png') !!}"
-                             style="height: 20px; vertical-align: middle"><span> DotA 2</span>
+                             style="height: 20px; vertical-align: middle"><span> @lang('pages.dota2')</span>
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
                         <li>
@@ -107,35 +111,24 @@
                         <li>
                             <a href="https://gaming.youtube.com/c/NextGenDOTA2VN" target="_blank">
                                 <i class="fa fa-youtube-play fa-fw"
-                                   aria-hidden="true"></i> @lang('pages.youtube-channel')</a>
+                                   aria-hidden="true"></i> @lang('pages.streaming')</a>
                         </li>
                     </ul>
                 </li>
-                {{--<li class="dropdown">--}}
-                {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">--}}
-                {{--<i class="fa fa-heart fa-fw" aria-hidden="true"></i> @lang('pages.we_need_support')--}}
-                {{--<span class="caret"></span></a>--}}
-                {{--<ul class="dropdown-menu" aria-labelledby="themes">--}}
-                {{--<li><a href="#">@lang('pages.join_supporter_club')</a></li>--}}
-                {{--<li><a href="#">@lang('pages.sponsor')</a></li>--}}
-                {{--<li class="divider"></li>--}}
-                {{--<li><a href="#">@lang('pages.buy-badge')</a></li>--}}
-                {{--<li><a href="#">@lang('pages.follow-us')</a></li>--}}
-                {{--<li><a href="#">@lang('pages.spread-the-words')</a></li>--}}
-                {{--</ul>--}}
-                {{--</li>--}}
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
+                        <img src="{!! URL::asset('images/league.png') !!}"
+                             style="height: 20px; vertical-align: middle"><span> @lang('pages.league_of_legends')</span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="themes">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-ellipsis-h fa-fw" aria-hidden="true"></i> Coming soon</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                {{--<li>--}}
-                {{--<a href="#">--}}
-                {{--<i class="fa fa-users fa-fw" aria-hidden="true"></i> @lang('pages.team-roster')</a>--}}
-                {{--</li>--}}
-                {{--<li><a href="#" target="_blank">--}}
-                {{--<i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i> @lang('pages.get-in-touch')</a></li>--}}
-                {{--<li><a href="https://gaming.youtube.com/c/NextGenDOTA2VN/" target="_blank">--}}
-                {{--<i class="fa fa-youtube fa-lg" aria-hidden="true"></i> @lang('pages.youtube-channel')</a></li>--}}
-                <li><a href="https://www.facebook.com/NextGenDota2/" target="_blank">
-                        <i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i></a></li>
                 <li>
                     <select class="selectpicker" data-width="fit">
                         @foreach (config('settings.locales') as $locale=>$details)
@@ -145,22 +138,13 @@
                     </select>
                 </li>
             </ul>
-
         </div>
     </div>
 </div> <!-- / navigation -->
 
-<div class="navbar bannerbar">
-    <div class="container">
-        <div class="row banner">
-            <img src="{!! URL::asset('images/banner.png') !!}">
-        </div>
-    </div>
-</div>
-
 <!-- container -->
 <div class="container">
-    <div class="page-header" id="banner">
+    <div class="page-header">
         <div class="row">
             <div class="col-lg-9 col-md-8 col-sm-7">
                 <h1>@yield("page-heading")</h1>
@@ -173,26 +157,26 @@
 
     <div class="clearfix"></div>
     <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="list-unstyled">
-                    <li class="pull-right"><a href="#top">@lang('contents.btn_back_to_top')</a></li>
-                    <li><a href="#">Terms of use</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Road map</a></li>
-                    <li><a href="https://www.facebook.com/NextGenDota2/" target="_blank">Facebook</a></li>
-                </ul>
-                <p>Next Gen &copy; {{ date('Y') }}. Version {{ config('app.version') }}</p>
-                <p>Created by <a href="https://www.facebook.com/nestor.nam.jay" rel="nofollow">Nam Le</a>. Contact him
-                    at <a href="mailto:me@namle.info">jay@next-gen.vn</a> or visit project's repository at <a
-                            href="https://github.com/lntn/esport-website">GitHub</a></p>
-                <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a> and <a href=""
-                                                                                                  rel="nofollow">Laravel
-                        5</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font
-                        Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.
-                </p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li class="pull-right"><a href="#top">@lang('contents.btn_back_to_top')</a></li>
+                        <li><a href="#">@lang('pages.terms_of_use')</a></li>
+                        <li><a href="#">@lang('pages.privacy_policy')</a></li>
+                        <li><a href="#">@lang('pages.for_sponsors')</a></li>
+                    </ul>
+                    <p>Next Gen &copy; {{ date('Y') }}. Version {{ config('app.version') }}</p>
+                    <p>Created by <a href="https://www.facebook.com/nestor.nam.jay" rel="nofollow">Nam Le</a>. Contact him
+                        at <a href="mailto:me@namle.info">jay@next-gen.vn</a> or visit project's repository at <a
+                                href="https://github.com/lntn/esport-website">GitHub</a></p>
+                    <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a> and <a href=""
+                                                                                                      rel="nofollow">Laravel
+                            5</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font
+                            Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.
+                    </p>
 
+                </div>
             </div>
         </div>
     </footer>

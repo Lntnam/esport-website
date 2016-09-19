@@ -9,7 +9,7 @@ class ContentBlockRepository extends BaseRepository
 {
     protected static $modelClassName = ContentBlock::class;
 
-    protected static $allowedForCreate = ['key', 'type', 'description'];
+    protected static $allowedForCreate = ['key', 'description'];
 
     protected static $allowedForUpdate = ['description'];
 
@@ -24,7 +24,7 @@ class ContentBlockRepository extends BaseRepository
 
     public static function getCreateValidationRules()
     {
-        return ['key' => 'required', 'type' => 'required'];
+        return ['key' => 'required'];
     }
 
     public static function create(array $attributes)
@@ -39,13 +39,18 @@ class ContentBlockRepository extends BaseRepository
         }
         $model->save();
 
+        foreach (config('settings.locales') as $locale => $details) {
+            $model->contents()
+                  ->create(['locale' => $locale, 'content' => '']);
+        }
+
         return $model;
     }
 
     public static function query($sort = 'name', $order = 'asc')
     {
         return ContentBlock::orderBy($sort, $order)
-                       ->get();
+                           ->get();
     }
 
     public function update($attributes)
@@ -58,5 +63,12 @@ class ContentBlockRepository extends BaseRepository
             }
         }
         $this->model->save();
+    }
+
+    public static function load($prefix)
+    {
+        return ContentBlock::where('key', 'like', $prefix . '.%')
+                           ->with('contents')
+                           ->get();
     }
 }

@@ -19,11 +19,6 @@
             </div>
 
             <div class="form-group">
-                <label for="type">@lang('contents.content_block_type')</label>
-                {!! Form::select('type', ['HTML'=>'HTML', 'Markdown'=>'Markdown'], !empty($model) ? $model['type'] : 'HTML', ['class'=>'form-control']) !!}
-            </div>
-
-            <div class="form-group">
                 <label for="description">@lang('contents.content_block_description')</label>
                 <input id="description" type="text" class="form-control" name="description"
                        value="{{ !empty($model) ? $model['description'] : '' }}"/>

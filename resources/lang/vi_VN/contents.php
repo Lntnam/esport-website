@@ -37,9 +37,6 @@ return [
 
     'btn_subscribe' => 'Đăng ký',
 
-    'btn-call-fixtures' => 'Xem lịch đấu & kết quả',
-    'btn-call-stream'   => 'Xem stream',
-
     'btn_all_results'      => 'Xem tất cả kết quả',
     'btn_back_to_fixtures' => 'Quay lại xem lịch đấu',
 
@@ -114,6 +111,5 @@ return [
     'your_name'  => 'Tên của bạn',
 
     'content_block_key'         => 'Từ Khóa',
-    'content_block_type'        => 'Loại',
     'content_block_description' => 'Ghi Chú',
 ];

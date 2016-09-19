@@ -5,22 +5,7 @@
  * Date: 10/09/2016
  * Time: 22:02
  */
-return ['home-welcome' => 'Welcome to Next Gen<sup>&reg;</sup>!',
-
-        'home-intro' => "We are a private-funded professional e-sport organization in Vietnam.<br /><br />
-                                    Team Next Gen is now considered as the strongest <strong>DotA 2</strong> team in the country,
-                                     and we are forming our own <strong>League of Legends</strong> team, which will be announced soon.",
-
-        'home-call-out' => "We hereby call out to all potential advertisers, investors and sponsors, both locally and globally, 
-                                    to assist us in the attempt to bring Vietnamese e-sports to the top tier of professionalism and achievements.",
-
-        'home-contact' => "For further investor relation enquiries, contact us at <strong>+84 888 225122</strong> or drop us an email
-                                    at <a href='mailto:jay@next-gen.vn'>jay@next-gen.vn</a>.",
-
-        'home-for-fan' => 'If you are a fan of <strong>DotA 2</strong>, <strong>League of Legends</strong> or of Next Gen<sup>&reg;</sup>, do stick along with your dream.',
-
-        'website-under-construction' => 'Website is still under developer, this is like version 1.0 / 1000. You may come back at another time for more information.',
-
+return [
         /*
          * Email contents
          */

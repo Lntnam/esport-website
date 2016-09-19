@@ -239,7 +239,8 @@ return [
 
         'CountryList' => \App\Facades\CountryList::class,
         'Setting' => \App\Facades\Setting::class,
-        'MailChimp' => \App\Facades\MailChimp::class
+        'MailChimp' => \App\Facades\MailChimp::class,
+        'ContentBlock' => \App\Facades\ContentBlock::class
     ],
 
 ];

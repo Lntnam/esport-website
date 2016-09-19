@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\ContentBlock;
 use App\CountryList;
 use App\MailChimp;
 use App\Setting;
@@ -39,6 +40,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton('App\Setting', function () {
             return new Setting();
+        });
+
+        $this->app->singleton('App\ContentBlock', function() {
+            return new ContentBlock();
         });
     }
 }

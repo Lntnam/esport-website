@@ -10,6 +10,8 @@ class ContentBlockContent extends Model
 
     protected $touches = ['block'];
 
+    protected $fillable = ['locale', 'content'];
+
     public function block()
     {
         return $this->belongsTo(ContentBlock::class);

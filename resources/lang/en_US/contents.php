@@ -37,9 +37,6 @@ return [
 
     'btn_subscribe' => 'Subscribe',
 
-    'btn-call-fixtures' => 'Check Fixtures & Results',
-    'btn-call-stream'   => 'Watch live stream',
-
     'btn_all_results'      => 'View all past results',
     'btn_back_to_fixtures' => 'Return to fixtures',
 
@@ -114,6 +111,5 @@ return [
     'your_name'  => 'Your name',
 
     'content_block_key'         => 'Key',
-    'content_block_type'        => 'Type',
     'content_block_description' => 'Description',
 ];

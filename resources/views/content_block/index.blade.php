@@ -94,10 +94,6 @@
                 width: 200,
                 title: '@lang('contents.content_block_key')'
             }, {
-                field: 'type',
-                width: 100,
-                title: '@lang('contents.content_block_type')'
-            }, {
                 field: 'description',
                 width: 400,
                 title: '@lang('contents.content_block_description')'

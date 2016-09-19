@@ -16,7 +16,6 @@ class CreateContentBlocksTable extends Migration
         Schema::create('content_blocks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('key', 50)->unique();
-            $table->enum('type', ['HTML', 'Markdown'])->default('html');
             $table->string('description')->nullable();
             $table->timestamps();
         });
