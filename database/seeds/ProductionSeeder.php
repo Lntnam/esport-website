@@ -14,5 +14,7 @@ class ProductionSeeder extends Seeder
         /* No harm to always run these on production */
         $this->call(InterestSeeder::class);
         $this->call(SubscriberSeeder::class);
+        $this->call(ContentBlocksTableSeeder::class);
+        $this->call(ContentBlockContentsTableSeeder::class);
     }
 }
