@@ -18,7 +18,7 @@ class TournamentController extends BaseController
 
     public function index()
     {
-        return view('tournament.manage_tournaments');
+        return view('tournament.manage');
     }
 
     public function ajaxCreate(Request $request)
@@ -34,12 +34,12 @@ class TournamentController extends BaseController
                 return response()->json(new AjaxResponse(true, $tour));
             }
 
-            return response()->json(new AjaxResponse(false, (string)view('tournament.create_tour_modal')
+            return response()->json(new AjaxResponse(false, (string)view('tournament.create_modal')
                 ->with('input', $attributes)
                 ->with('errors', $validator->errors())));
         }
 
-        return view('tournament.create_tour_modal')->with('input', $request->all());
+        return view('tournament.create_modal')->with('input', $request->all());
     }
 
     public function delete(Request $request, $id = null)
@@ -53,7 +53,7 @@ class TournamentController extends BaseController
 
             $deletable = $model->matches_count == 0;
 
-            return view('tournament.delete_tournament')
+            return view('tournament.delete')
                 ->with('model', $model)
                 ->with('deletable', $deletable);
         }
@@ -66,7 +66,7 @@ class TournamentController extends BaseController
         $deletable = $model->matches_count == 0;
 
         if (!$deletable) {
-            return view('tournament.delete_tournament')
+            return view('tournament.delete')
                 ->with('model', $model)
                 ->with('deletable', $deletable);
         }
@@ -87,7 +87,7 @@ class TournamentController extends BaseController
                 abort(404);
             }
 
-            return view('tournament.update_tournament')->with('model', $model);
+            return view('tournament.update')->with('model', $model);
         } else {
             $attributes = $request->all();
             $model = TournamentRepository::read($attributes['id']);
@@ -97,7 +97,7 @@ class TournamentController extends BaseController
 
             $validator = Validator::make($attributes, TournamentRepository::getUpdateValidationRules($model));
             if ($validator->fails()) {
-                return view('tournament.update_tournament')
+                return view('tournament.update')
                     ->with('model', $attributes)
                     ->with('errors', $validator->errors());
             }

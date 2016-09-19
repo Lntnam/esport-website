@@ -24,7 +24,7 @@ class StaffController extends BaseController
 
     public function index()
     {
-        return view('staff.manage_staffs');
+        return view('staff.manage');
     }
 
     public function create(Request $request)
@@ -40,12 +40,12 @@ class StaffController extends BaseController
                     ->with('message', trans('success.created', ['model' => trans('contents.staff'), 'label' => $request->input('name')]));
             }
 
-            return view('staff.create_staff')
+            return view('staff.create')
                 ->with('input', $request->all())
                 ->with('errors', $validator->errors());
         }
 
-        return view('staff.create_staff')->with('input', $request->all());
+        return view('staff.create')->with('input', $request->all());
     }
 
     public function delete(Request $request, $id = null)
@@ -57,7 +57,7 @@ class StaffController extends BaseController
                 abort(404);
             }
 
-            return view('staff.delete_staff')->with('model', $user->getAttributes());
+            return view('staff.delete')->with('model', $user->getAttributes());
         }
 
         $user = UserRepository::read($request->input('id'));
@@ -91,7 +91,7 @@ class StaffController extends BaseController
                 abort(404);
             }
 
-            return view('staff.update_staff')->with('model', $user->getAttributes());
+            return view('staff.update')->with('model', $user->getAttributes());
         } else {
             $user = UserRepository::read($request->input('id'));
             if (!$user) {
@@ -100,7 +100,7 @@ class StaffController extends BaseController
 
             $validator = Validator::make($request->all(), UserRepository::getUpdateValidationRules($user));
             if ($validator->fails()) {
-                return view('staff.update_staff')
+                return view('staff.update')
                     ->with('model', $request->all())
                     ->with('errors', $validator->errors());
             }

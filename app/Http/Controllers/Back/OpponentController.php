@@ -18,7 +18,7 @@ class OpponentController extends BaseController
 
     public function index()
     {
-        return view('opponent.manage_opponents');
+        return view('opponent.manage');
     }
 
     public function ajaxCreate(Request $request)
@@ -31,12 +31,12 @@ class OpponentController extends BaseController
                 return response()->json(new AjaxResponse(true, $team));
             }
 
-            return response()->json(new AjaxResponse(false, (string)view('opponent.create_opponent_modal')
+            return response()->json(new AjaxResponse(false, (string)view('opponent.create_model')
                 ->with('input', $request->all())
                 ->with('errors', $validator->errors())));
         }
 
-        return view('opponent.create_opponent_modal')->with('input', $request->all());
+        return view('opponent.create_model')->with('input', $request->all());
     }
 
     public function delete(Request $request, $id = null)
@@ -50,7 +50,7 @@ class OpponentController extends BaseController
 
             $deletable = $model->matches_count == 0;
 
-            return view('opponent.delete_opponent')
+            return view('opponent.delete')
                 ->with('model', $model)
                 ->with('deletable', $deletable);
         }
@@ -63,7 +63,7 @@ class OpponentController extends BaseController
         $deletable = $model->matches_count == 0;
 
         if (!$deletable) {
-            return view('opponent.delete_opponent')
+            return view('opponent.delete')
                 ->with('model', $model)
                 ->with('deletable', $deletable);
         }
@@ -84,7 +84,7 @@ class OpponentController extends BaseController
                 abort(404);
             }
 
-            return view('opponent.update_opponent')->with('model', $model);
+            return view('opponent.update')->with('model', $model);
         } else {
             $attributes = $request->all();
             $model = OpponentRepository::read($attributes['id']);
@@ -94,7 +94,7 @@ class OpponentController extends BaseController
 
             $validator = Validator::make($attributes, OpponentRepository::getUpdateValidationRules($model));
             if ($validator->fails()) {
-                return view('opponent.update_opponent')
+                return view('opponent.update')
                     ->with('model', $attributes)
                     ->with('errors', $validator->errors());
             }
