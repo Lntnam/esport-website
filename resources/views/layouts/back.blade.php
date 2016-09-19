@@ -152,15 +152,15 @@
                     <ul id="fixtures" class="collapse">
                         <li>
                             <a href="{!! route('back.match.index') !!}"><i
-                                        class="fa fa-fw fa-table"></i> @lang('pages.manage_matches')</a>
+                                        class="fa fa-fw fa-table"></i> @lang('pages.manage', ['model' => trans('contents.match')])</a>
                         </li>
                         <li>
                             <a href="{!! route('back.tournament.index') !!}"><i
-                                        class="fa fa-fw fa-table"></i> @lang('pages.manage_tournaments')</a>
+                                        class="fa fa-fw fa-table"></i> @lang('pages.manage', ['model' => trans('contents.tournament')])</a>
                         </li>
                         <li>
                             <a href="{!! route('back.opponent.index') !!}"><i
-                                        class="fa fa-fw fa-table"></i> @lang('pages.manage_opponents')</a>
+                                        class="fa fa-fw fa-table"></i> @lang('pages.manage', ['model' => trans('contents.opponent')])</a>
                         </li>
                     </ul>
                 </li>
@@ -171,7 +171,7 @@
                             <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="{!! route('back.staff.index') !!}">@lang('pages.manage_staffs')</a>
+                                <a href="{!! route('back.staff.index') !!}">@lang('pages.manage', ['model' => trans('contents.staff')])</a>
                             </li>
                             <li>
                                 <a href="{!! route('back.content_block.index') !!}">@lang('pages.manage', ['model' => trans('contents.content_block')])</a>

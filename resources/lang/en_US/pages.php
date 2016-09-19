@@ -31,7 +31,7 @@ return [
     'site_settings'                     => 'Site Settings',
 
     // Action pages
-    'manage'                            => 'Managae :Model',
+    'manage'                            => 'Manage :Model',
     'delete'                            => 'Deleting :Model',
     'create'                            => 'Creating :Model',
     'update'                            => 'Updating :Model',

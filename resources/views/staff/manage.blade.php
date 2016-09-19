@@ -1,13 +1,13 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.manage_staffs'))
+@section('title', trans('pages.manage', ['model' => trans('contents.staff')]))
 
 @section('head')
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css"/>
 @stop
 
-@section('page-heading', trans('pages.manage_staffs'))
+@section('page-heading', trans('pages.manage', ['model' => trans('contents.staff')]))
 
 @section('breadcrumbs', Breadcrumbs::render('manage_staffs'))
 

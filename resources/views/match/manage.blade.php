@@ -1,12 +1,12 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.manage_matches'))
+@section('title', trans('pages.manage', ['model' => trans('contents.match')]))
 
 @section('head')
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-table.min.css') }}"/>
 @stop
 
-@section('page-heading', trans('pages.manage_matches'))
+@section('page-heading', trans('pages.manage', ['model' => trans('contents.match')]))
 
 @section('breadcrumbs', Breadcrumbs::render('manage_matches'))
 

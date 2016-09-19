@@ -1,12 +1,12 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.manage_tournaments'))
+@section('title', trans('pages.manage', ['model' => trans('contents.tournament')]))
 
 @section('head')
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-table.min.css') }}"/>
 @stop
 
-@section('page-heading', trans('pages.manage_tournaments'))
+@section('page-heading', trans('pages.manage', ['model' => trans('contents.tournament')]))
 
 @section('breadcrumbs', Breadcrumbs::render('manage_tournaments'))
 

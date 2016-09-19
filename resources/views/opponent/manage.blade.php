@@ -1,13 +1,13 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.manage_opponents'))
+@section('title', trans('pages.manage', ['model' => trans('contents.opponent')]))
 
 @section('head')
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-table.min.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/flag-icon.min.css') }}"/>
 @stop
 
-@section('page-heading', trans('pages.manage_opponents'))
+@section('page-heading', trans('pages.manage', ['model' => trans('contents.opponent')]))
 
 @section('breadcrumbs', Breadcrumbs::render('manage_opponents'))
 

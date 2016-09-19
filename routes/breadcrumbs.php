@@ -20,7 +20,7 @@ use DaveJamesMiller\Breadcrumbs\Generator;
 /** Staffs */
     Breadcrumbs::register('manage_staffs', function (Generator $breadcrumbs) {
         $breadcrumbs->parent('home');
-        $breadcrumbs->push(trans('pages.manage_staffs'), route('back.staff.index'));
+        $breadcrumbs->push(trans('pages.manage', ['model' => trans('contents.staff')]), route('back.staff.index'));
     });
     Breadcrumbs::register('create_staff', function (Generator $breadcrumbs) {
         $breadcrumbs->parent('manage_staffs');
@@ -38,7 +38,7 @@ use DaveJamesMiller\Breadcrumbs\Generator;
 /** Matches */
     Breadcrumbs::register('manage_matches', function (Generator $breadcrumbs) {
         $breadcrumbs->parent('home');
-        $breadcrumbs->push(trans('pages.manage_matches'), route('back.match.index'));
+        $breadcrumbs->push(trans('pages.manage', ['model' => trans('contents.match')]), route('back.match.index'));
     });
     Breadcrumbs::register('create_match', function (Generator $breadcrumbs) {
         $breadcrumbs->parent('manage_matches');
@@ -56,7 +56,7 @@ use DaveJamesMiller\Breadcrumbs\Generator;
 /** Tournaments */
 Breadcrumbs::register('manage_tournaments', function (Generator $breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push(trans('pages.manage_tournaments'), route('back.tournament.index'));
+    $breadcrumbs->push(trans('pages.manage', ['model' => trans('contents.tournament')]), route('back.tournament.index'));
 });
 Breadcrumbs::register('update_tournament', function (Generator $breadcrumbs, $model) {
     $breadcrumbs->parent('manage_tournaments');
@@ -70,7 +70,7 @@ Breadcrumbs::register('delete_tournament', function (Generator $breadcrumbs, $mo
 /** Opponents */
 Breadcrumbs::register('manage_opponents', function (Generator $breadcrumbs) {
     $breadcrumbs->parent('home');
-    $breadcrumbs->push(trans('pages.manage_opponents'), route('back.opponent.index'));
+    $breadcrumbs->push(trans('pages.manage', ['model' => trans('contents.opponent')]), route('back.opponent.index'));
 });
 Breadcrumbs::register('update_opponent', function (Generator $breadcrumbs, $model) {
     $breadcrumbs->parent('manage_opponents');

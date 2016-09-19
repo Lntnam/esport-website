@@ -9,10 +9,10 @@ return [
     /*
      * Models
      */
-    'staff'      => 'staff',
-    'match'      => 'match',
-    'tournament' => 'tournament',
-    'opponent'   => 'opponent',
+    'staff'         => 'staff',
+    'match'         => 'match',
+    'tournament'    => 'tournament',
+    'opponent'      => 'opponent',
     'content_block' => 'content block',
 
     /*
