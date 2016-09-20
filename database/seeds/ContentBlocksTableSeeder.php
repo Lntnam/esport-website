@@ -12,8 +12,6 @@ class ContentBlocksTableSeeder extends Seeder
      */
     public function run()
     {
-        
-
         \DB::table('content_blocks')->delete();
         
         \DB::table('content_blocks')->insert(array (
@@ -216,7 +214,5 @@ class ContentBlocksTableSeeder extends Seeder
                 'updated_at' => '2016-09-20 19:56:47',
             ),
         ));
-        
-        
     }
 }

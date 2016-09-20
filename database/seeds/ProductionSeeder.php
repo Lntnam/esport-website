@@ -11,12 +11,12 @@ class ProductionSeeder extends Seeder
      */
     public function run()
     {
-        /* No harm to always run these on production */
-        $this->call(InterestSeeder::class);
-        $this->call(SubscriberSeeder::class);
-
         /* For v0.3 / content block update */
         $this->call(ContentBlocksTableSeeder::class);
         $this->call(ContentBlockContentsTableSeeder::class);
+
+        /* No harm to always run these on production */
+        $this->call(InterestSeeder::class);
+        $this->call(SubscriberSeeder::class);
     }
 }
