@@ -42,7 +42,7 @@ class TestMailer extends Command
             App::setLocale($this->option('locale'));
         }
 
-        $class = $type = $this->argument('class');
+        $class = $this->argument('class');
         if (!empty($class)) {
             $class = 'App\\Mail\\' . $class;
             try {

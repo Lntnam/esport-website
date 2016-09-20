@@ -33,7 +33,7 @@ class SubscriptionController extends BaseController
             }
 
             foreach ($attributes['interests'] as $key => $value) {
-                $attributes['interests'][$key] = ($value == '1' || $value == true);
+                $attributes['interests'][$key] = ($value == '1' || $value === true);
             }
 
             /* bind interest list */

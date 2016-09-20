@@ -68,7 +68,7 @@ class MarkdownFileRepository
 
     }
 
-    public function _generateUntitledFileName()
+    public function generateUntitledFileName()
     {
 
     }

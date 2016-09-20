@@ -8,6 +8,7 @@ use App\MailChimp;
 use App\Setting;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
             return in_array(true, $value, true);
         });
 
-        view()->composer('*', function($view){
+        view()->composer('*', function(View $view){
             $view_name = str_replace('.', '-', $view->getName());
             view()->share('view_name', $view_name);
         });

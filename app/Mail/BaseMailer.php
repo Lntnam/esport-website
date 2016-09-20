@@ -4,7 +4,6 @@
 namespace App\Mail;
 
 use Illuminate\Mail\Mailable;
-use URL;
 
 class BaseMailer extends Mailable
 {
@@ -14,7 +13,7 @@ class BaseMailer extends Mailable
 
     public function __construct()
     {
-        $this->_constructTest();
+        $this->constructTest();
     }
 
     public function build()
@@ -25,7 +24,7 @@ class BaseMailer extends Mailable
                            ]);
     }
 
-    protected function _constructTest()
+    protected function constructTest()
     {
 
     }

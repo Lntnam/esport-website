@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Back;
 use App\AjaxResponse;
 use App\Http\Controllers\Controller as BaseController;
 use App\Repositories\ContentBlockRepository;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Setting;
 use Validator;
 
 class ContentBlockController extends BaseController
@@ -112,7 +112,7 @@ class ContentBlockController extends BaseController
                 ]));
             }
             $block->saveContent($request->input('editabledata'));
-        } catch (Exception $exception) {
+        } catch (QueryException $exception) {
             return response()->json(new AjaxResponse(false, $exception->getMessage()));
         }
 

@@ -14,18 +14,17 @@ class WebHook
         if (!empty($type)) {
             Log::info('MailChimp web hook triggered. Type [' . $type . ']');
             $data = request('data');
-//            Log::debug('data: ' . json_encode($data));
             switch ($type) {
                 case 'unsubscribe':
-                    static::_changeSubscriptionStatus($data, 'unsubscribed');
+                    static::changeSubscriptionStatus($data, 'unsubscribed');
 
                     return;
                 case 'subscribe':
-                    static::_changeSubscriptionStatus($data, 'subscribed');
+                    static::changeSubscriptionStatus($data, 'subscribed');
 
                     return;
                 case 'profile':
-                    static::_changeMergeInfo($data);
+                    static::changeMergeInfo($data);
 
                     return;
                 default:
@@ -36,7 +35,7 @@ class WebHook
         Log::info('MailChimp web hook triggered. Type missing.');
     }
 
-    private static function _changeSubscriptionStatus($data, $status)
+    private static function changeSubscriptionStatus($data, $status)
     {
         $subscriber = Subscriber::where('mail_chimp_id', $data['id'])
                                 ->first();
@@ -48,7 +47,7 @@ class WebHook
         Log::info(sprintf('Subscriber status updated. ID [%s] Email [%s]', $data['id'], $data['email']));
     }
 
-    private static function _changeMergeInfo($data)
+    private static function changeMergeInfo($data)
     {
         $subscriber = Subscriber::where('mail_chimp_id', $data['id'])
                                 ->first();
