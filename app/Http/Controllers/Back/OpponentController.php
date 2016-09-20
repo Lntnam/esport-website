@@ -36,7 +36,7 @@ class OpponentController extends BaseController
                 ->with('errors', $validator->errors())));
         }
 
-        return view('opponent.create_model')->with('input', $request->all());
+        return view('opponent.create_modal')->with('input', $request->all());
     }
 
     public function delete(Request $request, $id = null)
