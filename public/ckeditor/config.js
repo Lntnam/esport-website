@@ -6,6 +6,7 @@
  */
 
 CKEDITOR.editorConfig = function (config) {
+    config.skin = 'bootstrapck';
     config.forcePasteAsPlainText = true;
     config.toolbar = [
         {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
