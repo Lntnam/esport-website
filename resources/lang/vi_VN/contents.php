@@ -9,10 +9,10 @@ return [
     /*
      * Models
      */
-    'staff'      => 'nhân niên',
-    'match'      => 'trận đấu',
-    'tournament' => 'giải đấu',
-    'opponent'   => 'đối thủ',
+    'staff'         => 'nhân niên',
+    'match'         => 'trận đấu',
+    'tournament'    => 'giải đấu',
+    'opponent'      => 'đối thủ',
     'content_block' => 'content block',
 
     /*
@@ -30,8 +30,10 @@ return [
     'btn_close'   => 'Đóng',
     'btn_restore' => 'Phục hồi',
 
-    'btn_create_model' => 'Tạo :model',
-    'modal_add_title'  => 'Tạo :Model',
+    'btn_create_model'  => 'Tạo :model',
+    'btn_live_edit'     => 'Sửa Trực Tiếp',
+    'btn_live_edit_end' => 'Hoàn Tất Sửa Trực Tiếp',
+    'modal_add_title'   => 'Tạo :Model',
 
     'btn_combo_show_all' => 'Hiện toàn bộ',
 
@@ -56,8 +58,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'interest_d796835b62' => 'Lịch đấu & kết quả',
-    'interest_5d5a7db8ef' => 'Sự kiện',
+    'interest_d796835b62' => 'Lịch đấu & kết quả DotA 2',
+    'interest_5d5a7db8ef' => 'Sự kiện DotA 2',
 
     /*
     |--------------------------------------------------------------------------
@@ -111,5 +113,6 @@ return [
     'your_name'  => 'Tên của bạn',
 
     'content_block_key'         => 'Từ Khóa',
+    'content_block_view'        => 'View Name',
     'content_block_description' => 'Ghi Chú',
 ];

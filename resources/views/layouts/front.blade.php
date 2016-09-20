@@ -105,7 +105,7 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
                         <li>
-                            <a href="{!! \URL::route('front.fixture.index') !!}">
+                            <a href="{!! \URL::route('dota2.fixture.index') !!}">
                                 <i class="fa fa-calendar fa-fw" aria-hidden="true"></i> @lang('pages.fixtures')</a>
                         </li>
                         <li>
@@ -147,8 +147,10 @@
     <div class="page-header">
         <div class="row">
             <div class="col-lg-9 col-md-8 col-sm-7">
-                <h1>@yield("page-heading")</h1>
-                <p class="lead">@yield("page-sub-heading")</p>
+                <h1 id="page_header"
+                    data-editable="true">@yield("page-heading")</h1>
+                <p class="lead" id="sub_header"
+                   data-editable="true">@yield("page-sub-heading")</p>
             </div>
         </div>
     </div>
@@ -167,13 +169,15 @@
                         <li><a href="#">@lang('pages.for_sponsors')</a></li>
                     </ul>
                     <p>Next Gen &copy; {{ date('Y') }}. Version {{ config('app.version') }}</p>
-                    <p>Created by <a href="https://www.facebook.com/nestor.nam.jay" rel="nofollow">Nam Le</a>. Contact him
+                    <p>Created by <a href="https://www.facebook.com/nestor.nam.jay" rel="nofollow">Nam Le</a>. Contact
+                        him
                         at <a href="mailto:me@namle.info">jay@next-gen.vn</a> or visit project's repository at <a
                                 href="https://github.com/lntn/esport-website">GitHub</a></p>
                     <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a> and <a href=""
                                                                                                       rel="nofollow">Laravel
                             5</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font
-                            Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.
+                            Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts"
+                                                           rel="nofollow">Google</a>.
                     </p>
 
                 </div>
@@ -190,6 +194,7 @@
 <script src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
 
 @yield('foot')
+<!-- Language selection -->
 <script type="text/javascript">
     $(function () {
         var picker = $('.selectpicker');
@@ -201,5 +206,19 @@
         picker.selectpicker('val', '{{ App::getLocale() }}');
     });
 </script>
+@if (session('admin_edit_page') === true)
+    <script src="{!! URL::asset('ckeditor/ckeditor.js') !!}"></script>
+    <script>
+        var token = '{!! csrf_token() !!}';
+        var postUrl = '{!! route('back.content_block.save', ['view' => $view_name]) !!}';
+        $("[data-editable='true']").each(function () {
+            $(this).attr('contenteditable', 'true');
+        });
+    </script>
+    <div class="btnLiveEdit">
+        <a href="{!! route('back.content_block.live_edit_end') !!}" type="button"
+           class="btn btn-warning">@lang('contents.btn_live_edit_end')</a>
+    </div>
+@endif
 </body>
 </html>

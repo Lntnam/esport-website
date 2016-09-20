@@ -15,9 +15,11 @@ class CreateContentBlocksTable extends Migration
     {
         Schema::create('content_blocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key', 50)->unique();
+            $table->string('view', 50);
+            $table->string('key', 50);
             $table->string('description')->nullable();
             $table->timestamps();
+            $table->unique(['view', 'key']);
         });
     }
 

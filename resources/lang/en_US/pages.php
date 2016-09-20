@@ -38,44 +38,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Layout Texts for Front End
+    | Page title & menu texts for Front End
     |--------------------------------------------------------------------------
     */
 
     'home'                              => 'Homepage',
     'about_us'                          => 'About Us',
     'dota2'                             => 'DotA 2',
+    'fixtures'                          => 'Fixtures',
     'league_of_legends'                 => 'League of Legends',
 
     'dota2_fanpage'                     => 'DotA 2 Fan Page',
     'league_fanpage'                    => 'League Fan Page',
     'support_us'                        => 'Support Us',
 
-    'fixtures'                          => 'Fixtures & Results',
-    'results'                           => 'All Results',
     'streaming'                         => 'Live Stream',
     'the_management'                    => 'The Management',
     'our_missions'                      => 'Our Missions',
 
-    'unsubscribe'                       => 'Unsubscribe',
-    'subscribe'                         => 'Subscribe',
-
     'terms_of_use'                      => 'Terms of use',
     'privacy_policy'                    => 'Privacy Policy',
     'for_sponsors'                      => 'For Sponsors & Advertisers',
-
-    /*
-     * Sub headings
-     */
-
-    'sub_fixtures'                      => 'Our journey to TI 69',
-
-    /*
-     * Internal links
-     */
-
-    'live'                              => 'Live Now',
-    'upcoming'                          => 'Upcoming',
-    'recent'                            => 'Recent',
-    'subscribe'                         => 'Receive fixture update via email',
 ];

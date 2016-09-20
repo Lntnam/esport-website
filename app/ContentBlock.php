@@ -3,44 +3,66 @@
 
 namespace App;
 
-
 use App\Repositories\ContentBlockRepository;
 
 class ContentBlock
 {
     private $cache = [];
 
-    private $page = '';
+    private $view = '';
 
-    public function output($key)
+    public function output($view, $key, ...$args)
     {
-        $page = substr($key, 0, strpos($key, '.'));
-
-        if ($page != $this->page || empty($this->cache)) {
+        if ($view != $this->view || empty($this->cache)) {
             /* Load content for whole page if not cached */
-            $blocks = ContentBlockRepository::load($page);
-            if (!empty($blocks)) {
-                foreach ($blocks as $block) {
-                    $contents = [];
-                    foreach ($block->getAttribute('contents') as $content) {
-                        $contents[$content->getAttribute('locale')] = $content->getAttribute('content');
-                    }
-                    $this->cache[$block->getAttribute('key')] = $contents;
-                }
-            }
-            else {
+            if (!$this->loadToCache($view)) {
                 return $key;
             }
         }
 
         if (isset($this->cache[$key])) {
             $block = $this->cache[$key];
+            $text = $key;
             if (isset($block[\App::getLocale()]))
-                return $block[\App::getLocale()];
+                $text = $block[\App::getLocale()];
+            else if (isset($block[config('app.locale')]))
+                $text = $block[config('app.locale')];
 
-            return $block[config('app.locale')];
+            return sprintf($text, ...$args);
         }
 
         return $key;
+    }
+
+    public function getList($view)
+    {
+        if ($view != $this->view || empty($this->cache)) {
+            /* Load content for whole page if not cached */
+            if (!$this->loadToCache($view)) {
+                return [];
+            }
+        }
+
+        return $this->cache;
+    }
+
+    private function loadToCache($view)
+    {
+        $blocks = ContentBlockRepository::load($view);
+        if (!empty($blocks)) {
+            foreach ($blocks as $block) {
+                $contents = [];
+                foreach ($block->getAttribute('contents') as $content) {
+                    $contents[$content->getAttribute('locale')] = $content->getAttribute('content');
+                }
+                $this->cache[$block->getAttribute('key')] = $contents;
+            }
+
+            $this->view = $view;
+
+            return true;
+        }
+
+        return false;
     }
 }

@@ -13,17 +13,20 @@
         <form role="form" method="post">
             {{ csrf_field() }}
             <div class="form-group">
+                <label for="view">@lang('contents.content_block_view')</label>
+                <input id="view" type="text" class="form-control" name="view"
+                       value="{{ !empty($model) ? $model['view'] : '' }}"/>
+            </div>
+            <div class="form-group">
                 <label for="key">@lang('contents.content_block_key')</label>
                 <input id="key" type="text" class="form-control" name="key"
                        value="{{ !empty($model) ? $model['key'] : '' }}"/>
             </div>
-
             <div class="form-group">
                 <label for="description">@lang('contents.content_block_description')</label>
                 <input id="description" type="text" class="form-control" name="description"
                        value="{{ !empty($model) ? $model['description'] : '' }}"/>
             </div>
-
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">@lang('contents.btn_submit')</button>
                 <button type="reset" class="btn btn-default">@lang('contents.btn_reset')</button>

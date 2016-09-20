@@ -9,7 +9,7 @@ class SiteController extends BaseController
 {
     public function index()
     {
-        return view('front.index');
+        return view('front.home');
     }
 
     public function lang($locale)

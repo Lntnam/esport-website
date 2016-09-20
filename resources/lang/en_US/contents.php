@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nam
- * Date: 02/09/2016
- * Time: 16:53
- */
 return [
     /*
      * Models
@@ -30,13 +24,14 @@ return [
     'btn_close'   => 'Close',
     'btn_restore' => 'Restore',
 
-    'btn_create_model' => 'Create :model',
-    'modal_add_title'  => 'Add new :Model',
+    'btn_create_model'  => 'Create :model',
+    'btn_live_edit'     => 'Live Edit Content',
+    'btn_live_edit_end' => 'Finish Live Edit',
+    'modal_add_title'   => 'Add new :Model',
 
     'btn_combo_show_all' => 'Show all items',
 
-    'btn_subscribe' => 'Subscribe',
-
+    'btn_subscribe'        => 'Subscribe',
     'btn_all_results'      => 'View all past results',
     'btn_back_to_fixtures' => 'Return to fixtures',
 
@@ -56,8 +51,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'interest_d796835b62' => 'Fixtures & results',
-    'interest_5d5a7db8ef' => 'Events',
+    'interest_d796835b62' => 'DotA 2 fixtures & results',
+    'interest_5d5a7db8ef' => 'DotA 2 events',
 
     /*
     |--------------------------------------------------------------------------
@@ -111,5 +106,6 @@ return [
     'your_name'  => 'Your name',
 
     'content_block_key'         => 'Key',
+    'content_block_view'        => 'View Name',
     'content_block_description' => 'Description',
 ];

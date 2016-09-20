@@ -14,9 +14,15 @@ class FixtureController extends BaseController
 {
     public function index()
     {
-        return view('match.fixtures');
+        return view('match.dota2_fixtures');
     }
 
+    /**
+     * Ajax call
+     *
+     * @param $kind
+     * @return $this
+     */
     public function data($kind)
     {
         $matches = [];
@@ -28,7 +34,7 @@ class FixtureController extends BaseController
                 $matches = MatchRepository::getUpcomingMatches();
                 break;
             case 'recent':
-                $matches = MatchRepository::getRecentMatches(config('settings.past_matches_count'));
+                $matches = MatchRepository::getRecentMatches(0, config('settings.past_matches_count'));
                 break;
         }
 
@@ -37,9 +43,34 @@ class FixtureController extends BaseController
 
     public function results()
     {
-        $matches = MatchRepository::getRecentMatches();
+        $matches = MatchRepository::getRecentMatches(0, 20);
 
-        return view('match.fixture_results')->with('matches', $matches);
+        return view('match.dota2_results')
+            ->with('matches', $matches)
+            ->with('hasMore', count($matches) < MatchRepository::getRecentMatchesCount())
+            ->with('offset', 0);
+    }
+
+    /**
+     * Ajax call
+     *
+     * @param $offset
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function moreResults($offset)
+    {
+        $matches = MatchRepository::getRecentMatches($offset, 10);
+
+        $html = view('match/_results')
+            ->with('matches', $matches)
+            ->with('offset', $offset)
+            ->render();
+
+        return response()->json([
+            'html'    => $html,
+            'count'   => count($matches),
+            'hasMore' => count($matches) + $offset < MatchRepository::getRecentMatchesCount(),
+        ]);
     }
 
     public function rss($locale)
@@ -50,7 +81,7 @@ class FixtureController extends BaseController
         $channel = new RSSWriter\Channel();
         $channel->title(trans('contents.channel_title'))
                 ->description(trans('contents.channel_description'))
-                ->url(URL::route('front.fixture.index'))
+                ->url(URL::route('dota2.fixture.index'))
                 ->language($locale)
                 ->ttl(60);
 
@@ -103,7 +134,10 @@ class FixtureController extends BaseController
 
     private function getRssDescription($match, $locale, $type)
     {
-        $desc = (empty($match->opponent) ? 'TBD' : ($match->opponent->name . ' (' . CountryList::getOne($match->opponent->country, $locale) . ') ')) . ', ' . $match->tournament->name;
+        $desc = (empty($match->opponent) ? 'TBD' : ($match->opponent->name .
+                ' (' .
+                CountryList::getOne($match->opponent->country, $locale) .
+                ') ')) . ', ' . $match->tournament->name;
         if ($type == 'live') {
             $desc .= ', ' . trans('contents.live_now');
         }
@@ -116,6 +150,6 @@ class FixtureController extends BaseController
 
     private function getRssUrl($match)
     {
-        return !empty($match->stream) ? $match->stream : URL::route('front.fixture.index') . '#' . $match->id;
+        return !empty($match->stream) ? $match->stream : URL::route('dota2.fixture.index') . '#' . $match->id;
     }
 }

@@ -309,8 +309,8 @@
                                                 </table>
                                                 <br>
                                                 Xem thêm lịch thi đấu và kết quả tại <a
-                                                        href="{{ URL::route('front.fixture.index') }}" target="_blank"
-                                                        style="mso-line-height-rule:exactly; -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%; color:#2BAADF; font-weight:normal; text-decoration:underline">{{ URL::route('front.fixture.index') }}</a><br>
+                                                        href="{{ URL::route('dota2.fixture.index') }}" target="_blank"
+                                                        style="mso-line-height-rule:exactly; -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%; color:#2BAADF; font-weight:normal; text-decoration:underline">{{ URL::route('dota2.fixture.index') }}</a><br>
                                                 <br>
                                                 Đừng quên like Facebook fan page và theo dõi kênh YouTube của team
                                                 nhé.

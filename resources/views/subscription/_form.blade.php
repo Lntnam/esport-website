@@ -1,5 +1,5 @@
 <div class="col-lg-6">
-    <form role="form" method="post" action="{!! URL::route('front.subscription.create') !!}">
+    <form role="form" method="post" action="{!! URL::route('subscription.create') !!}">
         {{ csrf_field() }}
         <input type="hidden" name="interests[{{ $interest }}]" value="1">
         <div class="form-group">
@@ -11,7 +11,7 @@
             <input type="text" name="b_59a9a5aee257480d4f3cbe81e_f848ac684f" tabindex="-1" value="">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success">@lang('contents.btn_subscribe')</button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-envelope-o" aria-hidden="true"></i> @lang('contents.btn_subscribe')</button>
         </div>
     </form>
 </div>

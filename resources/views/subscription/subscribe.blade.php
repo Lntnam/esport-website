@@ -1,8 +1,11 @@
 @extends('layouts.front')
 
-@section('title', trans('pages.subscribe'))
+@section('title', ContentBlock::output($view_name, 'page_header'))
 
-@section('page-heading', trans('pages.subscribe'))
+@section('page-heading', ContentBlock::output($view_name, 'page_header'))
+
+@section('page-sub-heading', ContentBlock::output($view_name, 'sub_header'))
+
 
 @section('head')
     <link href="{{ URL::asset('css/bootstrap-toggle.min.css') }}" rel="stylesheet"/>
@@ -54,7 +57,7 @@
                     <input type="text" name="b_59a9a5aee257480d4f3cbe81e_f848ac684f" tabindex="-1" value="">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success pull-right">@lang('contents.btn_subscribe')</button>
+                    <button type="submit" class="btn btn-success pull-right"><i class="fa fa-envelope-o" aria-hidden="true"></i> @lang('contents.btn_subscribe')</button>
                 </div>
             </form>
         </div>

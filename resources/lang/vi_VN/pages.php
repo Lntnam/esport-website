@@ -45,44 +45,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Layout Texts for Front End
+    | Page title & menu texts for Front End
     |--------------------------------------------------------------------------
     */
 
     'home'                              => 'Trang chủ',
     'about_us'                          => 'Về Chúng Tôi',
     'dota2'                             => 'DotA 2',
+    'fixtures'                          => 'Lịch Đấu',
     'league_of_legends'                 => 'Liên Minh',
 
     'dota2_fanpage'                     => 'DotA 2 Fan Page',
     'league_fanpage'                    => 'LMHT Fan Page',
     'support_us'                        => 'Hỗ Trợ Team',
 
-    'fixtures'                          => 'Lịch Đấu & Kết Quả',
-    'results'                           => 'Tất Cả Kết Quả',
     'streaming'                         => 'Live Stream',
     'the_management'                    => 'Ban Điều Hành',
     'our_missions'                      => 'Nhiệm Vụ',
 
-    'unsubscribe'                       => 'Hủy nhận email',
-    'subscribe'                         => 'Đăng ký nhận email',
-
     'terms_of_use'                      => 'Điều khoản sử dụng',
     'privacy_policy'                           => 'Điều khoản về quyền riêng tư',
     'for_sponsors'                       => 'Cho nhà tài trợ & quảng cáo',
-
-    /*
-     * Sub headings
-     */
-
-    'sub_fixtures'                      => 'Đường đến TI 69',
-
-    /*
-     * Internal links
-     */
-
-    'live'                              => 'Đang diễn ra',
-    'upcoming'                          => 'Sắp tới',
-    'recent'                            => 'Đã qua',
-    'subscribe'                         => 'Nhận lịch đấu qua email',
 ];

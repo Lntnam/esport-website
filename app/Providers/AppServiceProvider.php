@@ -21,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('interests', function($attribute, $value, $parameters, $validator) {
             return in_array(true, $value, true);
         });
+
+        view()->composer('*', function($view){
+            $view_name = str_replace('.', '-', $view->getName());
+            view()->share('view_name', $view_name);
+        });
     }
 
     /**

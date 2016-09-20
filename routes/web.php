@@ -31,3 +31,9 @@ require(base_path() . '/routes/web_frontend.php');
  */
 require(base_path() . '/routes/web_backend.php');
 
+/*
+ * Redirecting old URL
+ */
+Route::get('fixtures', function() {
+    return redirect()->route('dota2.fixture.index');
+});

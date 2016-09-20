@@ -15,6 +15,10 @@ class ProductionSeeder extends Seeder
         $this->call(InterestSeeder::class);
         $this->call(SubscriberSeeder::class);
 
+    }
+
+    private function seedContentBlock()
+    {
         \DB::table('content_blocks')
            ->delete();
 

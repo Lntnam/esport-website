@@ -14,7 +14,6 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         '/back/logout',
         '/back/staffs_grid_data',
-        '/back/staff_update',
         '/hook/mailchimp'
     ];
 }

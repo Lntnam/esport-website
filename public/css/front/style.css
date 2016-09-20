@@ -45,6 +45,23 @@ h6 {
 }
 
 /*
+ * Floating button to stop live edit
+ */
+.btnLiveEdit {
+    position: fixed;
+    right: 0px;
+    top: 100px;
+}
+
+/*
+ * Content editable styles
+ */
+[contenteditable=true]:hover, [contenteditable=true]:focus {
+    outline: 1px dashed darkblue;
+.text-stroke(0);
+}
+
+/*
  * overwrite the default navigation bar collapse trigger to 992
  */
 @media (min-width: 768px) and (max-width: 992px) {
@@ -87,12 +104,4 @@ h6 {
         margin-bottom: 20px;
         padding: 0;
     }
-}
-
-/*
- * Content editable styles
- */
-[contenteditable=true]:hover, [contenteditable=true]:focus {
-    outline: 1px dashed darkblue;
-.text-stroke(0);
 }

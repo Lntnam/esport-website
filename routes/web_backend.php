@@ -173,8 +173,12 @@ Route::group(['middleware' => 'back', 'prefix' => 'back', 'namespace' => 'Back']
 
             Route::get('update/{id}', 'ContentBlockController@update')
                  ->name($module . 'update');
-            Route::post('update', 'ContentBlockController@update')
-                 ->name($module . 'doUpdate');
+            Route::get('live_edit_start', 'ContentBlockController@startEdit')
+                 ->name($module . 'live_edit_start');
+            Route::get('live_edit_end', 'ContentBlockController@stopEdit')
+                 ->name($module . 'live_edit_end');
+            Route::post('save/{view}', 'ContentBlockController@save')
+                 ->name($module . 'save');
         });
 
         /*

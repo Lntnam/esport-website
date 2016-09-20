@@ -62,14 +62,14 @@ class SubscriptionController extends BaseController
                     }
 
                     return redirect()
-                        ->route('front.subscription.confirmation')
+                        ->route('subscription.confirmation')
                         ->with('success', true);
                 }
 
                 \Log::error('Unable to send member to MailChimp: ' . MailChimp::getError()['detail']);
 
                 return redirect()
-                    ->route('front.subscription.confirmation')
+                    ->route('subscription.confirmation')
                     ->with('success', false);
             }
             return view('subscription.subscribe')

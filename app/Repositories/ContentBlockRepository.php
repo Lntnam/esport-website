@@ -3,13 +3,14 @@
 
 namespace App\Repositories;
 
+use App;
 use App\Models\ContentBlock;
 
 class ContentBlockRepository extends BaseRepository
 {
     protected static $modelClassName = ContentBlock::class;
 
-    protected static $allowedForCreate = ['key', 'description'];
+    protected static $allowedForCreate = ['key', 'view', 'description'];
 
     protected static $allowedForUpdate = ['description'];
 
@@ -24,7 +25,7 @@ class ContentBlockRepository extends BaseRepository
 
     public static function getCreateValidationRules()
     {
-        return ['key' => 'required'];
+        return ['key' => 'required', 'view' => 'required'];
     }
 
     public static function create(array $attributes)
@@ -39,17 +40,13 @@ class ContentBlockRepository extends BaseRepository
         }
         $model->save();
 
-        foreach (config('settings.locales') as $locale => $details) {
-            $model->contents()
-                  ->create(['locale' => $locale, 'content' => '']);
-        }
-
         return $model;
     }
 
-    public static function query($sort = 'name', $order = 'asc')
+    public static function query()
     {
-        return ContentBlock::orderBy($sort, $order)
+        return ContentBlock::orderBy('view')
+                           ->orderBy('key')
                            ->get();
     }
 
@@ -65,9 +62,31 @@ class ContentBlockRepository extends BaseRepository
         $this->model->save();
     }
 
-    public static function load($prefix)
+    public function saveContent($content)
     {
-        return ContentBlock::where('key', 'like', $prefix . '.%')
+        $blockContent = $this->model->contents()
+                                    ->firstOrNew(['locale' => App::getLocale()]);
+        $blockContent->setAttribute('content', $content);
+        $blockContent->save();
+    }
+
+    public static function loadOne($view, $key)
+    {
+        $model = ContentBlock::where([
+            ['key', $key],
+            ['view', $view],
+        ])
+                             ->first();
+
+        if (!empty($model))
+            return new ContentBlockRepository($model);
+
+        return null;
+    }
+
+    public static function load($view)
+    {
+        return ContentBlock::where('view', $view)
                            ->with('contents')
                            ->get();
     }

@@ -98,17 +98,24 @@ class MatchRepository extends BaseRepository
                     ->get();
     }
 
-    public static function getRecentMatches($limit = 0)
+    public static function getRecentMatches($offset = 0, $limit = 0)
     {
         $builder = Match::where('over', true)
                         ->with('tournament')
                         ->with('opponent')
-                        ->orderBy('schedule', 'desc');
+                        ->orderBy('schedule', 'desc')
+                        ->offset($offset);
         if ($limit) {
             $builder->limit($limit);
         }
 
         return $builder->get();
+    }
+
+    public static function getRecentMatchesCount()
+    {
+        return Match::where('over', true)
+                    ->count();
     }
 
     public static function getUpcomingMatchesInRange(Carbon $endDate)

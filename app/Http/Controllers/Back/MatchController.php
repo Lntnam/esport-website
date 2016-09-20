@@ -17,6 +17,12 @@ use Validator;
 
 class MatchController extends BaseController
 {
+    /**
+     * Ajax call
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function data(Request $request)
     {
         $params = $this->retrieveSortParams($request, ['sort'=>'schedule', 'order'=>'desc']);

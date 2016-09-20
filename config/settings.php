@@ -62,7 +62,7 @@ return [
                 'every' => 3,
                 'check' => null, // week: N | month: j | year: j n
             ],
-            'time' => '07:00', // H:i, default timezone
+            'time' => '23:00', // H:i, default timezone
         ],
     ],
 ];

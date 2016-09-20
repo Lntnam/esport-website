@@ -1,17 +1,13 @@
 @extends('layouts.front')
 
-@section('title', trans('pages.subscribe'))
+@section('title', ContentBlock::output($view_name, 'page_header'))
 
-@section('page-heading', trans('pages.subscribe'))
+@section('page-heading', ContentBlock::output($view_name, 'page_header'))
 
 @section('content')
     @if (Session::get('success'))
-        <p>@lang('texts.email_greeting')</p>
-        <p>@lang('texts.subscription_confirmation_content')</p>
-        <p></p>
-        <p>@lang('texts.subscription_confirmation_goodbye')</p>
+        <p id="successful_text" data-editable="true">{!! ContentBlock::output($view_name, 'successful_text') !!}</p>
     @else
-        <p>@lang('texts.email_greeting')</p>
-        <p>@lang('texts.subscription_error')</p>
+        <p id="unsuccessful_text" data-editable="true">{!! ContentBlock::output($view_name, 'unsuccessful_text') !!}</p>
     @endif
 @stop

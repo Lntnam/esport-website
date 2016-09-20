@@ -307,9 +307,9 @@
                                                             </table>
                                                             <br>
                                                             For more fixtures &amp; results, visit <a
-                                                                    href="{{ URL::route('front.fixture.index') }}"
+                                                                    href="{{ URL::route('dota2.fixture.index') }}"
                                                                     target="_blank"
-                                                                    style="mso-line-height-rule:exactly; -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%; color:#2BAADF; font-weight:normal; text-decoration:underline">{{ URL::route('front.fixture.index') }}</a><br>
+                                                                    style="mso-line-height-rule:exactly; -ms-text-size-adjust:100%; -webkit-text-size-adjust:100%; color:#2BAADF; font-weight:normal; text-decoration:underline">{{ URL::route('dota2.fixture.index') }}</a><br>
                                                             <br>
                                                             Don't forget to like our Facebook page, and subscribe to our
                                                             YouTube channel.

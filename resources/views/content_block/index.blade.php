@@ -13,10 +13,16 @@
 @section('content')
 
     <div class="clearfix">
-        <p class="pull-right">
-            <button id="btnCreate" type="button" class="btn btn-primary">
-                @lang('contents.btn_create_model', ['model' => trans('contents.content_block')])</button>
-        </p>
+        <ul class="list-inline pull-right">
+            <li>
+                <button id="btnCreate" type="button" class="btn btn-primary">
+                    @lang('contents.btn_create_model', ['model' => trans('contents.content_block')])</button>
+            </li>
+            <li>
+                <a id="btnEdit" type="button" class="btn btn-info" href="{!! route('back.content_block.live_edit_start') !!}">
+                    @lang('contents.btn_live_edit')</a>
+            </li>
+        </ul>
     </div>
 
     <table id="grid"></table>
@@ -72,13 +78,11 @@
             showToggle: true,
             showPaginationSwitch: true,
             pageList: {{ config('settings.table_page_list') }},
-            sortable: true,
+            sortable: false,
 
             // Data Settings //
             idField: 'id',
             uniqueId: 'key',
-            sortName: 'key',
-            sortOrder: 'asc',
             url: '{{ route('back.content_block.gridData') }}',
             escape: true,
 
@@ -89,6 +93,10 @@
                 formatter: function (value, row, index) {
                     return index + 1;
                 }
+            }, {
+                field: 'view',
+                width: 100,
+                title: '@lang('contents.content_block_view')'
             }, {
                 field: 'key',
                 width: 200,

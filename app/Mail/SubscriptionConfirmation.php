@@ -15,7 +15,7 @@ class SubscriptionConfirmation extends BaseMailer
      */
     public function __construct()
     {
-        $this->actionUrl = URL::route('front.fixture.index');
+        $this->actionUrl = URL::route('dota2.fixture.index');
         $this->actionText = trans('contents.btn-call-fixtures');
 
         parent::__construct();

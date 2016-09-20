@@ -9,6 +9,12 @@ use Validator;
 
 class OpponentController extends BaseController
 {
+    /**
+     * Ajax call
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function data(Request $request)
     {
         $params = $this->retrieveSortParams($request);
@@ -21,6 +27,12 @@ class OpponentController extends BaseController
         return view('opponent.manage');
     }
 
+    /**
+     * Ajax call
+     *
+     * @param Request $request
+     * @return $this|\Illuminate\Http\JsonResponse
+     */
     public function ajaxCreate(Request $request)
     {
         if (!empty($request->all())) {
