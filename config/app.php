@@ -174,6 +174,7 @@ return [
         Sofa\Eloquence\ServiceProvider::class,
         Camroncade\Timezone\TimezoneServiceProvider::class,
         Torann\GeoIP\GeoIPServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
 
         /*
          * Application Service Providers...

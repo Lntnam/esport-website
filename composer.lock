@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "53c7df8fea339708b6c0d3dc3b397f25",
-    "content-hash": "ebb12207f7aa300c2ee1a4f4bde8ce5f",
+    "hash": "b7c4ebec8fb8437d5f26e50b0a851fcb",
+    "content-hash": "6ec1a5c15e33aed6120e53ed99a3b98d",
     "packages": [
         {
             "name": "camroncade/timezone",
@@ -1413,6 +1413,55 @@
                 "php"
             ],
             "time": "2016-09-16 12:04:44"
+        },
+        {
+            "name": "orangehill/iseed",
+            "version": "v2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orangehill/iseed.git",
+                "reference": "e94c5a05742ff5e29ddf34a27fcfddbec7712fd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orangehill/iseed/zipball/e94c5a05742ff5e29ddf34a27fcfddbec7712fd4",
+                "reference": "e94c5a05742ff5e29ddf34a27fcfddbec7712fd4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "illuminate/filesystem": "5.x",
+                "mockery/mockery": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Orangehill\\Iseed": "src/"
+                },
+                "classmap": [
+                    "src/Orangehill/Iseed/Exceptions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Tihomir Opacic",
+                    "email": "tihomir.opacic@orangehilldev.com"
+                }
+            ],
+            "description": "Generate a new Laravel database seed file based on data from the existing database table.",
+            "keywords": [
+                "artisan",
+                "generators",
+                "laravel",
+                "seed"
+            ],
+            "time": "2016-09-14 07:59:34"
         },
         {
             "name": "paragonie/random_compat",
