@@ -97,27 +97,27 @@ class OpponentController extends BaseController
             }
 
             return view('opponent.update')->with('model', $model);
-        } else {
-            $attributes = $request->all();
-            $model = OpponentRepository::read($attributes['id']);
-            if (!$model) {
-                abort(404);
-            }
-
-            $validator = Validator::make($attributes, OpponentRepository::getUpdateValidationRules($model));
-            if ($validator->fails()) {
-                return view('opponent.update')
-                    ->with('model', $attributes)
-                    ->with('errors', $validator->errors());
-            }
-
-            $repo = new OpponentRepository($model);
-            $repo->update($attributes);
-
-            return redirect()
-                ->route('back.opponent.index')
-                ->with('status', 'success')
-                ->with('message', trans('success.updated', ['model' => trans('contents.opponent'), 'label' => $model->getAttribute('name')]));
         }
+
+        $attributes = $request->all();
+        $model = OpponentRepository::read($attributes['id']);
+        if (!$model) {
+            abort(404);
+        }
+
+        $validator = Validator::make($attributes, OpponentRepository::getUpdateValidationRules($model));
+        if ($validator->fails()) {
+            return view('opponent.update')
+                ->with('model', $attributes)
+                ->with('errors', $validator->errors());
+        }
+
+        $repo = new OpponentRepository($model);
+        $repo->update($attributes);
+
+        return redirect()
+            ->route('back.opponent.index')
+            ->with('status', 'success')
+            ->with('message', trans('success.updated', ['model' => trans('contents.opponent'), 'label' => $model->getAttribute('name')]));
     }
 }

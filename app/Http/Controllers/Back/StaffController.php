@@ -98,26 +98,26 @@ class StaffController extends BaseController
             }
 
             return view('staff.update')->with('model', $user->getAttributes());
-        } else {
-            $user = UserRepository::read($request->input('id'));
-            if (!$user) {
-                abort(404);
-            }
-
-            $validator = Validator::make($request->all(), UserRepository::getUpdateValidationRules($user));
-            if ($validator->fails()) {
-                return view('staff.update')
-                    ->with('model', $request->all())
-                    ->with('errors', $validator->errors());
-            }
-
-            $repo = new UserRepository($user);
-            $repo->update($request->all());
-
-            return redirect()
-                ->route('back.staff.index')
-                ->with('status', 'success')
-                ->with('message', trans('success.updated', ['model' => trans('contents.staff'), 'label' => $user->name]));
         }
+
+        $user = UserRepository::read($request->input('id'));
+        if (!$user) {
+            abort(404);
+        }
+
+        $validator = Validator::make($request->all(), UserRepository::getUpdateValidationRules($user));
+        if ($validator->fails()) {
+            return view('staff.update')
+                ->with('model', $request->all())
+                ->with('errors', $validator->errors());
+        }
+
+        $repo = new UserRepository($user);
+        $repo->update($request->all());
+
+        return redirect()
+            ->route('back.staff.index')
+            ->with('status', 'success')
+            ->with('message', trans('success.updated', ['model' => trans('contents.staff'), 'label' => $user->name]));
     }
 }

@@ -109,29 +109,29 @@ class MatchController extends BaseController
                 ->with('model', $match)
                 ->with('tournaments', $tournaments)
                 ->with('opponents', $opponents);
-        } else {
-            $attributes = $request->all();
-            $match = MatchRepository::read($attributes['id']);
-            if (!$match) {
-                abort(404);
-            }
-
-            $validator = Validator::make($attributes, MatchRepository::getUpdateValidationRules($match));
-            if ($validator->fails()) {
-                return view('match.update')
-                    ->with('model', $attributes)
-                    ->with('errors', $validator->errors())
-                    ->with('tournaments', $tournaments)
-                    ->with('opponents', $opponents);
-            }
-
-            $repo = new MatchRepository($match);
-            $repo->update($attributes);
-
-            return redirect()
-                ->route('back.match.index')
-                ->with('status', 'success')
-                ->with('message', trans('success.delete', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
         }
+
+        $attributes = $request->all();
+        $match = MatchRepository::read($attributes['id']);
+        if (!$match) {
+            abort(404);
+        }
+
+        $validator = Validator::make($attributes, MatchRepository::getUpdateValidationRules($match));
+        if ($validator->fails()) {
+            return view('match.update')
+                ->with('model', $attributes)
+                ->with('errors', $validator->errors())
+                ->with('tournaments', $tournaments)
+                ->with('opponents', $opponents);
+        }
+
+        $repo = new MatchRepository($match);
+        $repo->update($attributes);
+
+        return redirect()
+            ->route('back.match.index')
+            ->with('status', 'success')
+            ->with('message', trans('success.delete', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
     }
 }

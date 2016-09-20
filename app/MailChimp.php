@@ -87,9 +87,7 @@ class MailChimp
                 }
                 return $interests;
             }
-            else {
-                $this->error = $result;
-            }
+            $this->error = $result;
         }
 
         return false;

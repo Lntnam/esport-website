@@ -19,9 +19,7 @@ class ContentBlockController extends BaseController
      */
     public function data(Request $request)
     {
-        $params = $this->retrieveSortParams($request, ['sort' => 'view,key', 'order' => 'asc']);
-
-        return response()->json(ContentBlockRepository::query($params['sort'], $params['order']));
+        return response()->json(ContentBlockRepository::query());
     }
 
     public function index()

@@ -13,11 +13,8 @@ class ContentBlock
 
     public function output($view, $key, ...$args)
     {
-        if ($view != $this->view || empty($this->cache)) {
-            /* Load content for whole page if not cached */
-            if (!$this->loadToCache($view)) {
-                return $key;
-            }
+        if (!$this->loadToCache($view)) {
+            return $key;
         }
 
         if (isset($this->cache[$key])) {
@@ -36,11 +33,8 @@ class ContentBlock
 
     public function getList($view)
     {
-        if ($view != $this->view || empty($this->cache)) {
-            /* Load content for whole page if not cached */
-            if (!$this->loadToCache($view)) {
-                return [];
-            }
+        if (!$this->loadToCache($view)) {
+            return [];
         }
 
         return $this->cache;
@@ -48,21 +42,25 @@ class ContentBlock
 
     private function loadToCache($view)
     {
-        $blocks = ContentBlockRepository::load($view);
-        if (!empty($blocks)) {
-            foreach ($blocks as $block) {
-                $contents = [];
-                foreach ($block->getAttribute('contents') as $content) {
-                    $contents[$content->getAttribute('locale')] = $content->getAttribute('content');
+        if ($view != $this->view || empty($this->cache)) {
+            $blocks = ContentBlockRepository::load($view);
+            if (!empty($blocks)) {
+                foreach ($blocks as $block) {
+                    $contents = [];
+                    foreach ($block->getAttribute('contents') as $content) {
+                        $contents[$content->getAttribute('locale')] = $content->getAttribute('content');
+                    }
+                    $this->cache[$block->getAttribute('key')] = $contents;
                 }
-                $this->cache[$block->getAttribute('key')] = $contents;
+
+                $this->view = $view;
+
+                return true;
             }
 
-            $this->view = $view;
-
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 }

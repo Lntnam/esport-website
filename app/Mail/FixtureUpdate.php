@@ -14,8 +14,6 @@ class FixtureUpdate extends BaseMailer
 
     /**
      * Create a new message instance.
-     *
-     * @return void
      */
     public function __construct()
     {

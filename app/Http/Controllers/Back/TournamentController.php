@@ -100,27 +100,27 @@ class TournamentController extends BaseController
             }
 
             return view('tournament.update')->with('model', $model);
-        } else {
-            $attributes = $request->all();
-            $model = TournamentRepository::read($attributes['id']);
-            if (!$model) {
-                abort(404);
-            }
-
-            $validator = Validator::make($attributes, TournamentRepository::getUpdateValidationRules($model));
-            if ($validator->fails()) {
-                return view('tournament.update')
-                    ->with('model', $attributes)
-                    ->with('errors', $validator->errors());
-            }
-
-            $repo = new TournamentRepository($model);
-            $repo->update($attributes);
-
-            return redirect()
-                ->route('back.tournament.index')
-                ->with('status', 'success')
-                ->with('message', trans('success.delete', ['model' => trans('contents.tournament'), 'label' => $model->getAttribute('name')]));
         }
+
+        $attributes = $request->all();
+        $model = TournamentRepository::read($attributes['id']);
+        if (!$model) {
+            abort(404);
+        }
+
+        $validator = Validator::make($attributes, TournamentRepository::getUpdateValidationRules($model));
+        if ($validator->fails()) {
+            return view('tournament.update')
+                ->with('model', $attributes)
+                ->with('errors', $validator->errors());
+        }
+
+        $repo = new TournamentRepository($model);
+        $repo->update($attributes);
+
+        return redirect()
+            ->route('back.tournament.index')
+            ->with('status', 'success')
+            ->with('message', trans('success.delete', ['model' => trans('contents.tournament'), 'label' => $model->getAttribute('name')]));
     }
 }
