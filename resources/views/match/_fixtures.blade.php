@@ -27,7 +27,8 @@
             <td align="center">{{ $match->games }}</td>
             <td align="center">
                 @if ($match->over) {{-- Recent --}}
-                {{ $match->for }} - {{ $match->against }}
+                <span class="label label-{!! $match->for > $match->against ? 'success' : ($match->for < $match->against? 'danger' : 'default') !!} btn-lg">{{ $match->for }}
+                    - {{ $match->against }}</span>
                 @elseif ($match->is_past) {{-- Live --}}
                 {{ $match->for }} - {{ $match->against }}
                 @else {{-- Upcoming --}}
@@ -43,15 +44,16 @@
                             <span class="fa fa-play-circle fa-lg"></span>
                         </a>
                     @else
-                        <div class="dropdown" >
+                        <div class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="fa fa-play-circle fa-lg"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width: 0;">
                                 @foreach ($streams as $stream)
-                                <li class="pull-right">
-                                    <a href="{{ $stream }}" target="_blank">Game {{$loop->index+1}} <span class="fa fa-play-circle"></span></a>
-                                </li>
+                                    <li class="pull-right">
+                                        <a href="{{ $stream }}" target="_blank">Game {{$loop->index+1}}
+                                            <span class="fa fa-play-circle"></span></a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>

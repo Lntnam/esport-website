@@ -26,7 +26,8 @@
             </td>
             <td align="center">{{ $match->games }}</td>
             <td align="center">
-                {{ $match->for }} - {{ $match->against }}
+                <span class="label label-{!! $match->for > $match->against ? 'success' : ($match->for < $match->against? 'danger' : 'default') !!} btn-lg">{{ $match->for }}
+                    - {{ $match->against }}</span>
             </td>
             <td align="center">
                 @if (!empty($match->stream))
