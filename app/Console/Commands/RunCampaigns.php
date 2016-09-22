@@ -115,7 +115,7 @@ class RunCampaigns extends Command
             ->render();
 
         $content_result = MailChimp::put(sprintf('campaigns/%s/content', $replicate_result['id']), ['html' => $html]);
-        if ($this->hasError($content_result, 'type')) {
+        if ($this->hasError($content_result)) {
             Log::error(sprintf('MailChimp Campaign - [fixtures] Error setting campaign content: %s', $content_result['detail']));
             echo sprintf("\033[31m [fixtures] Error setting campaign content: %s\033[0m\n", $content_result['detail']);
 
@@ -127,7 +127,7 @@ class RunCampaigns extends Command
 
         // Send & update campaign log
         $send_result = MailChimp::post(sprintf('campaigns/%s/actions/send', $replicate_result['id']));
-        if ($this->hasError($send_result, 'type')) { // ERROR!
+        if ($this->hasError($send_result)) { // ERROR!
             $log->setAttribute('success', false);
             $log->setAttribute('problem', $send_result['title']);
             $log->setAttribute('message', $send_result['detail']);
@@ -187,9 +187,13 @@ class RunCampaigns extends Command
         return false;
     }
 
-    private function hasError($result, $check = 'id')
+    private function hasError(&$result)
     {
-        return !empty($result) && empty($result[$check]);
+        if (empty($result)) {
+            $result = ['type' => 'Empty response', 'detail' => 'Empty response', 'title' => 'Empty response'];
+        }
+
+        return isset($result['type']) && isset($result['detail']);
     }
 
     /**
