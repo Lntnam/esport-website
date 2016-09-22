@@ -120,7 +120,7 @@
 
         /* rendering chart */
         google.charts.load('current', {'packages': ['corechart'], callback: drawVisualization});
-        google.charts.setOnLoadCallback(function () {
+        function drawVisualization () {
             $(function () {
                 data = google.visualization.arrayToDataTable(data);
                 console.log(data);
@@ -160,6 +160,6 @@
                 console.log(chart);
                 chart.draw(data, options);
             });
-        });
+        };
     </script>
 @stop
