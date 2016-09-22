@@ -15,47 +15,48 @@
 
         /* rendering chart */
         google.charts.load('current', {'packages': ['corechart'], callback: drawVisualization});
-        google.charts.setOnLoadCallback(function () {
-            $(function () {
-                data = google.visualization.arrayToDataTable(data);
-                console.log(data);
-                var options = {
+        $(function () {
+            data = google.visualization.arrayToDataTable(data);
+            console.log(data);
+            var options = {
 //            title : 'Monthly Coffee Production by Country',
-                    hAxis: {title: '@lang('contents.month')'},
-                    vAxes: {
-                        0: {
-                            title: '@lang('contents.matches')',
-                            format: '0',
-                            scaleType: 'linear',
-                            gridlines: {
-                                count: 6,
-                            }
-                        },
-                        1: {
-                            title: '@lang('contents.ratio')',
-                            format: 'percent',
-                            viewWindow: {
-                                max: 1,
-                                min: 0
-                            },
-                            gridlines: {
-                                count: 6,
-                            }
+                hAxis: {title: '@lang('contents.month')'},
+                vAxes: {
+                    0: {
+                        title: '@lang('contents.matches')',
+                        format: '0',
+                        scaleType: 'linear',
+                        gridlines: {
+                            count: 6,
                         }
                     },
-                    series: {
-                        0: {type: 'bars', targetAxisIndex: 0},
-                        1: {type: 'bars', targetAxisIndex: 0},
-                        2: {type: 'line', targetAxisIndex: 1}
-                    },
-                    colors: ['#18BC9C', '#E74C3C', '#EC8F6E']
-                };
-                console.log(options);
-                var chart = new google.visualization.ComboChart(document.getElementById('chart'));
-                console.log(chart);
-                chart.draw(data, options);
-            });
+                    1: {
+                        title: '@lang('contents.ratio')',
+                        format: 'percent',
+                        viewWindow: {
+                            max: 1,
+                            min: 0
+                        },
+                        gridlines: {
+                            count: 6,
+                        }
+                    }
+                },
+                series: {
+                    0: {type: 'bars', targetAxisIndex: 0},
+                    1: {type: 'bars', targetAxisIndex: 0},
+                    2: {type: 'line', targetAxisIndex: 1}
+                },
+                colors: ['#18BC9C', '#E74C3C', '#EC8F6E']
+            };
+            console.log(options);
+            var chart = new google.visualization.ComboChart(document.getElementById('chart'));
+            console.log(chart);
+            chart.draw(data, options);
         });
+//        google.charts.setOnLoadCallback(function () {
+//
+//        });
     </script>
 @stop
 
