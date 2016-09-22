@@ -92,7 +92,7 @@ class MatchRepository extends BaseRepository
 
     public static function getUpcomingMatches()
     {
-        return Match::where([['over', false], ['schedule', '>', Carbon::now()
+        return Match::where([['over', false], ['schedule', '>=', Carbon::tomorrow()
                                                                       ->toDateTimeString()]])
                     ->with('tournament')
                     ->with('opponent')
