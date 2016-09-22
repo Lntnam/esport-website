@@ -121,9 +121,10 @@
         /* rendering chart */
         google.charts.load('current', {'packages': ['corechart']});
         google.charts.setOnLoadCallback(drawVisualization);
-
+console.log(google.charts);
         function drawVisualization() {
             data = google.visualization.arrayToDataTable(data);
+            console.log(data);
             var options = {
 //            title : 'Monthly Coffee Production by Country',
                 hAxis: {title: '@lang('contents.month')'},
@@ -155,7 +156,9 @@
                 },
                 colors: ['#18BC9C', '#E74C3C', '#EC8F6E']
             };
+            console.log(options);
             var chart = new google.visualization.ComboChart(document.getElementById('chart'));
+            console.log(chart);
             chart.draw(data, options);
         }
     </script>
