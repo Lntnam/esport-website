@@ -56,7 +56,8 @@ class FixtureController extends BaseController
             'l' => $lAll,
             't' => $wAll + $dAll + $lAll,
         ]];
-        for ($i = 0; $i < Config::get('settings.past_stats_months'); $i++) {
+        $month_count = Config::get('settings.past_stats_months');
+        for ($i = 0; $i < $month_count; $i++) {
             $month = date('n') - $i;
             $w = MatchRepository::getMatchesCountByResult('>', $month);
             $d = MatchRepository::getMatchesCountByResult('=', $month);
