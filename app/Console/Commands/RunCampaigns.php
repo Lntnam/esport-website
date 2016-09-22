@@ -133,7 +133,7 @@ class RunCampaigns extends Command
             $log->setAttribute('message', $send_result['detail']);
 
             Log::error(sprintf('MailChimp Campaign - [fixtures] Error sending campaign: %s', $send_result['detail']));
-            echo sprintf("\033[31m [%s] [fixtures] Error sending campaign: %s\033[0m\n", $send_result['detail']);
+            echo sprintf("\033[31m [fixtures] [fixtures] Error sending campaign: %s\033[0m\n", $send_result['detail']);
         }
         else {
             $log->setAttribute('success', true);
@@ -187,13 +187,9 @@ class RunCampaigns extends Command
         return false;
     }
 
-    private function hasError(&$result)
+    private function hasError($result)
     {
-        if (empty($result)) {
-            $result = ['type' => 'Empty response', 'detail' => 'Empty response', 'title' => 'Empty response'];
-        }
-
-        return isset($result['type']) && isset($result['detail']);
+        return !empty($result) && isset($result['type']) && isset($result['detail']);
     }
 
     /**
