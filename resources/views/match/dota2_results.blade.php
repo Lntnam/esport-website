@@ -24,7 +24,7 @@
                     @for ($i = 0; $i < Config::get('settings.past_stats_months'); $i ++)
                         <th width="100px">{{ strftime('%b', DateTime::createFromFormat('!m', date('n') - $i)->getTimestamp()) }}</th>
                         <script>
-                            data.push([
+                            data.splice(1, 0, [
                                 '{{ strftime('%B', DateTime::createFromFormat('!m', date('n') - $i)->getTimestamp()) }}',
                                 {{ $stats[date('n') - $i]['w'] }},
                                 {{ 0 - $stats[date('n') - $i]['l'] }},
@@ -123,9 +123,7 @@
         function drawVisualization () {
             $(function () {
                 data = google.visualization.arrayToDataTable(data);
-                console.log(data);
                 var options = {
-//            title : 'Monthly Coffee Production by Country',
                     hAxis: {title: '@lang('contents.month')'},
                     vAxes: {
                         0: {
@@ -153,11 +151,10 @@
                         1: {type: 'bars', targetAxisIndex: 0},
                         2: {type: 'line', targetAxisIndex: 1}
                     },
-                    colors: ['#18BC9C', '#E74C3C', '#3498DB']
+                    colors: ['#18BC9C', '#E74C3C', '#3498DB'],
+                    isStacked: true
                 };
-                console.log(options);
                 var chart = new google.visualization.ComboChart(document.getElementById('chart'));
-                console.log(chart);
                 chart.draw(data, options);
             });
         };

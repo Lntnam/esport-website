@@ -13,7 +13,7 @@ return [
      * Front-end view options
      */
     'past_matches_count'    => 20,
-    'past_stats_months'     => 3,
+    'past_stats_months'     => 4,
 
     /*
      * Back-end view options
