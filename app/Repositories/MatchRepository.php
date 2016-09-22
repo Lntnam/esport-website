@@ -93,7 +93,7 @@ class MatchRepository extends BaseRepository
     public static function getUpcomingMatches()
     {
         return Match::where([['over', false], ['schedule', '>=', Carbon::tomorrow()
-                                                                      ->toDateTimeString()]])
+                                                                       ->toDateTimeString()]])
                     ->with('tournament')
                     ->with('opponent')
                     ->orderBy('schedule', 'asc')
@@ -112,6 +112,17 @@ class MatchRepository extends BaseRepository
         }
 
         return $builder->get();
+    }
+
+    public static function getMatchesCountByResult($compare, $month = null)
+    {
+        $builder = Match::whereColumn('for', $compare, 'against')
+                        ->where('over', true);
+        if (!empty($month)) {
+            $builder = $builder->whereMonth('schedule', '=', $month);
+        }
+
+        return $builder->count();
     }
 
     public static function getRecentMatchesCount()

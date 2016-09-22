@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App;
 use Carbon\Carbon;
+use Config;
 use CountryList;
 use App\Http\Controllers\Controller as BaseController;
 use App\Repositories\MatchRepository;
@@ -45,9 +46,34 @@ class FixtureController extends BaseController
     {
         $matches = MatchRepository::getRecentMatches(0, 20);
 
+        /* Get data for summary */
+        $wAll = MatchRepository::getMatchesCountByResult('>');
+        $dAll = MatchRepository::getMatchesCountByResult('=');
+        $lAll = MatchRepository::getMatchesCountByResult('<');
+        $stats = ['all' => [
+            'w' => $wAll,
+            'd' => $dAll,
+            'l' => $lAll,
+            't' => $wAll + $dAll + $lAll,
+        ]];
+        for ($i = 0; $i < Config::get('settings.past_stats_months'); $i++) {
+            $month = date('n') - $i;
+            $w = MatchRepository::getMatchesCountByResult('>', $month);
+            $d = MatchRepository::getMatchesCountByResult('=', $month);
+            $l = MatchRepository::getMatchesCountByResult('<', $month);
+
+            $stats[$month] = [
+                'w' => $w,
+                'd' => $d,
+                'l' => $l,
+                't' => $w + $d + $l,
+            ];
+        }
+
         return view('match.dota2_results')
             ->with('matches', $matches)
             ->with('hasMore', count($matches) < MatchRepository::getRecentMatchesCount())
+            ->with('stats', $stats)
             ->with('offset', 0);
     }
 

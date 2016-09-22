@@ -108,4 +108,13 @@ return [
     'content_block_key'         => 'Key',
     'content_block_view'        => 'View Name',
     'content_block_description' => 'Description',
+
+    'all_time'     => 'All time',
+    'winrate'      => 'Winrate:',
+    'match_played' => 'Match played:',
+    'month'        => 'Month',
+    'wins'         => 'Wins',
+    'losses'       => 'Losses',
+    'ratio'        => 'Ratio',
+    'matches'      => 'Matches',
 ];

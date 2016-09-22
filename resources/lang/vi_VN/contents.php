@@ -115,4 +115,14 @@ return [
     'content_block_key'         => 'Từ Khóa',
     'content_block_view'        => 'View Name',
     'content_block_description' => 'Ghi Chú',
+
+    'all_time'     => 'Tất cả',
+    'winrate'      => 'Winrate:',
+    'match_played' => 'Số trận:',
+    'month'        => 'Tháng',
+    'wins'         => 'Thắng',
+    'losses'       => 'Thua',
+    'ratio'        => 'Tỷ lệ',
+    'matches'      => 'Số trận',
+
 ];
