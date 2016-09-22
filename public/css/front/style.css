@@ -26,6 +26,9 @@ h6 {
     padding-top: 15%;
     padding-bottom: 15%;
 }
+.dropdown-menu li {
+    padding: 4px 0px;
+}
 
 /*
  * language select

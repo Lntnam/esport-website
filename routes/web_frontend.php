@@ -39,4 +39,12 @@ Route::group(['middleware' => 'front', 'namespace' => 'Front'], function () {
     Route::get('subscription/confirmation', function () {
         return view('subscription.confirmation');
     })
-         ->name($module . 'confirmation');});
+         ->name($module . 'confirmation');
+
+    /** Page management */
+    $module = 'pages.';
+    Route::get('/community_club', function () {
+        return view('front.community_club');
+    })
+         ->name($module . 'community_club');
+});

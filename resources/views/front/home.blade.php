@@ -49,12 +49,12 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="{!! URL::asset('js/html5shiv.js') !!}"></script>
-    <script src="{!! URL::asset('js/respond.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! URL::asset('js/html5shiv.js') !!}"></script>
+    <script type="text/javascript" src="{!! URL::asset('js/respond.min.js') !!}"></script>
     <![endif]-->
 
     <link href="{{ URL::asset('css/front/style.css') }}" rel="stylesheet">
-    <script>
+    <script type="text/javascript">
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -92,10 +92,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="{!! route('pages.about') !!}">
-                        <img src="{!! URL::asset('images/nextgen.png') !!}"
-                             style="height: 20px; vertical-align: middle"><span> @lang('pages.about_us')</span></a>
-                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
                         <img src="{!! URL::asset('images/Dota2.png') !!}"
@@ -372,11 +368,11 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="{{ URL::asset('js/jquery-3.1.0.min.js') }}"></script>
-<script src="{{ URL::asset('js/bootstrap-select.min.js') }}"></script>
-<script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/jquery-3.1.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
 <!-- language selection -->
 <script type="text/javascript">
     $(function () {
@@ -390,8 +386,8 @@
     });
 </script>
 @if (session('admin_edit_page') === true)
-    <script src="{!! URL::asset('ckeditor/ckeditor.js') !!}"></script>
-    <script>
+    <script type="text/javascript" src="{!! URL::asset('ckeditor/ckeditor.js') !!}"></script>
+    <script type="text/javascript">
         var token = '{!! csrf_token() !!}';
         var postUrl = '{!! route('back.content_block.save', ['view' => $view_name]) !!}';
         $("[data-editable='true']").each(function () {

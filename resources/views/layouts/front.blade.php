@@ -94,10 +94,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="{!! route('pages.about') !!}">
-                        <img src="{!! URL::asset('images/nextgen.png') !!}"
-                             style="height: 20px; vertical-align: middle"><span> @lang('pages.about_us')</span></a>
-                </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
                         <img src="{!! URL::asset('images/Dota2.png') !!}"
