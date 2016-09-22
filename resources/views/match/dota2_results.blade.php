@@ -7,7 +7,7 @@
 @section('page-sub-heading', ContentBlock::output($view_name, 'sub_header'))
 
 @section('head')
-    <script>
+    <script type="text/javascript">
         var data = [['@lang('contents.month')', '@lang('contents.wins')', '@lang('contents.losses')', '@lang('contents.ratio')']];
         var maxcount = 0;
         var mincount = 0;

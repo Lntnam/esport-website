@@ -49,12 +49,12 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="{!! URL::asset('js/html5shiv.js') !!}"></script>
-    <script src="{!! URL::asset('js/respond.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! URL::asset('js/html5shiv.js') !!}"></script>
+    <script type="text/javascript" src="{!! URL::asset('js/respond.min.js') !!}"></script>
     <![endif]-->
 
     <link href="{{ URL::asset('css/front/style.css') }}" rel="stylesheet">
-    <script>
+    <script type="text/javascript">
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -92,7 +92,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#">
+                <li><a href="{!! route('pages.about') !!}">
                         <img src="{!! URL::asset('images/nextgen.png') !!}"
                              style="height: 20px; vertical-align: middle"><span> @lang('pages.about_us')</span></a>
                 </li>
@@ -122,6 +122,25 @@
                         <li>
                             <a href="#">
                                 <i class="fa fa-ellipsis-h fa-fw" aria-hidden="true"></i> Coming soon</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                        <i class="fa fa-heart-o fa-fw"></i> <span>@lang('pages.support_us')</span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="themes">
+                        <li>
+                            <a href="{!! route('pages.community_club') !!}">
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Next Gen Community Club</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-money" aria-hidden="true"></i> Donation</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-shopping-bag" aria-hidden="true"></i> Buy gifts</a>
                         </li>
                     </ul>
                 </li>
@@ -168,7 +187,8 @@
                                         class="network-name">@lang('pages.league_fanpage')</span></a>
                         </li>
                         <li>
-                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-heart-o fa-fw"></i> <span
+                            <a href="javascript:void(0)"
+                               class="btn btn-default btn-lg"><i class="fa fa-heart-o fa-fw"></i> <span
                                         class="network-name">@lang('pages.support_us')</span></a>
                         </li>
                     </ul>
@@ -265,11 +285,13 @@
                 <ul class="list-inline intro-call-to-actions">
                     <li>
                         <a class="btn btn-success btn" href="javascript:void(0)"><span
-                                    class="network-name"><i class="fa fa-user-secret" aria-hidden="true"></i> @lang('pages.the_management')</span></a>
+                                    class="network-name"><i class="fa fa-user-secret"
+                                                            aria-hidden="true"></i> @lang('pages.the_management')</span></a>
                     </li>
                     <li>
                         <a class="btn btn-info btn" href="javascript:void(0)"><span
-                                    class="network-name"><i class="fa fa-object-ungroup" aria-hidden="true"></i> @lang('pages.our_missions')</span></a>
+                                    class="network-name"><i class="fa fa-object-ungroup"
+                                                            aria-hidden="true"></i> @lang('pages.our_missions')</span></a>
                     </li>
                 </ul>
             </div>
@@ -305,7 +327,9 @@
                         <input type="email" value="" name="email" class="form-control input-lg" id="email"
                                placeholder="@lang('contents.your_email')" style="width: 100%">
                     </div>
-                    <button type="submit" class="btn btn-success input-lg"><i class="fa fa-envelope-o" aria-hidden="true"></i> @lang('contents.btn_subscribe')</button>
+                    <button type="submit" class="btn btn-success input-lg"><i class="fa fa-envelope-o"
+                                                                              aria-hidden="true"></i> @lang('contents.btn_subscribe')
+                    </button>
                     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                     <div style="position: absolute; left: -5000px;" aria-hidden="true">
                         <input type="text" name="b_59a9a5aee257480d4f3cbe81e_f848ac684f" tabindex="-1" value="">
@@ -348,11 +372,11 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="{{ URL::asset('js/jquery-3.1.0.min.js') }}"></script>
-<script src="{{ URL::asset('js/bootstrap-select.min.js') }}"></script>
-<script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/jquery-3.1.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
 <!-- language selection -->
 <script type="text/javascript">
     $(function () {
@@ -366,8 +390,8 @@
     });
 </script>
 @if (session('admin_edit_page') === true)
-    <script src="{!! URL::asset('ckeditor/ckeditor.js') !!}"></script>
-    <script>
+    <script type="text/javascript" src="{!! URL::asset('ckeditor/ckeditor.js') !!}"></script>
+    <script type="text/javascript">
         var token = '{!! csrf_token() !!}';
         var postUrl = '{!! route('back.content_block.save', ['view' => $view_name]) !!}';
         $("[data-editable='true']").each(function () {
