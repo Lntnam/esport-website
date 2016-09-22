@@ -119,7 +119,7 @@
         })
 
         /* rendering chart */
-        google.charts.load('current', {'packages': ['corechart']}, callback: drawVisualization);
+        google.charts.load('current', {'packages': ['corechart'], callback: drawVisualization});
 //        google.charts.setOnLoadCallback(drawVisualization);
 console.log(google.charts);
         function drawVisualization() {
