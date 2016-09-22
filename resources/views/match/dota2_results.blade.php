@@ -14,7 +14,7 @@
         var mincount = 0;
 
         /* rendering chart */
-        google.charts.load('current', {'packages': ['corechart'], callback: drawVisualization});
+        google.charts.load('current', {'packages': ['corechart']});
         $(function () {
             data = google.visualization.arrayToDataTable(data);
             console.log(data);
