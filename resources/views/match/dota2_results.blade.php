@@ -98,7 +98,7 @@
 
 @section('foot')
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script>
+    <script type="text/javascript">
         var rowCount = {{ count($matches) }};
         $('#btnLoadMore').on('click', function () {
             $('#btnLoadMore i').removeClass('fa-caret-square-o-down');
