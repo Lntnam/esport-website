@@ -1,10 +1,10 @@
 <ul class="nav navbar-nav navbar-left">
     <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
             <img src="{!! URL::asset('images/Dota2.png') !!}"
                  style="height: 20px; vertical-align: middle"><span> @lang('pages.dota2')</span>
             <span class="caret"></span></a>
-        <ul class="dropdown-menu" aria-labelledby="themes">
+        <ul class="dropdown-menu" role="menu">
             <li>
                 <a href="{!! \URL::route('dota2.fixture.index') !!}">
                     <i class="fa fa-calendar fa-fw" aria-hidden="true"></i> @lang('pages.fixtures')</a>
@@ -33,6 +33,8 @@
             </li>
         </ul>
     </li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
             <i class="fa fa-video-camera fa-fw"></i> <span>@lang('pages.streaming')</span>
@@ -64,8 +66,6 @@
             </li>
         </ul>
     </li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
     <li>
         <select class="selectpicker" data-width="fit">
             @foreach (config('settings.locales') as $locale=>$details)

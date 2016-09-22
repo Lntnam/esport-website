@@ -77,7 +77,7 @@
 </head>
 <body>
 <!-- Navigation -->
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -93,7 +93,7 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            @include('layouts._navigation')
+            @include('front._navigation')
         </div>
     </div>
 </div> <!-- / navigation -->
