@@ -91,7 +91,7 @@ class MatchController extends BaseController
         return redirect()
             ->route('back.match.index')
             ->with('status', 'success')
-            ->with('message', trans('success.updated', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
+            ->with('message', trans('success.deleted', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
     }
 
     public function update(Request $request, $id = null)
@@ -132,6 +132,6 @@ class MatchController extends BaseController
         return redirect()
             ->route('back.match.index')
             ->with('status', 'success')
-            ->with('message', trans('success.delete', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
+            ->with('message', trans('success.updated', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
     }
 }
