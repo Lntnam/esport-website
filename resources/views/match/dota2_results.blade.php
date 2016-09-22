@@ -20,7 +20,7 @@
             <table id="stat-table" class="table">
                 <thead>
                 <tr>
-                    <th width="150px"></th>
+                    <th width="100px"></th>
                     @for ($i = 0; $i < Config::get('settings.past_stats_months'); $i ++)
                         <th width="100px">{{ strftime('%b', DateTime::createFromFormat('!m', date('n') - $i)->getTimestamp()) }}</th>
                         <script>
