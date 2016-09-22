@@ -25,6 +25,7 @@ class ContentBlock
             else if (isset($block[config('app.locale')]))
                 $text = $block[config('app.locale')];
 
+            if (empty($args)) return $text;
             return sprintf($text, ...$args);
         }
 

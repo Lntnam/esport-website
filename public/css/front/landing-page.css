@@ -18,16 +18,11 @@ h4,
 h5,
 h6 {
     font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    /*font-weight: 700;*/
 }
 
 .topnav {
     font-size: 14px;
-}
-
-.lead {
-    font-size: 18px;
-    font-weight: 400;
 }
 
 .intro-header {

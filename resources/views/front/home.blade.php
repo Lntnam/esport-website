@@ -98,9 +98,7 @@
     <!-- /.container -->
 </div>
 
-
 <!-- Header -->
-<a name="about"></a>
 <div class="intro-header">
     <div class="container">
 
@@ -140,8 +138,6 @@
 <!-- /.intro-header -->
 
 <!-- Page Content -->
-
-<a name="services"></a>
 <div class="content-section-a">
 
     <div class="container">
@@ -171,7 +167,6 @@
                 <img class="img-responsive" src="{!! URL::asset('images/dota2team.jpg') !!}" alt="">
             </div>
         </div>
-
     </div>
     <!-- /.container -->
 
@@ -181,9 +176,8 @@
 <div class="content-section-b">
 
     <div class="container">
-
         <div class="row">
-            <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+            <div class="col-lg-5 col-lg-offset-1 col-sm-push-6 col-sm-6">
                 <h2 class="section-heading" id="heading_lol"
                     data-editable="true">{!! ContentBlock::output($view_name, 'heading_lol') !!}</h2>
                 <p class="lead" id="intro_lol"
@@ -195,11 +189,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+            <div class="col-lg-5 col-sm-pull-6 col-sm-6">
                 <img class="img-responsive" src="{!! URL::asset('images/lolteam.jpg') !!}" alt="">
             </div>
         </div>
-
     </div>
     <!-- /.container -->
 

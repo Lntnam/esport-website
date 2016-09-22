@@ -54,7 +54,7 @@
         <ul class="dropdown-menu" aria-labelledby="themes">
             <li>
                 <a href="{!! route('pages.community_club') !!}">
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Next Gen Community Club</a>
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> @lang('pages.dota2_community_club')</a>
             </li>
             <li>
                 <a href="javascript:void(0)">

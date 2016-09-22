@@ -25,7 +25,9 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('*', function(View $view){
             $view_name = str_replace('.', '-', $view->getName());
+
             view()->share('view_name', $view_name);
+            view()->share('has_header', true);
         });
     }
 
