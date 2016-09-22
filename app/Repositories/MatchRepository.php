@@ -80,7 +80,9 @@ class MatchRepository extends BaseRepository
 
     public static function getLiveMatches()
     {
-        return Match::where([['over', false], ['schedule', '<=', Carbon::now()
+        /* current ly getting Today's matches */
+        return Match::where([['over', false], ['schedule', '<=', Carbon::today()
+                                                                       ->endOfDay()
                                                                        ->toDateTimeString()]])
                     ->with('tournament')
                     ->with('opponent')
