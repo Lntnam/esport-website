@@ -14,8 +14,8 @@
                 <thead>
                 <tr>
                     <th width="40px">#</th>
-                    <th width="200px">@lang('contents.match-date')</th>
-                    <th width="180px">@lang('contents.match-tour')</th>
+                    <th width="150px">@lang('contents.match-date')</th>
+                    <th width="200px">@lang('contents.match-tour')</th>
                     <th width="300px">@lang('contents.match-opponent')</th>
                     <th width="80px" style="text-align: center;">@lang('contents.match-best-of')</th>
                     <th width="100px" style="text-align: center;">@lang('contents.match-result')</th>

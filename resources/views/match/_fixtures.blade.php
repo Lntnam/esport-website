@@ -10,13 +10,22 @@
                 {{ $match->date }}
             </td>
             <td>
-                @if (!empty($match->tournament->bracket))
-                    <a href="{{ $match->tournament->bracket }}" title="bracket"
+                @if (!empty($match->tournament->homepage))
+                    <a href="{{ $match->tournament->homepage }}" title="info"
                        target="_blank">{{ $match->tournament->short }}</a>
                 @else
                     {{ $match->tournament->short }}
                 @endif
-                {{ (!empty($match->round) ? ' - ' . $match->round : '') }}
+
+                @if (!empty($match->round))
+                    -
+                    @if (!empty($match->tournament->bracket))
+                        <a href="{{ $match->tournament->bracket }}" title="bracket"
+                           target="_blank">{{ $match->round }}</a>
+                    @else
+                        {{ $match->round }}
+                    @endif
+                @endif
             </td>
             <td>
                 @if ($match->opponent != null)
