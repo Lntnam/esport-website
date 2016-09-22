@@ -43,8 +43,6 @@ Route::group(['middleware' => 'front', 'namespace' => 'Front'], function () {
 
     /** Page management */
     $module = 'pages.';
-    Route::get('/community_club', function () {
-        return view('front.community_club');
-    })
+    Route::get('community_club', 'PageController@communityClub')
          ->name($module . 'community_club');
 });

@@ -54,6 +54,7 @@ return [
     'dota2_fanpage'                     => 'DotA 2 Fan Page',
     'league_fanpage'                    => 'League Fan Page',
     'support_us'                        => 'Support Us',
+    'dota2_community_club'              => 'DotA 2 Community Club',
 
     'streaming'                         => 'Live Stream',
     'dota2_stream'                      => 'DotA 2 Stream',

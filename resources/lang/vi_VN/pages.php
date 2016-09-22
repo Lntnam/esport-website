@@ -61,6 +61,7 @@ return [
     'dota2_fanpage'                     => 'DotA 2 Fan Page',
     'league_fanpage'                    => 'LMHT Fan Page',
     'support_us'                        => 'Hỗ Trợ Team',
+    'dota2_community_club'              => 'DotA 2 Community Club',
 
     'streaming'                         => 'Live Stream',
     'dota2_stream'                      => 'Kênh DotA 2',

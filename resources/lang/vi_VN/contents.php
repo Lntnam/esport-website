@@ -42,6 +42,9 @@ return [
     'btn_all_results'      => 'Xem tất cả kết quả',
     'btn_back_to_fixtures' => 'Quay lại xem lịch đấu',
 
+    'btn_register' => 'Đăng Ký Ngay',
+    'btn_sign_in'  => 'Đăng Nhập',
+
     /*
     |--------------------------------------------------------------------------
     | RSS

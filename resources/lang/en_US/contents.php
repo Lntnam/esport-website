@@ -35,6 +35,9 @@ return [
     'btn_all_results'      => 'View all past results',
     'btn_back_to_fixtures' => 'Return to fixtures',
 
+    'btn_register' => 'Register Now',
+    'btn_sign_in'  => 'Member Sign In',
+
     /*
     |--------------------------------------------------------------------------
     | RSS
