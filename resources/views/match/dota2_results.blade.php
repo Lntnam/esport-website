@@ -153,7 +153,7 @@
                         1: {type: 'bars', targetAxisIndex: 0},
                         2: {type: 'line', targetAxisIndex: 1}
                     },
-                    colors: ['#18BC9C', '#E74C3C', '#EC8F6E']
+                    colors: ['#18BC9C', '#E74C3C', '#3498DB']
                 };
                 console.log(options);
                 var chart = new google.visualization.ComboChart(document.getElementById('chart'));

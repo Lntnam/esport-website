@@ -53,6 +53,9 @@ return [
     'about_us'                          => 'Về Chúng Tôi',
     'dota2'                             => 'DotA 2',
     'fixtures'                          => 'Lịch Đấu',
+    'results'                           => 'Kết Quả',
+    'achievements'                      => 'Thành Tích',
+
     'league_of_legends'                 => 'Liên Minh',
 
     'dota2_fanpage'                     => 'DotA 2 Fan Page',
@@ -60,6 +63,7 @@ return [
     'support_us'                        => 'Hỗ Trợ Team',
 
     'streaming'                         => 'Live Stream',
+    'dota2_stream'                      => 'Kênh DotA 2',
     'the_management'                    => 'Ban Điều Hành',
     'our_missions'                      => 'Nhiệm Vụ',
 
