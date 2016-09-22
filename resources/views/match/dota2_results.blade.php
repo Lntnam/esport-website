@@ -7,56 +7,10 @@
 @section('page-sub-heading', ContentBlock::output($view_name, 'sub_header'))
 
 @section('head')
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         var data = [['@lang('contents.month')', '@lang('contents.wins')', '@lang('contents.losses')', '@lang('contents.ratio')']];
         var maxcount = 0;
         var mincount = 0;
-
-        /* rendering chart */
-        google.charts.load('current', {'packages': ['corechart']});
-        $(function () {
-            data = google.visualization.arrayToDataTable(data);
-            console.log(data);
-            var options = {
-//            title : 'Monthly Coffee Production by Country',
-                hAxis: {title: '@lang('contents.month')'},
-                vAxes: {
-                    0: {
-                        title: '@lang('contents.matches')',
-                        format: '0',
-                        scaleType: 'linear',
-                        gridlines: {
-                            count: 6,
-                        }
-                    },
-                    1: {
-                        title: '@lang('contents.ratio')',
-                        format: 'percent',
-                        viewWindow: {
-                            max: 1,
-                            min: 0
-                        },
-                        gridlines: {
-                            count: 6,
-                        }
-                    }
-                },
-                series: {
-                    0: {type: 'bars', targetAxisIndex: 0},
-                    1: {type: 'bars', targetAxisIndex: 0},
-                    2: {type: 'line', targetAxisIndex: 1}
-                },
-                colors: ['#18BC9C', '#E74C3C', '#EC8F6E']
-            };
-            console.log(options);
-            var chart = new google.visualization.ComboChart(document.getElementById('chart'));
-            console.log(chart);
-            chart.draw(data, options);
-        });
-//        google.charts.setOnLoadCallback(function () {
-//
-//        });
     </script>
 @stop
 
@@ -143,6 +97,7 @@
 @stop
 
 @section('foot')
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         var rowCount = {{ count($matches) }};
         $('#btnLoadMore').on('click', function () {
@@ -162,5 +117,49 @@
                 }
             });
         })
+
+        /* rendering chart */
+        google.charts.load('current', {'packages': ['corechart'], callback: drawVisualization});
+        google.charts.setOnLoadCallback(function () {
+            $(function () {
+                data = google.visualization.arrayToDataTable(data);
+                console.log(data);
+                var options = {
+//            title : 'Monthly Coffee Production by Country',
+                    hAxis: {title: '@lang('contents.month')'},
+                    vAxes: {
+                        0: {
+                            title: '@lang('contents.matches')',
+                            format: '0',
+                            scaleType: 'linear',
+                            gridlines: {
+                                count: 6,
+                            }
+                        },
+                        1: {
+                            title: '@lang('contents.ratio')',
+                            format: 'percent',
+                            viewWindow: {
+                                max: 1,
+                                min: 0
+                            },
+                            gridlines: {
+                                count: 6,
+                            }
+                        }
+                    },
+                    series: {
+                        0: {type: 'bars', targetAxisIndex: 0},
+                        1: {type: 'bars', targetAxisIndex: 0},
+                        2: {type: 'line', targetAxisIndex: 1}
+                    },
+                    colors: ['#18BC9C', '#E74C3C', '#EC8F6E']
+                };
+                console.log(options);
+                var chart = new google.visualization.ComboChart(document.getElementById('chart'));
+                console.log(chart);
+                chart.draw(data, options);
+            });
+        });
     </script>
 @stop
