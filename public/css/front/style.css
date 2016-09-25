@@ -131,3 +131,15 @@ h6 {
         padding: 0;
     }
 }
+
+@media (max-width: 767px) {
+    th.collapse, td.collapse {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    th.collapse, td.collapse {
+        display: table-cell;
+    }
+}

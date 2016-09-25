@@ -5,7 +5,7 @@
 @else
     @foreach($matches as $match)
         <tr>
-            <td>{{ $loop->iteration }}</td>
+            <td class="collapse">{{ $loop->iteration }}</td>
             <td>
                 {{ $match->date }}
             </td>
@@ -33,7 +33,7 @@
                           class="flag-icon flag-icon-{{ strtolower($match->opponent->country) }}"></span> {{ $match->opponent->name }}
                 @endif
             </td>
-            <td align="center">{{ $match->games }}</td>
+            <td align="center" class="collapse">{{ $match->games }}</td>
             <td align="center">
                 @if ($match->over) {{-- Recent --}}
                 <span class="label label-{!! $match->for > $match->against ? 'success' : ($match->for < $match->against? 'danger' : 'default') !!} btn-lg">{{ $match->for }}
