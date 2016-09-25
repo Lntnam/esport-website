@@ -43,7 +43,7 @@
                     <?php $streams = explode(';', $match->stream) ?>
                     @if (count($streams) == 1)
                         <a href="{{ $match->stream }}" target="_blank">
-                            <span class="fa fa-play-circle fa-lg"></span>
+                            <span class="fa fa-play-circle"></span>
                         </a>
                     @else
                         <div class="dropdown" >
