@@ -48,7 +48,7 @@
                     @else
                         <div class="dropdown" >
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="fa fa-play-circle fa-lg"></span>
+                                <span class="fa fa-play-circle"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width: 0;">
                                 @foreach ($streams as $stream)
