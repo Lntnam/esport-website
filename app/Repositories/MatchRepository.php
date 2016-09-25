@@ -86,7 +86,7 @@ class MatchRepository extends BaseRepository
                                                                        ->toDateTimeString()]])
                     ->with('tournament')
                     ->with('opponent')
-                    ->orderBy('schedule', 'desc')
+                    ->orderBy('schedule', 'asc')
                     ->get();
     }
 
