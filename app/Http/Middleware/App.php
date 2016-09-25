@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App as Application;
+use Carbon\Carbon;
 use Closure;
 use GeoIP;
 use Illuminate\Http\Request;
@@ -48,6 +49,7 @@ class App
         if (!empty($locale)) {
             Application::setLocale($locale);
             setlocale(LC_TIME, $locale);
+            Carbon::setLocale(config('settings.locales')[$locale]['short']);
         }
 
         return $next($request);

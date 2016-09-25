@@ -41,7 +41,11 @@
                 @elseif ($match->is_past) {{-- Live --}}
                 {{ $match->for }} - {{ $match->against }}
                 @else {{-- Upcoming --}}
-                @lang('messages.at') {{ $match->time }}
+                @if ($match->is_today) {{-- today --}}
+                {{ $match->diff }}
+                @else
+                    @lang('messages.at') {{ $match->time }}
+                @endif
                 @endif
             </td>
             <td align="center">

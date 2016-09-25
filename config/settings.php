@@ -44,8 +44,8 @@ return [
      * Localization
      */
     'locales'     => [
-        'vi_VN' => ['title'=>'Vie', 'geo'=>'VN', 'icon'=>'vn'],
-        'en_US' => ['title'=>'Eng', 'geo'=>'US', 'icon'=>'gb'],
+        'vi_VN' => ['title'=>'Vie', 'geo'=>'VN', 'icon'=>'vn', 'short'=>'vi'],
+        'en_US' => ['title'=>'Eng', 'geo'=>'US', 'icon'=>'gb', 'short'=>'en'],
     ],
 
     /*

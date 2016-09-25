@@ -12,7 +12,7 @@ class Match extends Model
 
     protected $searchableColumns = ['tournament.name' => 20, 'tournament.short' => 5, 'opponent.name' => 25, 'opponent.short' => 10,];
 
-    protected $appends = ['date', 'time', 'is_past', 'formatted_schedule', 'diff'];
+    protected $appends = ['date', 'time', 'is_past', 'formatted_schedule', 'diff', 'is_today'];
 
     public function opponent()
     {
@@ -46,9 +46,17 @@ class Match extends Model
         return $schedule->lt(Carbon::now());
     }
 
+    public function getIsTodayAttribute()
+    {
+        $schedule = new Carbon($this->getAttribute('schedule'), config('settings.default_timezone'));
+
+        return $schedule->dayOfYear == Carbon::today(config('settings.default_timezone'))->dayOfYear;
+    }
+
     public function getDiffAttribute()
     {
-        return (new Carbon($this->getAttribute('schedule')))->diffForHumans(Carbon::now());
+        return (new Carbon($this->getAttribute('schedule'), config('settings.default_timezone')))->tz(config('app.timezone'))
+                                                                                                 ->diffForHumans(Carbon::now());
     }
 
     public function getScheduleAttribute($value)
