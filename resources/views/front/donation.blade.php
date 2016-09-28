@@ -12,12 +12,12 @@
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
-                                <a href="#paypal" type="onpage"
+                                <a href="#donation_methods" type="onpage"
                                    class="btn btn-default btn-lg"><i class="fa fa-paypal fa-fw"></i>
                                     PayPal</a>
                             </li>
                             <li>
-                                <a href="#bank_transfer"
+                                <a href="#donation_methods"
                                    class="btn btn-default btn-lg"><i class="fa fa-university fa-fw"></i> <span
                                             class="network-name">@lang('contents.bank_transfer')</span></a>
                             </li>
