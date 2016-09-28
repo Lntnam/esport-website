@@ -103,9 +103,9 @@
                 <div class="col-lg-8 col-lg-offset-2" style="text-align: center">
                     <h3 class="section-heading"
                         id="heading_progress"
-                        data-editable="true">{!! ContentBlock::output($view_name, 'heading_progress') !!}
-                    <small id="heading_progress_small"
-                        data-editable="true">{!! ContentBlock::output($view_name, 'heading_progress_small') !!}</small></h3>
+                        data-editable="true">{!! ContentBlock::output($view_name, 'heading_progress') !!}</h3>
+                    <p class="text-muted" id="heading_progress_small"
+                       data-editable="true">{!! ContentBlock::output($view_name, 'heading_progress_small') !!}</p>
                     <h5 class="section-heading"
                         id="progress_tour_cost"
                         data-editable="true">{!! ContentBlock::output($view_name, 'progress_tour_cost') !!}</h5>
