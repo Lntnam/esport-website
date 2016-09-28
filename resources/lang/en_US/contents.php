@@ -30,6 +30,7 @@ return [
     'modal_add_title'   => 'Add new :Model',
 
     'btn_combo_show_all' => 'Show all items',
+    'btn_load_more'      => 'Show more...',
 
     'btn_subscribe'        => 'Subscribe',
     'btn_all_results'      => 'View all past results',

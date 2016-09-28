@@ -36,6 +36,7 @@ return [
     'modal_add_title'   => 'Tạo :Model',
 
     'btn_combo_show_all' => 'Hiện toàn bộ',
+    'btn_load_more'      => 'Xem thêm...',
 
     'btn_subscribe' => 'Đăng ký',
 
