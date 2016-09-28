@@ -121,6 +121,19 @@
                     </div>
 
                     <h5 class="section-heading"
+                        id="progress_event_cost"
+                        data-editable="true">{!! ContentBlock::output($view_name, 'progress_event_cost') !!}</h5>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info progress-bar-striped"
+                             role="progressbar"
+                             aria-valuenow="{{ Setting::getJSON('donation_values')->event_cost }}"
+                             aria-valuemin="0"
+                             aria-valuemax="{{ Setting::getJSON('donation_targets')->event_cost }}"
+                             style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}%">
+                            <span>{{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}%</span>
+                        </div>
+                    </div>
+                    <h5 class="section-heading"
                               id="progress_month_cost"
                               data-editable="true">{!! ContentBlock::output($view_name, 'progress_month_cost') !!}</h5>
                     <div class="progress">
@@ -134,19 +147,6 @@
                         </div>
                     </div>
 
-                    <h5 class="section-heading"
-                        id="progress_event_cost"
-                        data-editable="true">{!! ContentBlock::output($view_name, 'progress_event_cost') !!}</h5>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-info progress-bar-striped"
-                             role="progressbar"
-                             aria-valuenow="{{ Setting::getJSON('donation_values')->event_cost }}"
-                             aria-valuemin="0"
-                             aria-valuemax="{{ Setting::getJSON('donation_targets')->event_cost }}"
-                             style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}%">
-                            <span>{{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}%</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
