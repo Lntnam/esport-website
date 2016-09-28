@@ -29,6 +29,11 @@ Route::group(['middleware' => 'front', 'namespace' => 'Front'], function () {
              ->name($module . 'results');
         Route::get('fixtures/more_results/{offset}', 'FixtureController@moreResults')
              ->name($module . 'more_results');
+
+        /** others */
+        $module = 'dota2.';
+        Route::get('donation', 'PageController@donation')
+             ->name($module . 'donation');
     });
 
     /** Subscription */

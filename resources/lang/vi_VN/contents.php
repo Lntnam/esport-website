@@ -9,7 +9,7 @@ return [
     /*
      * Models
      */
-    'staff'         => 'nhân niên',
+    'staff'         => 'nhân viên',
     'match'         => 'trận đấu',
     'tournament'    => 'giải đấu',
     'opponent'      => 'đối thủ',
@@ -44,6 +44,8 @@ return [
 
     'btn_register' => 'Đăng Ký Ngay',
     'btn_sign_in'  => 'Đăng Nhập',
+
+    'bank_transfer' => 'Chuyển Khoản',
 
     /*
     |--------------------------------------------------------------------------

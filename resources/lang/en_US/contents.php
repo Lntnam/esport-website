@@ -38,6 +38,8 @@ return [
     'btn_register' => 'Register Now',
     'btn_sign_in'  => 'Member Sign In',
 
+    'bank_transfer' => 'Bank Transfer',
+
     /*
     |--------------------------------------------------------------------------
     | RSS

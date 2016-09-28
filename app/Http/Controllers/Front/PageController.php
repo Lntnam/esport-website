@@ -11,4 +11,9 @@ class PageController extends BaseController
     {
         return view('front.community_club')->with('has_header', false);
     }
+
+    public function donation()
+    {
+        return view('front.donation')->with('has_header', false);
+    }
 }

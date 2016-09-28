@@ -24,4 +24,5 @@ return [
     'about_subtitle'                    => 'We are an indie company who believe in esports',
     'community_club_title'              => 'Next Gen Community Club',
     'community_club_subtitle'           => 'A place where we gather, share, and support our loved team',
+    'donation_title'                    => 'Donation',
 ];

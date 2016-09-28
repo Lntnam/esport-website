@@ -10,6 +10,13 @@
 |
 */
 
+/*
+ * Redirecting old URL
+ */
+Route::get('fixtures', function() {
+    return redirect()->route('dota2.fixture.index');
+});
+
 /**
  * Webhooks
  */
@@ -22,18 +29,12 @@ Route::post('hook/mailchimp', function() {
  * Prefix: /back/
  * Name: back.
  */
-require(base_path() . '/routes/web_frontend.php');
+require(base_path() . '/routes/web_backend.php');
 
 /*
  * Front-end Group
  * Prefix: /
  * Name: front.
  */
-require(base_path() . '/routes/web_backend.php');
+require(base_path() . '/routes/web_frontend.php');
 
-/*
- * Redirecting old URL
- */
-Route::get('fixtures', function() {
-    return redirect()->route('dota2.fixture.index');
-});

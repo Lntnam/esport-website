@@ -47,25 +47,29 @@
             </li>
         </ul>
     </li>
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
-            <i class="fa fa-heart-o fa-fw"></i> <span>@lang('pages.support_us')</span>
-            <span class="caret"></span></a>
-        <ul class="dropdown-menu" aria-labelledby="themes">
-            <li>
-                <a href="{!! route('pages.community_club') !!}">
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> @lang('pages.dota2_community_club')</a>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="fa fa-money" aria-hidden="true"></i> Donation</a>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="fa fa-shopping-bag" aria-hidden="true"></i> Buy gifts</a>
-            </li>
-        </ul>
+    <li>
+        <a href="{!! \URL::route('dota2.donation') !!}">
+            <i class="fa fa-money fa-fw" aria-hidden="true"></i> @lang('pages.donation')</a>
     </li>
+    {{--<li class="dropdown">--}}
+        {{--<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">--}}
+            {{--<i class="fa fa-heart-o fa-fw"></i> <span>@lang('pages.support_us')</span>--}}
+            {{--<span class="caret"></span></a>--}}
+        {{--<ul class="dropdown-menu" aria-labelledby="themes">--}}
+            {{--<li>--}}
+                {{--<a href="{!! route('pages.community_club') !!}">--}}
+                    {{--<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> @lang('pages.dota2_community_club')</a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:void(0)">--}}
+                    {{--<i class="fa fa-money" aria-hidden="true"></i> Donation</a>--}}
+            {{--</li>--}}
+            {{--<li>--}}
+                {{--<a href="javascript:void(0)">--}}
+                    {{--<i class="fa fa-shopping-bag" aria-hidden="true"></i> Buy gifts</a>--}}
+            {{--</li>--}}
+        {{--</ul>--}}
+    {{--</li>--}}
     <li>
         <select class="selectpicker" data-width="fit">
             @foreach (config('settings.locales') as $locale=>$details)

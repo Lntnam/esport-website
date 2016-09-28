@@ -25,4 +25,5 @@ return [
     'about_subtitle'                    => 'Chúng tôi là một công ty nhỏ và tin vào esports',
     'community_club_title'              => 'Next Gen Community Club',
     'community_club_subtitle'           => 'Một nơi để chúng ta tụ tập, chia sẻ, và ủng hộ đội game mình yêu thích',
+    'donation_title'                    => 'Đóng Góp',
 ];
