@@ -17,7 +17,7 @@
                                     PayPal</a>
                             </li>
                             <li>
-                                <a href="#donation_methods"
+                                <a href="#donation_methods" type="onpage"
                                    class="btn btn-default btn-lg"><i class="fa fa-university fa-fw"></i> <span
                                             class="network-name">@lang('contents.bank_transfer')</span></a>
                             </li>
