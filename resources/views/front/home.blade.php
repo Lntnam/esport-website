@@ -122,7 +122,7 @@
                                         class="network-name">@lang('pages.league_fanpage')</span></a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)"
+                            <a href="{!! route('dota2.donation') !!}"
                                class="btn btn-default btn-lg"><i class="fa fa-heart-o fa-fw"></i> <span
                                         class="network-name">@lang('pages.support_us')</span></a>
                         </li>
