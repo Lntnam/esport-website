@@ -110,7 +110,7 @@
                         id="progress_tour_cost"
                         data-editable="true">{!! ContentBlock::output($view_name, 'progress_tour_cost') !!}</h5>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-success progress-bar-striped active"
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active"
                              role="progressbar"
                              aria-valuenow="{{ Setting::getJSON('donation_values')->tour_cost }}"
                              aria-valuemin="0"
@@ -124,7 +124,7 @@
                               id="progress_month_cost"
                               data-editable="true">{!! ContentBlock::output($view_name, 'progress_month_cost') !!}</h5>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-info progress-bar-striped active"
+                        <div class="progress-bar progress-bar-info progress-bar-striped"
                              role="progressbar"
                              aria-valuenow="{{ Setting::getJSON('donation_values')->month_cost }}"
                              aria-valuemin="0"
@@ -138,7 +138,7 @@
                         id="progress_event_cost"
                         data-editable="true">{!! ContentBlock::output($view_name, 'progress_event_cost') !!}</h5>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-info progress-bar-striped active"
+                        <div class="progress-bar progress-bar-info progress-bar-striped"
                              role="progressbar"
                              aria-valuenow="{{ Setting::getJSON('donation_values')->event_cost }}"
                              aria-valuemin="0"
