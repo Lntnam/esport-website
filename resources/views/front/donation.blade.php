@@ -80,7 +80,6 @@
         </div>
     </div>
 
-    <a name="club_info"></a>
     <div class="content-section-b">
         <div class="container">
             <div class="row">
@@ -93,6 +92,61 @@
                 </div>
                 <div class="col-lg-5 col-lg-offset-1 col-sm-6">
                     <img class="img-responsive" src="{!! URL::asset('images/rog.jpg') !!}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section-a">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2" style="text-align: center">
+                    <h3 class="section-heading"
+                        id="heading_progress"
+                        data-editable="true">{!! ContentBlock::output($view_name, 'heading_progress') !!}
+                    <small id="heading_progress_small"
+                        data-editable="true">{!! ContentBlock::output($view_name, 'heading_progress_small') !!}</small></h3>
+                    <h5 class="section-heading"
+                        id="progress_tour_cost"
+                        data-editable="true">{!! ContentBlock::output($view_name, 'progress_tour_cost') !!}</h5>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active"
+                             role="progressbar"
+                             aria-valuenow="{{ Setting::getJSON('donation_values')->tour_cost }}"
+                             aria-valuemin="0"
+                             aria-valuemax="{{ Setting::getJSON('donation_targets')->tour_cost }}"
+                             style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->tour_cost / Setting::getJSON('donation_targets')->tour_cost * 100) }}%">
+                            <span>{{ round(Setting::getJSON('donation_values')->tour_cost / Setting::getJSON('donation_targets')->tour_cost * 100) }}%</span>
+                        </div>
+                    </div>
+
+                    <h5 class="section-heading"
+                              id="progress_month_cost"
+                              data-editable="true">{!! ContentBlock::output($view_name, 'progress_month_cost') !!}</h5>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info progress-bar-striped active"
+                             role="progressbar"
+                             aria-valuenow="{{ Setting::getJSON('donation_values')->month_cost }}"
+                             aria-valuemin="0"
+                             aria-valuemax="{{ Setting::getJSON('donation_targets')->month_cost }}"
+                             style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->month_cost / Setting::getJSON('donation_targets')->month_cost * 100) }}%">
+                            <span>{{ round(Setting::getJSON('donation_values')->month_cost / Setting::getJSON('donation_targets')->month_cost * 100) }}%</span>
+                        </div>
+                    </div>
+
+                    <h5 class="section-heading"
+                        id="progress_event_cost"
+                        data-editable="true">{!! ContentBlock::output($view_name, 'progress_event_cost') !!}</h5>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info progress-bar-striped active"
+                             role="progressbar"
+                             aria-valuenow="{{ Setting::getJSON('donation_values')->event_cost }}"
+                             aria-valuemin="0"
+                             aria-valuemax="{{ Setting::getJSON('donation_targets')->event_cost }}"
+                             style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}%">
+                            <span>{{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}%</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -137,7 +191,7 @@
 
 @section('foot')
     <script type="text/javascript">
-        $('a[type="onpage"]').click(function(){
+        $('a[type="onpage"]').click(function () {
             $('html, body').animate({
                 scrollTop: $('[name="' + $.attr(this, 'href').substr(1) + '"]').offset().top
             }, 500);

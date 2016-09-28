@@ -39,4 +39,11 @@ class Setting
 
         return null;
     }
+
+    public function getJSON($key)
+    {
+        if (!isset($this->cache[$key])) return null;
+
+        return json_decode($this->cache[$key]);
+    }
 }
