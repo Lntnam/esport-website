@@ -116,7 +116,8 @@
                              aria-valuemin="0"
                              aria-valuemax="{{ Setting::getJSON('donation_targets')->tour_cost }}"
                              style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->tour_cost / Setting::getJSON('donation_targets')->tour_cost * 100) }}%">
-                            <span>{{ round(Setting::getJSON('donation_values')->tour_cost / Setting::getJSON('donation_targets')->tour_cost * 100) }}%</span>
+                            <span>{{ round(Setting::getJSON('donation_values')->tour_cost / Setting::getJSON('donation_targets')->tour_cost * 100) }}
+                                %</span>
                         </div>
                     </div>
 
@@ -130,12 +131,13 @@
                              aria-valuemin="0"
                              aria-valuemax="{{ Setting::getJSON('donation_targets')->event_cost }}"
                              style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}%">
-                            <span>{{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}%</span>
+                            <span>{{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}
+                                %</span>
                         </div>
                     </div>
                     <h5 class="section-heading"
-                              id="progress_month_cost"
-                              data-editable="true">{!! ContentBlock::output($view_name, 'progress_month_cost') !!}</h5>
+                        id="progress_month_cost"
+                        data-editable="true">{!! ContentBlock::output($view_name, 'progress_month_cost') !!}</h5>
                     <div class="progress">
                         <div class="progress-bar progress-bar-info progress-bar-striped"
                              role="progressbar"
@@ -143,7 +145,8 @@
                              aria-valuemin="0"
                              aria-valuemax="{{ Setting::getJSON('donation_targets')->month_cost }}"
                              style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->month_cost / Setting::getJSON('donation_targets')->month_cost * 100) }}%">
-                            <span>{{ round(Setting::getJSON('donation_values')->month_cost / Setting::getJSON('donation_targets')->month_cost * 100) }}%</span>
+                            <span>{{ round(Setting::getJSON('donation_values')->month_cost / Setting::getJSON('donation_targets')->month_cost * 100) }}
+                                %</span>
                         </div>
                     </div>
 
@@ -183,6 +186,32 @@
                         data-editable="true">{!! ContentBlock::output($view_name, 'heading_bank_transfer') !!}</h3>
                     <div class="lead" id="bank_transfer_details"
                          data-editable="true">{!! ContentBlock::output($view_name, 'bank_transfer_details') !!}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section-a">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2" style="text-align: center">
+                    <h3 class="section-heading"
+                        id="heading_tshirt"
+                        data-editable="true">{!! ContentBlock::output($view_name, 'heading_tshirt') !!}</h3>
+                    <p class="text-primary" id="tshirt_details"
+                       data-editable="true">{!! ContentBlock::output($view_name, 'tshirt_details') !!}</p>
+                    <div class="col-lg-6">
+                        <div class="center-block">
+                            <a target="_blank" href="https://www.facebook.com/commerce/products/1135118263248288/"><img class="img-responsive"
+                                                                                                        src="{!! URL::asset('images/shirt1.jpg') !!}"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="center-block">
+                            <a target="_blank" href="https://www.facebook.com/commerce/products/1135118263248288/"><img class="img-responsive"
+                                                                                                        src="{!! URL::asset('images/shirt2.jpg') !!}"></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
