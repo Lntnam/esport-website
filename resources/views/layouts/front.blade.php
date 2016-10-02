@@ -152,6 +152,16 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script type="text/javascript" src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
 
+<!-- flash -->
+@if(Session::has('message'))
+    <script language="JavaScript">
+        swal({
+            title: "{{ Session::get('message') }}",
+            type: "{{ Session::get('status') }}"
+        });
+    </script>
+@endif
+
 @yield('foot')
 <!-- Language selection -->
 <script type="text/javascript">
