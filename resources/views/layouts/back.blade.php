@@ -203,16 +203,6 @@
             </div>
             <!-- /.row -->
 
-            <!-- flash -->
-            @if(Session::has('message'))
-                <script language="JavaScript">
-                    swal({
-                        title: "{{ Session::get('message') }}",
-                        type: "{{ Session::get('status') }}"
-                    });
-                </script>
-            @endif
-
             @if (count($errors) > 0)
                 <div class="row">
                     <div class="col-lg-6">
@@ -249,6 +239,16 @@
 <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
+
+<!-- flash -->
+@if(Session::has('message'))
+    <script language="JavaScript">
+        swal({
+            title: "{{ Session::get('message') }}",
+            type: "{{ Session::get('status') }}"
+        });
+    </script>
+@endif
 
 @yield('foot')
 
