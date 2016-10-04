@@ -10,4 +10,5 @@ return [
     'at'                            => 'lúc', // at what time
     'timezone-statement'            => 'Ngày giờ được hiển thị theo :value',
 
+    'card_pin_format'               => '(:length chữ số)'
 ];

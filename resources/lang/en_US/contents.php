@@ -123,4 +123,8 @@ return [
     'losses'       => 'Losses',
     'ratio'        => 'Ratio',
     'matches'      => 'Matches',
+
+    'card_pin'      => 'PIN Number',
+    'card_serial'   => 'Serial Number',
+    'card_provider' => 'Provider',
 ];

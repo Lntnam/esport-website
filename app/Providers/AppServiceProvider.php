@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\ContentBlock;
 use App\CountryList;
 use App\MailChimp;
+use app\Repositories\CardTransactionRepository;
 use App\Setting;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;

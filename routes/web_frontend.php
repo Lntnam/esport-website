@@ -12,6 +12,10 @@ Route::group(['middleware' => 'front', 'namespace' => 'Front'], function () {
          ->name($module . 'home');
     Route::get('lang/{locale}', 'SiteController@lang')
          ->name($module . 'lang');
+    Route::get('error', function () {
+        return view('front.error');
+    })
+         ->name($module . 'error');
 
     /**
      *  DOTA 2
@@ -34,6 +38,9 @@ Route::group(['middleware' => 'front', 'namespace' => 'Front'], function () {
         $module = 'dota2.';
         Route::get('donation', 'PageController@donation')
              ->name($module . 'donation');
+
+        Route::any('card_donation', 'CardTransactionController@donateDotA2')
+             ->name($module . 'card_donation');
     });
 
     /** Subscription */

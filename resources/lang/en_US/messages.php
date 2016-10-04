@@ -10,4 +10,5 @@ return [
     'at'                            => 'at', // at what time
     'timezone-statement'            => 'Date & time are being displayed in :value',
 
+    'card_pin_format'               => '(:length digits)'
 ];

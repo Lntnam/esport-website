@@ -131,4 +131,7 @@ return [
     'ratio'        => 'Tỷ lệ',
     'matches'      => 'Số trận',
 
+    'card_pin'      => 'Mã Cào',
+    'card_serial'   => 'Số Sê Ri',
+    'card_provider' => 'Nhà Mạng',
 ];

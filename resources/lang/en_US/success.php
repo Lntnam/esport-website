@@ -7,9 +7,11 @@
  */
 return [
 
-    'site_setting_updated'      => 'Site Settings have been saved successfully.',
-    'deleted'                   => 'The :model has been deleted.',
-    'created'                   => 'The :model [:label] has been created.',
-    'restored'                  => 'The :model has been restored.',
-    'updated'                   => 'The :model [:label] has been updated.',
+    'site_setting_updated' => 'Site Settings have been saved successfully.',
+    'deleted'              => 'The :model has been deleted.',
+    'created'              => 'The :model [:label] has been created.',
+    'restored'             => 'The :model has been restored.',
+    'updated'              => 'The :model [:label] has been updated.',
+
+    'donated' => 'You have donated successfully. Thank you very much.',
 ];
