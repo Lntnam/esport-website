@@ -164,7 +164,7 @@
                 </ul>
             </div>
             <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <img class="img-responsive" src="{!! URL::asset('images/dota2team.jpg') !!}" alt="">
+                <img class="img-responsive" src="{!! URL::asset('images/team-roster-oct-16.jpg') !!}" alt="">
             </div>
         </div>
     </div>
