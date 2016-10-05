@@ -125,7 +125,8 @@ return [
     'ratio'        => 'Ratio',
     'matches'      => 'Matches',
 
-    'card_pin'      => 'PIN Number',
-    'card_serial'   => 'Serial Number',
-    'card_provider' => 'Provider',
+    'card_pin'         => 'PIN Number',
+    'card_serial'      => 'Serial Number',
+    'card_provider'    => 'Provider',
+    'omit_the_slashes' => 'Omit the slashes',
 ];

@@ -237,7 +237,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="pin">@lang('contents.card_pin')
-                                    <small id="pin_format"></small>
+                                    <small>@lang('content.omit_the_slashes')</small>
                                 </label>
                                 <input type="text"
                                        value="{{ old('pin') }}"
@@ -247,7 +247,9 @@
                                        id="pin">
                             </div>
                             <div class="form-group">
-                                <label for="serial">@lang('contents.card_serial')</label>
+                                <label for="serial">@lang('contents.card_serial')
+                                    <small>@lang('content.omit_the_slashes')</small>
+                                </label>
                                 <input type="text"
                                        value="{{ old('serial') }}"
                                        name="serial"
@@ -276,14 +278,16 @@
                        data-editable="true">{!! ContentBlock::output($view_name, 'tshirt_details') !!}</p>
                     <div class="col-lg-6">
                         <div class="center-block">
-                            <a target="_blank" href="https://www.facebook.com/commerce/products/1135118263248288/"><img class="img-responsive"
-                                                                                                        src="{!! URL::asset('images/shirt1.jpg') !!}"></a>
+                            <a target="_blank" href="https://www.facebook.com/commerce/products/1135118263248288/"><img
+                                        class="img-responsive"
+                                        src="{!! URL::asset('images/shirt1.jpg') !!}"></a>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="center-block">
-                            <a target="_blank" href="https://www.facebook.com/commerce/products/1135118263248288/"><img class="img-responsive"
-                                                                                                        src="{!! URL::asset('images/shirt2.jpg') !!}"></a>
+                            <a target="_blank" href="https://www.facebook.com/commerce/products/1135118263248288/"><img
+                                        class="img-responsive"
+                                        src="{!! URL::asset('images/shirt2.jpg') !!}"></a>
                         </div>
                     </div>
                 </div>
@@ -300,37 +304,5 @@
             }, 500);
             return false;
         });
-
-        $('#provider').on('change', function () {
-            setPinPattern();
-        });
-        $(document).ready(function () {
-            setPinPattern();
-        });
-
-        function setPinPattern() {
-            var provider = $('#provider').val();
-            switch (provider) {
-                case 'VNP':
-                case 'MGC':
-                case 'ONC':
-                case 'ZING':
-//                    $('#pin').attr('pattern', '^\\d{12}$');
-                    $('#pin_format').text('@lang('messages.card_pin_format', ['length' => 12])');
-                    break;
-                case 'VMS':
-//                    $('#pin').attr('pattern', '^\\d{14}$');
-                    $('#pin_format').text('@lang('messages.card_pin_format', ['length' => 14])');
-                    break;
-                case 'FPT':
-//                    $('#pin').attr('pattern', '^\\d{10}$');
-                    $('#pin_format').text('@lang('messages.card_pin_format', ['length' => 10])');
-                    break;
-                case 'VTT':
-//                    $('#pin').attr('pattern', '^\\d{13,15}$');
-                    $('#pin_format').text('@lang('messages.card_pin_format', ['length' => '13-15'])');
-                    break;
-            }
-        }
     </script>
 @stop
