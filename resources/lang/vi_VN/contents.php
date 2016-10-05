@@ -47,6 +47,7 @@ return [
     'btn_sign_in'  => 'Đăng Nhập',
 
     'bank_transfer' => 'Chuyển Khoản',
+    'charging_card' => 'Thẻ Cào',
 
     /*
     |--------------------------------------------------------------------------
@@ -133,5 +134,5 @@ return [
 
     'card_pin'      => 'Mã Cào',
     'card_serial'   => 'Số Sê Ri',
-    'card_provider' => 'Nhà Mạng',
+    'card_provider' => 'Loại Thẻ',
 ];

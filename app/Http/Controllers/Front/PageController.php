@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller as BaseController;
 use App\Http\Requests;
+use lntn\Epay\EpayClient;
 
 class PageController extends BaseController
 {
@@ -14,6 +15,12 @@ class PageController extends BaseController
 
     public function donation()
     {
-        return view('front.donation')->with('has_header', false);
+        $source = 'donate_DotA2';
+
+        return view('front.donation', [
+            'source'     => $source,
+            'providers'  => EpayClient::getProviders(),
+            'has_header' => false,
+        ]);
     }
 }

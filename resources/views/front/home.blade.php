@@ -37,6 +37,7 @@
 
     <!-- Custom CSS -->
     <link href="{!! URL::asset('css/front/landing-page.css') !!}" rel="stylesheet">
+    <link href="{!! URL::asset('css/colorbox.css') !!}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="{!! URL::asset('css/font-awesome.min.css') !!}" rel="stylesheet" type="text/css">
@@ -163,8 +164,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <img class="img-responsive" src="{!! URL::asset('images/team-roster-oct-16.jpg') !!}" alt="">
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6" id="dota2-roster">
+                <img class="img-responsive zoom"
+                     src="{!! URL::asset('images/team-roster-oct-16.jpg') !!}"
+                     alt="Click to zoom">
             </div>
         </div>
     </div>
@@ -305,6 +308,11 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery-3.1.0.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/bootstrap-select.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+
+<!-- Other js libraries -->
+<script src="{{ URL::asset('js/jquery.zoom.min.js') }}"></script>
+<script src="{{ URL::asset('js/jquery.colorbox-min.js') }}"></script>
+
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script type="text/javascript" src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
 <!-- language selection -->
@@ -317,6 +325,16 @@
         });
 
         picker.selectpicker('val', '{{ App::getLocale() }}');
+
+        $("#dota2-roster > img").css('cursor', 'pointer');
+
+        $("#dota2-roster > img").on('click', function () {
+            $(this).colorbox({
+                href: this.src,
+                photo: true,
+                maxWidth: 900
+            });
+        });
     });
 </script>
 @if (session('admin_edit_page') === true)

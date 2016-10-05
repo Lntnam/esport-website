@@ -40,6 +40,7 @@ return [
     'btn_sign_in'  => 'Member Sign In',
 
     'bank_transfer' => 'Bank Transfer',
+    'charging_card' => 'Payment Cards',
 
     /*
     |--------------------------------------------------------------------------
