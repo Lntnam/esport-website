@@ -36,9 +36,11 @@ class CardTransactionController extends BaseController
                 /** @var EpayClient $client */
                 $config = config('services.epay');
                 $client = new EpayClient($config['username'], $config['partnerid'], $config['partnercode'], $config['mpin'], [
+                    'WS_URL'          => $config['ws_url'],
                     'EPAY_PUBLIC_KEY' => $config['epay_public_key'],
                     'PRIVATE_KEY'     => $config['private_key'],
                 ]);
+
 
                 try {
                     $client->login($config['password']);
