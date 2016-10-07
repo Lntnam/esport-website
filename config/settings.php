@@ -60,7 +60,7 @@ return [
             ], // saved campaigns to replicate
             'by' => [
                 'unit' => 'day',
-                'every' => 3,
+                'every' => 7,
                 'check' => null, // week: N | month: j | year: j n
             ],
             'time' => '23:00', // H:i, default timezone
