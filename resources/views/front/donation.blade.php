@@ -107,13 +107,13 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2" style="text-align: center">
                     <h3 class="section-heading"
-                        id="heading_progress"
-                        data-editable="true">{!! ContentBlock::output($view_name, 'heading_progress') !!}</h3>
+                        id="progress_tour_cost"
+                        data-editable="true">{!! ContentBlock::output($view_name, 'progress_tour_cost') !!}</h3>
                     <p class="text-muted" id="heading_progress_small"
                        data-editable="true">{!! ContentBlock::output($view_name, 'heading_progress_small') !!}</p>
-                    <h5 class="section-heading"
-                        id="progress_tour_cost"
-                        data-editable="true">{!! ContentBlock::output($view_name, 'progress_tour_cost') !!}</h5>
+                    {{--<h5 class="section-heading"--}}
+                        {{--id="progress_tour_cost"--}}
+                        {{--data-editable="true">{!! ContentBlock::output($view_name, 'progress_tour_cost') !!}</h5>--}}
                     <div class="progress">
                         <div class="progress-bar progress-bar-warning progress-bar-striped active"
                              role="progressbar"
@@ -126,34 +126,34 @@
                         </div>
                     </div>
 
-                    <h5 class="section-heading"
-                        id="progress_event_cost"
-                        data-editable="true">{!! ContentBlock::output($view_name, 'progress_event_cost') !!}</h5>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-info progress-bar-striped"
-                             role="progressbar"
-                             aria-valuenow="{{ Setting::getJSON('donation_values')->event_cost }}"
-                             aria-valuemin="0"
-                             aria-valuemax="{{ Setting::getJSON('donation_targets')->event_cost }}"
-                             style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}%">
-                            <span>{{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}
-                                %</span>
-                        </div>
-                    </div>
-                    <h5 class="section-heading"
-                        id="progress_month_cost"
-                        data-editable="true">{!! ContentBlock::output($view_name, 'progress_month_cost') !!}</h5>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-info progress-bar-striped"
-                             role="progressbar"
-                             aria-valuenow="{{ Setting::getJSON('donation_values')->month_cost }}"
-                             aria-valuemin="0"
-                             aria-valuemax="{{ Setting::getJSON('donation_targets')->month_cost }}"
-                             style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->month_cost / Setting::getJSON('donation_targets')->month_cost * 100) }}%">
-                            <span>{{ round(Setting::getJSON('donation_values')->month_cost / Setting::getJSON('donation_targets')->month_cost * 100) }}
-                                %</span>
-                        </div>
-                    </div>
+                    {{--<h5 class="section-heading"--}}
+                        {{--id="progress_event_cost"--}}
+                        {{--data-editable="true">{!! ContentBlock::output($view_name, 'progress_event_cost') !!}</h5>--}}
+                    {{--<div class="progress">--}}
+                        {{--<div class="progress-bar progress-bar-info progress-bar-striped"--}}
+                             {{--role="progressbar"--}}
+                             {{--aria-valuenow="{{ Setting::getJSON('donation_values')->event_cost }}"--}}
+                             {{--aria-valuemin="0"--}}
+                             {{--aria-valuemax="{{ Setting::getJSON('donation_targets')->event_cost }}"--}}
+                             {{--style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}%">--}}
+                            {{--<span>{{ round(Setting::getJSON('donation_values')->event_cost / Setting::getJSON('donation_targets')->event_cost * 100) }}--}}
+                                {{--%</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<h5 class="section-heading"--}}
+                        {{--id="progress_month_cost"--}}
+                        {{--data-editable="true">{!! ContentBlock::output($view_name, 'progress_month_cost') !!}</h5>--}}
+                    {{--<div class="progress">--}}
+                        {{--<div class="progress-bar progress-bar-info progress-bar-striped"--}}
+                             {{--role="progressbar"--}}
+                             {{--aria-valuenow="{{ Setting::getJSON('donation_values')->month_cost }}"--}}
+                             {{--aria-valuemin="0"--}}
+                             {{--aria-valuemax="{{ Setting::getJSON('donation_targets')->month_cost }}"--}}
+                             {{--style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->month_cost / Setting::getJSON('donation_targets')->month_cost * 100) }}%">--}}
+                            {{--<span>{{ round(Setting::getJSON('donation_values')->month_cost / Setting::getJSON('donation_targets')->month_cost * 100) }}--}}
+                                {{--%</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                 </div>
             </div>
