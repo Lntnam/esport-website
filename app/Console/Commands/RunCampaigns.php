@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Repositories;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Collection;
 use Log;
 use MailChimp;
 use Setting;
@@ -70,8 +71,9 @@ class RunCampaigns extends Command
      */
     protected function runFixtures($settings)
     {
-        $data = $this->validateFixtureCampaignData();
-        if (!empty($data)) {
+        /** @var Collection $data */
+        $data = $this->getFixtures();
+        if ($data->count() > 0) {
             foreach ($settings['campaign_id'] as $locale => $id) {
                 $this->sendFixtureByLocale($locale, $id, $data);
             }
@@ -195,7 +197,7 @@ class RunCampaigns extends Command
     /**
      * @return boolean
      */
-    private function validateFixtureCampaignData()
+    private function getFixtures()
     {
         // Only send fixtures update if there's any match for the next 3 days
         $today = Carbon::tomorrow(config('app.timezone'))
