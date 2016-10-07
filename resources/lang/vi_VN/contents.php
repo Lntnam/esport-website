@@ -23,12 +23,14 @@ return [
 
     'btn_back_to_top' => 'Lên đầu trang',
 
-    'btn_submit'  => 'Submit',
-    'btn_reset'   => 'Làm lại',
-    'btn_delete'  => 'Xóa',
-    'btn_back'    => '&laquo; Trở về',
-    'btn_close'   => 'Đóng',
-    'btn_restore' => 'Phục hồi',
+    'btn_submit'     => 'Submit',
+    'btn_reset'      => 'Làm lại',
+    'btn_delete'     => 'Xóa',
+    'btn_back'       => '&laquo; Trở về',
+    'btn_close'      => 'Đóng',
+    'btn_restore'    => 'Phục hồi',
+    'btn_click_here' => 'Bấm Vào Đây',
+
 
     'btn_create_model'  => 'Tạo :model',
     'btn_live_edit'     => 'Sửa Trực Tiếp',

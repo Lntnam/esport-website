@@ -66,4 +66,9 @@ return [
         'epay_public_key' => storage_path('app/epay_public_key.pem'),
         'private_key'     => storage_path('app/private_key.pem'),
     ],
+
+    'recaptcha' => [
+        'site_key' => env('RE_CAP_SITE'),
+        'secret'   => env('RE_CAP_SECRET'),
+    ],
 ];

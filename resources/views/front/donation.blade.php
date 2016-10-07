@@ -22,7 +22,7 @@
                                             class="network-name">@lang('contents.bank_transfer')</span></a>
                             </li>
                             <li>
-                                <a href="#charging_card" type="onpage"
+                                <a href="{!! route('dota2.card_donation') !!}"
                                    class="btn btn-default btn-lg"><i class="fa fa-credit-card fa-fw"></i> <span
                                             class="network-name">@lang('contents.charging_card')</span></a>
                             </li>
@@ -164,7 +164,7 @@
     <div class="content-section-b">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <h3 class="section-heading"
                         id="heading_paypal"
                         data-editable="true">{!! ContentBlock::output($view_name, 'heading_paypal') !!}</h3>
@@ -185,89 +185,26 @@
                              height="1">
                     </form>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <h3 class="section-heading"
                         id="heading_bank_transfer"
                         data-editable="true">{!! ContentBlock::output($view_name, 'heading_bank_transfer') !!}</h3>
                     <div class="lead" id="bank_transfer_details"
                          data-editable="true">{!! ContentBlock::output($view_name, 'bank_transfer_details') !!}</div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <a name="charging_card"></a>
-    <div class="content-section-a">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-lg-offset-3">
+                <div class="col-lg-4">
                     <h3 class="section-heading"
                         id="heading_charging_card"
                         data-editable="true">{!! ContentBlock::output($view_name, 'heading_charging_card') !!}</h3>
-                    @if (count($errors) > 0)
-                        <div class="row">
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    @endif
-                    <div class="row">
-                        <form role="form" method="post" action="{{ route('dota2.card_donation') }}">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="source" value="{{ $source }}">
-                            <div class="form-group">
-                                <label for="name">@lang('contents.your_name')</label>
-                                <input type="name"
-                                       value="{{ old('name') }}"
-                                       name="name"
-                                       class="form-control"
-                                       id="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="provider">@lang('contents.card_provider')</label>
-                                <select name="provider" class="form-control" id="provider">
-                                    @foreach ($providers as $p => $p_name)
-                                        <option value="{{ $p }}" {!! old('provider') == $p ? 'selected' : '' !!} >{{ $p_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="pin">@lang('contents.card_pin')
-                                    <small>@lang('content.omit_the_slashes')</small>
-                                </label>
-                                <input type="text"
-                                       value="{{ old('pin') }}"
-                                       name="pin"
-                                       class="form-control"
-                                       required
-                                       id="pin">
-                            </div>
-                            <div class="form-group">
-                                <label for="serial">@lang('contents.card_serial')
-                                    <small>@lang('content.omit_the_slashes')</small>
-                                </label>
-                                <input type="text"
-                                       value="{{ old('serial') }}"
-                                       name="serial"
-                                       class="form-control"
-                                       required
-                                       id="serial">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-success">@lang('contents.btn_submit')</button>
-                            </div>
-                        </form>
-                    </div>
+                    <a href="{!! route('dota2.card_donation') !!}"
+                       type="button"
+                       class="btn btn-success">@lang('contents.btn_click_here')</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="content-section-b">
+    <div class="content-section-a">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2" style="text-align: center">

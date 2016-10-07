@@ -17,12 +17,13 @@ return [
 
     'btn_back_to_top' => 'Back to top',
 
-    'btn_submit'  => 'Submit',
-    'btn_reset'   => 'Reset',
-    'btn_delete'  => 'Delete',
-    'btn_back'    => '&laquo; Go back',
-    'btn_close'   => 'Close',
-    'btn_restore' => 'Restore',
+    'btn_submit'     => 'Submit',
+    'btn_reset'      => 'Reset',
+    'btn_delete'     => 'Delete',
+    'btn_back'       => '&laquo; Go back',
+    'btn_close'      => 'Close',
+    'btn_restore'    => 'Restore',
+    'btn_click_here' => 'Click Here',
 
     'btn_create_model'  => 'Create :model',
     'btn_live_edit'     => 'Live Edit Content',

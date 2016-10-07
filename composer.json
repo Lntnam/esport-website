@@ -35,7 +35,8 @@
         "suin/php-rss-writer": "^1.5",
         "guzzlehttp/guzzle": "^6.2",
         "orangehill/iseed": "2.2",
-        "lntn/vnpt_epay_client": "1.0"
+        "lntn/vnpt_epay_client": "^1.0",
+        "google/recaptcha": "~1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

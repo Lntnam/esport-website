@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group">
                         <label for="pin">@lang('contents.card_pin')
-                            <small id="pin_format"></small>
+                            <small>(@lang('contents.omit_the_slashes'))</small>
                         </label>
                         <input type="text"
                                value="{{ old('pin') }}"
@@ -65,6 +65,11 @@
                                required
                                id="serial">
                     </div>
+
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha')['site_key'] }}"></div>
+                    </div>
+
                     <div class="form-group">
                         <button type="submit" class="btn btn-success">@lang('contents.btn_submit')</button>
                     </div>
@@ -75,37 +80,5 @@
 @stop
 
 @section('foot')
-    <script type="text/javascript">
-        $('#provider').on('change', function () {
-            setPinPattern();
-        });
-        $(document).ready(function () {
-            setPinPattern();
-        });
-
-        function setPinPattern() {
-            var provider = $('#provider').val();
-            switch (provider) {
-                case 'VNP':
-                case 'MGC':
-                case 'ONC':
-                case 'ZING':
-//                    $('#pin').attr('pattern', '^\\d{12}$');
-                    $('#pin_format').text('@lang('messages.card_pin_format', ['length' => 12])');
-                    break;
-                case 'VMS':
-//                    $('#pin').attr('pattern', '^\\d{14}$');
-                    $('#pin_format').text('@lang('messages.card_pin_format', ['length' => 14])');
-                    break;
-                case 'FPT':
-//                    $('#pin').attr('pattern', '^\\d{10}$');
-                    $('#pin_format').text('@lang('messages.card_pin_format', ['length' => 10])');
-                    break;
-                case 'VTT':
-//                    $('#pin').attr('pattern', '^\\d{13,15}$');
-                    $('#pin_format').text('@lang('messages.card_pin_format', ['length' => '13-15'])');
-                    break;
-            }
-        }
-    </script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 @stop
