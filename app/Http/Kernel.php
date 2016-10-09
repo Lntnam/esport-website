@@ -28,7 +28,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = ['web' => [Middleware\EncryptCookies::class, Cookie\Middleware\AddQueuedCookiesToResponse::class, Session\Middleware\StartSession::class, View\Middleware\ShareErrorsFromSession::class, Middleware\VerifyCsrfToken::class, Routing\Middleware\SubstituteBindings::class,],
 
-                                   'back' => [Middleware\App::class, 'auth:web',],
+                                   'back' => ['auth:web',],
 
                                    'front' => [Middleware\App::class,],
 

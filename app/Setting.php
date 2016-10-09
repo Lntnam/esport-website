@@ -7,6 +7,7 @@
  */
 namespace App;
 
+use App\Repositories\MasterListRepository;
 use App\Repositories\SiteSettingRepository;
 
 class Setting
@@ -20,7 +21,7 @@ class Setting
 
     public function __construct()
     {
-        $settings = SiteSettingRepository::all();
+        $settings = SiteSettingRepository::read();
         foreach ($settings as $item) {
             $this->cache[$item->key] = $item->value;
         }
@@ -31,6 +32,15 @@ class Setting
         if (!isset($this->cache[$key])) return null;
 
         return $this->cache[$key];
+    }
+
+    public function set($key, $value)
+    {
+        if (isset($this->cache[$key])) {
+            $this->cache[$key] = $value;
+
+            SiteSettingRepository::save([$key => $value]);
+        }
     }
 
     public function server($key) {
@@ -45,5 +55,21 @@ class Setting
         if (!isset($this->cache[$key])) return null;
 
         return json_decode($this->cache[$key]);
+    }
+
+    public function getMasterList($key)
+    {
+        $list_item = MasterListRepository::get($key);
+        if (!empty($list_item)) {
+            return json_decode($list_item->value);
+        }
+    }
+
+    public function getMasterListValue($key, $arrKey)
+    {
+        $list_item = MasterListRepository::get($key);
+        if (!empty($list_item)) {
+            return json_decode($list_item->value)->$arrKey;
+        }
     }
 }

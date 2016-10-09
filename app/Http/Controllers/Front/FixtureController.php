@@ -108,7 +108,7 @@ class FixtureController extends BaseController
         $channel = new RSSWriter\Channel();
         $channel->title(trans('contents.channel_title'))
                 ->description(trans('contents.channel_description'))
-                ->url(URL::route('dota2.fixture.index'))
+                ->url(route('dota2.fixture.index'))
                 ->language($locale)
                 ->ttl(60);
 
@@ -177,6 +177,6 @@ class FixtureController extends BaseController
 
     private function getRssUrl($match)
     {
-        return !empty($match->stream) ? $match->stream : URL::route('dota2.fixture.index') . '#' . $match->id;
+        return !empty($match->stream) ? $match->stream : route('dota2.fixture.index') . '#' . $match->id;
     }
 }

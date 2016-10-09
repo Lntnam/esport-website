@@ -6,11 +6,11 @@
             <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
             <li>
-                <a href="{!! \URL::route('dota2.fixture.index') !!}">
+                <a href="{!! \route('dota2.fixture.index') !!}">
                     <i class="fa fa-calendar fa-fw" aria-hidden="true"></i> @lang('pages.fixtures')</a>
             </li>
             <li>
-                <a href="{!! URL::route('dota2.fixture.results') !!}">
+                <a href="{!! route('dota2.fixture.results') !!}">
                     <i class="fa fa-list-ol fa-fw" aria-hidden="true"></i> @lang('pages.results')</a>
                 </a>
             </li>
@@ -48,7 +48,7 @@
         </ul>
     </li>
     <li>
-        <a href="{!! \URL::route('dota2.donation') !!}">
+        <a href="{!! \route('dota2.donation') !!}">
             <i class="fa fa-money fa-fw" aria-hidden="true"></i> @lang('pages.donation')</a>
     </li>
     {{--<li class="dropdown">--}}

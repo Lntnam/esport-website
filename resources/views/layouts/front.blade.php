@@ -91,7 +91,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{!! \URL::route('front.home') !!}" class="navbar-brand">
+            <a href="{!! \route('front.home') !!}" class="navbar-brand">
                 <span>{!! \Setting::get('brand-name')!!}</span></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -169,7 +169,7 @@
         var picker = $('.selectpicker');
         picker.selectpicker({});
         picker.on('change', function () {
-            window.location.href = '{{ URL::route('front.lang', ['locale'=>':locale:']) }}'.replace(':locale:', picker.val());
+            window.location.href = '{{ route('front.lang', ['locale'=>':locale:']) }}'.replace(':locale:', picker.val());
         });
 
         picker.selectpicker('val', '{{ App::getLocale() }}');
@@ -187,7 +187,7 @@
     </script>
     <div class="btnLiveEdit">
         <a href="{!! route('back.content_block.live_edit_end') !!}" type="button"
-           class="btn btn-warning">@lang('contents.btn_live_edit_end')</a>
+           class="btn btn-warning">Finish Live Edit</a>
     </div>
 @endif
 </body>

@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Back;
 
 use App\AjaxResponse;
 use App\Http\Controllers\Controller as BaseController;
+use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -43,15 +44,16 @@ class StaffController extends BaseController
                 return redirect()
                     ->route('back.staff.index')
                     ->with('status', 'success')
-                    ->with('message', trans('success.created', ['model' => trans('contents.staff'), 'label' => $request->input('name')]));
+                    ->with('message', sprintf('Staff %s was created.', $request->input('name')));
             }
 
-            return view('staff.create')
-                ->with('input', $request->all())
-                ->with('errors', $validator->errors());
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors($validator->errors());
         }
 
-        return view('staff.create')->with('input', $request->all());
+        return view('staff.create', ['input' => new User()]);
     }
 
     public function delete(Request $request, $id = null)
@@ -63,7 +65,7 @@ class StaffController extends BaseController
                 abort(404);
             }
 
-            return view('staff.delete')->with('model', $user->getAttributes());
+            return view('staff.delete')->with('model', $user);
         }
 
         $user = UserRepository::read($request->input('id'));
@@ -76,7 +78,7 @@ class StaffController extends BaseController
         return redirect()
             ->route('back.staff.index')
             ->with('status', 'success')
-            ->with('message', trans('success.deleted', ['model' => trans('contents.staff')]));
+            ->with('message', sprintf('Staff %s was deleted.', $user->name));
     }
 
     public function restore($id)
@@ -97,7 +99,7 @@ class StaffController extends BaseController
                 abort(404);
             }
 
-            return view('staff.update')->with('model', $user->getAttributes());
+            return view('staff.update')->with('model', $user);
         }
 
         $user = UserRepository::read($request->input('id'));
@@ -107,9 +109,10 @@ class StaffController extends BaseController
 
         $validator = Validator::make($request->all(), UserRepository::getUpdateValidationRules($user));
         if ($validator->fails()) {
-            return view('staff.update')
-                ->with('model', $request->all())
-                ->with('errors', $validator->errors());
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors($validator->errors());
         }
 
         $repo = new UserRepository($user);
@@ -118,6 +121,6 @@ class StaffController extends BaseController
         return redirect()
             ->route('back.staff.index')
             ->with('status', 'success')
-            ->with('message', trans('success.updated', ['model' => trans('contents.staff'), 'label' => $user->name]));
+            ->with('message', sprintf('Staff %s was updated.', $request->input('name')));
     }
 }

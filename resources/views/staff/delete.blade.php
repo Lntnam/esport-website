@@ -1,16 +1,10 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.delete', ['model'=>'staff']))
+@section('title', 'Deleting Staff')
 
-@section('page-heading', trans('pages.delete', ['model'=>'staff']))
+@section('page-heading', 'Deleting Staff')
 
-@section('page-sub-heading')
-    @if (!empty($model))
-        {{ $model['name'] }}
-    @endif
-@stop
-
-@section('breadcrumbs', Breadcrumbs::render('delete_staff', $model))
+@section('page-sub-heading', $model['name'])
 
 @section('content')
 
@@ -25,17 +19,11 @@
                     <p>Is about to be deleted.</p>
                     <p>This action is irreversible! Are you sure to continue?</p>
                     <p>
-                        <button type="submit" class="btn btn-danger">@lang('contents.btn_delete')</button>
-                        <button type="button" class="btn btn-link">@lang('contents.btn_back')</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <a href="{!! route('back.staff.index') !!}" type="button" class="btn btn-link">&laquo; Back</a>
                     </p>
                 </div>
             </form>
         </div>
     </div>
-@stop
-
-@section('foot')
-    <script type="text/javascript">
-        $('.btn-link').click(function() {window.location.href = '{{ route('back.staff.index') }}'});
-    </script>
 @stop

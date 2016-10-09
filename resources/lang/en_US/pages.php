@@ -9,32 +9,6 @@ return [
 
     'login'                             => 'Log In',
     'logout'                            => 'Log Out',
-    'back_toggle_nav'                   => 'Toggle Navigation',
-
-    'profile'                           => 'Profile',
-    'settings'                          => 'Settings',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Layout Texts for Back End
-    |--------------------------------------------------------------------------
-    */
-    'back_dashboard'                    => 'Staff Dashboard',
-
-    'back_restricted'                   => 'Restricted Area',
-
-    'back_fixtures'                     => 'Fixtures',
-    'manage_matches'                    => 'Manage Matches',
-    'manage_tournaments'                => 'Manage Tournaments',
-    'manage_opponents'                  => 'Manage Opponents',
-    'manage_staffs'                     => 'Manage Staffs',
-    'site_settings'                     => 'Site Settings',
-
-    // Action pages
-    'manage'                            => 'Manage :Model',
-    'delete'                            => 'Deleting :Model',
-    'create'                            => 'Creating :Model',
-    'update'                            => 'Updating :Model',
 
     /*
     |--------------------------------------------------------------------------

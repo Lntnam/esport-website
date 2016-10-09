@@ -18,26 +18,8 @@
             @endif
             <form role="form" method="post">
                 {{ csrf_field() }}
-                <div class="form-group">
-                    <label for="nameInput">@lang('contents.team-name')</label>
-                    <input id="nameInput" type="text" class="form-control" name="name"
-                           value="{{ !empty($input) ? $input['name'] : '' }}"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="short">@lang('contents.team-short')</label>
-                    <input id="short" type="text" class="form-control" name="short"
-                           value="{{ !empty($input) ? $input['short'] : '' }}"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="country">@lang('contents.team-country')</label>
-                    {!! Form::select('country',
-                        \CountryList::getList(\App::getLocale()),
-                        !empty($input) ? $input['country'] : null,
-                        ['class'=>'form-control'])
-                    !!}
-                </div>
+                <input type="hidden" name="game" value="{{ $game }}">
+                @include('opponent._form')
             </form>
         </div>
     </div>

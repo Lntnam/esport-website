@@ -9,7 +9,7 @@ class TournamentRepository extends BaseRepository
 
     protected static $modelClassName = Tournament::class;
 
-    protected static $allowedForCreate = ['name', 'short', 'type', 'homepage', 'bracket'];
+    protected static $allowedForCreate = ['name', 'short', 'type', 'homepage', 'bracket', 'game'];
 
     protected static $allowedForUpdate = ['name', 'short', 'type', 'homepage', 'bracket'];
 
@@ -44,28 +44,30 @@ class TournamentRepository extends BaseRepository
     public static function query($sort = 'name', $order = 'asc')
     {
         return Tournament::orderBy($sort, $order)
-                         ->get();
+            ->get();
     }
 
-    public static function search($keyword, $sort = 'name', $order = 'asc')
+    public static function search($keyword, $game, $sort = 'name', $order = 'asc')
     {
         return Tournament::search($keyword)
-                         ->orderBy($sort, $order)
-                         ->get();
+            ->where('game', $game)
+            ->orderBy($sort, $order)
+            ->get();
     }
 
     public static function readWithCount($id)
     {
         return Tournament::withCount('matches')
-                         ->where('id', $id)
-                         ->first();
+            ->where('id', $id)
+            ->first();
     }
 
-    public static function getList()
+    public static function getList($game)
     {
         $tours = Tournament::select('id', 'name')
-                           ->orderBy('name', 'asc')
-                           ->get();
+            ->where('game', $game)
+            ->orderBy('name', 'asc')
+            ->get();
         $array = [];
         foreach ($tours as $t) {
             $array[$t->id] = $t->name;

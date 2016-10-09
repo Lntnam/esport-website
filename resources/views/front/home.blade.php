@@ -87,7 +87,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="{!! \URL::route('front.home') !!}" class="navbar-brand">
+            <a href="{!! \route('front.home') !!}" class="navbar-brand">
                 <span>{!! \Setting::get('brand-name')!!}</span></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -152,7 +152,7 @@
                 <ul class="list-inline intro-call-to-actions">
                     <li>
                         <a class="btn btn-success btn"
-                           href="{!! URL::route('dota2.fixture.index') !!}"><span
+                           href="{!! route('dota2.fixture.index') !!}"><span
                                     class=" network-name"><i class="fa fa-calendar"
                                                              aria-hidden="true"></i> @lang('pages.fixtures')</span></a>
                     </li>
@@ -251,7 +251,7 @@
             </div>
             <div class="col-lg-6">
                 <form role="form" class="form-inline" method="post"
-                      action="{!! URL::route('subscription.create') !!}">
+                      action="{!! route('subscription.create') !!}">
                     {{ csrf_field() }}
                     <input type="hidden" name="interests[5d5a7db8ef]" value="1">
                     <input type="hidden" name="interests[d796835b62]" value="1">
@@ -321,7 +321,7 @@
         var picker = $('.selectpicker');
         picker.selectpicker({});
         picker.on('change', function () {
-            window.location.href = '{{ URL::route('front.lang', ['locale'=>':locale:']) }}'.replace(':locale:', picker.val());
+            window.location.href = '{{ route('front.lang', ['locale'=>':locale:']) }}'.replace(':locale:', picker.val());
         });
 
         picker.selectpicker('val', '{{ App::getLocale() }}');
@@ -348,7 +348,7 @@
     </script>
     <div class="btnLiveEdit">
         <a href="{!! route('back.content_block.live_edit_end') !!}" type="button"
-           class="btn btn-warning">@lang('contents.btn_live_edit_end')</a>
+           class="btn btn-warning">Finish Live Edit</a>
     </div>
 @endif
 </body>

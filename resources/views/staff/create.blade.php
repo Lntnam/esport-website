@@ -1,10 +1,8 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.create', ['model'=>'User']))
+@section('title', 'Create Staff')
 
-@section('page-heading', trans('pages.create', ['model'=>'Staff']))
-
-@section('breadcrumbs', Breadcrumbs::render('create_staff'))
+@section('page-heading', 'Create Staff')
 
 @section('content')
     <div class="row">
@@ -12,31 +10,23 @@
             <form role="form" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="name">@lang('contents.name')</label>
+                    <label for="name">Name</label>
                     <input type="text" class="form-control" placeholder="Name or nick name"
-                           name="name" value="{{ !empty($input) ? $input['name'] : '' }}">
+                           name="name" value="{{ old('name', $input['name']) }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="email">@lang('contents.email')</label>
+                    <label for="email">Email</label>
                     <input type="text" class="form-control" placeholder="someone@gmail.com"
-                           name="email" value="{{ !empty($input) ? $input['email'] : '' }}">
+                           name="email" value="{{ old('email', $input['email']) }}">
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">@lang('contents.btn_submit')</button>
-                    <button type="reset" class="btn btn-default">@lang('contents.btn_reset')</button>
-                    <button type="button" class="btn btn-link">@lang('contents.btn_back')</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-default">Reset</button>
+                    <a href="{!! route('back.staff.index') !!}" type="button" class="btn btn-link">&laquo; Back</a>
                 </div>
             </form>
         </div>
     </div>
-@stop
-
-@section('foot')
-    <script type="text/javascript">
-        $('.btn-link').click(function () {
-            window.location.href = '{{ route('back.staff.index') }}'
-        });
-    </script>
 @stop

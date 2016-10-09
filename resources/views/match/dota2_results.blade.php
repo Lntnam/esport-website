@@ -88,7 +88,7 @@
                 </table>
             </div>
             <p class="pull-right"><a type="button" class="btn btn-default btn-sm"
-                                     href="{{ URL::route('dota2.fixture.index') }}"><span
+                                     href="{{ route('dota2.fixture.index') }}"><span
                             class="fa fa-hand-o-left"></span> @lang('contents.btn_back_to_fixtures')</a></p>
             @if ($hasMore)
                 <p id="btnLoadMore"><a class="btn btn-success btn-sm" type="button" href="javascript:void(0)"><i
@@ -108,7 +108,7 @@
             $('#btnLoadMore i').removeClass('fa-caret-square-o-down');
             $('#btnLoadMore i').addClass('fa-spinner fa-pulse');
 
-            $.get('{!! URL::route('dota2.fixture.more_results', ['offset'=>'_offset_']) !!}'.replace('_offset_', rowCount), function (data) {
+            $.get('{!! route('dota2.fixture.more_results', ['offset'=>'_offset_']) !!}'.replace('_offset_', rowCount), function (data) {
                 $('#recent-table > tbody').append(data['html']);
                 rowCount += data['count'];
                 if (data['hasMore']) {

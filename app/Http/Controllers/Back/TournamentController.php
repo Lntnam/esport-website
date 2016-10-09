@@ -3,124 +3,164 @@ namespace App\Http\Controllers\Back;
 
 use App\AjaxResponse;
 use App\Http\Controllers\Controller as BaseController;
+use App\Models\Tournament;
 use App\Repositories\TournamentRepository;
+use App\Traits\GameController;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Validator;
 
 class TournamentController extends BaseController
 {
-    /**
-     * Ajax call
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function data(Request $request)
+    use GameController;
+
+    public function data($game, Request $request)
     {
+        $this->validateGame($game);
         $params = $this->retrieveSortParams($request);
 
-        return response()->json(TournamentRepository::search($request->input('search'), $params['sort'], $params['sort']));
+        return response()->json(TournamentRepository::search($request->input('search'), $game, $params['sort'], $params['sort']));
     }
 
-    public function index()
+    public function index($game)
     {
-        return view('tournament.manage');
+        $this->validateGame($game);
+
+        return view('tournament.manage', ['game' => $game]);
     }
 
-    /**
-     * Ajax call
-     *
-     * @param Request $request
-     * @return $this|\Illuminate\Http\JsonResponse
-     */
-    public function ajaxCreate(Request $request)
+    public function ajaxCreate($game, Request $request)
     {
-        if (!empty($request->all())) {
-            $attributes = $request->all();
-            if (empty($attributes['prize'])) $attributes['prize'] = 0;
+        $this->validateGame($game);
+        $input = $request->all();
+        if ($request->has('game')) {
+            if (empty($input['prize']))
+                $input['prize'] = 0;
 
-            $validator = Validator::make($attributes, TournamentRepository::getCreateValidationRules());
+            $validator = Validator::make($input, TournamentRepository::getCreateValidationRules());
             if (!$validator->fails()) {
-                $tour = TournamentRepository::create($attributes);
+                try {
+                    $tour = TournamentRepository::create($input);
+                } catch (QueryException $ex) {
+                    $request->flash();
+
+                    return response()->json(new AjaxResponse(false,
+                        (string)view('tournament.create_modal', ['game' => $game, 'model' => new Tournament()])
+                            ->with('errors', [$ex->getMessage()])
+                    ));
+                }
 
                 return response()->json(new AjaxResponse(true, $tour));
             }
+            $request->flash();
 
-            return response()->json(new AjaxResponse(false, (string)view('tournament.create_modal')
-                ->with('input', $attributes)
-                ->with('errors', $validator->errors())));
+            return response()->json(new AjaxResponse(false,
+                (string)view('tournament.create_modal', ['game' => $game, 'model' => new Tournament()])
+                    ->with('errors', $validator->errors())
+            ));
         }
 
-        return view('tournament.create_modal')->with('input', $request->all());
+        return view('tournament.create_modal', ['game' => $game, 'model' => new Tournament()]);
     }
 
     public function delete(Request $request, $id = null)
     {
-        if (empty($request->all())) {
-            $model = TournamentRepository::readWithCount($id);
+        if ($request->has('id')) {
 
+            $model = TournamentRepository::readWithCount($request->input('id'));
             if (!$model) {
                 abort(404);
             }
 
+            $game = $model->game;
             $deletable = $model->matches_count == 0;
+            if (!$deletable) {
+                return redirect()
+                    ->back()
+                    ->with('model', $model)
+                    ->with('deletable', $deletable)
+                    ->withErrors(['This tournament cannot be deleted.']);
+            }
 
-            return view('tournament.delete')
-                ->with('model', $model)
-                ->with('deletable', $deletable);
+            // Get tournament name for message
+            $name = $model->name;
+
+            try {
+                $model->delete();
+            } catch (QueryException $ex) {
+                return redirect()
+                    ->back()
+                    ->with('model', $model)
+                    ->with('deletable', $deletable)
+                    ->withErrors([$ex->getMessage()]);
+            }
+
+            return redirect()
+                ->route('back.tournaments.index', ['game' => $game])
+                ->with('status', 'success')
+                ->with('message', sprintf('Tournament %s was deleted.', $name));
         }
 
-        $model = TournamentRepository::readWithCount($request->input('id'));
+        $model = TournamentRepository::readWithCount($id);
+
         if (!$model) {
             abort(404);
         }
 
         $deletable = $model->matches_count == 0;
 
-        if (!$deletable) {
-            return view('tournament.delete')
-                ->with('model', $model)
-                ->with('deletable', $deletable);
-        }
-
-        $model->delete();
-
-        return redirect()
-            ->route('back.tournament.index')
-            ->with('status', 'success')
-            ->with('message', trans('success.updated', ['model' => trans('contents.tournament'), 'label' => $model->getAttribute('name')]));
+        return view('tournament.delete')
+            ->with('model', $model)
+            ->with('deletable', $deletable);
     }
 
     public function update(Request $request, $id = null)
     {
-        if (empty($request->all())) {
-            $model = TournamentRepository::read($id);
+        if ($request->has('id')) {
+            $input = $request->all();
+            $model = TournamentRepository::read($input['id']);
             if (!$model) {
                 abort(404);
             }
 
-            return view('tournament.update')->with('model', $model);
+            $game = $model->game;
+            if (empty($input['prize']))
+                $input['prize'] = 0;
+
+            $validator = Validator::make($input, TournamentRepository::getUpdateValidationRules($model));
+            if (!$validator->fails()) {
+
+                try {
+                    $repo = new TournamentRepository($model);
+                    $repo->update($input);
+                } catch (QueryException $ex) {
+                    return redirect()
+                        ->back()
+                        ->with('model', $model)
+                        ->with('game', $model->game)
+                        ->withErrors([$ex->getMessage()]);
+                }
+
+                return redirect()
+                    ->route('back.tournaments.index', ['game' => $game])
+                    ->with('status', 'success')
+                    ->with('message', sprintf('Tournament %s was updated.', $model->name));
+            }
+
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('game', $game)
+                ->with('model', $model)
+                ->withErrors($validator->errors());
+
         }
 
-        $attributes = $request->all();
-        $model = TournamentRepository::read($attributes['id']);
+        $model = TournamentRepository::read($id);
         if (!$model) {
             abort(404);
         }
 
-        $validator = Validator::make($attributes, TournamentRepository::getUpdateValidationRules($model));
-        if ($validator->fails()) {
-            return view('tournament.update')
-                ->with('model', $attributes)
-                ->with('errors', $validator->errors());
-        }
-
-        $repo = new TournamentRepository($model);
-        $repo->update($attributes);
-
-        return redirect()
-            ->route('back.tournament.index')
-            ->with('status', 'success')
-            ->with('message', trans('success.delete', ['model' => trans('contents.tournament'), 'label' => $model->getAttribute('name')]));
+        return view('tournament.update', ['model' => $model, 'game' => $model->game]);
     }
 }

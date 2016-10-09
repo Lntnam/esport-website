@@ -1,8 +1,8 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.back_dashboard'))
+@section('title', 'Dashboard')
 
-@section('page-heading', trans('pages.back_dashboard'))
+@section('page-heading', 'Dashboard')
 
 @section('content')
 

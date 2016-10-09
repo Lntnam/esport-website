@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <p class="text-info pull-left">@lang('messages.timezone-statement', ['value'=>config('settings.default_timezone_value')])</p>
             <p class="pull-right">
-                <a href="{!! URL::route('dota2.fixture.rss', ['locale'=>\App::getLocale()]) !!}" title="RSS"
+                <a href="{!! route('dota2.fixture.rss', ['locale'=>\App::getLocale()]) !!}" title="RSS"
                    target="_blank"><span class="fa fa-rss-square fa-2x"></span></a></p>
             <div class="clearfix"></div>
             <div class="row">
@@ -82,7 +82,7 @@
                     </tbody>
                 </table>
                 <p class="pull-right"><a class="btn btn-default btn-sm"
-                                         href="{{ URL::route('dota2.fixture.results') }}"><span
+                                         href="{{ route('dota2.fixture.results') }}"><span
                                 class="fa fa-link"></span> @lang('contents.btn_all_results')</a></p>
             </div>
             <div class="row">
@@ -97,15 +97,15 @@
 @section('foot')
     <script type="text/javascript">
         $('document').ready(function () {
-            $.get('{!! URL::route('dota2.fixture.data', ['kind'=>'live']) !!}', function (data) {
+            $.get('{!! route('dota2.fixture.data', ['kind'=>'live']) !!}', function (data) {
                 $('#live-loading').hide();
                 $('#live-table > tbody').html(data);
             });
-            $.get('{!! URL::route('dota2.fixture.data', ['kind'=>'upcoming']) !!}', function (data) {
+            $.get('{!! route('dota2.fixture.data', ['kind'=>'upcoming']) !!}', function (data) {
                 $('#upcoming-loading').hide();
                 $('#upcoming-table > tbody').html(data);
             });
-            $.get('{!! URL::route('dota2.fixture.data', ['kind'=>'recent']) !!}', function (data) {
+            $.get('{!! route('dota2.fixture.data', ['kind'=>'recent']) !!}', function (data) {
                 $('#recent-loading').hide();
                 $('#recent-table > tbody').html(data);
             });
@@ -115,15 +115,15 @@
 
         function startCounter() {
             setTimeout(startCounter, 10000);
-            $.get('{!! URL::route('dota2.fixture.data', ['kind'=>'live']) !!}', function (data) {
+            $.get('{!! route('dota2.fixture.data', ['kind'=>'live']) !!}', function (data) {
                 $('#live-loading').hide();
                 $('#live-table > tbody').html(data);
             });
-            $.get('{!! URL::route('dota2.fixture.data', ['kind'=>'upcoming']) !!}', function (data) {
+            $.get('{!! route('dota2.fixture.data', ['kind'=>'upcoming']) !!}', function (data) {
                 $('#upcoming-loading').hide();
                 $('#upcoming-table > tbody').html(data);
             });
-            $.get('{!! URL::route('dota2.fixture.data', ['kind'=>'recent']) !!}', function (data) {
+            $.get('{!! route('dota2.fixture.data', ['kind'=>'recent']) !!}', function (data) {
                 $('#recent-loading').hide();
                 $('#recent-table > tbody').html(data);
             });

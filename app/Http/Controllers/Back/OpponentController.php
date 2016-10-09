@@ -3,28 +3,35 @@ namespace App\Http\Controllers\Back;
 
 use App\AjaxResponse;
 use App\Http\Controllers\Controller as BaseController;
+use App\Models\Opponent;
 use App\Repositories\OpponentRepository;
+use App\Traits\GameController;
 use Illuminate\Http\Request;
 use Validator;
 
 class OpponentController extends BaseController
 {
+    use GameController;
+
     /**
      * Ajax call
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Request $request)
+    public function data($game, Request $request)
     {
+        $this->validateGame($game);
         $params = $this->retrieveSortParams($request);
 
-        return response()->json(OpponentRepository::search($request->input('search'), $params['sort'], $params['order']));
+        return response()->json(OpponentRepository::search($request->input('search'), $game, $params['sort'], $params['order']));
     }
 
-    public function index()
+    public function index($game)
     {
-        return view('opponent.manage');
+        $this->validateGame($game);
+
+        return view('opponent.manage', ['game' => $game]);
     }
 
     /**
@@ -33,91 +40,133 @@ class OpponentController extends BaseController
      * @param Request $request
      * @return $this|\Illuminate\Http\JsonResponse
      */
-    public function ajaxCreate(Request $request)
+    public function ajaxCreate($game, Request $request)
     {
-        if (!empty($request->all())) {
-            $validator = Validator::make($request->all(), OpponentRepository::getCreateValidationRules());
+        $this->validateGame($game);
+        $input = $request->all();
+        if ($request->has('game')) {
+            $validator = Validator::make($input, OpponentRepository::getCreateValidationRules());
             if (!$validator->fails()) {
-                $team = OpponentRepository::create($request->all());
+                try {
+                    $tour = OpponentRepository::create($input);
+                } catch (QueryException $ex) {
+                    $request->flash();
 
-                return response()->json(new AjaxResponse(true, $team));
+                    return response()->json(new AjaxResponse(false,
+                        (string)view('opponent.create_modal', ['game' => $game, 'model' => new Opponent()])
+                            ->with('errors', [$ex->getMessage()])
+                    ));
+                }
+
+                return response()->json(new AjaxResponse(true, $tour));
             }
+            $request->flash();
 
-            return response()->json(new AjaxResponse(false, (string)view('opponent.create_model')
-                ->with('input', $request->all())
-                ->with('errors', $validator->errors())));
+            return response()->json(new AjaxResponse(false,
+                (string)view('opponent.create_modal', ['game' => $game, 'model' => new Opponent()])
+                    ->with('errors', $validator->errors())
+            ));
         }
 
-        return view('opponent.create_modal')->with('input', $request->all());
+        return view('opponent.create_modal', ['game' => $game, 'model' => new Opponent()]);
     }
 
     public function delete(Request $request, $id = null)
     {
-        if (empty($request->all())) {
-            $model = OpponentRepository::readWithCount($id);
+        if ($request->has('id')) {
 
+            $model = OpponentRepository::readWithCount($request->input('id'));
             if (!$model) {
                 abort(404);
             }
 
+            $game = $model->game;
             $deletable = $model->matches_count == 0;
+            if (!$deletable) {
+                return redirect()
+                    ->back()
+                    ->with('model', $model)
+                    ->with('deletable', $deletable)
+                    ->withErrors(['This opponent team cannot be deleted.']);
+            }
 
-            return view('opponent.delete')
-                ->with('model', $model)
-                ->with('deletable', $deletable);
+            // Get tournament name for message
+            $name = $model->name;
+
+            try {
+                $model->delete();
+            } catch (QueryException $ex) {
+                return redirect()
+                    ->back()
+                    ->with('model', $model)
+                    ->with('deletable', $deletable)
+                    ->withErrors([$ex->getMessage()]);
+            }
+
+            return redirect()
+                ->route('back.opponents.index', ['game' => $game])
+                ->with('status', 'success')
+                ->with('message', sprintf('Opponent team %s was deleted.', $name));
         }
 
-        $model = OpponentRepository::readWithCount($request->input('id'));
+        $model = OpponentRepository::readWithCount($id);
+
         if (!$model) {
             abort(404);
         }
 
         $deletable = $model->matches_count == 0;
 
-        if (!$deletable) {
-            return view('opponent.delete')
-                ->with('model', $model)
-                ->with('deletable', $deletable);
-        }
-
-        $model->delete();
-
-        return redirect()
-            ->route('back.opponent.index')
-            ->with('status', 'success')
-            ->with('message', trans('success.delete', ['model' => trans('contents.opponent'), 'label' => $model->getAttribute('name')]));
+        return view('opponent.delete')
+            ->with('model', $model)
+            ->with('deletable', $deletable);
     }
 
     public function update(Request $request, $id = null)
     {
-        if (empty($request->all())) {
-            $model = OpponentRepository::read($id);
+        if ($request->has('id')) {
+            $input = $request->all();
+            $model = OpponentRepository::read($input['id']);
             if (!$model) {
                 abort(404);
             }
 
-            return view('opponent.update')->with('model', $model);
+            $game = $model->game;
+
+            $validator = Validator::make($input, OpponentRepository::getUpdateValidationRules($model));
+            if (!$validator->fails()) {
+
+                try {
+                    $repo = new OpponentRepository($model);
+                    $repo->update($input);
+                } catch (QueryException $ex) {
+                    return redirect()
+                        ->back()
+                        ->with('model', $model)
+                        ->with('game', $model->game)
+                        ->withErrors([$ex->getMessage()]);
+                }
+
+                return redirect()
+                    ->route('back.opponents.index', ['game' => $game])
+                    ->with('status', 'success')
+                    ->with('message', sprintf('Opponent team %s was updated.', $model->name));
+            }
+
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('game', $game)
+                ->with('model', $model)
+                ->withErrors($validator->errors());
+
         }
 
-        $attributes = $request->all();
-        $model = OpponentRepository::read($attributes['id']);
+        $model = OpponentRepository::read($id);
         if (!$model) {
             abort(404);
         }
 
-        $validator = Validator::make($attributes, OpponentRepository::getUpdateValidationRules($model));
-        if ($validator->fails()) {
-            return view('opponent.update')
-                ->with('model', $attributes)
-                ->with('errors', $validator->errors());
-        }
-
-        $repo = new OpponentRepository($model);
-        $repo->update($attributes);
-
-        return redirect()
-            ->route('back.opponent.index')
-            ->with('status', 'success')
-            ->with('message', trans('success.updated', ['model' => trans('contents.opponent'), 'label' => $model->getAttribute('name')]));
+        return view('opponent.update', ['model' => $model, 'game' => $model->game]);
     }
 }

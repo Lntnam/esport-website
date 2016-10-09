@@ -1,10 +1,8 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.site_settings'))
+@section('title', 'Site Settings')
 
-@section('page-heading', trans('pages.site_settings'))
-
-@section('breadcrumbs', Breadcrumbs::render('site_settings'))
+@section('page-heading', 'Site Settings')
 
 @section('content')
 
@@ -32,8 +30,8 @@
                     </div>
                 @endforeach
 
-                <button type="submit" class="btn btn-primary">@lang('contents.btn_submit')</button>
-                <button type="reset" class="btn btn-default">@lang('contents.btn_reset')</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-default">Reset</button>
             </form>
         </div>
     </div>

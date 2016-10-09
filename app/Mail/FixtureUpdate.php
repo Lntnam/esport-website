@@ -17,7 +17,7 @@ class FixtureUpdate extends BaseMailer
      */
     public function __construct()
     {
-        $this->actionUrl = URL::route('dota2.fixture.index');
+        $this->actionUrl = route('dota2.fixture.index');
         $this->actionText = trans('contents.btn-call-fixtures');
 
         parent::__construct();

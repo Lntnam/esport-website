@@ -15,32 +15,19 @@ class SiteSettingRepository extends BaseRepository
 
     protected static $modelClassName = SiteSetting::class;
 
-    public static function getCreateValidationRules()
-    {
-        return [];
-    }
-
-    public static function getUpdateValidationRules(Model $model)
-    {
-        return [];
-    }
-
-    public static function create(array $attributes)
-    {
-    }
-
     public static function all($columns = ['*'])
     {
         return SiteSetting::orderBy('order')
-                          ->get();
+            ->get();
     }
 
     public static function save(array $settings)
     {
         $data = [];
         foreach ($settings as $key => $value) {
-            $setting = SiteSetting::find($key);
-            if ($setting && $setting->getAttribute('visible')) {
+            $setting = SiteSetting::withoutGlobalScope('visibility')
+                ->find($key);
+            if ($setting) {
                 $setting->setAttribute('value', $value);
                 $setting->save();
                 $data[] = $setting;
@@ -50,11 +37,18 @@ class SiteSettingRepository extends BaseRepository
         return $data;
     }
 
-    public static function read($key)
+    public static function read($key = null)
     {
-        $setting = SiteSetting::withoutGlobalScope('visibility')
-                              ->find($key);
-        if (!empty($setting)) return $setting->getAttribute('value');
+        if (!empty($key)) {
+            $setting = SiteSetting::withoutGlobalScope('visibility')
+                ->find($key);
+            if (!empty($setting))
+                return $setting->getAttribute('value');
+        }
+        else {
+            return SiteSetting::withoutGlobalScope('visibility')
+                ->get();
+        }
 
         return null;
     }

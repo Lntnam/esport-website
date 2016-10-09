@@ -1,137 +1,193 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nam
- * Date: 03/09/2016
- * Time: 00:12
- */
 namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller as BaseController;
+use App\Models\Match;
 use App\Repositories\MatchRepository;
 use App\Repositories\OpponentRepository;
 use App\Repositories\TournamentRepository;
+use App\Traits\GameController;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Setting;
 use Validator;
 
 class MatchController extends BaseController
 {
-    /**
-     * Ajax call
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function data(Request $request)
-    {
-        $params = $this->retrieveSortParams($request, ['sort'=>'schedule', 'order'=>'desc']);
+    use GameController;
 
-        return response()->json(MatchRepository::query($request->input('search'), $params['sort'], $params['order']));
+    public function index($game)
+    {
+        $this->validateGame($game);
+
+        return view('match.manage', ['game' => $game]);
     }
 
-    public function index()
+    public function data($game, Request $request)
     {
-        return view('match.manage');
+        $this->validateGame($game);
+        $params = $this->retrieveSortParams($request, ['sort' => 'schedule', 'order' => 'desc']);
+
+        return response()->json(MatchRepository::query($request->input('search'), $game, $params['sort'], $params['order']));
     }
 
-    public function create(Request $request)
+    public function create($game, Request $request)
     {
-        // Get select lists
-        $tournaments = TournamentRepository::getList();
-        $opponents = OpponentRepository::getList();
+        $this->validateGame($game);
+        $tournaments = TournamentRepository::getList($game);
+        $opponents = OpponentRepository::getList($game);
 
-        if (!empty($request->all())) {
-            $attributes = $request->all();
-            $validator = Validator::make($attributes, MatchRepository::getCreateValidationRules());
+        if ($request->has('game')) {
+
+            $input = $request->all();
+            $validator = Validator::make($input, MatchRepository::getCreateValidationRules());
             if (!$validator->fails()) {
-                $match = MatchRepository::create($attributes);
+
+                try {
+                    $match = MatchRepository::create($input);
+                } catch (QueryException $ex) {
+                    return redirect()
+                        ->back()
+                        ->withErrors([$ex->getMessage()])
+                        ->withInput()
+                        ->with('tournaments', $tournaments)
+                        ->with('opponents', $opponents);
+                }
 
                 // Set flag to send fixture today
                 Setting::set('fixtures_send_today', 1);
 
+                // Get opponent name for message
+                $opponent_name = 'TBD';
+                if (!empty($match->opponent)) {
+                    $opponent_name = $match->opponent->name;
+                }
+
+                // Success
                 return redirect()
-                    ->route('back.match.index')
+                    ->route('back.fixtures.index', ['game' => $game])
                     ->with('status', 'success')
-                    ->with('message', trans('success.created', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
+                    ->with('message', sprintf('Match against %s was created.', $opponent_name));
             }
 
-            return view('match.create')
-                ->with('model', $attributes)
-                ->with('errors', $validator->errors())
+            // Validation fails
+            return redirect()
+                ->back()
+                ->withErrors($validator->errors())
+                ->withInput()
                 ->with('tournaments', $tournaments)
                 ->with('opponents', $opponents);
         }
 
-        return view('match.create')
-            ->with('model', $request->all())
-            ->with('tournaments', $tournaments)
-            ->with('opponents', $opponents);
+        return view('match.create', [
+            'game' => $game,
+            'model' => new Match(),
+            'tournaments' => $tournaments,
+            'opponents' => $opponents
+        ]);
     }
 
     public function delete(Request $request, $id = null)
     {
-        if (empty($request->all())) {
-            $match = MatchRepository::read($id);
+        if ($request->has('id')) {
+            $input = $request->all();
+            $id = $input['id'];
 
+            $match = MatchRepository::read($id);
             if (!$match) {
                 abort(404);
             }
 
-            return view('match.delete')->with('model', array_merge($match->getAttributes(), ['formatted_schedule' => $match->getAttribute('formatted_schedule')]));
+            $game = $match->game;
+            // Get opponent name for message
+            $opponent_name = 'TBD';
+            if (!empty($match->opponent)) {
+                $opponent_name = $match->opponent->name;
+            }
+
+            try {
+                $match->delete();
+            }
+            catch (QueryException $ex) {
+                return redirect()
+                    ->back()
+                    ->withErrors([$ex->getMessage()])
+                    ->withInput();
+            }
+
+            return redirect()
+                ->route('back.fixtures.index', ['game' => $game])
+                ->with('status', 'success')
+                ->with('message', sprintf('Match against %s was deleted.', $opponent_name));
         }
 
-        $match = MatchRepository::read($request->input('id'));
+        $match = MatchRepository::read($id);
+
         if (!$match) {
             abort(404);
         }
-
-        $match->delete();
-
-        return redirect()
-            ->route('back.match.index')
-            ->with('status', 'success')
-            ->with('message', trans('success.deleted', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
+        return view('match.delete', ['model' => $match, 'game' => $match->game]);
     }
 
     public function update(Request $request, $id = null)
     {
-        $tournaments = TournamentRepository::getList();
-        $opponents = OpponentRepository::getList();
-
-        if (empty($request->all())) {
-            $match = MatchRepository::read($id);
+        if ($request->has('id')) {
+            $input = $request->all();
+            $match = MatchRepository::read($input['id']);
             if (!$match) {
                 abort(404);
             }
+            $tournaments = TournamentRepository::getList($match->game);
+            $opponents = OpponentRepository::getList($match->game);
 
-            return view('match.update')
-                ->with('model', $match)
+            $validator = Validator::make($input, MatchRepository::getUpdateValidationRules($match));
+            if (!$validator->fails()) {
+                try {
+                    $repo = new MatchRepository($match);
+                    $repo->update($input);
+                } catch (QueryException $ex) {
+                    return redirect()
+                        ->back()
+                        ->withErrors([$ex->getMessage()])
+                        ->withInput()
+                        ->with('tournaments', $tournaments)
+                        ->with('opponents', $opponents);
+                }
+
+                // Get opponent name for message
+                $opponent_name = 'TBD';
+                if (!empty($match->opponent)) {
+                    $opponent_name = $match->opponent->name;
+                }
+
+                // Success
+                return redirect()
+                    ->route('back.fixtures.index', ['game' => $match->game])
+                    ->with('status', 'success')
+                    ->with('message', sprintf('Match against %s was updated.', $opponent_name));
+            }
+
+            // Validation fails
+            return redirect()
+                ->back()
+                ->withErrors($validator->errors())
+                ->withInput()
                 ->with('tournaments', $tournaments)
                 ->with('opponents', $opponents);
         }
 
-        $attributes = $request->all();
-        $match = MatchRepository::read($attributes['id']);
+        $match = MatchRepository::read($id);
         if (!$match) {
             abort(404);
         }
 
-        $validator = Validator::make($attributes, MatchRepository::getUpdateValidationRules($match));
-        if ($validator->fails()) {
-            return view('match.update')
-                ->with('model', $attributes)
-                ->with('errors', $validator->errors())
-                ->with('tournaments', $tournaments)
-                ->with('opponents', $opponents);
-        }
+        $tournaments = TournamentRepository::getList($match->game);
+        $opponents = OpponentRepository::getList($match->game);
 
-        $repo = new MatchRepository($match);
-        $repo->update($attributes);
-
-        return redirect()
-            ->route('back.match.index')
-            ->with('status', 'success')
-            ->with('message', trans('success.updated', ['model' => trans('contents.match'), 'label' => $match->getAttribute('formatted_schedule')]));
+        return view('match.update')
+            ->with('model', $match)
+            ->with('game', $match->game)
+            ->with('tournaments', $tournaments)
+            ->with('opponents', $opponents);
     }
 }

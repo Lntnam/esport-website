@@ -36,7 +36,7 @@ class SettingController extends BaseController
         $request->session()
                 ->flash('status', 'success');
         $request->session()
-                ->flash('message', trans('success.site_setting_updated'));
+                ->flash('message', 'Site settings were updated.');
 
         return view('back.site_settings')->with('settings', $settings);
     }

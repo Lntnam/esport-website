@@ -63,7 +63,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">@lang('pages.back_toggle_nav')</span>
+                <span class="sr-only">nav toggle</span>
                 <span class="icon-bar">dummy 1</span>
                 <span class="icon-bar">dummy 1</span>
                 <span class="icon-bar">dummy 1</span>
@@ -113,17 +113,8 @@
                     {{ Auth::user() ? Auth::user()->name : 'unknown' }} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i
-                                    class="fa fa-fw fa-user"></i> @lang('pages.profile')</a>
-                    </li>
-                    <li>
-                        <a href="#"><i
-                                    class="fa fa-fw fa-gear"></i> @lang('pages.settings')</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
                         <a href="{!! route('back.logout') !!}"><i
-                                    class="fa fa-fw fa-power-off"></i> @lang('pages.logout')</a>
+                                    class="fa fa-fw fa-power-off"></i> Logout</a>
                     </li>
                 </ul>
             </li>
@@ -131,53 +122,47 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <!-- other icons:
-                fa-bar-chart-o
-                fa-table
-                fa-edit
-                fa-desktop
-                fa-wrench
-                fa-arrows-v
-                fa-caret-down
-                fa-file
-                 -->
                 <li>
                     <a href="{!! route('back.dashboard') !!}"><i
-                                class="fa fa-fw fa-dashboard"></i> @lang('pages.back_dashboard')</a>
+                                class="fa fa-fw fa-dashboard"></i> Staff Dashboard</a>
                 </li>
                 <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#fixtures">
-                        <i class="fa fa-fw fa-wrench"></i> @lang('pages.back_fixtures')
+                    <a href="javascript:;" data-toggle="collapse" data-target="#dota2">
+                        <i class="fa fa-fw fa-trophy"></i> DotA 2
                         <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="fixtures" class="collapse">
+                    <ul id="dota2" class="collapse">
                         <li>
-                            <a href="{!! route('back.match.index') !!}"><i
-                                        class="fa fa-fw fa-table"></i> @lang('pages.manage', ['model' => trans('contents.match')])</a>
+                            <a href="{!! route('back.fixtures.index', ['game' => 'dota2']) !!}"><i
+                                        class="fa fa-fw fa-calendar"></i> Fixtures & results</a>
                         </li>
                         <li>
-                            <a href="{!! route('back.tournament.index') !!}"><i
-                                        class="fa fa-fw fa-table"></i> @lang('pages.manage', ['model' => trans('contents.tournament')])</a>
+                            <a href="{!! route('back.tournaments.index', ['game' => 'dota2']) !!}"><i
+                                        class="fa fa-fw fa-trophy"></i> Tournaments</a>
                         </li>
                         <li>
-                            <a href="{!! route('back.opponent.index') !!}"><i
-                                        class="fa fa-fw fa-table"></i> @lang('pages.manage', ['model' => trans('contents.opponent')])</a>
+                            <a href="{!! route('back.opponents.index', ['game' => 'dota2']) !!}"><i
+                                        class="fa fa-fw fa-bomb"></i> Opponents</a>
                         </li>
                     </ul>
                 </li>
                 @if (session('root'))
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo">
-                            <i class="fa fa-fw fa-wrench"></i> @lang('pages.back_restricted')
+                            <i class="fa fa-fw fa-wrench"></i> Restricted
                             <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="{!! route('back.staff.index') !!}">@lang('pages.manage', ['model' => trans('contents.staff')])</a>
+                                <a href="{!! route('back.staff.index') !!}"> Staffs</a>
                             </li>
                             <li>
-                                <a href="{!! route('back.content_block.index') !!}">@lang('pages.manage', ['model' => trans('contents.content_block')])</a>
+                                <a href="{!! route('back.content_block.index') !!}"> Content Blocks</a>
                             </li>
                             <li>
-                                <a href="{!! route('back.siteSettings') !!}">@lang('pages.site_settings')</a>
+                                <a href="{!! route('back.siteSettings') !!}"> Site Settings</a>
+                            </li>
+                            <li>
+                                <a href="{!! route('back.donation.index') !!}"><i class="fa fa-fw fa-heart-o"></i>
+                                    Donation</a>
                             </li>
                         </ul>
                     </li>
@@ -198,7 +183,6 @@
                         @yield('page-heading')
                         <small>@yield('page-sub-heading')</small>
                     </h1>
-                    @yield('breadcrumbs')
                 </div>
             </div>
             <!-- /.row -->

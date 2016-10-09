@@ -1,5 +1,5 @@
 <div class="col-lg-6">
-    <form role="form" method="post" action="{!! URL::route('subscription.create') !!}">
+    <form role="form" method="post" action="{!! route('subscription.create') !!}">
         {{ csrf_field() }}
         <input type="hidden" name="interests[{{ $interest }}]" value="1">
         <div class="form-group">

@@ -9,7 +9,7 @@ class OpponentRepository extends BaseRepository
 
     protected static $modelClassName = Opponent::class;
 
-    protected static $allowedForCreate = ['name', 'short', 'country', 'flag'];
+    protected static $allowedForCreate = ['name', 'short', 'country', 'flag', 'game'];
 
     protected static $allowedForUpdate = ['name', 'short', 'country', 'flag'];
 
@@ -44,29 +44,30 @@ class OpponentRepository extends BaseRepository
     public static function query($sort = 'name', $order = 'asc')
     {
         return Opponent::orderBy($sort, $order)
-                       ->get();
+            ->get();
     }
 
-    public static function search($keyword, $sort = 'name', $order = 'asc')
+    public static function search($keyword, $game, $sort = 'name', $order = 'asc')
     {
         return Opponent::search($keyword)
-                       ->withCount('matches')
-                       ->orderBy($sort, $order)
-                       ->get();
+            ->where('game', $game)
+            ->withCount('matches')
+            ->orderBy($sort, $order)
+            ->get();
     }
 
     public static function readWithCount($id)
     {
         return Opponent::withCount('matches')
-                       ->where('id', $id)
-                       ->first();
+            ->where('id', $id)
+            ->first();
     }
 
     public static function getList()
     {
         $opps = Opponent::select('id', 'name')
-                        ->orderBy('name', 'asc')
-                        ->get();
+            ->orderBy('name', 'asc')
+            ->get();
         $array = [];
         foreach ($opps as $t) {
             $array[$t->id] = $t->name;

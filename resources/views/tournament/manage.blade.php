@@ -1,14 +1,12 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.manage', ['model' => trans('contents.tournament')]))
+@section('title', Setting::getMasterListValue('back_games', $game) . ' Tournaments')
 
 @section('head')
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-table.min.css') }}"/>
 @stop
 
-@section('page-heading', trans('pages.manage', ['model' => trans('contents.tournament')]))
-
-@section('breadcrumbs', Breadcrumbs::render('manage_tournaments'))
+@section('page-heading', Setting::getMasterListValue('back_games', $game) . ' Tournaments')
 
 @section('content')
 
@@ -20,38 +18,6 @@
     <script type="text/javascript" src="{{ URL::asset('js/bootstrap-table.min.js') }}"></script>
     <script type="text/javascript">
         $('#grid').bootstrapTable({
-            // Localization //
-            formatLoadingMessage: function () {
-                return '@lang('table.loading')';
-            },
-            formatRecordsPerPage: function (pageNumber) {
-                return '@lang('table.record-per-page')'.replace('%1', pageNumber);
-            },
-            formatShowingRows: function (pageFrom, pageTo, totalRows) {
-                return '@lang('table.showing-rows')'.replace('%1', pageFrom).replace('%2', pageTo).replace('%3', totalRows);
-            },
-            formatDetailPagination: function (totalRows) {
-                return '@lang('table.detail-pagination')'.replace('%1', totalRows);
-            },
-            formatSearch: function () {
-                return '@lang('table.search')';
-            },
-            formatNoMatches: function () {
-                return '@lang('table.no-matches')';
-            },
-            formatRefresh: function () {
-                return '@lang('table.refresh')';
-            },
-            formatToggle: function () {
-                return '@lang('table.toggle')';
-            },
-            formatColumns: function () {
-                return '@lang('table.columns')';
-            },
-            formatAllRows: function () {
-                return '@lang('table.all-rows')';
-            },
-
             // Style //
             classes: 'table table-no-bordered table-hover',
             striped: true,
@@ -74,12 +40,12 @@
             uniqueId: 'id',
             sortName: 'name',
             sortOrder: 'asc',
-            url: '{{ route('back.tournament.gridData') }}',
+            url: '{{ route('back.tournaments.gridData', ['game' => $game]) }}',
             escape: true,
 
             // Column Definitions //
             columns: [{
-                title: '@lang('table.col-no')',
+                title: 'No.',
                 width: 60,
                 formatter: function (value, row, index) {
                     return index + 1;
@@ -87,52 +53,52 @@
             }, {
                 field: 'name',
                 width: 400,
-                title: '@lang('contents.tour-name')'
+                title: 'Tournament Name'
             }, {
                 field: 'short',
                 width: 300,
-                title: '@lang('contents.tour-short')'
+                title: 'Short Name'
             }, {
                 field: 'type',
                 width: 300,
-                title: '@lang('contents.tour-type')',
+                title: 'Type',
                 formatter: function(value) {
                     return value.toUpperCase();
                 }
             }, {
                 field: 'homepage',
                 width: 300,
-                title: '@lang('contents.tour-homepage')',
+                title: 'Info Link',
                 formatter: function(value) {
                     if (value != '')
-                        return '<a href="'+value+'" title="" target="_blank">@lang('contents.tour-homepage')</a>';
+                        return '<a href="'+value+'" title="" target="_blank">Link</a>';
                     else
                         return '';
                 }
             }, {
                 field: 'bracket',
                 width: 300,
-                title: '@lang('contents.tour-bracket')',
+                title: 'Bracket Link',
                 formatter: function(value) {
                     if (value != '')
-                        return '<a href="'+value+'" title="" target="_blank">@lang('contents.tour-bracket')</a>';
+                        return '<a href="'+value+'" title="" target="_blank">Link</a>';
                     else
                         return '';
                 }
             }, {
-                title: '@lang('table.col-command')',
+                title: 'Commands',
                 width: 100,
                 align: 'center',
                 formatter: function (value, row) {
                     return [
                         '<a class="btn-sm" href="' +
-                        '{!! route('back.tournament.update', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
-                        '" title="@lang('contents.btn-update')">' +
+                        '{!! route('back.tournaments.update', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
+                        '" title="update">' +
                         '<i class="glyphicon glyphicon-edit"></i></a>',
 
                         '<a class="btn-sm" href="' +
-                        '{!! route('back.tournament.delete', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
-                        '" title="@lang('contents.btn_delete')">' +
+                        '{!! route('back.tournaments.delete', ['id'=>'_id_']) !!}'.replace('_id_', row.id) +
+                        '" title="delete">' +
                         '<i class="glyphicon glyphicon-remove"></i></a>'
                     ].join('');
                 }

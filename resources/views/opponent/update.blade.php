@@ -1,58 +1,26 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.update', ['model'=>'opponent']))
+@section('title', 'Updating ' . Setting::getMasterListValue('back_games', $game) . ' Opponent')
 
-@section('page-heading', trans('pages.update', ['model'=>'opponent']))
+@section('page-heading', 'Updating ' . Setting::getMasterListValue('back_games', $game) . ' Opponent')
 
-@section('page-sub-heading')
-    @if (!empty($model))
-        {{ $model['name'] }}
-    @endif
-@stop
-
-@section('breadcrumbs', Breadcrumbs::render('update_opponent', $model))
+@section('page-sub-heading', $model->name)
 
 @section('content')
     <div class="row">
         <div class="col-lg-6">
-            <form role="form" method="post" action="{!! URL::route('back.opponent.doUpdate') !!}">
+            <form role="form" method="post" action="{!! route('back.opponents.doUpdate') !!}">
                 {{ csrf_field() }}
-                <input type="hidden" name="id" value="{{ $model['id'] }}">
-                <div class="form-group">
-                    <label for="nameInput">@lang('contents.team-name')</label>
-                    <input id="nameInput" type="text" class="form-control" name="name"
-                           value="{{ !empty($model) ? $model['name'] : '' }}"/>
-                </div>
+                <input type="hidden" name="id" value="{{ old('id', $model->id) }}">
 
-                <div class="form-group">
-                    <label for="short">@lang('contents.team-short')</label>
-                    <input id="short" type="text" class="form-control" name="short"
-                           value="{{ !empty($model) ? $model['short'] : '' }}"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="country">@lang('contents.team-country')</label>
-                    {!! Form::select('country',
-                        \CountryList::getList(\App::getLocale()),
-                        !empty($model) ? $model['country'] : null,
-                        ['class'=>'form-control'])
-                    !!}
-                </div>
+                @include('opponent._form')
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">@lang('contents.btn_submit')</button>
                     <button type="reset" class="btn btn-default">@lang('contents.btn_reset')</button>
-                    <button type="button" class="btn btn-link">@lang('contents.btn_back')</button>
+                    <a href="{{ route('back.tournaments.index', ['game' => $model->game]) }}" type="button" class="btn btn-link">&laquo; Back</a>
                 </div>
             </form>
         </div>
     </div>
-@stop
-
-@section('foot')
-    <script type="text/javascript">
-        $('.btn-link').click(function () {
-            window.location.href = '{{ route('back.opponent.index') }}'
-        });
-    </script>
 @stop

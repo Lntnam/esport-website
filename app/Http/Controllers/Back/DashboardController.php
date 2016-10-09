@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller as BaseController;
 
 class DashboardController extends BaseController
 {
-    public function getDashboard()
+    public function index()
     {
         return view('back.dashboard');
     }

@@ -1,15 +1,13 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.create', ['model'=>'match']))
+@section('title', 'Create ' . Setting::getMasterListValue('back_games', $game) . ' Match')
 
 @section('head')
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-datetimepicker.min.css') }}"/>
     <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.min.css') }}"/>
 @stop
 
-@section('page-heading', trans('pages.create', ['model'=>'match']))
-
-@section('breadcrumbs', Breadcrumbs::render('create_match'))
+@section('page-heading', 'Create ' . Setting::getMasterListValue('back_games', $game) . ' Match')
 
 @section('content')
     <!-- Add tournament modal -->
@@ -20,7 +18,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"
-                        id="myModalLabel">@lang('contents.modal_add_title', ['model'=>'tournament'])</h4>
+                        id="myModalLabel">Create {{ Setting::getMasterListValue('back_games', $game) }} Tournament</h4>
                 </div>
                 <div class="modal-body">
                 </div>
@@ -40,7 +38,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"
-                        id="myModalLabel">@lang('contents.modal_add_title', ['model'=>'opponent'])</h4>
+                        id="myModalLabel">Create {{ Setting::getMasterListValue('back_games', $game) }} Opponent</h4>
                 </div>
                 <div class="modal-body">
                 </div>
@@ -56,101 +54,9 @@
         <div class="col-lg-6">
             <form role="form" method="post">
                 {{ csrf_field() }}
-                <div class="form-group">
-                    <label for="schedule">@lang('contents.match-schedule')</label>
-                    <div class="input-group date" id="schedulepicker">
-                        <input type="text" class="form-control" name="schedule"
-                               placeholder="{{ \Carbon\Carbon::now(config('settings.default_timezone'))
-                               ->format(config('settings.match_format')) }}"
-                               value="{{ !empty($model) ? $model['formatted_schedule'] : '' }}"/>
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
+                <input type="hidden" name="game" value="{{ $game }}">
 
-                <div class="form-group">
-                    <label for="timezone">@lang('contents.timezone')</label>
-                    {!! Timezone::selectForm(
-                        !empty($model['timezone']) ? $model['timezone'] : config('settings.default_timezone'),
-                        null,
-                        ['class'=>'form-control', 'name'=>'timezone']
-                        )
-                    !!}
-                </div>
-
-                <div class="form-group">
-                    <label for="tournament_id">@lang('contents.match-tour')</label>
-                    <div class="input-group" id="groupTournament">
-                        {!! Form::select('tournament_id',
-                            $tournaments,
-                            !empty($model['tournament_id']) ? $model['tournament_id'] : null,
-                            ['placeholder'=>trans('contents.match-tour-default'), 'id'=>'tournament'])
-                        !!}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="opponent_id">@lang('contents.match-opponent')</label>
-                    <div class="input-group" id="groupOpponent">
-                        {!! Form::select('opponent_id',
-                            $opponents,
-                            !empty($model) ? $model['opponent_id'] : null,
-                            ['placeholder'=>trans('contents.match-opponent-default'), 'id'=>'opponent'])
-                        !!}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="games">@lang('contents.match-best-of')</label>
-                    {!! Form::select('games', [1=>1, 2=>2, 3=>3, 5=>5, 7=>7], !empty($model) ? $model['games'] : 1, ['class'=>'form-control']) !!}
-                </div>
-
-                <div class="form-group">
-                    <label for="stream">@lang('contents.match_stream')</label>
-                    <input id="stream" type="url" class="form-control" name="stream"
-                           value="{{ !empty($model) ? $model['stream'] : '' }}"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="round">@lang('contents.match_round')</label>
-                    <input id="round" type="text" class="form-control" name="round"
-                           placeholder="Qualifier / Play-off / Main event"
-                           value="{{ !empty($model) ? $model['round'] : '' }}"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="result">@lang('contents.match-result')</label>
-                    <div class="input-group">
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" name="for"
-                                   placeholder="@lang('contents.match-for-holder')"
-                                   value="{{ !empty($model) ? $model['for'] : '' }}"/>
-                        </div>
-                        <div class="col-md-1">
-                            <span class="glyphicon glyphicon-minus" style="margin-top: 8px;"></span>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="number" class="form-control" name="against"
-                                   placeholder="@lang('contents.match-against-holder')"
-                                   value="{{ !empty($model) ? $model['against'] : '' }}"/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="checkbox">
-                    <label>
-                        <input type="hidden" name="over" value="0">
-                        <input type="checkbox" name="over"
-                               value="1" {{ !empty($model) ? ($model['over'] ? 'checked="checked"' : '' ) : '' }}>
-                        @lang('contents.match-over')</label>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">@lang('contents.btn_submit')</button>
-                    <button type="reset" class="btn btn-default">@lang('contents.btn_reset')</button>
-                    <button type="button" class="btn btn-link">@lang('contents.btn_back')</button>
-                </div>
+                @include('match._form')
             </form>
         </div>
     </div>
@@ -162,9 +68,6 @@
     <script type="text/javascript" src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{!! URL::asset('js/combobox.js') !!}"></script>
     <script type="text/javascript">
-        $('.btn-link').click(function () {
-            window.location.href = '{{ route('back.match.index') }}'
-        });
         $('#schedulepicker').datetimepicker({
             format: '{{ config('settings.match_picker_format') }}',
             stepping: 5,
@@ -177,8 +80,6 @@
         var tournament = $('#tournament');
 
         tournament.combobox({
-            showAllItems: '@lang('contents.btn_combo_show_all')',
-            didNotMatch: "@lang('messages.combo-did-not-match')",
             ifInvalid: function (value) {
                 modal.find('.btn-primary').hide();
                 modal.modal();
@@ -189,14 +90,14 @@
                     }
                 });
 
-                modal.find('.modal-body').load('{!! URL::route('back.tournament.ajaxCreate') !!}', function () {
+                modal.find('.modal-body').load('{!! route('back.tournaments.ajaxCreate', ['game' => $game]) !!}', function () {
                     // Set default name
                     modal.find('#nameInput').val(value);
 
                     // Assign submit event
                     modal.find('.btn-primary').off('click');
                     modal.find('.btn-primary').on('click', function () {
-                        $.post('{!! URL::route('back.tournament.ajaxCreate') !!}', // URL
+                        $.post('{!! route('back.tournaments.ajaxCreate', ['game' => $game]) !!}', // URL
                                 modal.find('.modal-body').find('form').serialize() // data
                         ).done(function (data) { // complete handler
                             if (data.success) {
@@ -235,8 +136,6 @@
         var opponent = $('#opponent');
 
         opponent.combobox({
-            showAllItems: '@lang('contents.btn_combo_show_all')',
-            didNotMatch: "@lang('messages.combo-did-not-match')",
             ifInvalid: function (value) {
                 modal.find('.btn-primary').hide();
                 modal.modal();
@@ -247,14 +146,14 @@
                     }
                 });
 
-                modal.find('.modal-body').load('{!! URL::route('back.opponent.ajaxCreate') !!}', function () {
+                modal.find('.modal-body').load('{!! route('back.opponents.ajaxCreate', ['game' => $game]) !!}', function () {
                     // Set default name
                     modal.find('#nameInput').val(value);
 
                     // Assign submit event
                     modal.find('.btn-primary').off('click');
                     modal.find('.btn-primary').on('click', function () {
-                        $.post('{!! URL::route('back.opponent.ajaxCreate') !!}', // URL
+                        $.post('{!! route('back.opponents.ajaxCreate', ['game' => $game]) !!}', // URL
                                 modal.find('.modal-body').find('form').serialize() // data
                         ).done(function (data) { // complete handler
                             if (data.success) {

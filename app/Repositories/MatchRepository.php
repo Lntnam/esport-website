@@ -16,7 +16,7 @@ class MatchRepository extends BaseRepository
 
     protected static $modelClassName = Match::class;
 
-    protected static $allowedForCreate = ['tournament_id', 'opponent_id', 'for', 'against', 'games', 'over', 'stream', 'round'];
+    protected static $allowedForCreate = ['tournament_id', 'opponent_id', 'for', 'against', 'games', 'over', 'stream', 'round', 'game'];
 
     protected static $allowedForUpdate = ['tournament_id', 'opponent_id', 'for', 'against', 'games', 'over', 'stream', 'round'];
 
@@ -47,20 +47,21 @@ class MatchRepository extends BaseRepository
                 $match->setAttribute($field, $value);
             }
         }
-        $match->setAttribute('schedule', Carbon::createFromFormat(config('settings.match_format'), $attributes['schedule'], $attributes['timezone'])
-                                               ->tz(config('app.timezone')));
+        $match->setAttribute('schedule', Carbon::createFromFormat(config('settings.match_format'), $attributes['schedule'], config('settings.default_timezone'))
+            ->tz(config('app.timezone')));
         $match->save();
 
         return $match;
     }
 
-    public static function query($keyword, $sort = 'schedule', $order = 'desc')
+    public static function query($keyword, $game, $sort = 'schedule', $order = 'desc')
     {
         return Match::search($keyword)
-                    ->with('tournament')
-                    ->with('opponent')
-                    ->orderBy($sort, $order)
-                    ->get();
+            ->where('game', $game)
+            ->with('tournament')
+            ->with('opponent')
+            ->orderBy($sort, $order)
+            ->get();
     }
 
     public function update($attributes)
@@ -73,8 +74,8 @@ class MatchRepository extends BaseRepository
                 $this->model->setAttribute($field, $value);
             }
         }
-        $this->model->setAttribute('schedule', Carbon::createFromFormat(config('settings.match_format'), $attributes['schedule'], $attributes['timezone'])
-                                                     ->tz(config('app.timezone')));
+        $this->model->setAttribute('schedule', Carbon::createFromFormat(config('settings.match_format'), $attributes['schedule'], config('settings.default_timezone'))
+            ->tz(config('app.timezone')));
         $this->model->save();
     }
 
@@ -82,31 +83,31 @@ class MatchRepository extends BaseRepository
     {
         /* current ly getting Today's matches */
         return Match::where([['over', false], ['schedule', '<=', Carbon::today()
-                                                                       ->endOfDay()
-                                                                       ->toDateTimeString()]])
-                    ->with('tournament')
-                    ->with('opponent')
-                    ->orderBy('schedule', 'asc')
-                    ->get();
+            ->endOfDay()
+            ->toDateTimeString()]])
+            ->with('tournament')
+            ->with('opponent')
+            ->orderBy('schedule', 'asc')
+            ->get();
     }
 
     public static function getUpcomingMatches()
     {
         return Match::where([['over', false], ['schedule', '>=', Carbon::tomorrow()
-                                                                       ->toDateTimeString()]])
-                    ->with('tournament')
-                    ->with('opponent')
-                    ->orderBy('schedule', 'asc')
-                    ->get();
+            ->toDateTimeString()]])
+            ->with('tournament')
+            ->with('opponent')
+            ->orderBy('schedule', 'asc')
+            ->get();
     }
 
     public static function getRecentMatches($offset = 0, $limit = 0)
     {
         $builder = Match::where('over', true)
-                        ->with('tournament')
-                        ->with('opponent')
-                        ->orderBy('schedule', 'desc')
-                        ->offset($offset);
+            ->with('tournament')
+            ->with('opponent')
+            ->orderBy('schedule', 'desc')
+            ->offset($offset);
         if ($limit) {
             $builder->limit($limit);
         }
@@ -117,7 +118,7 @@ class MatchRepository extends BaseRepository
     public static function getMatchesCountByResult($compare, $month = null)
     {
         $builder = Match::whereColumn('for', $compare, 'against')
-                        ->where('over', true);
+            ->where('over', true);
         if (!empty($month)) {
             $builder = $builder->whereMonth('schedule', '=', $month);
         }
@@ -128,16 +129,16 @@ class MatchRepository extends BaseRepository
     public static function getRecentMatchesCount()
     {
         return Match::where('over', true)
-                    ->count();
+            ->count();
     }
 
     public static function getUpcomingMatchesInRange(Carbon $endDate)
     {
         return Match::where([['over', false], ['schedule', '>', Carbon::now(config('app.timezone'))
-                                                                      ->toDateTimeString()], ['schedule', '<=', $endDate->toDateTimeString()]])
-                    ->with('tournament')
-                    ->with('opponent')
-                    ->orderBy('schedule', 'asc')
-                    ->get();
+            ->toDateTimeString()], ['schedule', '<=', $endDate->toDateTimeString()]])
+            ->with('tournament')
+            ->with('opponent')
+            ->orderBy('schedule', 'asc')
+            ->get();
     }
 }

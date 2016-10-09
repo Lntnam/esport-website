@@ -1,32 +1,26 @@
 @extends('layouts.back')
 
-@section('title', trans('pages.delete', ['model'=>'opponent']))
+@section('title', 'Deleting ' . Setting::getMasterListValue('back_games', $model->game) . ' Opponent')
 
-@section('page-heading', trans('pages.delete', ['model'=>'opponent']))
+@section('page-heading', 'Deleting ' . Setting::getMasterListValue('back_games', $model->game) . ' Opponent')
 
-@section('page-sub-heading')
-    @if (!empty($model))
-        {{ $model['name'] }}
-    @endif
-@stop
-
-@section('breadcrumbs', Breadcrumbs::render('delete_opponent', $model))
+@section('page-sub-heading', $model->name)
 
 @section('content')
 
     @if ($deletable)
         <div class="row">
             <div class="col-lg-6">
-                <form role="form" method="post" action="{{ route('back.opponent.doDelete') }}">
+                <form role="form" method="post" action="{{ route('back.opponents.doDelete') }}">
                     {{ csrf_field() }}
-                    <input type="hidden" name="id" value="{{ $model['id'] }}">
+                    <input type="hidden" name="id" value="{{ $model->id }}">
                     <div class="jumbotron">
-                        <h3><strong>{{ $model['name'] }}</strong></h3>
-                        <p>@lang('messages.delete_message_1')</p>
-                        <p>@lang('messages.delete_message_2')</p>
+                        <h3><strong>{{ $model->name }}</strong></h3>
+                        <p>Is about to be deleted.</p>
+                        <p>This action is irreversible! Are you sure to continue?</p>
                         <p>
-                            <button type="submit" class="btn btn-danger">@lang('contents.btn_delete')</button>
-                            <button type="button" class="btn btn-link">@lang('contents.btn_back')</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <a href="{{ route('back.opponents.index', ['game' => $model->game]) }}" type="button" class="btn btn-link">&laquo; Back</a>
                         </p>
                     </div>
                 </form>
@@ -36,21 +30,13 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="jumbotron">
-                    <h3><strong>{{ $model['name'] }}</strong></h3>
-                    <p>@lang('messages.cannot_delete')</p>
+                    <h3><strong>{{ $model->name }}</strong></h3>
+                    <p>This opponent cannot be deleted.</p>
                     <p>
-                        <button type="button" class="btn btn-link">@lang('contents.btn_back')</button>
+                        <a href="{{ route('back.opponents.index', ['game' => $model->game]) }}" type="button" class="btn btn-link">&laquo; Back</a>
                     </p>
                 </div>
             </div>
         </div>
     @endif
-@stop
-
-@section('foot')
-    <script type="text/javascript">
-        $('.btn-link').click(function () {
-            window.location.href = '{{ route('back.opponent.index') }}'
-        });
-    </script>
 @stop

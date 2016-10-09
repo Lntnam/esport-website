@@ -109,14 +109,8 @@ return [
     */
 
     'attributes' => [
-        'email'             => 'email',
-        'name'              => 'tên đầy đủ',
-        'tournament_id'     => 'giải đấu',
-        'opponent_id'       => 'đối thủ',
     ],
 
     'error'                 => 'Oops! đã có lỗi xảy ra.',
-    'updating-not-allowed'  => 'Không được phép cập nhật [:attribute].',
-    'not-found'             => 'Không tìm thấy :model.',
     'interests'             => 'Bạn phải chọn ít nhất một nội dung để nhận tin.',
 ];

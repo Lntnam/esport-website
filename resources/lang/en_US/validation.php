@@ -109,14 +109,8 @@ return [
     */
 
     'attributes' => [
-        'email'             => 'email',
-        'name'              => 'full name',
-        'tournament_id'     => 'tournament',
-        'opponent_id'       => 'opponent',
     ],
 
     'error'                 => 'Oops! something went wrong.',
-    'updating-not-allowed'  => 'Updating of [:attribute] is not allowed.',
-    'not-found'             => 'The :model cannot be found.',
     'interests'             => 'You must choose at least one item to get update.',
 ];

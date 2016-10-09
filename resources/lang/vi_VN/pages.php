@@ -16,32 +16,6 @@ return [
 
     'login'                             => 'Đăng Nhập',
     'logout'                            => 'Đăng Xuất',
-    'back_toggle_nav'                   => 'Toggle Navigation',
-
-    'profile'                           => 'Hồ Sơ',
-    'settings'                          => 'Thiết Lập',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Layout Texts for Back End
-    |--------------------------------------------------------------------------
-    */
-    'back_dashboard'                    => 'Staff Dashboard',
-
-    'back_restricted'                   => 'Restricted Area',
-
-    'back_fixtures'                     => 'Lịch Đấu',
-    'manage_matches'                    => 'Quản Lý Trận Đấu',
-    'manage_tournaments'                => 'Quản Lý Giải Đấu',
-    'manage_opponents'                  => 'Quản Lý Đối Thủ',
-    'manage_staffs'                     => 'Quản Lý Nhân Viên',
-    'site_settings'                     => 'Site Settings',
-
-    // Action pages
-    'manage'                            => 'Quản lý :Model',
-    'delete'                            => 'Đang xóa :Model',
-    'create'                            => 'Đang tạo :Model',
-    'update'                            => 'Đang sửa :Model',
 
     /*
     |--------------------------------------------------------------------------
