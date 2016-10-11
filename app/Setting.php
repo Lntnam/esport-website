@@ -29,7 +29,8 @@ class Setting
 
     public function get($key)
     {
-        if (!isset($this->cache[$key])) return null;
+        if (!isset($this->cache[$key]))
+            return null;
 
         return $this->cache[$key];
     }
@@ -43,7 +44,8 @@ class Setting
         }
     }
 
-    public function server($key) {
+    public function server($key)
+    {
         if (isset($_SERVER[$key]))
             return $_SERVER[$key];
 
@@ -52,7 +54,8 @@ class Setting
 
     public function getJSON($key)
     {
-        if (!isset($this->cache[$key])) return null;
+        if (!isset($this->cache[$key]))
+            return null;
 
         return json_decode($this->cache[$key]);
     }
@@ -70,6 +73,18 @@ class Setting
         $list_item = MasterListRepository::get($key);
         if (!empty($list_item)) {
             return json_decode($list_item->value)->$arrKey;
+        }
+    }
+
+    public function saveMasterList($key, $list)
+    {
+        $list_item = MasterListRepository::get($key);
+        if (!empty($list_item)) {
+            $list_value = json_decode($list_item->value);
+            foreach ($list as $k => $v) {
+                $list_value->$k = $v;
+            }
+            MasterListRepository::set($key, json_encode($list_value));
         }
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 
-@section('title', {!! 'Staff Login' !!})
+@section('title', 'Staff Login')
 
 @section('head')
     <link href="{{ URL::asset('css/signin.css') }}" rel="stylesheet">

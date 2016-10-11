@@ -54,7 +54,7 @@ Route::group(['middleware' => 'back', 'prefix' => 'back', 'namespace' => 'Back']
     Route::group(['prefix' => 'donation'], function () {
         $module = 'back.donation.';
 
-        Route::get('index', 'DonationController@index')->name($module . 'index');
+        Route::match(['get', 'post'], 'index', 'DonationController@index')->name($module . 'index');
         Route::post('addTarget', 'DonationController@addTarget')->name($module . 'addTarget');
         Route::post('removeTarget', 'DonationController@removeTarget')->name($module . 'removeTarget');
         Route::post('addSource', 'DonationController@addSource')->name($module . 'addSource');

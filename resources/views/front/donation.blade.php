@@ -117,11 +117,11 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-warning progress-bar-striped active"
                              role="progressbar"
-                             aria-valuenow="{{ Setting::getJSON('donation_values')->tour_cost }}"
+                             aria-valuenow="{{ $sum }}"
                              aria-valuemin="0"
-                             aria-valuemax="{{ Setting::getJSON('donation_targets')->tour_cost }}"
-                             style="min-width: 2em; width: {{ round(Setting::getJSON('donation_values')->tour_cost / Setting::getJSON('donation_targets')->tour_cost * 100) }}%">
-                            <span>{{ round(Setting::getJSON('donation_values')->tour_cost / Setting::getJSON('donation_targets')->tour_cost * 100) }}
+                             aria-valuemax="{{ $target }}"
+                             style="min-width: 2em; width: {{ round($sum / $target * 100) }}%">
+                            <span>{{ round($sum / $target * 100) }}
                                 %</span>
                         </div>
                     </div>
