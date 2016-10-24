@@ -20,7 +20,7 @@ class OpponentRepository extends BaseRepository
 
     public static function getCreateValidationRules()
     {
-        return ['name' => 'required', 'short' => 'required',];
+        return ['name' => 'required|max:50', 'short' => 'required|max:10',];
     }
 
     public static function getUpdateValidationRules(Model $model)

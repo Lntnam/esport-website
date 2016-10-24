@@ -20,7 +20,7 @@ class TournamentRepository extends BaseRepository
 
     public static function getCreateValidationRules()
     {
-        return ['name' => 'required', 'short' => 'required', 'type' => 'required|in:online,onlan,other', 'homepage' => 'url', 'bracket' => 'url'];
+        return ['name' => 'required|max:50', 'short' => 'required|max:10', 'type' => 'required|in:online,onlan,other', 'homepage' => 'url', 'bracket' => 'url'];
     }
 
     public static function getUpdateValidationRules(Model $model)
