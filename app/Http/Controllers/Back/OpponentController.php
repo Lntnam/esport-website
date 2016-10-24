@@ -54,7 +54,7 @@ class OpponentController extends BaseController
 
                     return response()->json(new AjaxResponse(false,
                         (string)view('opponent.create_modal', ['game' => $game, 'model' => new Opponent()])
-                            ->with('errors', [$ex->getMessage()])
+                            ->with('errors', new MessageBag([$ex->getMessage()]))
                     ));
                 }
 
@@ -100,7 +100,7 @@ class OpponentController extends BaseController
                     ->back()
                     ->with('model', $model)
                     ->with('deletable', $deletable)
-                    ->withErrors([$ex->getMessage()]);
+                    ->withErrors(new MessageBag([$ex->getMessage()]));
             }
 
             return redirect()
@@ -144,7 +144,7 @@ class OpponentController extends BaseController
                         ->back()
                         ->with('model', $model)
                         ->with('game', $model->game)
-                        ->withErrors([$ex->getMessage()]);
+                        ->withErrors(new MessageBag([$ex->getMessage()]));
                 }
 
                 return redirect()

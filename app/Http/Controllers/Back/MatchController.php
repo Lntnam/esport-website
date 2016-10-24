@@ -48,7 +48,7 @@ class MatchController extends BaseController
                 } catch (QueryException $ex) {
                     return redirect()
                         ->back()
-                        ->withErrors([$ex->getMessage()])
+                        ->withErrors(new MessageBag([$ex->getMessage()]))
                         ->withInput()
                         ->with('tournaments', $tournaments)
                         ->with('opponents', $opponents);
@@ -111,7 +111,7 @@ class MatchController extends BaseController
             catch (QueryException $ex) {
                 return redirect()
                     ->back()
-                    ->withErrors([$ex->getMessage()])
+                    ->withErrors(new MessageBag([$ex->getMessage()]))
                     ->withInput();
             }
 
@@ -148,7 +148,7 @@ class MatchController extends BaseController
                 } catch (QueryException $ex) {
                     return redirect()
                         ->back()
-                        ->withErrors([$ex->getMessage()])
+                        ->withErrors(new MessageBag([$ex->getMessage()]))
                         ->withInput()
                         ->with('tournaments', $tournaments)
                         ->with('opponents', $opponents);

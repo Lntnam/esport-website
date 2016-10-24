@@ -8,6 +8,7 @@ use App\Repositories\TournamentRepository;
 use App\Traits\GameController;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
 use Validator;
 
 class TournamentController extends BaseController
@@ -46,7 +47,7 @@ class TournamentController extends BaseController
 
                     return response()->json(new AjaxResponse(false,
                         (string)view('tournament.create_modal', ['game' => $game, 'model' => new Tournament()])
-                            ->with('errors', [$ex->getMessage()])
+                            ->with('errors', new MessageBag([$ex->getMessage()]))
                     ));
                 }
 
@@ -79,7 +80,7 @@ class TournamentController extends BaseController
                     ->back()
                     ->with('model', $model)
                     ->with('deletable', $deletable)
-                    ->withErrors(['This tournament cannot be deleted.']);
+                    ->withErrors(new MessageBag(['This tournament cannot be deleted.']));
             }
 
             // Get tournament name for message
@@ -138,7 +139,7 @@ class TournamentController extends BaseController
                         ->back()
                         ->with('model', $model)
                         ->with('game', $model->game)
-                        ->withErrors([$ex->getMessage()]);
+                        ->withErrors(new MessageBag([$ex->getMessage()]));
                 }
 
                 return redirect()

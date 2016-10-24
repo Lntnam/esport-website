@@ -31,7 +31,7 @@ class DonationController extends BaseController
                 return redirect()
                     ->back()
                     ->with('status', 'error')
-                    ->with('message', 'Error saving [' . $key . ']: ' . $ex->getMessage());
+                    ->with('message', new MessageBag(['Error saving [' . $key . ']: ' . $ex->getMessage()]));
             }
 
             $sources = [];
@@ -47,7 +47,7 @@ class DonationController extends BaseController
                 return redirect()
                     ->back()
                     ->with('status', 'error')
-                    ->with('message', 'Error saving sources for [' . $key . ']: ' . $ex->getMessage());
+                    ->with('message', new MessageBag(['Error saving sources for [' . $key . ']: ' . $ex->getMessage()]));
             }
 
             return redirect()
