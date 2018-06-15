@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller as BaseController;
 use App\Repositories\UserRepository;
 
 use Socialite;
+use Request;
 
 class AuthController extends BaseController
 {
@@ -40,6 +41,7 @@ class AuthController extends BaseController
 
     public function getSocialHandle($provider)
     {
+        session()->put('state', Request::input('state'));
         $socialUser = Socialite::driver($provider)
                                ->user();
 
@@ -64,6 +66,6 @@ class AuthController extends BaseController
         $admins = preg_split('/[\s*,\s*]*,+[\s*,\s*]*/', trim(config('settings.root_admin')));
         session(['root' => in_array($userCheck->getAttribute('email'), $admins)]);
 
-        return redirect()->intended(route('back.dashboard'));
+        return redirect()->route('back.dashboard');
     }
 }
